@@ -1,13 +1,14 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
-import NavbarWrapper from '@/components/NavbarWrapper';
+import Navbar from './components/NavbarWrapper';  // ✅ FIXED
+import Footer from './components/Footer';   // Add this too!
 
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'Refugee Support Foundation',
-  description: 'Providing shelter, education, and hope for refugee families',
+  title: 'Nihiri - Refugee Support Foundation',
+  description: 'Empowering refugee and immigrant families in New Haven, CT',
 };
 
 export default function RootLayout({
@@ -18,8 +19,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <NavbarWrapper />
+        <Navbar />
         <main>{children}</main>
+        <Footer /> {/* ✅ Add footer here */}
       </body>
     </html>
   );
