@@ -3,6 +3,16 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { 
+  FaXTwitter, 
+  FaFacebookF, 
+  FaInstagram, 
+  FaLinkedinIn, 
+  FaYoutube,
+  FaPhone,
+  FaEnvelope,
+  FaLocationDot
+} from 'react-icons/fa6';
 
 export default function Footer() {
   const [openSection, setOpenSection] = useState<string | null>(null);
@@ -40,218 +50,167 @@ export default function Footer() {
   };
 
   return (
-    <footer className="bg-brand-neutral text-white mt-20">
+    <footer className="bg-cyan-600 text-white mt-20 relative overflow-hidden">
+      {/* Decorative wave pattern */}
+      <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-brand-primary via-brand-light to-brand-primary opacity-30"></div>
+      
       {/* Main Footer Content */}
-      <div className="max-w-7xl mx-auto px-4 md:px-8 py-16">
+      <div className="max-w-7xl mx-auto px-4 md:px-8 py-16 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           
           {/* Column 1: Brand & Mission */}
           <div className="space-y-6">
-            <Link href="/" className="block">
-              <h3 className="text-3xl font-bold text-brand-primary">Nihiri</h3>
+            <Link href="/" className="block group">
+              <div className="flex items-center gap-4">
+                <div className="relative w-12 h-12 rounded-full overflow-hidden bg-white shadow-md ring-2 ring-white/50 flex-shrink-0">
+                  <Image 
+                    src="/Nihiri_logo.jpg"
+                    alt="Nihiri Logo"
+                    width={48}
+                    height={48}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                  />
+                </div>
+                <div className="flex flex-col">
+                  <h2 className="text-lg font-extrabold text-white tracking-tight leading-tight">
+                    New International Hope
+                  </h2>
+                  <p className="text-xs text-white/80 font-medium">
+                    For Refugees And Immigrants
+                  </p>
+                </div>
+              </div>
             </Link>
-            <p className="text-gray-300 text-sm leading-relaxed">
+            <p className="text-white/80 text-sm leading-relaxed">
               Empowering refugee and immigrant families with the tools, education, and support 
               they need to build independent, thriving lives in our community.
             </p>
             <div className="flex space-x-4 pt-4">
               {[
-                { name: 'X', href: '#' },
-                { name: 'FB', href: '#' },
-                { name: 'IG', href: '#' },
-                { name: 'IN', href: '#' },
-                { name: 'YT', href: '#' },
-              ].map((social) => (
+                { Icon: FaXTwitter, href: '#' },
+                { Icon: FaFacebookF, href: '#' },
+                { Icon: FaInstagram, href: '#' },
+                { Icon: FaLinkedinIn, href: '#' },
+                { Icon: FaYoutube, href: '#' },
+              ].map(({ Icon, href }, idx) => (
                 <a
-                  key={social.name}
-                  href={social.href}
+                  key={idx}
+                  href={href}
                   className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center 
-                           text-white hover:bg-brand-primary hover:text-brand-neutral 
-                           transition-all duration-300 hover:scale-110"
-                  aria-label={`${social.name} profile`}
+                           text-white hover:bg-brand-primary hover:text-cyan-600 
+                           transition-all duration-300 hover:scale-110 hover:rotate-6"
+                  aria-label="Social"
                 >
-                  <span className="text-xs font-bold">{social.name}</span>
+                  <Icon size={16} />
                 </a>
               ))}
             </div>
           </div>
 
-          {/* Column 2: Quick Links (Mobile Accordion) */}
+          {/* Column 2: Quick Links */}
           <div>
-            <h4 className="text-xl font-bold text-brand-primary mb-6">
+            <h4 className="text-lg font-black text-brand-primary mb-6 uppercase tracking-wider">
               Quick Links
             </h4>
             
-            {/* Mobile Accordion Button */}
-            <button
-              className="md:hidden flex items-center justify-between w-full text-left 
-                         text-white font-medium py-3 border-b border-white/20"
-              onClick={() => toggleSection('quick')}
-              aria-expanded={openSection === 'quick'}
-            >
-              <span>Navigate</span>
-              <span className="text-brand-primary">
-                {openSection === 'quick' ? '−' : '+'}
-              </span>
-            </button>
-
-            {/* Desktop/Mobile Content */}
-            <div className={`
-              ${openSection === 'quick' ? 'block' : 'hidden'} 
-              md:block mt-4 md:mt-0
-            `}>
-              <div className="grid grid-cols-2 gap-4">
-                {[
-                  ...footerLinks.about.slice(0, 3),
-                  ...footerLinks.events,
-                  { label: 'Donate', href: '/donate' },
-                ].map((link) => (
-                  <Link
-                    key={link.href}
-                    href={link.href}
-                    className="text-gray-300 hover:text-brand-primary transition-colors 
-                             text-sm font-medium py-1 block"
-                  >
-                    {link.label}
-                  </Link>
-                ))}
-              </div>
+            <div className="space-y-3">
+              {[
+                ...footerLinks.about.slice(0, 3),
+                ...footerLinks.events,
+                { label: 'Donate', href: '/donate' },
+              ].map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className="flex items-center gap-3 text-white/80 hover:text-white transition-all 
+                           text-sm font-medium py-1 group"
+                >
+                  <span className="text-brand-primary text-xs transition-all group-hover:translate-x-1">→</span>
+                  {link.label}
+                </Link>
+              ))}
             </div>
           </div>
 
-          {/* Column 3: Programs & Services */}
+          {/* Column 3: Programs */}
           <div>
-            <h4 className="text-xl font-bold text-brand-primary mb-6">
+            <h4 className="text-lg font-black text-brand-primary mb-6 uppercase tracking-wider">
               Our Programs
             </h4>
             
-            <button
-              className="md:hidden flex items-center justify-between w-full text-left 
-                         text-white font-medium py-3 border-b border-white/20"
-              onClick={() => toggleSection('programs')}
-              aria-expanded={openSection === 'programs'}
-            >
-              <span>What We Do</span>
-              <span className="text-brand-primary">
-                {openSection === 'programs' ? '−' : '+'}
-              </span>
-            </button>
-
-            <div className={`
-              ${openSection === 'programs' ? 'block' : 'hidden'} 
-              md:block mt-4 md:mt-0
-            `}>
-              <ul className="space-y-3">
-                {footerLinks.programs.map((link) => (
-                  <li key={link.href}>
-                    <Link
-                      href={link.href}
-                      className="text-gray-300 hover:text-brand-primary transition-colors 
-                               text-sm font-medium flex items-center group"
-                    >
-                      <span className="text-brand-primary mr-2 group-hover:mr-3 
-                                     transition-all">→</span>
-                      {link.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
+            <div className="space-y-3">
+              {footerLinks.programs.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className="flex items-center gap-3 text-white/80 hover:text-white transition-all 
+                           text-sm font-medium py-1 group"
+                >
+                  <span className="text-brand-primary text-xs transition-all group-hover:translate-x-1">→</span>
+                  {link.label}
+                </Link>
+              ))}
             </div>
           </div>
 
-          {/* Column 4: Contact Information */}
+          {/* Column 4: Contact */}
           <div>
-            <h4 className="text-xl font-bold text-brand-primary mb-6">
+            <h4 className="text-lg font-black text-brand-primary mb-6 uppercase tracking-wider">
               Contact Us
             </h4>
             
             <div className="space-y-4">
-              <div className="flex items-start space-x-3 group">
-                <span className="text-brand-primary mt-1 group-hover:scale-110 transition-transform">
-                  📧
-                </span>
-                <div className="space-y-1">
-                  <p className="text-gray-300 text-sm">
-                    <a 
-                      href="mailto:info@nihri.com" 
-                      className="hover:text-brand-primary transition-colors"
-                    >
-                      info@nihri.com
-                    </a>
-                  </p>
-                  <p className="text-gray-300 text-sm">
-                    <a 
-                      href="mailto:janetk26@yahoo.com" 
-                      className="hover:text-brand-primary transition-colors"
-                    >
-                      janetk26@yahoo.com
-                    </a>
-                  </p>
-                  <p className="text-gray-300 text-sm">
-                    <a 
-                      href="mailto:newinternationalhope@gmail.com" 
-                      className="hover:text-brand-primary transition-colors"
-                    >
-                      newinternationalhope@gmail.com
-                    </a>
-                  </p>
-                </div>
-              </div>
+              <a href="mailto:info@nihri.com" className="flex items-center gap-3 text-white/80 hover:text-white transition-colors">
+                <FaEnvelope className="text-brand-primary" />
+                <span className="text-sm font-medium">info@nihri.com</span>
+              </a>
+              
+              <a href="mailto:janetk26@yahoo.com" className="flex items-center gap-3 text-white/80 hover:text-white transition-colors">
+                <FaEnvelope className="text-brand-primary" />
+                <span className="text-sm font-medium">janetk26@yahoo.com</span>
+              </a>
+              
+              <a href="mailto:newinternationalhope@gmail.com" className="flex items-center gap-3 text-white/80 hover:text-white transition-colors">
+                <FaEnvelope className="text-brand-primary" />
+                <span className="text-sm font-medium">newinternationalhope@gmail.com</span>
+              </a>
 
-              <div className="flex items-start space-x-3 group">
-                <span className="text-brand-primary mt-1 group-hover:scale-110 transition-transform">
-                  📞
-                </span>
-                <p className="text-gray-300 text-sm">
-                  <a 
-                    href="tel:+2036759395" 
-                    className="hover:text-brand-primary transition-colors font-medium"
-                  >
-                    +(203) 675 93 95
-                  </a>
-                </p>
-              </div>
+              <a href="tel:+2036759395" className="flex items-center gap-3 text-white/80 hover:text-white transition-colors">
+                <FaPhone className="text-brand-primary" />
+                <span className="text-sm font-medium">+(203) 675 93 95</span>
+              </a>
 
-              <div className="flex items-start space-x-3 group">
-                <span className="text-brand-primary mt-1 group-hover:scale-110 transition-transform">
-                  📍
-                </span>
-                <p className="text-gray-300 text-sm leading-relaxed">
+              <div className="flex items-start gap-3 text-white/80">
+                <FaLocationDot className="text-brand-primary mt-1" />
+                <span className="text-sm font-medium leading-relaxed">
                   475 Elm St.<br />
                   New Haven, CT 06511<br />
                   United States
-                </p>
+                </span>
               </div>
             </div>
 
-            <div className="mt-8 pt-6 border-t border-white/10">
-              <Link 
-                href="/donate" 
-                className="btn-primary w-full text-center inline-block"
-              >
-                Donate Now
-              </Link>
-            </div>
+            
           </div>
         </div>
       </div>
 
-      {/* Bottom Bar */}
-      <div className="border-t border-white/10 bg-black/20">
+      {/* Bottom Bar - Darker Blue */}
+      <div className="bg-cyan-700 border-t border-cyan-500">
         <div className="max-w-7xl mx-auto px-4 md:px-8 py-6">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-            <p className="text-gray-400 text-sm text-center md:text-left">
+            <p className="text-white/70 text-sm text-center md:text-left">
               © {currentYear} Nihiri. All rights reserved. | 501(c)(3) Nonprofit Organization
             </p>
             
             <div className="flex items-center space-x-6 text-sm">
-              <Link href="/privacy" className="text-gray-400 hover:text-brand-primary transition-colors">
+              <Link href="/privacy" className="text-white/70 hover:text-brand-primary transition-colors">
                 Privacy Policy
               </Link>
-              <Link href="/terms" className="text-gray-400 hover:text-brand-primary transition-colors">
+              <Link href="/terms" className="text-white/70 hover:text-brand-primary transition-colors">
                 Terms of Service
               </Link>
-              <Link href="/accessibility" className="text-gray-400 hover:text-brand-primary transition-colors">
+              <Link href="/accessibility" className="text-white/70 hover:text-brand-primary transition-colors">
                 Accessibility
               </Link>
             </div>

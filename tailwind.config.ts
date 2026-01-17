@@ -9,13 +9,15 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        'brand-light': '#faf59e',
-        'brand-primary': '#f3ec59',
-        'brand-dark': '#9f972a',
-        'brand-text': '#655c13',
-        'brand-neutral': '#5b6662',
-        'brand-background': '#fcfcf5',
-        'brand-cyan': '#06b6d4',
+        brand: {
+          light: '#faf59e',
+          primary: '#f3ec59',
+          dark: '#9f972a',
+          text: '#655c13',
+          neutral: '#5b6662',
+          background: '#fcfcf5',
+          cyan: '#06b6d4',
+        },
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],
@@ -24,4 +26,5 @@ const config: Config = {
   },
   plugins: [],
 };
+
 export default config;
