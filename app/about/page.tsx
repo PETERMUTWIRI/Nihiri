@@ -1,13 +1,14 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { FaArrowRight, FaXTwitter, FaFacebookF, FaInstagram, FaLinkedinIn, FaYoutube, FaPlay } from 'react-icons/fa6';
+import { FaArrowRight, FaXTwitter, FaFacebookF, FaInstagram, FaLinkedinIn, FaYoutube } from 'react-icons/fa6';
 import YouTubeEmbed from '@/components/YouTubeEmbed';
+import NewsletterCTA from '@/components/NewsletterCTA';
 
 export default function AboutPage() {
   return (
     <div className="min-h-screen bg-brand-background">
       
-      {/* HERO SECTION - Video Preview Button, Centered, Below Navbar */}
+      {/* HERO SECTION */}
       <section className="relative min-h-[70vh] bg-gradient-to-b from-brand-primary/20 to-brand-background flex items-center justify-center text-center overflow-hidden pt-40">
         <div className="absolute inset-0 bg-black/5"></div>
         <div className="relative z-10 px-6 flex flex-col items-center w-full">
@@ -24,7 +25,7 @@ export default function AboutPage() {
         <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-b from-transparent to-brand-background"></div>
       </section>
 
-      {/* MISSION & VISION - Tight Spacing */}
+      {/* MISSION & VISION */}
       <section className="py-16 px-6 md:px-12 max-w-7xl mx-auto">
         <div className="grid md:grid-cols-2 gap-12 mb-20">
           <div className="text-right pr-8">
@@ -48,7 +49,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* OUR HISTORY - Image Left, Text Right */}
+      {/* OUR HISTORY */}
       <section className="py-16 px-6 md:px-12 max-w-7xl mx-auto">
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <div className="relative h-80 md:h-96 rounded-2xl overflow-hidden shadow-xl">
@@ -80,7 +81,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* CORE VALUES - Tight Layout */}
+      {/* CORE VALUES */}
       <section className="py-16 px-6 md:px-12 max-w-7xl mx-auto">
         <h2 className="text-4xl md:text-5xl font-black text-center text-black mb-16">Our Core Values</h2>
         
@@ -157,49 +158,12 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* USA Referral CTA - Seamless with Footer */}
-      {/* Newsletter CTA with Pattern Background */}
-      <section className="relative py-16 px-6 md:px-12">
-  
-        {/* Pattern Background */}
-        <div 
-          className="absolute inset-0 bg-[url('/images/patterns/elena-pattern.svg')] 
-               bg-repeat bg-center opacity-100"
-        />
-
-       {/* Content Card */}
-        <div className="relative max-w-4xl mx-auto">
-           <div className="bg-white rounded-2xl shadow-xl px-8 py-10 
-                    flex flex-col md:flex-row 
-                    items-center justify-between gap-6">
-
-              {/* Text */}
-              <h3 className="text-2xl md:text-3xl font-extrabold text-gray-900">
-                  Stay up to date with the latest at Elena’s Light
-              </h3>
-
-              {/* Input + Button */}
-              <div className="flex w-full md:w-auto">
-                 <input
-                    type="email"
-                    placeholder="Enter your email address"
-                    className="flex-1 md:w-72 px-4 py-3 
-                       border border-gray-300 rounded-l-full 
-                      focus:outline-none focus:ring-2 focus:ring-brand-primary"
-                />
-                <button
-                className="bg-orange-400 hover:bg-orange-500 
-                       text-white font-bold px-6 py-3 
-                       rounded-r-full transition"
-                >
-                Send →
-                </button>
-              </div>
-
-            </div>
-        </div>
-      </section>
-
+      {/* NEWSLETTER CTA - With Your SVG Background */}
+      <NewsletterCTA 
+        title="Stay up to date with the latest at Elena’s Light"
+        placeholder="Enter your email address"
+        buttonText="Send →"
+      />
     </div>
   );
 }

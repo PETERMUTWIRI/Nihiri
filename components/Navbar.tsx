@@ -147,12 +147,12 @@ export default function Navbar() {
 
   const navItems = {
     about: [
-      { label: 'About Us', href: '/#mission' },
-      { label: 'Our History', href: '/#history' },
-      { label: 'Board of Directors', href: '/#board' },
-      { label: 'Staff', href: '/#staff' },
-      { label: 'Annual Reports', href: '/#reports' },
-      { label: 'Blog & News', href: '/#blog' },
+      { label: 'About Us', href: '/about' },
+      { label: 'Our History', href: '/history' },
+      { label: 'Board of Directors', href: '/board' },
+      { label: 'Staff', href: '/staff' },
+      { label: 'Annual Reports', href: '/reports' },
+      { label: 'Blog & News', href: '/blog' },
     ],
     events: [
       { label: 'Upcoming Events', href: '/events/upcoming' },
