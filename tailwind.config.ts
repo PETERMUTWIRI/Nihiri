@@ -6,6 +6,7 @@ const config: Config = {
     './components/**/*.{js,ts,jsx,tsx,mdx}',
     './app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
+  darkMode: ['class', '[data-theme="dark"]'], // ← NEW
   theme: {
     extend: {
       colors: {
@@ -17,6 +18,9 @@ const config: Config = {
           neutral: '#5b6662',
           background: '#fcfcf5',
           cyan: '#06b6d4',
+          // dark-scheme overrides
+          'dark-bg': '#0b132b',
+          'dark-text': '#f3f4f6',
         },
       },
       fontFamily: {

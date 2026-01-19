@@ -3,6 +3,18 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    /* LIGHT mode tokens */
+    --brand-background: #fcfcf5;
+    --brand-text: #655c13;
+  }
+
+  [data-theme='dark'] {
+    /* DARK mode tokens */
+    --brand-background: theme(colors.brand.dark-bg);
+    --brand-text: theme(colors.brand.dark-text);
+  }
+
   body {
     @apply bg-brand-background text-brand-text antialiased;
   }

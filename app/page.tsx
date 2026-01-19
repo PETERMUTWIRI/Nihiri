@@ -64,7 +64,7 @@ export default function AboutPage() {
             <h2 className="text-3xl md:text-4xl font-black text-black mb-4">Our History</h2>
             <p className="text-lg text-gray-700 mb-4 leading-relaxed">
               <strong>Jane Kinity, founder & Executive Director of New International Hope for Refugee.</strong> 
-              She arrived in New Haven, CT as a refugee advocate in 2016, witnessing 
+              She arrived in New Haven in early 2000, CT as a refugee advocate in 2016, witnessing 
               firsthand the systemic barriers families face—language isolation, healthcare confusion, and social exclusion.
             </p>
             <p className="text-lg text-gray-700 leading-relaxed">
