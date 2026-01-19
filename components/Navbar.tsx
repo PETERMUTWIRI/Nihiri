@@ -182,8 +182,15 @@ const MobileDrawer = ({ open, setOpen, navItems }: { open: boolean; setOpen: (v:
             transition={{ type: 'spring', stiffness: 300, damping: 40 }}
           >
             <div className="py-8">
-              <div className="px-6 pb-6 border-b border-white/20 mb-4">
+              <div className="px-6 pb-6 border-b border-white/20 mb-4 flex items-center justify-between">
                 <h3 className="text-xl font-black text-white">Menu</h3>
+                <button
+                  onClick={() => setOpen(false)}
+                  className="text-white hover:text-brand-primary transition-colors p-2 -mr-2"
+                  aria-label="Close menu"
+                >
+                  <FaX size={24} />
+                </button>
               </div>
               <div className="space-y-1">
                 <MobileAccordion title="About" items={navItems.about} />
