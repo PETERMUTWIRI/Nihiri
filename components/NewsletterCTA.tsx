@@ -2,54 +2,154 @@ import { FaArrowRight } from 'react-icons/fa6';
 
 interface NewsletterCTAProps {
   title?: string;
+  subtitle?: string;
   placeholder?: string;
   buttonText?: string;
 }
 
 export default function NewsletterCTA({ 
   title = "Stay up to date with the latest",
+  subtitle = "New International Hope\nFor Refugees And Immigrants",
   placeholder = "Enter your email address",
-  buttonText = "Send →"
+  buttonText = "Send"
 }: NewsletterCTAProps) {
   return (
-    <section className="relative py-16 px-6 md:px-12 overflow-hidden bg-gradient-to-br from-white via-cyan-50/30 to-white">
-      {/* Bold Cyan Pattern - 40% opacity, footer color */}
-      <div className="absolute inset-0 opacity-40 pointer-events-none">
-        <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" preserveAspectRatio="none">
-          <rect fill='#ffffff' width='800' height='800'/>
-          <defs>
-            <radialGradient id='a' cx='400' cy='400' r='9.8%' gradientUnits='userSpaceOnUse'>
-              <stop offset='0' stopColor='#ffffff'/>
-              <stop offset='1' stopColor='#06b6d4'/> {/* ← Footer cyan */}
-            </radialGradient>
-            <radialGradient id='b' cx='400' cy='400' r='58.8%' gradientUnits='userSpaceOnUse'>
-              <stop offset='0' stopColor='#ffffff'/>
-              <stop offset='1' stopColor='#0891b2'/> {/* ← Deeper cyan */}
-            </radialGradient>
-          </defs>
-          <rect fill='url(#a)' width='800' height='800'/>
-          <g fillOpacity='0.99'>
-            <path fill='url(#b)' d='M998.7 439.2c1.7-26.5 1.7-52.7 0.1-78.5L401 399.9c0 0 0-0.1 0-0.1l587.6-116.9c-5.1-25.9-11.9-51.2-20.3-75.8L400.9 399.7c0 0 0-0.1 0-0.1l537.3-265c-11.6-23.5-24.8-46.2-39.3-67.9L400.8 399.5c0 0 0-0.1-0.1-0.1l450.4-395c-17.3-19.7-35.8-38.2-55.5-55.5l-395 450.4c0 0-0.1 0-0.1-0.1L733.4-99c-21.7-14.5-44.4-27.6-68-39.3l-265 537.4c0 0-0.1 0-0.1 0l192.6-567.4c-24.6-8.3-49.9-15.1-75.8-20.2L400.2 399c0 0-0.1 0-0.1 0l39.2-597.7c-26.5-1.7-52.7-1.7-78.5-0.1L399.9 399c0 0-0.1 0-0.1 0L282.9-188.6c-25.9 5.1-51.2 11.9-75.8 20.3l192.6 567.4c0 0-0.1 0-0.1 0l-265-537.3c-23.5 11.6-46.2 24.8-67.9 39.3l332.8 498.1c0 0-0.1 0-0.1 0.1L4.4-51.1C-15.3-33.9-33.8-15.3-51.1 4.4l450.4 395c0 0 0 0.1-0.1 0.1L-99 66.6c-14.5 21.7-27.6 44.4-39.3 68l537.4 265c0 0 0 0.1 0 0.1l-567.4-192.6c-8.3 24.6-15.1 49.9-20.2 75.8L399 399.8c0 0 0 0.1 0 0.1l-597.7-39.2c-1.7 26.5-1.7 52.7-0.1 78.5L399 400.1c0 0 0 0.1 0 0.1l-587.6 116.9c5.1 25.9 11.9 51.2 20.3 75.8l567.4-192.6c0 0 0 0.1 0 0.1l-537.3 265c11.6 23.5 24.8 46.2 39.3 67.9l498.1-332.8c0 0 0 0.1 0.1 0.1l-450.4 395c17.3 19.7 35.8 38.2 55.5 55.5l395-450.4c0 0 0.1 0 0.1 0.1L66.6 899c21.7 14.5 44.4 27.6 68 39.3l265-537.4c0 0 0.1 0 0.1 0L207.1 968.3c24.6 8.3 49.9 15.1 75.8 20.2L399.8 401c0 0 0.1 0 0.1 0l-39.2 597.7c26.5 1.7 52.7 1.7 78.5 0.1L400.1 401c0 0 0.1 0 0.1 0l116.9 587.6c25.9-5.1 51.2-11.9 75.8-20.3L400.3 400.9c0 0 0.1 0 0.1 0l265 537.3c23.5-11.6 46.2-24.8 67.9-39.3L400.5 400.8c0 0 0.1 0 0.1-0.1l395 450.4c19.7-17.3 38.2-35.8 55.5-55.5l-450.4-395c0 0 0-0.1 0.1-0.1L899 733.4c14.5-21.7 27.6-44.4 39.3-68l-537.4-265c0 0 0-0.1 0-0.1l567.4 192.6c8.3-24.6 15.1-49.9 20.2-75.8L401 400.2c0 0 0-0.1 0-0.1L998.7 439.2z'/>
+    <section className="relative py-8 px-6 md:px-12 overflow-hidden bg-white">
+      {/* Decorative SVG Pattern - Top */}
+      <div className="absolute top-0 left-0 right-0 h-24 opacity-100 pointer-events-none">
+        <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 200" preserveAspectRatio="none">
+          {/* Repeating ornamental bows - scaled */}
+          <g fill="#06b6d4">
+            {/* First - Larger */}
+            <g transform="translate(100, 50) scale(1.5) translate(-100, -50)">
+              <path d="M100,40 Q80,20 60,40 Q40,60 60,80 Q80,60 100,40 M100,40 Q120,20 140,40 Q160,60 140,80 Q120,60 100,40"/>
+              <circle cx="100" cy="50" r="5" fill="#0891b2"/>
+            </g>
+            
+            {/* Standard size */}
+            <g>
+              <path d="M300,40 Q280,20 260,40 Q240,60 260,80 Q280,60 300,40 M300,40 Q320,20 340,40 Q360,60 340,80 Q320,60 300,40"/>
+              <circle cx="300" cy="50" r="5" fill="#0891b2"/>
+            </g>
+            
+            {/* Middle (3rd position) - Larger */}
+            <g transform="translate(500, 50) scale(1.5) translate(-500, -50)">
+              <path d="M500,40 Q480,20 460,40 Q440,60 460,80 Q480,60 500,40 M500,40 Q520,20 540,40 Q560,60 540,80 Q520,60 500,40"/>
+              <circle cx="500" cy="50" r="5" fill="#0891b2"/>
+            </g>
+            
+            {/* Standard size */}
+            <g>
+              <path d="M700,40 Q680,20 660,40 Q640,60 660,80 Q680,60 700,40 M700,40 Q720,20 740,40 Q760,60 740,80 Q720,60 700,40"/>
+              <circle cx="700" cy="50" r="5" fill="#0891b2"/>
+            </g>
+            
+            {/* Standard size */}
+            <g>
+              <path d="M900,40 Q880,20 860,40 Q840,60 860,80 Q880,60 900,40 M900,40 Q920,20 940,40 Q960,60 940,80 Q920,60 900,40"/>
+              <circle cx="900" cy="50" r="5" fill="#0891b2"/>
+            </g>
+            
+            {/* Last - Larger */}
+            <g transform="translate(1100, 50) scale(1.5) translate(-1100, -50)">
+              <path d="M1100,40 Q1080,20 1060,40 Q1040,60 1060,80 Q1080,60 1100,40 M1100,40 Q1120,20 1140,40 Q1160,60 1140,80 Q1120,60 1100,40"/>
+              <circle cx="1100" cy="50" r="5" fill="#0891b2"/>
+            </g>
+          </g>
+          
+          {/* Decorative dots */}
+          <g fill="#0891b2">
+            <circle cx="150" cy="100" r="4"/>
+            <circle cx="1050" cy="100" r="4"/>
+            <circle cx="200" cy="150" r="3.5"/>
+            <circle cx="1000" cy="150" r="3.5"/>
           </g>
         </svg>
       </div>
-      
-      {/* Content Card */}
-      <div className="relative max-w-4xl mx-auto">
-        <div className="bg-white rounded-2xl shadow-xl px-8 py-10 flex flex-col md:flex-row items-center justify-between gap-6">
-          <h3 className="text-2xl md:text-3xl font-extrabold text-gray-900">
-            {title}
-          </h3>
-          <div className="flex w-full md:w-auto">
+
+      {/* Decorative SVG Pattern - Bottom */}
+      <div className="absolute bottom-0 left-0 right-0 h-24 opacity-100 pointer-events-none">
+        <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 200" preserveAspectRatio="none">
+          {/* Repeating ornamental bows */}
+          <g fill="#06b6d4">
+            {/* First - Larger */}
+            <g transform="translate(100, 150) scale(1.5) translate(-100, -150)">
+              <path d="M100,160 Q80,180 60,160 Q40,140 60,120 Q80,140 100,160 M100,160 Q120,180 140,160 Q160,140 140,120 Q120,140 100,160"/>
+              <circle cx="100" cy="150" r="5" fill="#0891b2"/>
+            </g>
+            
+            {/* Standard size */}
+            <g>
+              <path d="M300,160 Q280,180 260,160 Q240,140 260,120 Q280,140 300,160 M300,160 Q320,180 340,160 Q360,140 340,120 Q320,140 300,160"/>
+              <circle cx="300" cy="150" r="5" fill="#0891b2"/>
+            </g>
+            
+            {/* Middle (3rd position) - Larger */}
+            <g transform="translate(500, 150) scale(1.5) translate(-500, -150)">
+              <path d="M500,160 Q480,180 460,160 Q440,140 460,120 Q480,140 500,160 M500,160 Q520,180 540,160 Q560,140 540,120 Q520,140 500,160"/>
+              <circle cx="500" cy="150" r="5" fill="#0891b2"/>
+            </g>
+            
+            {/* Standard size */}
+            <g>
+              <path d="M700,160 Q680,180 660,160 Q640,140 660,120 Q680,140 700,160 M700,160 Q720,180 740,160 Q760,140 740,120 Q720,140 700,160"/>
+              <circle cx="700" cy="150" r="5" fill="#0891b2"/>
+            </g>
+            
+            {/* Standard size */}
+            <g>
+              <path d="M900,160 Q880,180 860,160 Q840,140 860,120 Q880,140 900,160 M900,160 Q920,180 940,160 Q960,140 940,120 Q920,140 900,160"/>
+              <circle cx="900" cy="150" r="5" fill="#0891b2"/>
+            </g>
+            
+            {/* Last - Larger */}
+            <g transform="translate(1100, 150) scale(1.5) translate(-1100, -150)">
+              <path d="M1100,160 Q1080,180 1060,160 Q1040,140 1060,120 Q1080,140 1100,160 M1100,160 Q1120,180 1140,160 Q1160,140 1140,120 Q1120,140 1100,160"/>
+              <circle cx="1100" cy="150" r="5" fill="#0891b2"/>
+            </g>
+          </g>
+          
+          {/* Decorative dots */}
+          <g fill="#0891b2">
+            <circle cx="150" cy="100" r="4"/>
+            <circle cx="1050" cy="100" r="4"/>
+            <circle cx="200" cy="50" r="3.5"/>
+            <circle cx="1000" cy="50" r="3.5"/>
+          </g>
+        </svg>
+      </div>
+
+      {/* Content */}
+      <div className="relative max-w-6xl mx-auto z-10">
+        <div className="bg-white rounded-2xl shadow-lg px-8 md:px-16 py-6 md:py-8 border border-brand-primary/20 hover:border-brand-primary/40 transition-colors">
+          <div className="mb-6 text-center">
+            <h2 className="text-2xl md:text-3xl font-extrabold text-black leading-tight mb-2">
+              {title}
+            </h2>
+            <div className="mb-4">
+              <p className="text-2xl md:text-3xl font-extrabold text-black">
+                New International Hope
+              </p>
+              <p className="text-lg md:text-xl font-extrabold text-brand-primary">
+                For Refugees And Immigrants
+              </p>
+            </div>
+          </div>
+
+          <div className="flex flex-col sm:flex-row gap-3 items-center justify-center">
             <input
               type="email"
               placeholder={placeholder}
-              className="flex-1 md:w-72 px-4 py-3 border border-gray-300 rounded-l-full focus:outline-none focus:ring-2 focus:ring-brand-primary"
+              className="flex-1 w-full sm:w-auto px-6 py-3 border-2 border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-brand-primary focus:border-brand-primary transition-all text-brand-text placeholder-gray-500 font-medium"
             />
-            <button className="bg-brand-primary hover:bg-brand-dark text-black font-bold px-6 py-3 rounded-r-full transition-all hover:scale-105">
-              {buttonText}
+            <button className="w-full sm:w-auto bg-brand-primary hover:bg-brand-dark text-brand-text font-extrabold px-8 py-3 rounded-full transition-all transform hover:scale-105 active:scale-95 shadow-lg hover:shadow-xl border border-black/10 flex items-center gap-2">
+              {buttonText} <FaArrowRight className="transition-transform group-hover:translate-x-1" />
             </button>
           </div>
+
+          <p className="text-center text-xs text-gray-600 mt-4 font-medium tracking-wide">
+            We respect your privacy. Unsubscribe at any time.
+          </p>
         </div>
       </div>
     </section>

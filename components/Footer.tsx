@@ -50,7 +50,8 @@ export default function Footer() {
   };
 
   return (
-    <footer className="bg-cyan-600 text-white mt-20 relative overflow-hidden">
+    // After
+    <footer className="bg-cyan-600 text-white relative overflow-hidden">
       {/* Decorative wave pattern */}
       <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-brand-primary via-brand-light to-brand-primary opacity-30"></div>
       

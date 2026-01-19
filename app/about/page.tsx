@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import React from 'react';
 import { FaArrowRight, FaXTwitter, FaFacebookF, FaInstagram, FaLinkedinIn, FaYoutube } from 'react-icons/fa6';
 import YouTubeEmbed from '@/components/YouTubeEmbed';
 import NewsletterCTA from '@/components/NewsletterCTA';
@@ -160,7 +161,7 @@ export default function AboutPage() {
 
       {/* NEWSLETTER CTA - With Your SVG Background */}
       <NewsletterCTA 
-        title="Stay up to date with the latest at Elena’s Light"
+        title="Stay up to date with the latest at"
         placeholder="Enter your email address"
         buttonText="Send →"
       />

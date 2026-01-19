@@ -1,13 +1,15 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import React from 'react';
 import { FaArrowRight, FaXTwitter, FaFacebookF, FaInstagram, FaLinkedinIn, FaYoutube } from 'react-icons/fa6';
 import YouTubeEmbed from '@/components/YouTubeEmbed';
+import NewsletterCTA from '@/components/NewsletterCTA';
 
-export default function HomePage() {
+export default function AboutPage() {
   return (
     <div className="min-h-screen bg-brand-background">
       
-      {/* HERO SECTION - Video Preview Button, Centered, Below Navbar */}
+      {/* HERO SECTION */}
       <section className="relative min-h-[70vh] bg-gradient-to-b from-brand-primary/20 to-brand-background flex items-center justify-center text-center overflow-hidden pt-40">
         <div className="absolute inset-0 bg-black/5"></div>
         <div className="relative z-10 px-6 flex flex-col items-center w-full">
@@ -24,7 +26,7 @@ export default function HomePage() {
         <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-b from-transparent to-brand-background"></div>
       </section>
 
-      {/* MISSION & VISION - Tight Spacing */}
+      {/* MISSION & VISION */}
       <section className="py-16 px-6 md:px-12 max-w-7xl mx-auto">
         <div className="grid md:grid-cols-2 gap-12 mb-20">
           <div className="text-right pr-8">
@@ -48,7 +50,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* OUR HISTORY - Image Left, Text Right */}
+      {/* OUR HISTORY */}
       <section className="py-16 px-6 md:px-12 max-w-7xl mx-auto">
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <div className="relative h-80 md:h-96 rounded-2xl overflow-hidden shadow-xl">
@@ -80,7 +82,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* CORE VALUES - Tight Layout */}
+      {/* CORE VALUES */}
       <section className="py-16 px-6 md:px-12 max-w-7xl mx-auto">
         <h2 className="text-4xl md:text-5xl font-black text-center text-black mb-16">Our Core Values</h2>
         
@@ -157,34 +159,12 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* USA Referral CTA - Seamless Blend */}
-      <section className="bg-white py-16 px-6 md:px-12">
-        <div className="max-w-2xl mx-auto text-center bg-gradient-to-b from-brand-light to-white rounded-2xl p-8 border border-gray-200">
-          <h4 className="text-2xl md:text-3xl font-black text-brand-text mb-4"> Professional Network</h4>
-          <p className="text-base md:text-lg text-gray-700 mb-6">
-            Are you a service provider, healthcare professional, or community leader? 
-            Join our referral network to connect families with vital resources and expand your impact.
-          </p>
-          <Link href="/referral-network" className="inline-flex items-center gap-2 bg-brand-primary hover:bg-brand-dark text-black px-6 md:px-8 py-3 md:py-4 rounded-full font-extrabold transition-all hover:scale-105 group">
-            Join Referral Network 
-            <FaArrowRight className="transition-transform group-hover:translate-x-1" />
-          </Link>
-          
-          {/* Social Icons */}
-          <div className="flex justify-center items-center gap-6 md:gap-8 mt-8 pt-8 border-t border-gray-200">
-            {[FaXTwitter, FaFacebookF, FaInstagram, FaLinkedinIn, FaYoutube].map((Icon, idx) => (
-              <a 
-                key={idx}
-                href="#"
-                className="w-12 h-12 md:w-14 md:h-14 bg-brand-primary hover:bg-brand-dark rounded-full flex items-center justify-center 
-                         text-black hover:text-white transition-all hover:scale-110 shadow-md"
-              >
-                <Icon size={20} className="md:w-6 md:h-6" />
-              </a>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* NEWSLETTER CTA - With Your SVG Background */}
+      <NewsletterCTA 
+        title="Stay up to date with the latest at"
+        placeholder="Enter your email address"
+        buttonText="Send →"
+      />
     </div>
   );
 }
