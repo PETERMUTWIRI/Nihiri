@@ -14,7 +14,7 @@ export default function NewsletterCTA({
   buttonText = "Send"
 }: NewsletterCTAProps) {
   return (
-    <section className="relative py-8 px-6 md:px-12 overflow-hidden bg-white">
+    <section className="relative pt-o pb-12 px-6 md:px-12 overflow-hidden bg-white">
       {/* Decorative SVG Pattern - Top */}
       <div className="absolute top-0 left-0 right-0 h-24 opacity-100 pointer-events-none">
         <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 200" preserveAspectRatio="none">

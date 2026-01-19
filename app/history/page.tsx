@@ -4,14 +4,15 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { FaArrowRight } from 'react-icons/fa6';
 import HistoryCarousel from '@/components/HistoryCarousel';
-
+import NewsletterCTA from '@/components/NewsletterCTA';
 export default function HistoryPage() {
   return (
     <div className="min-h-screen bg-brand-background">
       {/* HERO */}
-      <section className="relative py-24 md:py-32 px-6 md:px-12 text-center bg-gradient-to-b from-brand-primary/20 to-brand-background">
-        <h1 className="text-5xl md:text-6xl font-black text-brand-text mb-6">Our History</h1>
-        
+      <section className="relative pt-32 pb-16 px-6 md:px-12 text-center bg-gradient-to-b from-brand-primary/20 to-brand-background">
+          <h1 className="text-5xl md:text-6xl font-black text-black mb-6">
+             Our History
+          </h1>
       </section>
 
       {/* CAROUSEL */}
@@ -55,12 +56,10 @@ export default function HistoryPage() {
       </section>
 
       {/* CTA */}
-      <section className="py-16 px-6 md:px-12 text-center">
-        <h3 className="text-3xl font-black text-brand-text mb-4">Help us write the next chapter</h3>
-        <Link href="/donate" className="btn-primary inline-flex items-center gap-2 group">
-          Donate today <FaArrowRight className="transition-transform group-hover:translate-x-1" />
-        </Link>
-      </section>
+      <NewsletterCTA
+              title="Stay up to date with the latest  at"
+              subtitle="New International Hope\nFor Refugees And Immigrants"
+      />
     </div>
   );
 }

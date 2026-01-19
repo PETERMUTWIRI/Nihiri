@@ -39,11 +39,11 @@ export default function HistoryCarousel() {
             className={`absolute inset-0 transition-opacity duration-500 ${i === idx ? 'opacity-100' : 'opacity-0'}`}
           >
             <Image
-              src={`/images/history/${src}`}
-              alt={`History slide ${i + 1}`}
-              fill
-              className="object-cover"
-              priority={i === 0}
+                src={`/images/history/${src}`}
+                alt={`History slide ${i + 1}`}
+                fill
+                className="object-cover object-center"   // ← NEW: keep heads, crop sides
+                priority={i === 0}
             />
           </div>
         ))}
