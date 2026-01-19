@@ -16,9 +16,7 @@ export default function AboutPage() {
           <h1 className="text-5xl md:text-6xl font-black text-black mb-8 tracking-tight">
             Who We Are
           </h1>
-          <p className="text-xl text-gray-700 mb-12 max-w-3xl">
-            Building brighter futures for refugee women and children in New Haven, CT
-          </p>
+          
           <div className="w-full max-w-4xl mx-auto">
             <YouTubeEmbed videoId="6bfSEk_oX60" />
           </div>
