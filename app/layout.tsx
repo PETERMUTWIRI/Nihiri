@@ -1,8 +1,10 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
-import Navbar from '../components/NavbarWrapper';  // ✅ FIXED
-import Footer from '../components/Footer';   // Add this too!
+import Navbar from '@/components/NavbarWrapper';
+import Footer from '@/components/Footer';
+import { NeonAuthUIProvider, UserButton } from '@neondatabase/auth/react';
+import { authClient } from '@/lib/auth/client';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -11,17 +13,20 @@ export const metadata: Metadata = {
   description: 'Empowering refugee and immigrant families in New Haven, CT',
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
-      <body className={inter.className}>
-        <Navbar />
-        <main>{children}</main>
-        <Footer /> {/* ✅ Add footer here */}
+    <html lang="en" suppressHydrationWarning>
+      <body className={`${inter.className} antialiased`}>
+        <NeonAuthUIProvider authClient={authClient} emailOTP redirectTo="/account/settings">
+          {/* Top-right user button */}
+          <header className="flex justify-end items-center p-4 gap-4 h-16 bg-white border-b">
+            <UserButton size="icon" />
+          </header>
+
+          <Navbar />
+          <main className="min-h-screen">{children}</main>
+          <Footer />
+        </NeonAuthUIProvider>
       </body>
     </html>
   );

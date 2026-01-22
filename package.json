@@ -6,6 +6,9 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@ckeditor/ckeditor5-build-classic": "^41.4.2",
+    "@ckeditor/ckeditor5-react": "^11.0.1",
+    "@neondatabase/auth": "^0.1.0-beta.21",
     "@stripe/stripe-js": "^8.6.1",
     "@tailwindcss/postcss": "^4.1.18",
     "@vercel/postgres": "^0.10.0",
