@@ -1,11 +1,22 @@
 'use client';
 
+import { Suspense } from 'react';
 import { useState, useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { FaSave, FaArrowLeft } from 'react-icons/fa';
 import Link from 'next/link';
 
+// Wrapper with Suspense
 export default function AdminEventsPage() {
+  return (
+    <Suspense fallback={<div className="p-8">Loading editor...</div>}>
+      <EventEditor />
+    </Suspense>
+  );
+}
+
+// Actual editor component
+function EventEditor() {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [category, setCategory] = useState<'Upcoming' | 'Past'>('Upcoming');

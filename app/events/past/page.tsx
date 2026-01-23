@@ -1,4 +1,5 @@
 // app/events/past/page.tsx
+export const dynamic = 'force-dynamic'; 
 import Link from 'next/link';
 import Image from 'next/image';
 import { FaCalendar, FaLocationDot } from 'react-icons/fa6';

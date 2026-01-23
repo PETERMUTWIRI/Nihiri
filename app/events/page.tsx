@@ -1,6 +1,6 @@
-// app/events/page.tsx  (was "upcoming")
+// app/events/page.tsx
+export const dynamic = 'force-dynamic'; 
 import Link from 'next/link';
-import Image from 'next/image';
 import { FaCalendar, FaLocationDot } from 'react-icons/fa6';
 import NewsletterCTA from '@/components/NewsletterCTA';
 
@@ -16,7 +16,12 @@ type Event = {
 };
 
 async function getEvents(): Promise<Event[]> {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/events`, {
+  // Use VERCEL_URL (auto-set) or fallback to localhost
+  const base = process.env.VERCEL_URL
+    ? `https://${process.env.VERCEL_URL}`
+    : process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000';
+    
+  const res = await fetch(`${base}/api/events`, {
     next: { revalidate: 60 },
   });
   if (!res.ok) return [];

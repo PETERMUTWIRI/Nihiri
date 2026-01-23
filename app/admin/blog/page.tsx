@@ -1,21 +1,51 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { CKEditor } from '@ckeditor/ckeditor5-react';
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { FaSave, FaArrowLeft } from 'react-icons/fa';
 import Link from 'next/link';
 
+// Wrapper with Suspense for useSearchParams
 export default function AdminBlogPage() {
+  return (
+    <Suspense fallback={<div className="p-8">Loading editor...</div>}>
+      <BlogEditor />
+    </Suspense>
+  );
+}
+
+function BlogEditor() {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [category, setCategory] = useState('News');
   const [cover, setCover] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [EditorComponent, setEditorComponent] = useState<any>(null);
+  const [ClassicEditor, setClassicEditor] = useState<any>(null);
+  
   const router = useRouter();
   const searchParams = useSearchParams();
   const editId = searchParams.get('id');
+
+  // Load CKEditor client-side only
+  useEffect(() => {
+    let mounted = true;
+    
+    const loadEditor = async () => {
+      const [{ CKEditor }, ClassicEditorBuild] = await Promise.all([
+        import('@ckeditor/ckeditor5-react'),
+        import('@ckeditor/ckeditor5-build-classic'),
+      ]);
+      
+      if (mounted) {
+        setEditorComponent(() => CKEditor);
+        setClassicEditor(() => ClassicEditorBuild.default);
+      }
+    };
+    
+    loadEditor();
+    return () => { mounted = false; };
+  }, []);
 
   useEffect(() => {
     if (editId) {
@@ -69,6 +99,14 @@ export default function AdminBlogPage() {
     }
   };
 
+  const handleEditorChange = (_event: any, editor: any) => {
+    setContent(editor.getData());
+  };
+
+  if (!EditorComponent || !ClassicEditor) {
+    return <div className="p-8">Loading rich text editor...</div>;
+  }
+
   return (
     <div className="max-w-5xl mx-auto bg-white rounded-2xl shadow-xl p-8">
       <div className="flex items-center gap-4 mb-6">
@@ -116,10 +154,10 @@ export default function AdminBlogPage() {
         {cover && <img src={cover} alt="cover" className="mt-2 h-32 rounded" />}
       </div>
 
-      <CKEditor
+      <EditorComponent
         editor={ClassicEditor}
         data={content}
-        onChange={(_event, editor) => setContent(editor.getData())}
+        onChange={handleEditorChange}
       />
 
       <button 
