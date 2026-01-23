@@ -1,8 +1,6 @@
-'use client';
-
-import { useEffect, useState } from 'react';
+import { notFound } from 'next/navigation';
 import Image from 'next/image';
-import { FaCalendarAlt, FaMapMarkerAlt, FaClock } from 'react-icons/fa6';
+import { FaCalendar, FaLocationDot, FaClock } from 'react-icons/fa6';
 import NewsletterCTA from '@/components/NewsletterCTA';
 
 type Event = {
@@ -15,17 +13,20 @@ type Event = {
   location: string;
 };
 
-export default function EventPage({ params }: { params: { id: string } }) {
-  const [event, setEvent] = useState<Event | null>(null);
+async function getEvent(slug: string): Promise<Event | null> {
+  const base = process.env.VERCEL_URL
+    ? `https://${process.env.VERCEL_URL}`
+    : 'http://localhost:3000';
+  const res = await fetch(`${base}/api/events/${slug}`, { next: { revalidate: 60 } });
+  if (!res.ok) return null;
+  return res.json();
+}
 
-  useEffect(() => {
-    fetch(`/api/events/${params.id}`)
-      .then((r) => r.json())
-      .then(setEvent)
-      .catch(() => setEvent(null));
-  }, [params.id]);
-
-  if (!event) return <p className="p-6">Event not found.</p>;
+export default async function EventPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params; // ← unwrap the Promise
+  const event = await getEvent(id);
+  
+  if (!event) notFound();
 
   const start = new Date(event.startDate);
   const end = event.endDate ? new Date(event.endDate) : null;
@@ -43,8 +44,8 @@ export default function EventPage({ params }: { params: { id: string } }) {
         <div className="absolute bottom-8 left-1/2 -translate-x-1/2 text-center text-white max-w-4xl px-6">
           <h1 className="text-4xl md:text-5xl font-black">{event.title}</h1>
           <div className="flex items-center justify-center gap-4 mt-4 text-sm opacity-90">
-            <span className="flex items-center gap-1"><FaCalendarAlt /> {start.toLocaleDateString()}</span>
-            <span className="flex items-center gap-1"><FaMapMarkerAlt /> {event.location}</span>
+            <span className="flex items-center gap-1"><FaCalendar /> {start.toLocaleDateString()}</span>
+            <span className="flex items-center gap-1"><FaLocationDot /> {event.location}</span>
             {end && <span className="flex items-center gap-1"><FaClock /> {end.toLocaleDateString()}</span>}
           </div>
         </div>

@@ -316,7 +316,7 @@ export default function Navbar() {
       { label: 'Blog & News', href: '/blog', description: 'Read the latest from our blog.' },
     ],
     events: [
-      { label: 'Upcoming Events', href: '/events/upcoming', description: 'Join us at our next event.' },
+      { label: 'Upcoming Events', href: '/events', description: 'Join us at our next event.' },
       { label: 'Past Events', href: '/events/past', description: 'See photos and recaps.' },
     ],
     programs: [

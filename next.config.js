@@ -13,6 +13,17 @@ const nextConfig = {
       },
     ],
   },
+  
+  // Redirects for old event routes
+  async redirects() {
+    return [
+      {
+        source: '/events/upcoming',
+        destination: '/events',
+        permanent: true, // 301 for SEO
+      },
+    ];
+  },
 };
 
 module.exports = nextConfig;

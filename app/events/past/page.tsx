@@ -1,7 +1,7 @@
 // app/events/past/page.tsx
 import Link from 'next/link';
 import Image from 'next/image';
-import { FaCalendarAlt, FaMapMarkerAlt } from 'react-icons/fa6';
+import { FaCalendar, FaLocationDot } from 'react-icons/fa6';
 import NewsletterCTA from '@/components/NewsletterCTA';
 
 type Event = {
@@ -63,8 +63,8 @@ export default async function PastEventsPage() {
                   <h2 className="text-xl font-black text-brand-text mt-1 mb-2">{ev.title}</h2>
                   <p className="text-gray-600 text-sm line-clamp-3">{ev.excerpt}</p>
                   <div className="flex items-center gap-4 mt-4 text-sm text-gray-500">
-                    <span className="flex items-center gap-1"><FaCalendarAlt /> {new Date(ev.startDate).toLocaleDateString()}</span>
-                    <span className="flex items-center gap-1"><FaMapMarkerAlt /> {ev.location}</span>
+                    <span className="flex items-center gap-1"><FaCalendar /> {new Date(ev.startDate).toLocaleDateString()}</span>
+                    <span className="flex items-center gap-1"><FaLocationDot /> {ev.location}</span>
                   </div>
                 </div>
               </Link>
