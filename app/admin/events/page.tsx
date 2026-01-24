@@ -232,13 +232,20 @@ function EventEditor() {
       const method = editId ? 'PUT' : 'POST';
       const url = editId ? `/api/events?id=${editId}` : '/api/events';
 
+      // Convert datetime-local format to ISO 8601 with timezone
+      const convertToISO = (dateStr: string) => {
+        if (!dateStr) return null;
+        const date = new Date(dateStr);
+        return date.toISOString();
+      };
+
       const payload = {
         title: title.trim(),
         description: description || undefined,
         category,
         cover: cover || undefined,
-        startDate, // Send as ISO string
-        endDate: endDate || null,
+        startDate: convertToISO(startDate),
+        endDate: endDate ? convertToISO(endDate) : null,
         location: location.trim(),
         author: author || undefined,
         metaTitle: metaTitle || undefined,
