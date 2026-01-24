@@ -1,4 +1,4 @@
-// app/admin/events/page.tsx - ENTERPRISE EVENTS ADMIN
+// app/admin/events/page.tsx - COMPLETE WITH IMGBB UPLOAD
 'use client';
 
 import { Suspense, useState, useEffect } from 'react';
@@ -89,17 +89,18 @@ function EventEditor() {
   const [location, setLocation] = useState('');
   const [cover, setCover] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [uploadLoading, setUploadLoading] = useState(false);
   
-  // SEO & Meta fields (NEW)
+  // SEO & Meta fields
   const [author, setAuthor] = useState('');
   const [metaTitle, setMetaTitle] = useState('');
   const [metaDesc, setMetaDesc] = useState('');
   const [ogImage, setOgImage] = useState('');
   
-  // Event specific (NEW)
-  const [venue, setVenue] = useState(''); // Detailed venue name
-  const [address, setAddress] = useState(''); // Full address
-  const [registrationLink, setRegistrationLink] = useState(''); // External registration URL
+  // Event specific
+  const [venue, setVenue] = useState('');
+  const [address, setAddress] = useState('');
+  const [registrationLink, setRegistrationLink] = useState('');
   const [maxAttendees, setMaxAttendees] = useState<number | ''>('');
   const [isFree, setIsFree] = useState(true);
   const [ticketPrice, setTicketPrice] = useState('');
@@ -137,10 +138,10 @@ function EventEditor() {
       const res = await fetch(`/api/events?id=${id}`);
       const event = await res.json();
       
-      setTitle(event.title);
+      setTitle(event.title || '');
       setDescription(event.description || '');
-      setCategory(event.category);
-      setLocation(event.location);
+      setCategory(event.category || 'Upcoming');
+      setLocation(event.location || '');
       setCover(event.cover || '');
       setAuthor(event.author || '');
       setMetaTitle(event.metaTitle || '');
@@ -167,21 +168,78 @@ function EventEditor() {
     }
   };
 
+  // ImgBB Upload Handler
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>, setter: (url: string) => void) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    
+    // Validate file size (max 5MB for ImgBB free tier)
+    if (file.size > 5 * 1024 * 1024) {
+      alert('File size must be less than 5MB');
+      return;
+    }
+
+    setUploadLoading(true);
+    
+    try {
+      const formData = new FormData();
+      formData.append('image', file);
+
+      const res = await fetch('/api/upload', {
+        method: 'POST',
+        body: formData,
+      });
+
+      if (!res.ok) {
+        throw new Error('Upload failed');
+      }
+
+      const data = await res.json();
+      
+      if (data.url) {
+        setter(data.url);
+        console.log('Image uploaded:', data.url);
+      } else {
+        throw new Error('No URL returned');
+      }
+    } catch (error) {
+      console.error('Upload error:', error);
+      alert('Failed to upload image. Please try again.');
+    } finally {
+      setUploadLoading(false);
+    }
+  };
+
   const saveEvent = async () => {
-    if (!title.trim() || !startDate || !location.trim())  return alert('Required fields: Title, Start Date, Location');
+    // Debug log
+    console.log('Saving event:', {
+      title: title.trim(),
+      startDate,
+      location: location.trim(),
+    });
+
+    if (!title.trim() || !startDate || !location.trim()) {
+      return alert('Required fields: Title, Start Date, Location');
+    }
+
+    // Validate end date is after start date
+    if (endDate && new Date(endDate) <= new Date(startDate)) {
+      return alert('End date must be after start date');
+    }
+
     setIsLoading(true);
     try {
       const method = editId ? 'PUT' : 'POST';
       const url = editId ? `/api/events?id=${editId}` : '/api/events';
 
       const payload = {
-        title,
-        description,
+        title: title.trim(),
+        description: description || undefined,
         category,
-        cover,
-        startDate: new Date(startDate),
-        endDate: endDate ? new Date(endDate) : null,
-        location,
+        cover: cover || undefined,
+        startDate, // Send as ISO string
+        endDate: endDate || null,
+        location: location.trim(),
         author: author || undefined,
         metaTitle: metaTitle || undefined,
         metaDesc: metaDesc || undefined,
@@ -194,16 +252,24 @@ function EventEditor() {
         ticketPrice: isFree ? undefined : ticketPrice,
       };
 
+      console.log('Sending payload:', payload);
+
       const res = await fetch(url, {
         method,
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
       });
 
+      console.log('Response status:', res.status);
+
       if (!res.ok) {
-        const error = await res.json();
-        throw new Error(error.error || 'Failed to save event');
+        const errorData = await res.json().catch(() => ({ error: 'Unknown error' }));
+        console.error('Error response:', errorData);
+        throw new Error(errorData.error || `Failed to save event (${res.status})`);
       }
+
+      const data = await res.json();
+      console.log('Success:', data);
 
       alert(editId ? 'Event updated!' : 'Event saved!');
       router.push('/admin');
@@ -212,22 +278,6 @@ function EventEditor() {
       alert(error instanceof Error ? error.message : 'Failed to save event');
     } finally {
       setIsLoading(false);
-    }
-  };
-
-  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>, setter: (url: string) => void) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-    
-    const body = new FormData();
-    body.append('file', file);
-    
-    try {
-      const res = await fetch('/api/upload', { method: 'POST', body });
-      const { url } = await res.json();
-      setter(url);
-    } catch (error) {
-      alert('Failed to upload image');
     }
   };
 
@@ -266,7 +316,6 @@ function EventEditor() {
           </h2>
         </div>
         
-        {/* Category Badge */}
         <span className={`px-4 py-2 rounded-full text-sm font-semibold ${
           category === 'Upcoming' ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800'
         }`}>
@@ -368,7 +417,7 @@ function EventEditor() {
                   type="datetime-local"
                   className="w-full px-4 py-3 border rounded-lg"
                   value={startDate}
-                  onChange={(e) => setStartDate(e.target.value || '')}
+                  onChange={(e) => setStartDate(e.target.value)}
                   disabled={isLoading}
                 />
               </div>
@@ -472,19 +521,22 @@ function EventEditor() {
             {/* Registration Link */}
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-2">
-                External Registration Link (optional)
+                Registration Link (optional)
               </label>
               <input
-                type="url"
+                type="text"
                 className="w-full px-4 py-3 border rounded-lg"
-                placeholder="https://eventbrite.com/..."
+                placeholder="https://eventbrite.com/... or newinternationalhope@gmail.com"
                 value={registrationLink}
                 onChange={(e) => setRegistrationLink(e.target.value)}
                 disabled={isLoading}
               />
+              <p className="text-xs text-gray-500 mt-1">
+                Can be a URL or email address
+              </p>
             </div>
 
-            {/* Cover Image */}
+            {/* Cover Image with ImgBB */}
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-2">
                 <FaImage className="inline mr-1"/> Event Cover Image
@@ -494,21 +546,27 @@ function EventEditor() {
                   type="file"
                   accept="image/*"
                   onChange={(e) => handleImageUpload(e, setCover)}
-                  disabled={isLoading}
+                  disabled={isLoading || uploadLoading}
                   className="flex-1"
                 />
-                {cover && (
-                  <div className="relative">
-                    <img src={cover} alt="cover" className="h-20 w-20 object-cover rounded" />
-                    <button 
-                      onClick={() => setCover('')}
-                      className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-5 h-5 text-xs"
-                    >
-                      ×
-                    </button>
-                  </div>
-                )}
+                {uploadLoading && <span className="text-blue-600 text-sm">Uploading...</span>}
               </div>
+              {cover && (
+                <div className="mt-4 relative inline-block">
+                  <img 
+                    src={cover} 
+                    alt="Event cover" 
+                    className="h-32 w-48 object-cover rounded-lg shadow-md" 
+                  />
+                  <button 
+                    onClick={() => setCover('')}
+                    className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-6 h-6 text-xs hover:bg-red-600 transition"
+                    type="button"
+                  >
+                    ×
+                  </button>
+                </div>
+              )}
             </div>
 
             {/* Description */}
@@ -566,7 +624,7 @@ function EventEditor() {
               </div>
             </div>
 
-            {/* OG Image */}
+            {/* OG Image with ImgBB */}
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-2">
                 Social Media Image (Open Graph)
@@ -576,21 +634,27 @@ function EventEditor() {
                   type="file"
                   accept="image/*"
                   onChange={(e) => handleImageUpload(e, setOgImage)}
-                  disabled={isLoading}
+                  disabled={isLoading || uploadLoading}
                   className="flex-1"
                 />
-                {ogImage && (
-                  <div className="relative">
-                    <img src={ogImage} alt="og" className="h-20 w-20 object-cover rounded" />
-                    <button 
-                      onClick={() => setOgImage('')}
-                      className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-5 h-5 text-xs"
-                    >
-                      ×
-                    </button>
-                  </div>
-                )}
+                {uploadLoading && <span className="text-blue-600 text-sm">Uploading...</span>}
               </div>
+              {ogImage && (
+                <div className="mt-4 relative inline-block">
+                  <img 
+                    src={ogImage} 
+                    alt="Social media preview" 
+                    className="h-32 w-48 object-cover rounded-lg shadow-md" 
+                  />
+                  <button 
+                    onClick={() => setOgImage('')}
+                    className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-6 h-6 text-xs hover:bg-red-600 transition"
+                    type="button"
+                  >
+                    ×
+                  </button>
+                </div>
+              )}
               <p className="text-xs text-gray-500 mt-1">Recommended: 1200×630 pixels</p>
             </div>
 
@@ -621,7 +685,7 @@ function EventEditor() {
 
             {/* Event Card Preview */}
             <div className="bg-white rounded-xl shadow-lg overflow-hidden border max-w-2xl mx-auto">
-              {cover && (
+              {cover ? (
                 <div className="relative h-48 bg-gray-200">
                   <img src={cover} alt={title} className="w-full h-full object-cover" />
                   <div className="absolute top-4 left-4">
@@ -629,6 +693,10 @@ function EventEditor() {
                       {category}
                     </span>
                   </div>
+                </div>
+              ) : (
+                <div className="h-48 bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
+                  <span className="text-white text-6xl">📅</span>
                 </div>
               )}
               
@@ -676,9 +744,9 @@ function EventEditor() {
             type="button"
             onClick={saveEvent} 
             className="flex-1 bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition flex items-center justify-center gap-2 disabled:opacity-50"
-            disabled={isLoading}
+            disabled={isLoading || uploadLoading}
           >
-            <FaSave /> {editId ? 'Update Event' : 'Save Event'}
+            <FaSave /> {isLoading ? 'Saving...' : (editId ? 'Update Event' : 'Save Event')}
           </button>
         </div>
       </div>

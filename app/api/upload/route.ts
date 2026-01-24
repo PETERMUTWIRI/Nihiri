@@ -1,26 +1,38 @@
-import { writeFile, mkdir } from 'fs/promises';
-import { join } from 'path';
-import { randomUUID } from 'crypto';
+// app/api/upload/route.ts - IMGBB VERSION
+import { NextResponse } from 'next/server';
 
 export async function POST(req: Request) {
   try {
-    const data = await req.formData();
-    const file: File = data.get('file') as File;
+    const formData = await req.formData();
+    const file = formData.get('file') as File;
     
     if (!file) {
-      return Response.json({ error: 'No file provided' }, { status: 400 });
+      return NextResponse.json({ error: 'No file provided' }, { status: 400 });
     }
 
-    const name = `${randomUUID()}-${file.name.replace(/\s/g, '-')}`;
-    const pathDir = join(process.cwd(), 'public', 'uploads', 'blog');
-    const pathFull = join(pathDir, name);
+    // Convert to base64
+    const bytes = await file.arrayBuffer();
+    const buffer = Buffer.from(bytes);
+    const base64 = buffer.toString('base64');
+
+    // Upload to ImgBB
+    const imgbbForm = new FormData();
+    imgbbForm.append('image', base64);
     
-    await mkdir(pathDir, { recursive: true });
-    await writeFile(pathFull, Buffer.from(await file.arrayBuffer()));
+    const res = await fetch(`https://api.imgbb.com/1/upload?key=${process.env.IMGBB_API_KEY}`, {
+      method: 'POST',
+      body: imgbbForm,
+    });
     
-    return Response.json({ url: `/uploads/blog/${name}` });
+    const data = await res.json();
+    
+    if (!data.success) {
+      throw new Error(data.error?.message || 'Upload failed');
+    }
+
+    return NextResponse.json({ url: data.data.url });
   } catch (error) {
     console.error('Upload error:', error);
-    return Response.json({ error: 'Upload failed' }, { status: 500 });
+    return NextResponse.json({ error: 'Upload failed' }, { status: 500 });
   }
 }
