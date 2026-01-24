@@ -168,8 +168,7 @@ function EventEditor() {
   };
 
   const saveEvent = async () => {
-    if (!title || !startDate || !location) return alert('Required fields: Title, Start Date, Location');
-    
+    if (!title.trim() || !startDate || !location.trim())  return alert('Required fields: Title, Start Date, Location');
     setIsLoading(true);
     try {
       const method = editId ? 'PUT' : 'POST';
@@ -180,8 +179,8 @@ function EventEditor() {
         description,
         category,
         cover,
-        startDate,
-        endDate,
+        startDate: new Date(startDate),
+        endDate: endDate ? new Date(endDate) : null,
         location,
         author: author || undefined,
         metaTitle: metaTitle || undefined,
@@ -369,7 +368,7 @@ function EventEditor() {
                   type="datetime-local"
                   className="w-full px-4 py-3 border rounded-lg"
                   value={startDate}
-                  onChange={(e) => setStartDate(e.target.value)}
+                  onChange={(e) => setStartDate(e.target.value || '')}
                   disabled={isLoading}
                 />
               </div>
@@ -674,6 +673,7 @@ function EventEditor() {
         {/* Action Buttons */}
         <div className="flex gap-4 mt-8 pt-6 border-t">
           <button 
+            type="button"
             onClick={saveEvent} 
             className="flex-1 bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition flex items-center justify-center gap-2 disabled:opacity-50"
             disabled={isLoading}
