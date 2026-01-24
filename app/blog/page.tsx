@@ -1,39 +1,34 @@
-// app/blog/page.tsx - FIXED VERSION
+// app/blog/page.tsx - FULLY FIXED
 import Link from "next/link";
 import Image from "next/image";
 import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
-interface Post {
-  id: number;
-  title: string;
-  slug: string;
-  excerpt: string | null;
-  content: string;
-  cover: string | null;
-  category: string;
-  publishedAt: Date;
-}
-
-async function getPosts(): Promise<Post[]> {
-  // Use Prisma directly - works during build, no fetch needed
+// Remove the custom interface - let Prisma handle types
+async function getPosts() {
   const posts = await prisma.post.findMany({
     where: { 
       published: true,
-      deletedAt: null, // Exclude soft-deleted
+      deletedAt: null,
     },
     orderBy: { publishedAt: 'desc' },
   });
   
-  console.log(`Found ${posts.length} posts`); // Debug log
+  console.log(`Found ${posts.length} posts`);
   return posts;
+}
+
+// Helper function to safely format dates
+function formatDate(date: Date | null, options?: Intl.DateTimeFormatOptions): string {
+  if (!date) return 'Coming soon';
+  return new Date(date).toLocaleDateString('en-US', options);
 }
 
 export default async function BlogPage() {
   const posts = await getPosts();
-  const featuredPost = posts[0]; // Latest post
-  const otherPosts = posts.slice(1); // Rest of posts
+  const featuredPost = posts[0];
+  const otherPosts = posts.slice(1);
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -73,7 +68,7 @@ export default async function BlogPage() {
                 {/* Right: Content */}
                 <div className="p-8 lg:p-12 flex flex-col justify-center bg-white">
                   <time className="text-gray-500 text-sm mb-3 uppercase tracking-wide">
-                    {new Date(featuredPost.publishedAt).toLocaleDateString('en-US', {
+                    {formatDate(featuredPost.publishedAt, {
                       weekday: 'long',
                       year: 'numeric',
                       month: 'long',
@@ -147,7 +142,7 @@ export default async function BlogPage() {
                     </div>
                     <div className="p-6">
                       <time className="text-xs text-gray-500 mb-2 block">
-                        {new Date(post.publishedAt).toLocaleDateString()}
+                        {formatDate(post.publishedAt)}
                       </time>
                       <h4 className="text-lg font-bold text-gray-900 mb-2 line-clamp-2 group-hover:text-blue-600 transition">
                         {post.title}

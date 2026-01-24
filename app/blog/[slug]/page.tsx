@@ -59,13 +59,13 @@ export default async function BlogPostPage({ params }: PageProps) {
           {post.title}
         </h1>
         
-        <time className="text-gray-500 mb-8 block">
-          Published on {new Date(post.publishedAt).toLocaleDateString('en-US', {
+        <time className="text-gray-500 text-sm mb-3 uppercase tracking-wide">
+          {post.publishedAt ? new Date(post.publishedAt).toLocaleDateString('en-US', {
             weekday: 'long',
             year: 'numeric',
             month: 'long',
             day: 'numeric'
-          })}
+          }) : 'Coming Soon'}
         </time>
 
         {post.cover && (
