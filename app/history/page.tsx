@@ -24,7 +24,7 @@ export default function HistoryPage() {
 
       {/* TIMELINE */}
       <section className="py-16 px-6 md:px-12 max-w-6xl mx-auto">
-        <h2 className="text-4xl font-black text-brand-text text-center mb-12">Key Milestones</h2>
+        <h2 className="text-4xl font-black text-gray-900 text-center mb-12">Key Milestones</h2>
         <div className="space-y-12 border-l-2 border-brand-primary/40 pl-8 md:pl-12">
           {[
             { year: '2000', title: 'Arrival in New Haven', desc: 'Jane Kinity arrives from Kenya and begins informal support for neighbours.' },
@@ -38,7 +38,7 @@ export default function HistoryPage() {
               <span className="absolute -left-[42px] top-1 w-8 h-8 rounded-full bg-brand-primary text-white flex items-center justify-center font-black text-sm">
                 {m.year}
               </span>
-              <h3 className="text-2xl font-extrabold text-brand-text mb-1">{m.title}</h3>
+              <h3 className="text-2xl font-extrabold text-gray-900 mb-1">{m.title}</h3>
               <p className="text-gray-700 leading-relaxed">{m.desc}</p>
             </li>
           ))}
@@ -48,7 +48,7 @@ export default function HistoryPage() {
       {/* QUOTE */}
       <section className="py-16 px-6 md:px-12 bg-white">
         <div className="max-w-4xl mx-auto text-center">
-          <blockquote className="text-2xl md:text-3xl font-black text-brand-text italic">
+          <blockquote className="text-2xl md:text-3xl font-black text-gray-900 italic">
             “Empowerment through education—turning the challenges of displacement into the triumphs of new beginnings.”
           </blockquote>
           <cite className="mt-4 block text-brand-primary font-extrabold">— Jane Kinity, Founder</cite>

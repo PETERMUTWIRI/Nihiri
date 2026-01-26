@@ -88,7 +88,7 @@ export default function BoardPage() {
     <div className="min-h-screen bg-brand-background">
       {/* HERO */}
       <section className="py-24 md:py-32 px-6 md:px-12 text-center bg-gradient-to-b from-brand-primary/20 to-brand-background">
-        <h1 className="text-5xl md:text-6xl font-black text-brand-text mb-6">Board of Directors</h1>
+        <h1 className="text-5xl md:text-6xl font-black text-black mb-6">Board of Directors</h1>
         <p className="text-xl text-gray-700 max-w-3xl mx-auto">
           Meet the leaders who guide our mission and ensure every refugee family thrives.
         </p>
@@ -112,7 +112,7 @@ export default function BoardPage() {
                   className="w-full h-full object-cover"
                 />
               </div>
-              <h3 className="mt-4 font-extrabold text-brand-text">{m.name}</h3>
+              <h3 className="mt-4 font-extrabold text-gray-900">{m.name}</h3>
               <p className="text-sm text-brand-primary font-semibold">{m.role}</p>
             </button>
           ))}
@@ -155,7 +155,7 @@ export default function BoardPage() {
                     />
                   </div>
                   <div>
-                    <h2 className="text-2xl font-black text-brand-text">{active.name}</h2>
+                    <h2 className="text-2xl font-black text-gray-900">{active.name}</h2>
                     <p className="text-brand-primary font-semibold">{active.role}</p>
                   </div>
                 </div>

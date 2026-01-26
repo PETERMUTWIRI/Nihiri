@@ -233,41 +233,41 @@ export default function HealthPage() {
 
           <div className="grid md:grid-cols-2 gap-12">
             <div className="space-y-8">
-              <div className="bg-gray-100 backdrop-blur rounded-2xl p-8">
-                <h3 className="text-2xl font-bold mb-4">Vaccine Clinic Program</h3>
+              <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition hover:-translate-y-1">
+                <h3 className="text-2xl font-bold mb-4 text-gray-900">Vaccine Clinic Program</h3>
                 <p className="text-gray-600 leading-relaxed">
                   Offered both online and in-person, our vaccine awareness initiative is specifically designed to address the unique concerns of refugee communities. We provide comprehensive education about the immune system, explain the critical importance of immunization for community health, and respectfully address common myths and misconceptions about vaccines that may circulate within communities.
                 </p>
-                <p className="text-brand-text/80 mt-4 leading-relaxed">
+                <p className="text-gray-600 mt-4 leading-relaxed">
                   We create welcoming, judgment-free spaces where clients feel safe asking specific questions about their personal health situations. All educational materials are professionally translated and presented in Dari, Pashto, and Arabic, ensuring that language is never a barrier to understanding life-saving health information.
                 </p>
               </div>
 
-              <div className="bg-white/10 backdrop-blur rounded-2xl p-8">
-                <h3 className="text-2xl font-bold mb-4">National Association of Regional Councils (NARC)</h3>
-                <p className="text-brand-text/80 leading-relaxed">
+              <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition hover:-translate-y-1">
+                <h3 className="text-2xl font-bold mb-4 text-gray-900">National Association of Regional Councils (NARC)</h3>
+                <p className="text-gray-600 leading-relaxed">
                   The annual NARC Conference and Exhibition stands as the largest national gathering focused on promoting effective regional cooperation and solutions. Our participation allows us to share best practices with leadership from Councils of Government and Metropolitan Planning Organizations across the country.
                 </p>
-                <p className="text-brand-text/80 mt-4 leading-relaxed">
+                <p className="text-gray-600 mt-4 leading-relaxed">
                   This platform enables us to advocate for refugee health needs at the policy level, learning from congressional and state lawmakers, university researchers, and nonprofit leaders about emerging strategies for serving displaced populations. Our presence ensures that refugee voices are represented in regional health planning discussions.
                 </p>
               </div>
             </div>
 
             <div className="space-y-8">
-              <div className="bg-white/10 backdrop-blur rounded-2xl p-8">
-                <h3 className="text-2xl font-bold mb-4">Mental Health America Conference</h3>
-                <p className="text-brand-text/80 leading-relaxed">
+              <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition hover:-translate-y-1">
+                <h3 className="text-2xl font-bold mb-4 text-gray-900">Mental Health America Conference</h3>
+                <p className="text-gray-600 leading-relaxed">
                   In June 2022, our representatives took the national stage to share research and expertise on addressing America's refugee mental health crisis. This presentation offered practical, culturally-informed approaches to mental healthcare that respect the diverse backgrounds and experiences of refugee communities.
                 </p>
-                <p className="text-brand-text/80 mt-4 leading-relaxed">
+                <p className="text-gray-600 mt-4 leading-relaxed">
                   By participating in these national conversations, we help shape the broader discourse on refugee mental health, ensuring that service providers across the country understand the unique psychological impacts of forced migration and the specific support structures that promote healing and resilience.
                 </p>
               </div>
 
-              <div className="bg-white/10 backdrop-blur rounded-2xl p-8">
-                <h3 className="text-2xl font-bold mb-4">Photovoice Worldwide</h3>
-                <p className="text-brand-text/80 leading-relaxed">
+              <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition hover:-translate-y-1">
+                <h3 className="text-2xl font-bold mb-4 text-gray-900">Photovoice Worldwide</h3>
+                <p className="text-gray-600 leading-relaxed">
                   In October 2022, our team member Rachel shared insights from a powerful Photovoice activity conducted with refugee youth in collaboration with Wesleyan University. This innovative methodology allows young people to document their lived experiences through photography, creating visual narratives that communicate their challenges, hopes, and perspectives in ways that traditional interviews cannot capture.
                 </p>
               </div>

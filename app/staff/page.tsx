@@ -160,7 +160,7 @@ export default function StaffPage() {
               className={`px-4 py-2 rounded-full text-sm font-extrabold transition ${
                 filter === t
                   ? 'bg-brand-primary text-black'
-                  : 'bg-white text-brand-text hover:bg-brand-primary/20'
+                  : 'bg-white text-gray-900 hover:bg-brand-primary/20'
               }`}
             >
               {t}
@@ -187,7 +187,7 @@ export default function StaffPage() {
                   className="w-full h-full object-cover"
                 />
               </div>
-              <h3 className="mt-4 font-extrabold text-brand-text">{m.name}</h3>
+              <h3 className="mt-4 font-extrabold text-gray-900">{m.name}</h3>
               <p className="text-sm text-brand-primary font-semibold">{m.role}</p>
               {m.past && (
                 <span className="mt-2 inline-block px-2 py-1 text-xs bg-gray-200 text-gray-700 rounded">Past Staff</span>
@@ -226,7 +226,7 @@ export default function StaffPage() {
                     />
                   </div>
                   <div>
-                    <h2 className="text-2xl font-black text-brand-text">{active.name}</h2>
+                    <h2 className="text-2xl font-black text-gray-900">{active.name}</h2>
                     <p className="text-brand-primary font-semibold">{active.role}</p>
                     {active.past && <span className="text-xs text-gray-500">Past Staff</span>}
                   </div>
