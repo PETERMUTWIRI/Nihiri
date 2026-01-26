@@ -1,4 +1,4 @@
-// app/admin/events/page.tsx - SIMPLIFIED VERSION (matching blog pattern)
+// app/admin/events/page.tsx - COMPLETE REFACTORED VERSION
 'use client';
 
 import { useEffect, useState, Suspense } from 'react';
@@ -15,7 +15,6 @@ export default function AdminEventsPage() {
 }
 
 function EventEditor() {
-  // All fields in one object like blog pattern
   const [formData, setFormData] = useState({
     title: '',
     description: '',
@@ -37,6 +36,7 @@ function EventEditor() {
   });
   
   const [isLoading, setIsLoading] = useState(false);
+  const [uploadLoading, setUploadLoading] = useState(false);
   const [activeTab, setActiveTab] = useState<'details' | 'seo'>('details');
   
   const router = useRouter();
@@ -76,28 +76,23 @@ function EventEditor() {
       });
     } catch (error) {
       console.error('Failed to load event:', error);
-      alert('Failed to load event');
     } finally {
       setIsLoading(false);
     }
   };
 
-  // Generic handler for all inputs
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value, type } = e.target;
     
     if (type === 'checkbox') {
       const checked = (e.target as HTMLInputElement).checked;
       setFormData(prev => ({ ...prev, [name]: checked }));
-    } else if (type === 'number') {
-      setFormData(prev => ({ ...prev, [name]: value }));
     } else {
       setFormData(prev => ({ ...prev, [name]: value }));
     }
-    
-    console.log(`Field ${name} changed to:`, value); // Debug
   };
 
+  // ImgBB Upload Handler
   const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>, field: 'cover' | 'ogImage') => {
     const file = e.target.files?.[0];
     if (!file) return;
@@ -107,41 +102,59 @@ function EventEditor() {
       return;
     }
 
+    setUploadLoading(true);
+    
     try {
-      const body = new FormData();
-      body.append('file', file);
-      const res = await fetch('/api/upload', { method: 'POST', body });
-      const { url } = await res.json();
-      setFormData(prev => ({ ...prev, [field]: url }));
+      const uploadForm = new FormData();
+      uploadForm.append('image', file);
+
+      const res = await fetch('/api/upload', {
+        method: 'POST',
+        body: uploadForm,
+      });
+
+      const data = await res.json();
+      
+      if (data.url) {
+        setFormData(prev => ({ ...prev, [field]: data.url }));
+      } else {
+        throw new Error('Upload failed');
+      }
     } catch (error) {
+      console.error('Upload error:', error);
       alert('Failed to upload image');
+    } finally {
+      setUploadLoading(false);
     }
   };
 
   const saveEvent = async () => {
-    const { title, startDate, location } = formData;
-    
-    console.log('Saving with formData:', formData);
-    console.log('Required fields:', { title, startDate, location });
-
-    if (!title.trim() || !startDate || !location.trim()) {
-      return alert('Required fields: Title, Start Date, Location');
-    }
-
     setIsLoading(true);
+    
     try {
       const method = editId ? 'PUT' : 'POST';
       const url = editId ? `/api/events?id=${editId}` : '/api/events';
 
-      const payload = {
-        ...formData,
-        title: formData.title.trim(),
-        location: formData.location.trim(),
-        startDate: formData.startDate, // Already in ISO format from datetime-local
-        endDate: formData.endDate || null,
-        maxAttendees: formData.maxAttendees ? Number(formData.maxAttendees) : undefined,
-        ticketPrice: formData.isFree ? undefined : formData.ticketPrice,
-      };
+      // Build payload - only include fields that have values
+      const payload: any = {};
+      
+      if (formData.title) payload.title = formData.title;
+      if (formData.description) payload.description = formData.description;
+      if (formData.category) payload.category = formData.category;
+      if (formData.location) payload.location = formData.location;
+      if (formData.startDate) payload.startDate = formData.startDate;
+      if (formData.endDate) payload.endDate = formData.endDate;
+      if (formData.cover) payload.cover = formData.cover;
+      if (formData.author) payload.author = formData.author;
+      if (formData.metaTitle) payload.metaTitle = formData.metaTitle;
+      if (formData.metaDesc) payload.metaDesc = formData.metaDesc;
+      if (formData.ogImage) payload.ogImage = formData.ogImage;
+      if (formData.venue) payload.venue = formData.venue;
+      if (formData.address) payload.address = formData.address;
+      if (formData.registrationLink) payload.registrationLink = formData.registrationLink;
+      if (formData.maxAttendees) payload.maxAttendees = Number(formData.maxAttendees);
+      payload.isFree = formData.isFree;
+      if (!formData.isFree && formData.ticketPrice) payload.ticketPrice = formData.ticketPrice;
 
       console.log('Sending payload:', payload);
 
@@ -153,7 +166,7 @@ function EventEditor() {
 
       if (!res.ok) {
         const error = await res.json();
-        throw new Error(error.error || 'Failed to save event');
+        throw new Error(error.error || 'Failed to save');
       }
 
       alert(editId ? 'Event updated!' : 'Event saved!');
@@ -211,11 +224,11 @@ function EventEditor() {
           <div className="space-y-6">
             {/* Title */}
             <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">Event Title *</label>
+              <label className="block text-sm font-semibold text-gray-700 mb-2">Event Title</label>
               <input
                 name="title"
                 className="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500"
-                placeholder="e.g., Annual Refugee Support Gala 2026"
+                placeholder="e.g., Community Health Fair"
                 value={formData.title}
                 onChange={handleChange}
                 disabled={isLoading}
@@ -224,11 +237,11 @@ function EventEditor() {
 
             {/* Author */}
             <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">Event Organizer</label>
+              <label className="block text-sm font-semibold text-gray-700 mb-2">Organizer</label>
               <input
                 name="author"
                 className="w-full px-4 py-3 border rounded-lg"
-                placeholder="e.g., New International Hope Team"
+                placeholder="New International Hope Team"
                 value={formData.author}
                 onChange={handleChange}
                 disabled={isLoading}
@@ -237,7 +250,7 @@ function EventEditor() {
 
             {/* Category */}
             <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">Event Status</label>
+              <label className="block text-sm font-semibold text-gray-700 mb-2">Status</label>
               <select
                 name="category"
                 className="w-full px-4 py-3 border rounded-lg"
@@ -250,47 +263,49 @@ function EventEditor() {
               </select>
             </div>
 
-            {/* Date & Time - KEY FIX: Using name attribute like blog */}
+            {/* Dates - SIMPLE TEXT INPUTS */}
             <div className="grid md:grid-cols-2 gap-4">
               <div>
                 <label className="block text-sm font-semibold text-gray-700 mb-2">
-                  <FaClock className="inline mr-1"/> Start Date & Time *
+                  <FaClock className="inline mr-1"/> Start Date
                 </label>
                 <input
-                  type="datetime-local"
+                  type="text"
                   name="startDate"
                   className="w-full px-4 py-3 border rounded-lg"
+                  placeholder="2026-01-25T09:00"
                   value={formData.startDate}
                   onChange={handleChange}
                   disabled={isLoading}
                 />
-                {/* Debug */}
-                <span className="text-xs text-gray-400">Value: {formData.startDate || 'empty'}</span>
+                <p className="text-xs text-gray-500 mt-1">Format: YYYY-MM-DDTHH:MM</p>
               </div>
               <div>
                 <label className="block text-sm font-semibold text-gray-700 mb-2">
-                  <FaClock className="inline mr-1"/> End Date & Time (optional)
+                  <FaClock className="inline mr-1"/> End Date (optional)
                 </label>
                 <input
-                  type="datetime-local"
+                  type="text"
                   name="endDate"
                   className="w-full px-4 py-3 border rounded-lg"
+                  placeholder="2026-01-25T16:00"
                   value={formData.endDate}
                   onChange={handleChange}
                   disabled={isLoading}
                 />
+                <p className="text-xs text-gray-500 mt-1">Same format as start date</p>
               </div>
             </div>
 
             {/* Location */}
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-2">
-                <FaMapMarkerAlt className="inline mr-1"/> Location *
+                <FaMapMarkerAlt className="inline mr-1"/> Location
               </label>
               <input
                 name="location"
                 className="w-full px-4 py-3 border rounded-lg"
-                placeholder="e.g., Community Center Downtown"
+                placeholder="Downtown Community Center"
                 value={formData.location}
                 onChange={handleChange}
                 disabled={isLoading}
@@ -303,7 +318,7 @@ function EventEditor() {
               <input
                 name="venue"
                 className="w-full px-4 py-3 border rounded-lg mb-2"
-                placeholder="e.g., Grand Ballroom, 3rd Floor"
+                placeholder="Grand Ballroom"
                 value={formData.venue}
                 onChange={handleChange}
                 disabled={isLoading}
@@ -311,7 +326,7 @@ function EventEditor() {
               <textarea
                 name="address"
                 className="w-full px-4 py-3 border rounded-lg h-20"
-                placeholder="Full address: 123 Main St, City, State, ZIP"
+                placeholder="123 Main St, City, State 12345"
                 value={formData.address}
                 onChange={handleChange}
                 disabled={isLoading}
@@ -320,7 +335,7 @@ function EventEditor() {
 
             {/* Ticket Info */}
             <div className="bg-gray-50 p-4 rounded-lg">
-              <h4 className="font-semibold text-gray-900 mb-4">Ticket Information</h4>
+              <h4 className="font-semibold text-gray-900 mb-4">Ticket Info</h4>
               
               <label className="flex items-center gap-2 mb-4 cursor-pointer">
                 <input
@@ -337,7 +352,7 @@ function EventEditor() {
                 <input
                   name="ticketPrice"
                   className="w-full px-4 py-3 border rounded-lg mb-4"
-                  placeholder="Ticket Price (e.g., $25.00)"
+                  placeholder="$25.00"
                   value={formData.ticketPrice}
                   onChange={handleChange}
                   disabled={isLoading}
@@ -348,7 +363,7 @@ function EventEditor() {
                 type="number"
                 name="maxAttendees"
                 className="w-full px-4 py-3 border rounded-lg"
-                placeholder="Maximum Attendees (optional)"
+                placeholder="Max attendees (optional)"
                 value={formData.maxAttendees}
                 onChange={handleChange}
                 disabled={isLoading}
@@ -357,18 +372,18 @@ function EventEditor() {
 
             {/* Registration */}
             <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">Registration Link or Email</label>
+              <label className="block text-sm font-semibold text-gray-700 mb-2">Registration</label>
               <input
                 name="registrationLink"
                 className="w-full px-4 py-3 border rounded-lg"
-                placeholder="https://... or email@example.com"
+                placeholder="https://... or newinternationalhope@gmail.com"
                 value={formData.registrationLink}
                 onChange={handleChange}
                 disabled={isLoading}
               />
             </div>
 
-            {/* Cover Image */}
+            {/* Cover Image - ImgBB */}
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-2">
                 <FaImage className="inline mr-1"/> Cover Image
@@ -377,12 +392,19 @@ function EventEditor() {
                 type="file"
                 accept="image/*"
                 onChange={(e) => handleImageUpload(e, 'cover')}
-                disabled={isLoading}
+                disabled={isLoading || uploadLoading}
               />
+              {uploadLoading && <span className="text-blue-600 text-sm ml-2">Uploading...</span>}
               {formData.cover && (
                 <div className="mt-2 relative inline-block">
-                  <img src={formData.cover} alt="Cover" className="h-20 rounded" />
-                  <button onClick={() => setFormData(p => ({...p, cover: ''}))} className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-5 h-5 text-xs">×</button>
+                  <img src={formData.cover} alt="Cover" className="h-24 rounded shadow" />
+                  <button 
+                    onClick={() => setFormData(p => ({...p, cover: ''}))}
+                    className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-6 h-6 text-xs hover:bg-red-600"
+                    type="button"
+                  >
+                    ×
+                  </button>
                 </div>
               )}
             </div>
@@ -393,7 +415,7 @@ function EventEditor() {
               <textarea
                 name="description"
                 className="w-full px-4 py-3 border rounded-lg h-40"
-                placeholder="Describe the event..."
+                placeholder="Event description..."
                 value={formData.description}
                 onChange={handleChange}
                 disabled={isLoading}
@@ -405,11 +427,10 @@ function EventEditor() {
           <div className="space-y-6">
             <div className="bg-blue-50 p-4 rounded-lg mb-6">
               <h3 className="font-semibold text-blue-900 mb-1">SEO Settings</h3>
-              <p className="text-sm text-blue-700">Optimize search engine appearance.</p>
             </div>
 
             <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">Meta Title (60 chars)</label>
+              <label className="block text-sm font-semibold text-gray-700 mb-2">Meta Title</label>
               <input
                 name="metaTitle"
                 className="w-full px-4 py-3 border rounded-lg"
@@ -421,7 +442,7 @@ function EventEditor() {
             </div>
 
             <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">Meta Description (160 chars)</label>
+              <label className="block text-sm font-semibold text-gray-700 mb-2">Meta Description</label>
               <textarea
                 name="metaDesc"
                 className="w-full px-4 py-3 border rounded-lg h-24"
@@ -432,18 +453,26 @@ function EventEditor() {
               <span className="text-xs text-gray-500">{formData.metaDesc.length}/160</span>
             </div>
 
+            {/* OG Image - ImgBB */}
             <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">Social Media Image</label>
+              <label className="block text-sm font-semibold text-gray-700 mb-2">Social Image</label>
               <input
                 type="file"
                 accept="image/*"
                 onChange={(e) => handleImageUpload(e, 'ogImage')}
-                disabled={isLoading}
+                disabled={isLoading || uploadLoading}
               />
+              {uploadLoading && <span className="text-blue-600 text-sm ml-2">Uploading...</span>}
               {formData.ogImage && (
                 <div className="mt-2 relative inline-block">
-                  <img src={formData.ogImage} alt="OG" className="h-20 rounded" />
-                  <button onClick={() => setFormData(p => ({...p, ogImage: ''}))} className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-5 h-5 text-xs">×</button>
+                  <img src={formData.ogImage} alt="OG" className="h-24 rounded shadow" />
+                  <button 
+                    onClick={() => setFormData(p => ({...p, ogImage: ''}))}
+                    className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-6 h-6 text-xs hover:bg-red-600"
+                    type="button"
+                  >
+                    ×
+                  </button>
                 </div>
               )}
             </div>
@@ -457,7 +486,7 @@ function EventEditor() {
             className="flex-1 bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition flex items-center justify-center gap-2 disabled:opacity-50"
             disabled={isLoading}
           >
-            <FaSave /> {isLoading ? 'Saving...' : (editId ? 'Update Event' : 'Save Event')}
+            <FaSave /> {isLoading ? 'Saving...' : (editId ? 'Update' : 'Save')}
           </button>
         </div>
       </div>
