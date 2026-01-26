@@ -1,4 +1,4 @@
-// app/api/events/route.ts - COMPLETE REFACTORED VERSION
+// app/api/events/route.ts - COMPLETE WORKING VERSION
 import { NextRequest, NextResponse } from 'next/server';
 import { PrismaClient } from '@prisma/client';
 import { z } from 'zod';
@@ -6,15 +6,27 @@ import { verifyAdminAuth, unauthorizedResponse } from '@/lib/auth/middleware';
 
 const prisma = new PrismaClient();
 
-// Validation schema for create/update
+// Flexible date validator - accepts multiple formats
+const flexibleDateTime = z.string().refine(
+  (val) => {
+    if (!val) return false;
+    const date = new Date(val);
+    return !isNaN(date.getTime());
+  },
+  {
+    message: 'Invalid date format. Use: YYYY-MM-DDTHH:MM (e.g., 2026-01-25T09:00)',
+  }
+);
+
+// Validation schema - NO strict datetime validation
 const eventSchema = z.object({
-  title: z.string().min(3, 'Title must be at least 3 characters'),
+  title: z.string().min(1, 'Title is required'),
   description: z.string().optional(),
   category: z.enum(['Upcoming', 'Past']),
   cover: z.string().optional(),
   location: z.string().min(1, 'Location is required'),
-  startDate: z.string().datetime('Invalid start date format'),
-  endDate: z.string().datetime('Invalid end date format').optional().nullable(),
+  startDate: flexibleDateTime,
+  endDate: flexibleDateTime.optional().nullable(),
   author: z.string().optional(),
   metaTitle: z.string().max(100).optional(),
   metaDesc: z.string().max(160).optional(),
@@ -44,7 +56,6 @@ export async function GET(req: NextRequest) {
       return NextResponse.json(event);
     }
 
-    // Build where clause
     const where: any = { deletedAt: null };
     if (category && category !== 'All') {
       where.category = category;
@@ -69,7 +80,8 @@ export async function POST(req: NextRequest) {
     if (!auth.authorized) return unauthorizedResponse();
 
     const body = await req.json();
-    
+    console.log('POST body:', body);
+
     // Validate input
     const validation = eventSchema.safeParse(body);
     if (!validation.success) {
@@ -81,34 +93,31 @@ export async function POST(req: NextRequest) {
     }
 
     const data = validation.data;
-    const slug = slugify(data.title);
-
-    // Check for duplicate slug
-    const existing = await prisma.event.findUnique({ where: { slug } });
-    if (existing) {
-      return NextResponse.json({ error: 'Event with this title already exists' }, { status: 409 });
-    }
+    
+    // Generate unique slug
+    const baseSlug = slugify(data.title);
+    const slug = `${baseSlug}-${Date.now()}`;
 
     const event = await prisma.event.create({
       data: {
         title: data.title,
         slug,
-        description: data.description,
+        description: data.description || null,
         category: data.category,
-        cover: data.cover,
+        cover: data.cover || null,
         location: data.location,
-        startDate: new Date(data.startDate),
+        startDate: new Date(data.startDate), // Flexible Date parsing
         endDate: data.endDate ? new Date(data.endDate) : null,
-        author: data.author,
-        metaTitle: data.metaTitle,
-        metaDesc: data.metaDesc,
-        ogImage: data.ogImage,
-        venue: data.venue,
-        address: data.address,
-        registrationLink: data.registrationLink,
-        maxAttendees: data.maxAttendees,
+        author: data.author || null,
+        metaTitle: data.metaTitle || null,
+        metaDesc: data.metaDesc || null,
+        ogImage: data.ogImage || null,
+        venue: data.venue || null,
+        address: data.address || null,
+        registrationLink: data.registrationLink || null,
+        maxAttendees: data.maxAttendees || null,
         isFree: data.isFree,
-        ticketPrice: data.isFree ? null : data.ticketPrice,
+        ticketPrice: data.isFree ? null : data.ticketPrice || null,
       },
     });
 
@@ -132,9 +141,29 @@ export async function PUT(req: NextRequest) {
     }
 
     const body = await req.json();
-    
-    // Validate input (make all fields optional for update)
-    const updateSchema = eventSchema.partial();
+    console.log('PUT body:', body);
+
+    // Allow partial updates - make all fields optional
+    const updateSchema = z.object({
+      title: z.string().min(1).optional(),
+      description: z.string().optional(),
+      category: z.enum(['Upcoming', 'Past']).optional(),
+      cover: z.string().optional(),
+      location: z.string().min(1).optional(),
+      startDate: flexibleDateTime.optional(),
+      endDate: flexibleDateTime.optional().nullable(),
+      author: z.string().optional(),
+      metaTitle: z.string().max(100).optional(),
+      metaDesc: z.string().max(160).optional(),
+      ogImage: z.string().optional(),
+      venue: z.string().optional(),
+      address: z.string().optional(),
+      registrationLink: z.string().optional(),
+      maxAttendees: z.number().int().positive().optional(),
+      isFree: z.boolean().optional(),
+      ticketPrice: z.string().optional(),
+    });
+
     const validation = updateSchema.safeParse(body);
     
     if (!validation.success) {
@@ -147,14 +176,14 @@ export async function PUT(req: NextRequest) {
 
     const data = validation.data;
 
-    // Build update data
+    // Build update data dynamically
     const updateData: any = {};
-    if (data.title) updateData.title = data.title;
+    if (data.title !== undefined) updateData.title = data.title;
     if (data.description !== undefined) updateData.description = data.description;
-    if (data.category) updateData.category = data.category;
+    if (data.category !== undefined) updateData.category = data.category;
     if (data.cover !== undefined) updateData.cover = data.cover;
-    if (data.location) updateData.location = data.location;
-    if (data.startDate) updateData.startDate = new Date(data.startDate);
+    if (data.location !== undefined) updateData.location = data.location;
+    if (data.startDate !== undefined) updateData.startDate = new Date(data.startDate);
     if (data.endDate !== undefined) updateData.endDate = data.endDate ? new Date(data.endDate) : null;
     if (data.author !== undefined) updateData.author = data.author;
     if (data.metaTitle !== undefined) updateData.metaTitle = data.metaTitle;
@@ -191,7 +220,6 @@ export async function DELETE(req: NextRequest) {
       return NextResponse.json({ error: 'Invalid event ID' }, { status: 400 });
     }
 
-    // Soft delete
     await prisma.event.update({
       where: { id },
       data: { deletedAt: new Date() },
