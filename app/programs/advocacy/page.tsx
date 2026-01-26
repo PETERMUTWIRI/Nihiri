@@ -186,34 +186,34 @@ export default function AdvocacyPage() {
       </section>
 
       {/* NATIONAL COALITIONS */}
-      <section className="py-20 bg-brand-primary text-brand-text\">
+      <section className="py-20 bg-brand-cyan text-white">
         <div className="max-w-7xl mx-auto px-6 md:px-12">
           <h2 className="text-4xl font-black text-center mb-16">National Coalition Participation</h2>
 
           <div className="grid md:grid-cols-2 gap-12">
             <div className="bg-white/10 backdrop-blur rounded-2xl p-8">
               <h3 className="text-2xl font-bold mb-4">We Are All America (WAAA)</h3>
-              <p className="text-brand-text/80 leading-relaxed">
+              <p className="text-white/80 leading-relaxed">
                 As active members of the WAAA coalition, we participate in coordinated national campaigns to advance refugee protection and resettlement. This includes the annual Refugee Advocacy Summit in Washington D.C., where our representatives meet with congressional offices from Illinois, Michigan, and Ohio to advocate for increased refugee admissions ceilings and restored resettlement infrastructure.
               </p>
-              <p className="text-brand-text/80 mt-4 leading-relaxed">
+              <p className="text-white/80 mt-4 leading-relaxed">
                 Through WAAA, we have joined successful campaigns to extend and redesignate TPS for multiple countries, protect asylum access at the border, and increase funding for refugee integration services in receiving communities.
               </p>
             </div>
 
             <div className="bg-white/10 backdrop-blur rounded-2xl p-8">
               <h3 className="text-2xl font-bold mb-4">Refugee Council USA (RCUSA)</h3>
-              <p className="text-brand-text/80 leading-relaxed">
+              <p className="text-white/80 leading-relaxed">
                 Our policy team regularly participates in RCUSA working groups focused on asylum reform, unaccompanied child protection, and Afghan evacuation efforts. We contribute field perspectives from our direct service work to inform national policy recommendations and legislative strategies.
               </p>
-              <p className="text-brand-text/80 mt-4 leading-relaxed">
+              <p className="text-white/80 mt-4 leading-relaxed">
                 In 2023, our executive director joined the RCUSA delegation to the United Nations High Commissioner for Refugees (UNHCR) consultations in Geneva, representing grassroots organizations working with newly arrived populations in non-traditional resettlement locations.
               </p>
             </div>
           </div>
 
           <div className="mt-12 text-center">
-            <p className="text-xl text-brand-text/80 leading-relaxed max-w-4xl mx-auto">
+            <p className="text-xl text-white/80 leading-relaxed max-w-4xl mx-auto">
               At New International Hope, our commitment to advocacy and legal support remains unwavering. We invite you to join us in our ongoing efforts to create a more inclusive society, where the rights and dignity of refugees are upheld and protected through every available legal pathway.
             </p>
           </div>
@@ -264,7 +264,7 @@ export default function AdvocacyPage() {
               rel="noopener noreferrer"
               className="group flex flex-col items-center"
             >
-              <div className="w-24 h-24 md:w-32 md:h-32 bg-brand-primary rounded-2xl flex items-center justify-center shadow-lg group-hover:shadow-2xl transition-all duration-300 group-hover:-translate-y-2">
+              <div className="w-24 h-24 md:w-32 md:h-32 bg-blue-600 rounded-2xl flex items-center justify-center shadow-lg group-hover:shadow-2xl transition-all duration-300 group-hover:-translate-y-2">
                 <FaFacebook className="text-5xl md:text-6xl text-white" />
               </div>
               <span className="mt-4 font-bold text-gray-700 group-hover:text-brand-primary transition">Facebook</span>

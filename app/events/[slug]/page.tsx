@@ -81,7 +81,7 @@ export default async function EventPage({ params }: PageProps) {
           {/* Category Badge */}
           <div className="pt-8 mb-4">
             <span className={`inline-block px-4 py-2 rounded-full text-sm font-bold ${
-              isPast ? 'bg-gray-200 text-gray-700' : 'bg-green-100 text-green-700'
+              isPast ? 'bg-gray-200 text-gray-700' : 'bg-brand-primary/20 text-brand-primary'
             }`}>
               {isPast ? 'Past Event' : 'Upcoming Event'}
             </span>
@@ -93,21 +93,21 @@ export default async function EventPage({ params }: PageProps) {
 
           {/* Countdown (only for upcoming) */}
           {countdown && (
-            <div className="mb-8 p-6 bg-blue-50 rounded-2xl inline-block">
-              <p className="text-sm text-blue-600 font-bold mb-3 uppercase tracking-wide">
+            <div className="mb-8 p-6 bg-brand-primary/10 rounded-2xl inline-block">
+              <p className="text-sm text-brand-primary font-bold mb-3 uppercase tracking-wide">
                 <FaClock className="inline mr-2"/> Event Starts In
               </p>
               <div className="flex gap-4">
                 <div className="text-center">
-                  <div className="text-4xl font-black text-blue-600">{countdown.days}</div>
+                  <div className="text-4xl font-black text-brand-primary">{countdown.days}</div>
                   <div className="text-xs text-gray-600 uppercase">Days</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-4xl font-black text-blue-600">{countdown.hours}</div>
+                  <div className="text-4xl font-black text-brand-primary">{countdown.hours}</div>
                   <div className="text-xs text-gray-600 uppercase">Hours</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-4xl font-black text-blue-600">{countdown.minutes}</div>
+                  <div className="text-4xl font-black text-brand-primary">{countdown.minutes}</div>
                   <div className="text-xs text-gray-600 uppercase">Mins</div>
                 </div>
               </div>
@@ -117,8 +117,8 @@ export default async function EventPage({ params }: PageProps) {
           {/* Event Meta Grid */}
           <div className="grid md:grid-cols-3 gap-6 mb-8">
             <div className="flex items-start gap-3">
-              <div className="bg-blue-100 p-3 rounded-lg">
-                <FaCalendar className="text-blue-600 text-xl"/>
+              <div className="bg-brand-primary/10 p-3 rounded-lg">
+                <FaCalendar className="text-brand-primary text-xl"/>
               </div>
               <div>
                 <p className="text-sm text-gray-500 font-medium">Date & Time</p>
@@ -144,8 +144,8 @@ export default async function EventPage({ params }: PageProps) {
             </div>
 
             <div className="flex items-start gap-3">
-              <div className="bg-green-100 p-3 rounded-lg">
-                <FaLocationDot className="text-green-600 text-xl"/>
+              <div className="bg-brand-primary/10 p-3 rounded-lg">
+                <FaLocationDot className="text-brand-primary text-xl"/>
               </div>
               <div>
                 <p className="text-sm text-gray-500 font-medium">Location</p>
@@ -157,8 +157,8 @@ export default async function EventPage({ params }: PageProps) {
 
             {!isPast && (
               <div className="flex items-start gap-3">
-                <div className="bg-purple-100 p-3 rounded-lg">
-                    <FaTicket className="text-purple-600 text-xl"/>
+                <div className="bg-brand-primary/10 p-3 rounded-lg">
+                    <FaTicket className="text-brand-primary text-xl"/>
                   </div>
                 <div>
                   <p className="text-sm text-gray-500 font-medium">Admission</p>
@@ -216,9 +216,9 @@ export default async function EventPage({ params }: PageProps) {
             <div className="lg:col-span-1">
               {/* CTA Card */}
               {!isPast ? (
-                <div className="bg-blue-600 text-white rounded-2xl p-6 shadow-xl sticky top-8">
+                <div className="bg-brand-primary text-brand-text rounded-2xl p-6 shadow-xl sticky top-8">
                   <h3 className="text-xl font-bold mb-4">Register for this Event</h3>
-                  <p className="text-blue-100 mb-6">Secure your spot today. Spaces may be limited.</p>
+                  <p className="text-brand-text/80 mb-6">Secure your spot today. Spaces may be limited.</p>
                   
                   {event.registrationLink ? (
                     <a 
@@ -228,18 +228,18 @@ export default async function EventPage({ params }: PageProps) {
                       }
                       target={event.registrationLink.includes('@') ? undefined : "_blank"}
                       rel={event.registrationLink.includes('@') ? undefined : "noopener noreferrer"}
-                      className="block w-full bg-white text-blue-600 text-center py-4 rounded-xl font-bold hover:bg-gray-100 transition"
+                      className="block w-full bg-white text-brand-primary text-center py-4 rounded-xl font-bold hover:bg-gray-100 transition"
                     >
                       {event.registrationLink.includes('@') ? 'Register via Email' : 'Register Now'}
                     </a>
                   ) : (
-                    <button className="block w-full bg-white text-blue-600 py-4 rounded-xl font-bold cursor-not-allowed opacity-75">
+                    <button className="block w-full bg-white text-brand-primary py-4 rounded-xl font-bold cursor-not-allowed opacity-75">
                       Registration Closed
                     </button>
                   )}
                   
                   {event.maxAttendees && (
-                    <p className="text-sm text-blue-200 mt-4 text-center">
+                    <p className="text-sm text-brand-text/70 mt-4 text-center">
                       Limited availability
                     </p>
                   )}
@@ -251,7 +251,7 @@ export default async function EventPage({ params }: PageProps) {
                   <p className="text-gray-600 text-sm">This event has already taken place.</p>
                   <Link 
                     href="/events"
-                    className="mt-4 inline-block text-blue-600 font-bold hover:underline"
+                    className="mt-4 inline-block text-brand-primary font-bold hover:underline"
                   >
                     View Upcoming Events →
                   </Link>
@@ -296,7 +296,7 @@ export default async function EventPage({ params }: PageProps) {
                       )}
                     </div>
                     <div className="p-4">
-                      <h4 className="font-bold text-gray-900 group-hover:text-blue-600 transition line-clamp-1">
+                      <h4 className="font-bold text-gray-900 group-hover:text-brand-primary transition line-clamp-1">
                         {ev.title}
                       </h4>
                       <p className="text-sm text-gray-500 mt-1">

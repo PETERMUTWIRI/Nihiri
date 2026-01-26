@@ -96,7 +96,7 @@ export default async function PastEventsPage() {
                   </div>
                   <div className="p-6">
                     <span className="text-xs font-bold text-gray-500 uppercase tracking-wider">Past Event</span>
-                    <h2 className="text-xl font-bold text-gray-900 mt-2 mb-2 group-hover:text-blue-600 transition">
+                    <h2 className="text-xl font-bold text-gray-900 mt-2 mb-2 group-hover:text-brand-primary transition">
                       {ev.title}
                     </h2>
                     <p className="text-gray-600 text-sm line-clamp-3 mb-4">
@@ -120,7 +120,7 @@ export default async function PastEventsPage() {
 
       {/* UPCOMING EVENTS PREVIEW (Cross-linking back) */}
       {upcomingPreview.length > 0 && (
-        <section className="py-16 bg-blue-50">
+        <section className="py-16 bg-brand-primary/5">
           <div className="max-w-7xl mx-auto px-6 md:px-12">
             <div className="flex items-center justify-between mb-8">
               <div>
@@ -129,7 +129,7 @@ export default async function PastEventsPage() {
               </div>
               <Link 
                 href="/events"
-                className="text-blue-600 font-bold hover:underline flex items-center"
+                className="text-brand-primary font-bold hover:underline flex items-center"
               >
                 View All Upcoming <FaArrowLeft className="ml-1 rotate-180"/>
               </Link>
@@ -145,13 +145,13 @@ export default async function PastEventsPage() {
                       ) : (
                         <div className="w-full h-full flex items-center justify-center text-4xl">📅</div>
                       )}
-                      <div className="absolute top-2 left-2 bg-green-600 text-white px-2 py-1 rounded text-xs font-bold">
+                      <div className="absolute top-2 left-2 bg-brand-primary text-brand-text px-2 py-1 rounded text-xs font-bold">
                         UPCOMING
                       </div>
                     </div>
                     <div className="p-4">
                       <h4 className="font-bold text-gray-900 line-clamp-1">{ev.title}</h4>
-                      <p className="text-sm text-green-600 mt-1 font-medium">
+                      <p className="text-sm text-brand-primary mt-1 font-medium">
                         {new Date(ev.startDate).toLocaleDateString()}
                       </p>
                     </div>

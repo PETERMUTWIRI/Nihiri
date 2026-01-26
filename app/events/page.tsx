@@ -93,7 +93,7 @@ export default async function EventsPage() {
         <div className="flex flex-wrap justify-center gap-3">
           <Link 
             href="/events" 
-            className="px-6 py-3 rounded-full text-sm font-bold bg-blue-600 text-white shadow-lg"
+            className="px-6 py-3 rounded-full text-sm font-bold bg-brand-primary text-brand-text shadow-lg"
           >
             Upcoming
           </Link>
@@ -127,7 +127,7 @@ export default async function EventsPage() {
                   </div>
                 )}
                 <div className="absolute top-6 left-6">
-                  <span className="bg-blue-600 text-white px-4 py-2 rounded-full text-sm font-bold shadow-lg">
+                  <span className="bg-brand-primary text-brand-text px-4 py-2 rounded-full text-sm font-bold shadow-lg">
                     Featured Event
                   </span>
                 </div>
@@ -146,16 +146,16 @@ export default async function EventsPage() {
                         const cd = getCountdown(featuredEvent.startDate);
                         return (
                           <>
-                            <div className="bg-blue-50 rounded-xl p-4 text-center">
-                              <div className="text-3xl font-black text-blue-600">{cd.days}</div>
+                            <div className="bg-brand-primary/10 rounded-xl p-4 text-center">
+                              <div className="text-3xl font-black text-brand-primary">{cd.days}</div>
                               <div className="text-xs text-gray-600 uppercase">Days</div>
                             </div>
-                            <div className="bg-blue-50 rounded-xl p-4 text-center">
-                              <div className="text-3xl font-black text-blue-600">{cd.hours}</div>
+                            <div className="bg-brand-primary/10 rounded-xl p-4 text-center">
+                              <div className="text-3xl font-black text-brand-primary">{cd.hours}</div>
                               <div className="text-xs text-gray-600 uppercase">Hours</div>
                             </div>
-                            <div className="bg-blue-50 rounded-xl p-4 text-center">
-                              <div className="text-3xl font-black text-blue-600">{cd.minutes}</div>
+                            <div className="bg-brand-primary/10 rounded-xl p-4 text-center">
+                              <div className="text-3xl font-black text-brand-primary">{cd.minutes}</div>
                               <div className="text-xs text-gray-600 uppercase">Mins</div>
                             </div>
                           </>
@@ -165,7 +165,7 @@ export default async function EventsPage() {
                   </div>
                 )}
 
-                <span className="text-blue-600 font-bold text-sm uppercase tracking-wider mb-2">
+                <span className="text-brand-primary font-bold text-sm uppercase tracking-wider mb-2">
                   {featuredEvent.category}
                 </span>
                 <h2 className="text-3xl lg:text-4xl font-black text-gray-900 mb-4 leading-tight">
@@ -177,11 +177,11 @@ export default async function EventsPage() {
                 
                 <div className="space-y-3 mb-8">
                   <div className="flex items-center gap-3 text-gray-700">
-                    <FaCalendar className="text-blue-600" />
+                    <FaCalendar className="text-brand-primary" />
                     <span>{formatDate(featuredEvent.startDate)}</span>
                   </div>
                   <div className="flex items-center gap-3 text-gray-700">
-                    <FaLocationDot className="text-blue-600" />
+                    <FaLocationDot className="text-brand-primary" />
                     <span>{featuredEvent.location}</span>
                     {featuredEvent.venue && <span className="text-gray-500">• {featuredEvent.venue}</span>}
                   </div>
@@ -190,7 +190,7 @@ export default async function EventsPage() {
                 <div className="flex flex-wrap gap-4">
                   <Link 
                     href={`/events/${featuredEvent.slug}`}
-                    className="inline-flex items-center bg-blue-600 text-white px-8 py-4 rounded-xl font-bold hover:bg-blue-700 transition shadow-lg hover:shadow-xl"
+                    className="inline-flex items-center bg-brand-primary text-brand-text px-8 py-4 rounded-xl font-bold hover:bg-brand-dark transition shadow-lg hover:shadow-xl"
                   >
                     Event Details <FaArrowRight className="ml-2"/>
                   </Link>
@@ -202,7 +202,7 @@ export default async function EventsPage() {
                       }
                       target={featuredEvent.registrationLink.includes('@') ? undefined : "_blank"}
                       rel={featuredEvent.registrationLink.includes('@') ? undefined : "noopener noreferrer"}
-                      className="inline-flex items-center bg-green-600 text-white px-8 py-4 rounded-xl font-bold hover:bg-green-700 transition shadow-lg"
+                      className="inline-flex items-center bg-brand-primary text-brand-text px-8 py-4 rounded-xl font-bold hover:bg-brand-dark transition shadow-lg"
                     >
                       Register Now
                     </a>
@@ -244,8 +244,8 @@ export default async function EventsPage() {
                       )}
                     </div>
                     <div className="p-6">
-                      <span className="text-xs font-bold text-blue-600 uppercase tracking-wider">{ev.category}</span>
-                      <h4 className="text-xl font-bold text-gray-900 mt-2 mb-2 line-clamp-2 group-hover:text-blue-600 transition">
+                      <span className="text-xs font-bold text-brand-primary uppercase tracking-wider">{ev.category}</span>
+                      <h4 className="text-xl font-bold text-gray-900 mt-2 mb-2 line-clamp-2 group-hover:text-brand-primary transition">
                         {ev.title}
                       </h4>
                       <p className="text-gray-600 text-sm line-clamp-2 mb-4">
@@ -273,7 +273,7 @@ export default async function EventsPage() {
             <p className="text-gray-600 mb-6">Check back soon for new events.</p>
             <Link 
               href="/events/past"
-              className="inline-flex items-center bg-blue-600 text-white px-6 py-3 rounded-xl font-bold hover:bg-blue-700 transition"
+              className="inline-flex items-center bg-brand-primary text-brand-text px-6 py-3 rounded-xl font-bold hover:bg-brand-dark transition"
             >
               <FaHistory className="mr-2"/> View Past Events
             </Link>
@@ -292,7 +292,7 @@ export default async function EventsPage() {
               </div>
               <Link 
                 href="/events/past"
-                className="text-blue-600 font-bold hover:underline flex items-center"
+                className="text-brand-primary font-bold hover:underline flex items-center"
               >
                 View All <FaArrowRight className="ml-1"/>
               </Link>
