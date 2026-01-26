@@ -286,15 +286,7 @@ export default function AdvocacyPage() {
             </Link>
           </div>
 
-          <div className="mt-12 p-6 bg-white rounded-2xl shadow-md max-w-2xl mx-auto">
-            <h3 className="font-bold text-gray-900 mb-2">Available Recordings:</h3>
-            <ul className="text-left text-gray-600 space-y-2">
-              <li>• Know Your Rights: Humanitarian Parole Pathways (March 2023)</li>
-              <li>• TPS and Immigration Options for Haitian Nationals (September 2023)</li>
-              <li>• Understanding the Asylum Process: Step by Step</li>
-              <li>• Family Reunification Parole Program Explained</li>
-            </ul>
-          </div>
+          
         </div>
       </section>
 
@@ -311,7 +303,7 @@ export default function AdvocacyPage() {
             {/* Image 1 */}
             <div className="flex-shrink-0 w-72 h-48 rounded-2xl overflow-hidden shadow-lg">
               <div className="w-full h-full bg-gradient-to-br from-brand-primary to-yellow-300 flex items-center justify-center">
-                <span className="text-4xl">⚖️</span>
+                <Image src="/images/programs/advocacy.jpg" alt="Advocacy Session" fill className="object-cover" />
               </div>
             </div>
             {/* Image 2 */}
