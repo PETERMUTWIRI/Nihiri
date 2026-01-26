@@ -14,12 +14,8 @@ export default function HealthPage() {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Left: Hero Image */}
             <div className="relative h-96 lg:h-[500px] rounded-3xl overflow-hidden shadow-2xl">
+              <Image src="/images/programs/health5.png" alt="Health Education Session" fill className="object-cover" priority />
               <div className="absolute inset-0 bg-gradient-to-br from-brand-primary/20 to-yellow-400/20" />
-              {/* Placeholder - Replace with actual image */}
-              <div className="w-full h-full bg-gradient-to-br from-yellow-50 to-yellow-100 flex items-center justify-center">
-                <span className="text-8xl">🏥</span>
-              </div>
-              <Image src="/images/programs/advocacy5.jpg" alt="Health Education Session" fill className="object-cover" priority />
             </div>
 
             {/* Right: Content */}
@@ -231,15 +227,15 @@ export default function HealthPage() {
       </section>
 
       {/* ADVOCACY SECTION */}
-      <section className="py-20 bg-brand-primary text-brand-text">
+      <section className="py-20 bg-white text-gray-900">
         <div className="max-w-7xl mx-auto px-6 md:px-12">
           <h2 className="text-4xl font-black text-center mb-16">Advocacy & Outreach</h2>
 
           <div className="grid md:grid-cols-2 gap-12">
             <div className="space-y-8">
-              <div className="bg-white/10 backdrop-blur rounded-2xl p-8">
+              <div className="bg-gray-100 backdrop-blur rounded-2xl p-8">
                 <h3 className="text-2xl font-bold mb-4">Vaccine Clinic Program</h3>
-                <p className="text-brand-text/80 leading-relaxed">
+                <p className="text-gray-600 leading-relaxed">
                   Offered both online and in-person, our vaccine awareness initiative is specifically designed to address the unique concerns of refugee communities. We provide comprehensive education about the immune system, explain the critical importance of immunization for community health, and respectfully address common myths and misconceptions about vaccines that may circulate within communities.
                 </p>
                 <p className="text-brand-text/80 mt-4 leading-relaxed">
