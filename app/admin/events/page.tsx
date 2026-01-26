@@ -1,76 +1,11 @@
-// app/admin/events/page.tsx - COMPLETE WITH IMGBB UPLOAD
+// app/admin/events/page.tsx - SIMPLIFIED VERSION (matching blog pattern)
 'use client';
 
-import { Suspense, useState, useEffect } from 'react';
+import { useEffect, useState, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { FaSave, FaArrowLeft, FaCalendar, FaClock, FaMapMarkerAlt, FaImage, FaGlobe } from 'react-icons/fa';
 import Link from 'next/link';
 
-// Countdown component for preview
-function CountdownPreview({ targetDate }: { targetDate: string }) {
-  const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
-  const [isPast, setIsPast] = useState(false);
-
-  useEffect(() => {
-    if (!targetDate) return;
-    
-    const calculateTime = () => {
-      const now = new Date().getTime();
-      const target = new Date(targetDate).getTime();
-      const difference = target - now;
-
-      if (difference < 0) {
-        setIsPast(true);
-        setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
-        return;
-      }
-
-      setIsPast(false);
-      setTimeLeft({
-        days: Math.floor(difference / (1000 * 60 * 60 * 24)),
-        hours: Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
-        minutes: Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60)),
-        seconds: Math.floor((difference % (1000 * 60)) / 1000),
-      });
-    };
-
-    calculateTime();
-    const timer = setInterval(calculateTime, 1000);
-    return () => clearInterval(timer);
-  }, [targetDate]);
-
-  if (!targetDate) return <div className="text-gray-500">Set start date to see countdown</div>;
-
-  return (
-    <div className={`p-4 rounded-lg ${isPast ? 'bg-red-50' : 'bg-blue-50'}`}>
-      <div className="text-sm font-semibold mb-2 text-gray-700">
-        {isPast ? '⚠️ Event has already started/passed' : '⏰ Live Countdown Preview'}
-      </div>
-      {!isPast && (
-        <div className="grid grid-cols-4 gap-2 text-center">
-          <div className="bg-white rounded p-2 shadow">
-            <div className="text-2xl font-bold text-blue-600">{timeLeft.days}</div>
-            <div className="text-xs text-gray-500">Days</div>
-          </div>
-          <div className="bg-white rounded p-2 shadow">
-            <div className="text-2xl font-bold text-blue-600">{timeLeft.hours}</div>
-            <div className="text-xs text-gray-500">Hours</div>
-          </div>
-          <div className="bg-white rounded p-2 shadow">
-            <div className="text-2xl font-bold text-blue-600">{timeLeft.minutes}</div>
-            <div className="text-xs text-gray-500">Mins</div>
-          </div>
-          <div className="bg-white rounded p-2 shadow">
-            <div className="text-2xl font-bold text-blue-600">{timeLeft.seconds}</div>
-            <div className="text-xs text-gray-500">Secs</div>
-          </div>
-        </div>
-      )}
-    </div>
-  );
-}
-
-// Wrapper with Suspense
 export default function AdminEventsPage() {
   return (
     <Suspense fallback={<div className="p-8">Loading editor...</div>}>
@@ -80,33 +15,29 @@ export default function AdminEventsPage() {
 }
 
 function EventEditor() {
-  // Core fields
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
-  const [category, setCategory] = useState<'Upcoming' | 'Past'>('Upcoming');
-  const [startDate, setStartDate] = useState('');
-  const [endDate, setEndDate] = useState('');
-  const [location, setLocation] = useState('');
-  const [cover, setCover] = useState('');
+  // All fields in one object like blog pattern
+  const [formData, setFormData] = useState({
+    title: '',
+    description: '',
+    category: 'Upcoming' as 'Upcoming' | 'Past',
+    location: '',
+    startDate: '',
+    endDate: '',
+    cover: '',
+    author: '',
+    metaTitle: '',
+    metaDesc: '',
+    ogImage: '',
+    venue: '',
+    address: '',
+    registrationLink: '',
+    maxAttendees: '',
+    isFree: true,
+    ticketPrice: '',
+  });
+  
   const [isLoading, setIsLoading] = useState(false);
-  const [uploadLoading, setUploadLoading] = useState(false);
-  
-  // SEO & Meta fields
-  const [author, setAuthor] = useState('');
-  const [metaTitle, setMetaTitle] = useState('');
-  const [metaDesc, setMetaDesc] = useState('');
-  const [ogImage, setOgImage] = useState('');
-  
-  // Event specific
-  const [venue, setVenue] = useState('');
-  const [address, setAddress] = useState('');
-  const [registrationLink, setRegistrationLink] = useState('');
-  const [maxAttendees, setMaxAttendees] = useState<number | ''>('');
-  const [isFree, setIsFree] = useState(true);
-  const [ticketPrice, setTicketPrice] = useState('');
-  
-  // UI state
-  const [activeTab, setActiveTab] = useState<'details' | 'seo' | 'preview'>('details');
+  const [activeTab, setActiveTab] = useState<'details' | 'seo'>('details');
   
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -118,48 +49,31 @@ function EventEditor() {
     }
   }, [editId]);
 
-  // Auto-generate meta fields
-  useEffect(() => {
-    if (title && !metaTitle) {
-      setMetaTitle(`${title} | New International Hope`);
-    }
-  }, [title]);
-
-  useEffect(() => {
-    if (description && !metaDesc) {
-      const plainText = description.replace(/<[^>]*>/g, '');
-      setMetaDesc(plainText.slice(0, 160));
-    }
-  }, [description]);
-
   const loadEvent = async (id: number) => {
     try {
       setIsLoading(true);
       const res = await fetch(`/api/events?id=${id}`);
       const event = await res.json();
       
-      setTitle(event.title || '');
-      setDescription(event.description || '');
-      setCategory(event.category || 'Upcoming');
-      setLocation(event.location || '');
-      setCover(event.cover || '');
-      setAuthor(event.author || '');
-      setMetaTitle(event.metaTitle || '');
-      setMetaDesc(event.metaDesc || '');
-      setOgImage(event.ogImage || '');
-      setVenue(event.venue || '');
-      setAddress(event.address || '');
-      setRegistrationLink(event.registrationLink || '');
-      setMaxAttendees(event.maxAttendees || '');
-      setIsFree(event.isFree ?? true);
-      setTicketPrice(event.ticketPrice || '');
-      
-      if (event.startDate) {
-        setStartDate(new Date(event.startDate).toISOString().slice(0, 16));
-      }
-      if (event.endDate) {
-        setEndDate(new Date(event.endDate).toISOString().slice(0, 16));
-      }
+      setFormData({
+        title: event.title || '',
+        description: event.description || '',
+        category: event.category || 'Upcoming',
+        location: event.location || '',
+        startDate: event.startDate ? new Date(event.startDate).toISOString().slice(0, 16) : '',
+        endDate: event.endDate ? new Date(event.endDate).toISOString().slice(0, 16) : '',
+        cover: event.cover || '',
+        author: event.author || '',
+        metaTitle: event.metaTitle || '',
+        metaDesc: event.metaDesc || '',
+        ogImage: event.ogImage || '',
+        venue: event.venue || '',
+        address: event.address || '',
+        registrationLink: event.registrationLink || '',
+        maxAttendees: event.maxAttendees?.toString() || '',
+        isFree: event.isFree ?? true,
+        ticketPrice: event.ticketPrice || '',
+      });
     } catch (error) {
       console.error('Failed to load event:', error);
       alert('Failed to load event');
@@ -168,63 +82,50 @@ function EventEditor() {
     }
   };
 
-  // ImgBB Upload Handler
-  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>, setter: (url: string) => void) => {
+  // Generic handler for all inputs
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const { name, value, type } = e.target;
+    
+    if (type === 'checkbox') {
+      const checked = (e.target as HTMLInputElement).checked;
+      setFormData(prev => ({ ...prev, [name]: checked }));
+    } else if (type === 'number') {
+      setFormData(prev => ({ ...prev, [name]: value }));
+    } else {
+      setFormData(prev => ({ ...prev, [name]: value }));
+    }
+    
+    console.log(`Field ${name} changed to:`, value); // Debug
+  };
+
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>, field: 'cover' | 'ogImage') => {
     const file = e.target.files?.[0];
     if (!file) return;
     
-    // Validate file size (max 5MB for ImgBB free tier)
     if (file.size > 5 * 1024 * 1024) {
       alert('File size must be less than 5MB');
       return;
     }
 
-    setUploadLoading(true);
-    
     try {
-      const formData = new FormData();
-      formData.append('image', file);
-
-      const res = await fetch('/api/upload', {
-        method: 'POST',
-        body: formData,
-      });
-
-      if (!res.ok) {
-        throw new Error('Upload failed');
-      }
-
-      const data = await res.json();
-      
-      if (data.url) {
-        setter(data.url);
-        console.log('Image uploaded:', data.url);
-      } else {
-        throw new Error('No URL returned');
-      }
+      const body = new FormData();
+      body.append('file', file);
+      const res = await fetch('/api/upload', { method: 'POST', body });
+      const { url } = await res.json();
+      setFormData(prev => ({ ...prev, [field]: url }));
     } catch (error) {
-      console.error('Upload error:', error);
-      alert('Failed to upload image. Please try again.');
-    } finally {
-      setUploadLoading(false);
+      alert('Failed to upload image');
     }
   };
 
   const saveEvent = async () => {
-    // Debug log
-    console.log('Saving event:', {
-      title: title.trim(),
-      startDate,
-      location: location.trim(),
-    });
+    const { title, startDate, location } = formData;
+    
+    console.log('Saving with formData:', formData);
+    console.log('Required fields:', { title, startDate, location });
 
     if (!title.trim() || !startDate || !location.trim()) {
       return alert('Required fields: Title, Start Date, Location');
-    }
-
-    // Validate end date is after start date
-    if (endDate && new Date(endDate) <= new Date(startDate)) {
-      return alert('End date must be after start date');
     }
 
     setIsLoading(true);
@@ -232,31 +133,14 @@ function EventEditor() {
       const method = editId ? 'PUT' : 'POST';
       const url = editId ? `/api/events?id=${editId}` : '/api/events';
 
-      // Convert datetime-local format to ISO 8601 with timezone
-      const convertToISO = (dateStr: string) => {
-        if (!dateStr) return null;
-        const date = new Date(dateStr);
-        return date.toISOString();
-      };
-
       const payload = {
-        title: title.trim(),
-        description: description || undefined,
-        category,
-        cover: cover || undefined,
-        startDate: convertToISO(startDate),
-        endDate: endDate ? convertToISO(endDate) : null,
-        location: location.trim(),
-        author: author || undefined,
-        metaTitle: metaTitle || undefined,
-        metaDesc: metaDesc || undefined,
-        ogImage: ogImage || undefined,
-        venue: venue || undefined,
-        address: address || undefined,
-        registrationLink: registrationLink || undefined,
-        maxAttendees: maxAttendees || undefined,
-        isFree,
-        ticketPrice: isFree ? undefined : ticketPrice,
+        ...formData,
+        title: formData.title.trim(),
+        location: formData.location.trim(),
+        startDate: formData.startDate, // Already in ISO format from datetime-local
+        endDate: formData.endDate || null,
+        maxAttendees: formData.maxAttendees ? Number(formData.maxAttendees) : undefined,
+        ticketPrice: formData.isFree ? undefined : formData.ticketPrice,
       };
 
       console.log('Sending payload:', payload);
@@ -267,16 +151,10 @@ function EventEditor() {
         body: JSON.stringify(payload),
       });
 
-      console.log('Response status:', res.status);
-
       if (!res.ok) {
-        const errorData = await res.json().catch(() => ({ error: 'Unknown error' }));
-        console.error('Error response:', errorData);
-        throw new Error(errorData.error || `Failed to save event (${res.status})`);
+        const error = await res.json();
+        throw new Error(error.error || 'Failed to save event');
       }
-
-      const data = await res.json();
-      console.log('Success:', data);
 
       alert(editId ? 'Event updated!' : 'Event saved!');
       router.push('/admin');
@@ -286,28 +164,6 @@ function EventEditor() {
     } finally {
       setIsLoading(false);
     }
-  };
-
-  // Format date for display
-  const formatEventDate = () => {
-    if (!startDate) return 'Date TBD';
-    const start = new Date(startDate);
-    const end = endDate ? new Date(endDate) : null;
-    
-    const options: Intl.DateTimeFormatOptions = { 
-      weekday: 'long', 
-      year: 'numeric', 
-      month: 'long', 
-      day: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit'
-    };
-    
-    if (end && start.toDateString() === end.toDateString()) {
-      return `${start.toLocaleDateString('en-US', options)} - ${end.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}`;
-    }
-    
-    return start.toLocaleDateString('en-US', options);
   };
 
   return (
@@ -324,9 +180,9 @@ function EventEditor() {
         </div>
         
         <span className={`px-4 py-2 rounded-full text-sm font-semibold ${
-          category === 'Upcoming' ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800'
+          formData.category === 'Upcoming' ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800'
         }`}>
-          {category}
+          {formData.category}
         </span>
       </div>
 
@@ -348,27 +204,20 @@ function EventEditor() {
         >
           <FaGlobe /> SEO & Meta
         </button>
-        <button
-          onClick={() => setActiveTab('preview')}
-          className={`px-6 py-3 font-medium flex items-center gap-2 ${
-            activeTab === 'preview' ? 'border-b-2 border-blue-600 text-blue-600' : 'text-gray-600'
-          }`}
-        >
-          <FaClock /> Live Preview
-        </button>
       </div>
 
       <div className="p-8">
-        {activeTab === 'details' && (
+        {activeTab === 'details' ? (
           <div className="space-y-6">
             {/* Title */}
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-2">Event Title *</label>
               <input
+                name="title"
                 className="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500"
                 placeholder="e.g., Annual Refugee Support Gala 2026"
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
+                value={formData.title}
+                onChange={handleChange}
                 disabled={isLoading}
               />
             </div>
@@ -377,44 +226,31 @@ function EventEditor() {
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-2">Event Organizer</label>
               <input
+                name="author"
                 className="w-full px-4 py-3 border rounded-lg"
                 placeholder="e.g., New International Hope Team"
-                value={author}
-                onChange={(e) => setAuthor(e.target.value)}
+                value={formData.author}
+                onChange={handleChange}
                 disabled={isLoading}
               />
             </div>
 
-            {/* Category Toggle */}
+            {/* Category */}
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-2">Event Status</label>
-              <div className="flex gap-4">
-                <button
-                  type="button"
-                  onClick={() => setCategory('Upcoming')}
-                  className={`flex-1 py-3 px-4 rounded-lg border-2 font-medium transition ${
-                    category === 'Upcoming' 
-                      ? 'border-green-500 bg-green-50 text-green-700' 
-                      : 'border-gray-200 hover:border-green-300'
-                  }`}
-                >
-                  🟢 Upcoming
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setCategory('Past')}
-                  className={`flex-1 py-3 px-4 rounded-lg border-2 font-medium transition ${
-                    category === 'Past' 
-                      ? 'border-gray-500 bg-gray-50 text-gray-700' 
-                      : 'border-gray-200 hover:border-gray-300'
-                  }`}
-                >
-                  ⚪ Past Event
-                </button>
-              </div>
+              <select
+                name="category"
+                className="w-full px-4 py-3 border rounded-lg"
+                value={formData.category}
+                onChange={handleChange}
+                disabled={isLoading}
+              >
+                <option value="Upcoming">Upcoming</option>
+                <option value="Past">Past Event</option>
+              </select>
             </div>
 
-            {/* Date & Time */}
+            {/* Date & Time - KEY FIX: Using name attribute like blog */}
             <div className="grid md:grid-cols-2 gap-4">
               <div>
                 <label className="block text-sm font-semibold text-gray-700 mb-2">
@@ -422,11 +258,14 @@ function EventEditor() {
                 </label>
                 <input
                   type="datetime-local"
+                  name="startDate"
                   className="w-full px-4 py-3 border rounded-lg"
-                  value={startDate}
-                  onChange={(e) => setStartDate(e.target.value)}
+                  value={formData.startDate}
+                  onChange={handleChange}
                   disabled={isLoading}
                 />
+                {/* Debug */}
+                <span className="text-xs text-gray-400">Value: {formData.startDate || 'empty'}</span>
               </div>
               <div>
                 <label className="block text-sm font-semibold text-gray-700 mb-2">
@@ -434,324 +273,189 @@ function EventEditor() {
                 </label>
                 <input
                   type="datetime-local"
+                  name="endDate"
                   className="w-full px-4 py-3 border rounded-lg"
-                  value={endDate}
-                  onChange={(e) => setEndDate(e.target.value)}
+                  value={formData.endDate}
+                  onChange={handleChange}
                   disabled={isLoading}
                 />
               </div>
             </div>
 
-            {/* Location Details */}
-            <div className="space-y-4">
-              <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-2">
-                  <FaMapMarkerAlt className="inline mr-1"/> Location/Venue Name *
-                </label>
-                <input
-                  className="w-full px-4 py-3 border rounded-lg"
-                  placeholder="e.g., Community Center Downtown"
-                  value={location}
-                  onChange={(e) => setLocation(e.target.value)}
-                  disabled={isLoading}
-                />
-              </div>
-              
-              <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-2">Detailed Venue Name</label>
-                <input
-                  className="w-full px-4 py-3 border rounded-lg"
-                  placeholder="e.g., Grand Ballroom, 3rd Floor"
-                  value={venue}
-                  onChange={(e) => setVenue(e.target.value)}
-                  disabled={isLoading}
-                />
-              </div>
-              
-              <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-2">Full Address</label>
-                <textarea
-                  className="w-full px-4 py-3 border rounded-lg h-20"
-                  placeholder="123 Main St, City, State, ZIP"
-                  value={address}
-                  onChange={(e) => setAddress(e.target.value)}
-                  disabled={isLoading}
-                />
-              </div>
+            {/* Location */}
+            <div>
+              <label className="block text-sm font-semibold text-gray-700 mb-2">
+                <FaMapMarkerAlt className="inline mr-1"/> Location *
+              </label>
+              <input
+                name="location"
+                className="w-full px-4 py-3 border rounded-lg"
+                placeholder="e.g., Community Center Downtown"
+                value={formData.location}
+                onChange={handleChange}
+                disabled={isLoading}
+              />
+            </div>
+
+            {/* Venue & Address */}
+            <div>
+              <label className="block text-sm font-semibold text-gray-700 mb-2">Venue Details</label>
+              <input
+                name="venue"
+                className="w-full px-4 py-3 border rounded-lg mb-2"
+                placeholder="e.g., Grand Ballroom, 3rd Floor"
+                value={formData.venue}
+                onChange={handleChange}
+                disabled={isLoading}
+              />
+              <textarea
+                name="address"
+                className="w-full px-4 py-3 border rounded-lg h-20"
+                placeholder="Full address: 123 Main St, City, State, ZIP"
+                value={formData.address}
+                onChange={handleChange}
+                disabled={isLoading}
+              />
             </div>
 
             {/* Ticket Info */}
             <div className="bg-gray-50 p-4 rounded-lg">
               <h4 className="font-semibold text-gray-900 mb-4">Ticket Information</h4>
               
-              <div className="flex items-center gap-4 mb-4">
-                <label className="flex items-center gap-2 cursor-pointer">
-                  <input
-                    type="radio"
-                    checked={isFree}
-                    onChange={() => setIsFree(true)}
-                    className="w-4 h-4 text-blue-600"
-                  />
-                  <span>Free Event</span>
-                </label>
-                <label className="flex items-center gap-2 cursor-pointer">
-                  <input
-                    type="radio"
-                    checked={!isFree}
-                    onChange={() => setIsFree(false)}
-                    className="w-4 h-4 text-blue-600"
-                  />
-                  <span>Paid Event</span>
-                </label>
-              </div>
-
-              {!isFree && (
+              <label className="flex items-center gap-2 mb-4 cursor-pointer">
                 <input
+                  type="checkbox"
+                  name="isFree"
+                  checked={formData.isFree}
+                  onChange={handleChange}
+                  className="w-4 h-4 text-blue-600"
+                />
+                <span>Free Event</span>
+              </label>
+
+              {!formData.isFree && (
+                <input
+                  name="ticketPrice"
                   className="w-full px-4 py-3 border rounded-lg mb-4"
                   placeholder="Ticket Price (e.g., $25.00)"
-                  value={ticketPrice}
-                  onChange={(e) => setTicketPrice(e.target.value)}
+                  value={formData.ticketPrice}
+                  onChange={handleChange}
                   disabled={isLoading}
                 />
               )}
 
               <input
                 type="number"
+                name="maxAttendees"
                 className="w-full px-4 py-3 border rounded-lg"
                 placeholder="Maximum Attendees (optional)"
-                value={maxAttendees}
-                onChange={(e) => setMaxAttendees(e.target.value ? Number(e.target.value) : '')}
+                value={formData.maxAttendees}
+                onChange={handleChange}
                 disabled={isLoading}
               />
             </div>
 
-            {/* Registration Link */}
+            {/* Registration */}
+            <div>
+              <label className="block text-sm font-semibold text-gray-700 mb-2">Registration Link or Email</label>
+              <input
+                name="registrationLink"
+                className="w-full px-4 py-3 border rounded-lg"
+                placeholder="https://... or email@example.com"
+                value={formData.registrationLink}
+                onChange={handleChange}
+                disabled={isLoading}
+              />
+            </div>
+
+            {/* Cover Image */}
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-2">
-                Registration Link (optional)
+                <FaImage className="inline mr-1"/> Cover Image
               </label>
               <input
-                type="text"
-                className="w-full px-4 py-3 border rounded-lg"
-                placeholder="https://eventbrite.com/... or newinternationalhope@gmail.com"
-                value={registrationLink}
-                onChange={(e) => setRegistrationLink(e.target.value)}
+                type="file"
+                accept="image/*"
+                onChange={(e) => handleImageUpload(e, 'cover')}
                 disabled={isLoading}
               />
-              <p className="text-xs text-gray-500 mt-1">
-                Can be a URL or email address
-              </p>
-            </div>
-
-            {/* Cover Image with ImgBB */}
-            <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">
-                <FaImage className="inline mr-1"/> Event Cover Image
-              </label>
-              <div className="flex items-center gap-4">
-                <input
-                  type="file"
-                  accept="image/*"
-                  onChange={(e) => handleImageUpload(e, setCover)}
-                  disabled={isLoading || uploadLoading}
-                  className="flex-1"
-                />
-                {uploadLoading && <span className="text-blue-600 text-sm">Uploading...</span>}
-              </div>
-              {cover && (
-                <div className="mt-4 relative inline-block">
-                  <img 
-                    src={cover} 
-                    alt="Event cover" 
-                    className="h-32 w-48 object-cover rounded-lg shadow-md" 
-                  />
-                  <button 
-                    onClick={() => setCover('')}
-                    className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-6 h-6 text-xs hover:bg-red-600 transition"
-                    type="button"
-                  >
-                    ×
-                  </button>
+              {formData.cover && (
+                <div className="mt-2 relative inline-block">
+                  <img src={formData.cover} alt="Cover" className="h-20 rounded" />
+                  <button onClick={() => setFormData(p => ({...p, cover: ''}))} className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-5 h-5 text-xs">×</button>
                 </div>
               )}
             </div>
 
             {/* Description */}
             <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">Event Description</label>
+              <label className="block text-sm font-semibold text-gray-700 mb-2">Description</label>
               <textarea
+                name="description"
                 className="w-full px-4 py-3 border rounded-lg h-40"
-                placeholder="Describe the event, agenda, speakers, etc. HTML allowed."
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
+                placeholder="Describe the event..."
+                value={formData.description}
+                onChange={handleChange}
                 disabled={isLoading}
               />
             </div>
           </div>
-        )}
-
-        {activeTab === 'seo' && (
+        ) : (
+          /* SEO Tab */
           <div className="space-y-6">
             <div className="bg-blue-50 p-4 rounded-lg mb-6">
               <h3 className="font-semibold text-blue-900 mb-1">SEO Settings</h3>
-              <p className="text-sm text-blue-700">Optimize how this event appears in search engines and social media.</p>
+              <p className="text-sm text-blue-700">Optimize search engine appearance.</p>
             </div>
 
-            {/* Meta Title */}
             <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">
-                Meta Title (60 chars max)
-              </label>
+              <label className="block text-sm font-semibold text-gray-700 mb-2">Meta Title (60 chars)</label>
               <input
+                name="metaTitle"
                 className="w-full px-4 py-3 border rounded-lg"
-                placeholder="SEO title for search results..."
-                value={metaTitle}
-                onChange={(e) => setMetaTitle(e.target.value)}
+                value={formData.metaTitle}
+                onChange={handleChange}
                 maxLength={60}
               />
-              <div className="flex justify-between mt-1">
-                <span className="text-xs text-gray-500">{metaTitle.length}/60</span>
-              </div>
+              <span className="text-xs text-gray-500">{formData.metaTitle.length}/60</span>
             </div>
 
-            {/* Meta Description */}
             <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">
-                Meta Description (160 chars max)
-              </label>
+              <label className="block text-sm font-semibold text-gray-700 mb-2">Meta Description (160 chars)</label>
               <textarea
+                name="metaDesc"
                 className="w-full px-4 py-3 border rounded-lg h-24"
-                placeholder="Brief description for search results..."
-                value={metaDesc}
-                onChange={(e) => setMetaDesc(e.target.value)}
+                value={formData.metaDesc}
+                onChange={handleChange}
                 maxLength={160}
               />
-              <div className="flex justify-between mt-1">
-                <span className="text-xs text-gray-500">{metaDesc.length}/160</span>
-              </div>
+              <span className="text-xs text-gray-500">{formData.metaDesc.length}/160</span>
             </div>
 
-            {/* OG Image with ImgBB */}
             <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">
-                Social Media Image (Open Graph)
-              </label>
-              <div className="flex items-center gap-4">
-                <input
-                  type="file"
-                  accept="image/*"
-                  onChange={(e) => handleImageUpload(e, setOgImage)}
-                  disabled={isLoading || uploadLoading}
-                  className="flex-1"
-                />
-                {uploadLoading && <span className="text-blue-600 text-sm">Uploading...</span>}
-              </div>
-              {ogImage && (
-                <div className="mt-4 relative inline-block">
-                  <img 
-                    src={ogImage} 
-                    alt="Social media preview" 
-                    className="h-32 w-48 object-cover rounded-lg shadow-md" 
-                  />
-                  <button 
-                    onClick={() => setOgImage('')}
-                    className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-6 h-6 text-xs hover:bg-red-600 transition"
-                    type="button"
-                  >
-                    ×
-                  </button>
+              <label className="block text-sm font-semibold text-gray-700 mb-2">Social Media Image</label>
+              <input
+                type="file"
+                accept="image/*"
+                onChange={(e) => handleImageUpload(e, 'ogImage')}
+                disabled={isLoading}
+              />
+              {formData.ogImage && (
+                <div className="mt-2 relative inline-block">
+                  <img src={formData.ogImage} alt="OG" className="h-20 rounded" />
+                  <button onClick={() => setFormData(p => ({...p, ogImage: ''}))} className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-5 h-5 text-xs">×</button>
                 </div>
               )}
-              <p className="text-xs text-gray-500 mt-1">Recommended: 1200×630 pixels</p>
-            </div>
-
-            {/* Google Preview */}
-            <div className="border rounded-lg p-4 bg-gray-50">
-              <h4 className="text-sm font-semibold text-gray-700 mb-2">Google Search Preview</h4>
-              <div className="bg-white p-4 rounded border">
-                <div className="text-blue-800 text-lg truncate" style={{color: '#1a0dab'}}>
-                  {metaTitle || title || 'Event Title'}
-                </div>
-                <div className="text-green-700 text-sm truncate">
-                  nihiri.com › events › {title.toLowerCase().replace(/\s+/g, '-')}
-                </div>
-                <div className="text-gray-600 text-sm line-clamp-2 mt-1">
-                  {metaDesc || description?.replace(/<[^>]*>/g, '').slice(0, 160) || 'No description...'}
-                </div>
-              </div>
             </div>
           </div>
         )}
 
-        {activeTab === 'preview' && (
-          <div className="space-y-6">
-            <div className="bg-blue-50 p-4 rounded-lg">
-              <h3 className="font-semibold text-blue-900 mb-1">Live Event Preview</h3>
-              <p className="text-sm text-blue-700">This is exactly how your event will appear to the public.</p>
-            </div>
-
-            {/* Event Card Preview */}
-            <div className="bg-white rounded-xl shadow-lg overflow-hidden border max-w-2xl mx-auto">
-              {cover ? (
-                <div className="relative h-48 bg-gray-200">
-                  <img src={cover} alt={title} className="w-full h-full object-cover" />
-                  <div className="absolute top-4 left-4">
-                    <span className="bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-semibold">
-                      {category}
-                    </span>
-                  </div>
-                </div>
-              ) : (
-                <div className="h-48 bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
-                  <span className="text-white text-6xl">📅</span>
-                </div>
-              )}
-              
-              <div className="p-6">
-                <h2 className="text-2xl font-bold text-gray-900 mb-2">{title || 'Event Title'}</h2>
-                
-                <div className="flex items-center text-gray-600 mb-4">
-                  <FaCalendar className="mr-2" />
-                  {formatEventDate()}
-                </div>
-                
-                <div className="flex items-center text-gray-600 mb-4">
-                  <FaMapMarkerAlt className="mr-2" />
-                  {location || 'Location TBD'}
-                  {venue && ` - ${venue}`}
-                </div>
-
-                {/* Countdown */}
-                <div className="mb-4">
-                  <CountdownPreview targetDate={startDate} />
-                </div>
-
-                <p className="text-gray-600 mb-4 line-clamp-3">
-                  {description?.replace(/<[^>]*>/g, '') || 'No description provided.'}
-                </p>
-
-                <div className="flex gap-3">
-                  <button className="flex-1 bg-blue-600 text-white py-3 rounded-lg font-semibold">
-                    Register Now
-                  </button>
-                  {!isFree && ticketPrice && (
-                    <div className="px-4 py-3 bg-gray-100 rounded-lg font-semibold text-gray-700">
-                      {ticketPrice}
-                    </div>
-                  )}
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* Action Buttons */}
+        {/* Save Button */}
         <div className="flex gap-4 mt-8 pt-6 border-t">
           <button 
-            type="button"
             onClick={saveEvent} 
             className="flex-1 bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition flex items-center justify-center gap-2 disabled:opacity-50"
-            disabled={isLoading || uploadLoading}
+            disabled={isLoading}
           >
             <FaSave /> {isLoading ? 'Saving...' : (editId ? 'Update Event' : 'Save Event')}
           </button>
