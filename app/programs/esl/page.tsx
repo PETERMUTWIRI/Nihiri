@@ -18,7 +18,7 @@ export default function ESLPage() {
               <div className="w-full h-full bg-gradient-to-br from-yellow-50 to-yellow-100 flex items-center justify-center">
                 <span className="text-8xl">📚</span>
               </div>
-              <Image src="/images/programs/esl-hero.jpg" alt="ESL Class" fill className="object-cover" priority />
+              <Image src="/images/programs/esl3.jpg" alt="ESL Class" fill className="object-cover" priority />
             </div>
 
             {/* Right: Content */}
@@ -129,70 +129,44 @@ export default function ESLPage() {
 
       {/* IMAGE CAROUSEL - 5 Images Visible, Moving Right to Left */}
       <section className="py-16 bg-white overflow-hidden">
-        <div className="max-w-7xl mx-auto px-6 md:px-12 mb-8">
-          <h2 className="text-3xl font-bold text-gray-900">Our ESL Community</h2>
-          <p className="text-gray-600 mt-2">Moments from our classes and community gatherings</p>
-        </div>
-        
-        {/* Carousel Container - All 5 visible, scrolling */}
         <div className="relative">
-          <div className="flex gap-6 animate-scroll-left">
+          <div className="flex gap-6 animate-scroll-right">
             {/* Image 1 */}
-            <div className="flex-shrink-0 w-72 h-48 rounded-2xl overflow-hidden shadow-lg">
-              <div className="w-full h-full bg-gradient-to-br from-brand-primary to-yellow-300 flex items-center justify-center">
-                <span className="text-4xl">👩‍🏫</span>
-              </div>
+            <div className="flex-shrink-0 w-72 h-48 rounded-2xl overflow-hidden shadow-lg relative">
+              <Image src="/images/programs/health1.png" alt="Health Session 1" fill className="object-cover" />
             </div>
             {/* Image 2 */}
-            <div className="flex-shrink-0 w-72 h-48 rounded-2xl overflow-hidden shadow-lg">
-              <div className="w-full h-full bg-gradient-to-br from-brand-primary to-yellow-300 flex items-center justify-center">
-                <span className="text-4xl">👥</span>
-              </div>
+            <div className="flex-shrink-0 w-72 h-48 rounded-2xl overflow-hidden shadow-lg relative">
+              <Image src="/images/programs/health2.png" alt="Health Session 2" fill className="object-cover" />
             </div>
             {/* Image 3 */}
-            <div className="flex-shrink-0 w-72 h-48 rounded-2xl overflow-hidden shadow-lg">
-              <div className="w-full h-full bg-gradient-to-br from-brand-primary to-yellow-300 flex items-center justify-center">
-                <span className="text-4xl">📖</span>
-              </div>
+            <div className="flex-shrink-0 w-72 h-48 rounded-2xl overflow-hidden shadow-lg relative">
+              <Image src="/images/programs/health3.png" alt="Health Session 3" fill className="object-cover" />
             </div>
             {/* Image 4 */}
-            <div className="flex-shrink-0 w-72 h-48 rounded-2xl overflow-hidden shadow-lg">
-              <div className="w-full h-full bg-gradient-to-br from-brand-primary to-yellow-300 flex items-center justify-center">
-                <span className="text-4xl">🎓</span>
-              </div>
+            <div className="flex-shrink-0 w-72 h-48 rounded-2xl overflow-hidden shadow-lg relative">
+              <Image src="/images/programs/health4.png" alt="Health Session 4" fill className="object-cover" />
             </div>
             {/* Image 5 */}
-            <div className="flex-shrink-0 w-72 h-48 rounded-2xl overflow-hidden shadow-lg">
-              <div className="w-full h-full bg-gradient-to-br from-brand-primary to-yellow-300 flex items-center justify-center">
-                <span className="text-4xl">🌍</span>
-              </div>
+            <div className="flex-shrink-0 w-72 h-48 rounded-2xl overflow-hidden shadow-lg relative">
+              <Image src="/images/programs/health5.png" alt="Health Session 5" fill className="object-cover" />
             </div>
             
             {/* Duplicate set for seamless loop */}
-            <div className="flex-shrink-0 w-72 h-48 rounded-2xl overflow-hidden shadow-lg">
-              <div className="w-full h-full bg-gradient-to-br from-brand-primary to-yellow-300 flex items-center justify-center">
-                <span className="text-4xl">👩‍🏫</span>
-              </div>
+            <div className="flex-shrink-0 w-72 h-48 rounded-2xl overflow-hidden shadow-lg relative">
+              <Image src="/images/programs/health1.png" alt="Health Session 1" fill className="object-cover" />
             </div>
-            <div className="flex-shrink-0 w-72 h-48 rounded-2xl overflow-hidden shadow-lg">
-              <div className="w-full h-full bg-gradient-to-br from-brand-primary to-yellow-300 flex items-center justify-center">
-                <span className="text-4xl">👥</span>
-              </div>
+            <div className="flex-shrink-0 w-72 h-48 rounded-2xl overflow-hidden shadow-lg relative">
+              <Image src="/images/programs/health2.png" alt="Health Session 2" fill className="object-cover" />
             </div>
-            <div className="flex-shrink-0 w-72 h-48 rounded-2xl overflow-hidden shadow-lg">
-              <div className="w-full h-full bg-gradient-to-br from-brand-primary to-yellow-300 flex items-center justify-center">
-                <span className="text-4xl">📖</span>
-              </div>
+            <div className="flex-shrink-0 w-72 h-48 rounded-2xl overflow-hidden shadow-lg relative">
+              <Image src="/images/programs/health3.png" alt="Health Session 3" fill className="object-cover" />
             </div>
-            <div className="flex-shrink-0 w-72 h-48 rounded-2xl overflow-hidden shadow-lg">
-              <div className="w-full h-full bg-gradient-to-br from-brand-primary to-yellow-300 flex items-center justify-center">
-                <span className="text-4xl">🎓</span>
-              </div>
+            <div className="flex-shrink-0 w-72 h-48 rounded-2xl overflow-hidden shadow-lg relative">
+              <Image src="/images/programs/health4.png" alt="Health Session 4" fill className="object-cover" />
             </div>
-            <div className="flex-shrink-0 w-72 h-48 rounded-2xl overflow-hidden shadow-lg">
-              <div className="w-full h-full bg-gradient-to-br from-brand-primary to-yellow-300 flex items-center justify-center">
-                <span className="text-4xl">🌍</span>
-              </div>
+            <div className="flex-shrink-0 w-72 h-48 rounded-2xl overflow-hidden shadow-lg relative">
+              <Image src="/images/programs/health5.png" alt="Health Session 5" fill className="object-cover" />
             </div>
           </div>
         </div>

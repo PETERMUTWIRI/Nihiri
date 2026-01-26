@@ -31,3 +31,31 @@
     @apply bg-brand-primary hover:bg-brand-dark text-brand-text px-6 py-3 rounded-md font-semibold transition-all hover:scale-105;
   }
 }
+
+@layer utilities {
+  @keyframes scroll-left {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+  }
+
+  @keyframes scroll-right {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
+
+  .animate-scroll-left {
+    animation: scroll-left 20s linear infinite;
+  }
+
+  .animate-scroll-right {
+    animation: scroll-right 20s linear infinite;
+  }
+}

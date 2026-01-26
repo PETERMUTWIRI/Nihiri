@@ -185,6 +185,51 @@ export default function HealthPage() {
         </div>
       </section>
 
+      {/* IMAGE CAROUSEL */}
+      <section className="py-16 bg-white overflow-hidden">
+        <div className="relative">
+          <div className="flex gap-6 animate-scroll-right">
+            {/* Image 1 */}
+            <div className="flex-shrink-0 w-72 h-48 rounded-2xl overflow-hidden shadow-lg relative">
+              <Image src="/images/programs/health1.png" alt="Health Session 1" fill className="object-cover" />
+            </div>
+            {/* Image 2 */}
+            <div className="flex-shrink-0 w-72 h-48 rounded-2xl overflow-hidden shadow-lg relative">
+              <Image src="/images/programs/health2.png" alt="Health Session 2" fill className="object-cover" />
+            </div>
+            {/* Image 3 */}
+            <div className="flex-shrink-0 w-72 h-48 rounded-2xl overflow-hidden shadow-lg relative">
+              <Image src="/images/programs/health3.png" alt="Health Session 3" fill className="object-cover" />
+            </div>
+            {/* Image 4 */}
+            <div className="flex-shrink-0 w-72 h-48 rounded-2xl overflow-hidden shadow-lg relative">
+              <Image src="/images/programs/health4.png" alt="Health Session 4" fill className="object-cover" />
+            </div>
+            {/* Image 5 */}
+            <div className="flex-shrink-0 w-72 h-48 rounded-2xl overflow-hidden shadow-lg relative">
+              <Image src="/images/programs/health5.png" alt="Health Session 5" fill className="object-cover" />
+            </div>
+            
+            {/* Duplicate set for seamless loop */}
+            <div className="flex-shrink-0 w-72 h-48 rounded-2xl overflow-hidden shadow-lg relative">
+              <Image src="/images/programs/health1.png" alt="Health Session 1" fill className="object-cover" />
+            </div>
+            <div className="flex-shrink-0 w-72 h-48 rounded-2xl overflow-hidden shadow-lg relative">
+              <Image src="/images/programs/health2.png" alt="Health Session 2" fill className="object-cover" />
+            </div>
+            <div className="flex-shrink-0 w-72 h-48 rounded-2xl overflow-hidden shadow-lg relative">
+              <Image src="/images/programs/health3.png" alt="Health Session 3" fill className="object-cover" />
+            </div>
+            <div className="flex-shrink-0 w-72 h-48 rounded-2xl overflow-hidden shadow-lg relative">
+              <Image src="/images/programs/health4.png" alt="Health Session 4" fill className="object-cover" />
+            </div>
+            <div className="flex-shrink-0 w-72 h-48 rounded-2xl overflow-hidden shadow-lg relative">
+              <Image src="/images/programs/health5.png" alt="Health Session 5" fill className="object-cover" />
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* ADVOCACY SECTION */}
       <section className="py-20 bg-brand-primary text-brand-text">
         <div className="max-w-7xl mx-auto px-6 md:px-12">
@@ -280,77 +325,6 @@ export default function HealthPage() {
                 <p className="text-gray-600 mt-4 leading-relaxed">
                   More importantly, we outlined how our organization is striving to help families recover and rebuild as we emerge from the pandemic. This includes expanded mental health services, economic support programs, and continued health education to address long-term COVID effects. Our presentation emphasized the need for sustained support for refugee communities even as broader society returns to normal.
                 </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* IMAGE CAROUSEL - 5 Images Moving Right to Left */}
-      <section className="py-16 bg-white overflow-hidden">
-        <div className="max-w-7xl mx-auto px-6 md:px-12 mb-8">
-          <h2 className="text-3xl font-bold text-gray-900">Our Health Community</h2>
-          <p className="text-gray-600 mt-2">Moments from our health education sessions and community wellness activities</p>
-        </div>
-        
-        {/* Carousel Container */}
-        <div className="relative">
-          <div className="flex gap-6 animate-scroll-left">
-            {/* Image 1 */}
-            <div className="flex-shrink-0 w-72 h-48 rounded-2xl overflow-hidden shadow-lg">
-              <div className="w-full h-full bg-gradient-to-br from-brand-primary to-yellow-300 flex items-center justify-center">
-                <span className="text-4xl">🏥</span>
-              </div>
-            </div>
-            {/* Image 2 */}
-            <div className="flex-shrink-0 w-72 h-48 rounded-2xl overflow-hidden shadow-lg">
-              <div className="w-full h-full bg-gradient-to-br from-brand-primary to-yellow-300 flex items-center justify-center">
-                <span className="text-4xl">👨‍👩‍👧‍👦</span>
-              </div>
-            </div>
-            {/* Image 3 */}
-            <div className="flex-shrink-0 w-72 h-48 rounded-2xl overflow-hidden shadow-lg">
-              <div className="w-full h-full bg-gradient-to-br from-brand-primary to-yellow-300 flex items-center justify-center">
-                <span className="text-4xl">🧠</span>
-              </div>
-            </div>
-            {/* Image 4 */}
-            <div className="flex-shrink-0 w-72 h-48 rounded-2xl overflow-hidden shadow-lg">
-              <div className="w-full h-full bg-gradient-to-br from-brand-primary to-yellow-300 flex items-center justify-center">
-                <span className="text-4xl">👩‍⚕️</span>
-              </div>
-            </div>
-            {/* Image 5 */}
-            <div className="flex-shrink-0 w-72 h-48 rounded-2xl overflow-hidden shadow-lg">
-              <div className="w-full h-full bg-gradient-to-br from-brand-primary to-yellow-300 flex items-center justify-center">
-                <span className="text-4xl">💉</span>
-              </div>
-            </div>
-            
-            {/* Duplicate set for seamless loop */}
-            <div className="flex-shrink-0 w-72 h-48 rounded-2xl overflow-hidden shadow-lg">
-              <div className="w-full h-full bg-gradient-to-br from-brand-primary to-yellow-300 flex items-center justify-center">
-                <span className="text-4xl">🏥</span>
-              </div>
-            </div>
-            <div className="flex-shrink-0 w-72 h-48 rounded-2xl overflow-hidden shadow-lg">
-              <div className="w-full h-full bg-gradient-to-br from-brand-primary to-yellow-300 flex items-center justify-center">
-                <span className="text-4xl">👨‍👩‍👧‍👦</span>
-              </div>
-            </div>
-            <div className="flex-shrink-0 w-72 h-48 rounded-2xl overflow-hidden shadow-lg">
-              <div className="w-full h-full bg-gradient-to-br from-brand-primary to-yellow-300 flex items-center justify-center">
-                <span className="text-4xl">🧠</span>
-              </div>
-            </div>
-            <div className="flex-shrink-0 w-72 h-48 rounded-2xl overflow-hidden shadow-lg">
-              <div className="w-full h-full bg-gradient-to-br from-brand-primary to-yellow-300 flex items-center justify-center">
-                <span className="text-4xl">👩‍⚕️</span>
-              </div>
-            </div>
-            <div className="flex-shrink-0 w-72 h-48 rounded-2xl overflow-hidden shadow-lg">
-              <div className="w-full h-full bg-gradient-to-br from-brand-primary to-yellow-300 flex items-center justify-center">
-                <span className="text-4xl">💉</span>
               </div>
             </div>
           </div>

@@ -101,6 +101,51 @@ export default function AdvocacyPage() {
         </div>
       </section>
 
+      {/* IMAGE CAROUSEL */}
+      <section className="py-16 bg-white overflow-hidden">
+        <div className="relative">
+          <div className="flex gap-6 animate-scroll-right">
+            {/* Image 1 */}
+            <div className="flex-shrink-0 w-72 h-48 rounded-2xl overflow-hidden shadow-lg relative">
+              <Image src="/images/programs/advocacy2.png" alt="Advocacy Session 1" fill className="object-cover" />
+            </div>
+            {/* Image 2 */}
+            <div className="flex-shrink-0 w-72 h-48 rounded-2xl overflow-hidden shadow-lg relative">
+              <Image src="/images/programs/advocacy3.png" alt="Advocacy Session 2" fill className="object-cover" />
+            </div>
+            {/* Image 3 */}
+            <div className="flex-shrink-0 w-72 h-48 rounded-2xl overflow-hidden shadow-lg relative">
+              <Image src="/images/programs/advocacy4.png" alt="Advocacy Session 3" fill className="object-cover" />
+            </div>
+            {/* Image 4 */}
+            <div className="flex-shrink-0 w-72 h-48 rounded-2xl overflow-hidden shadow-lg relative">
+              <Image src="/images/programs/advocacy5.png" alt="Advocacy Session 4" fill className="object-cover" />
+            </div>
+            {/* Image 5 */}
+            <div className="flex-shrink-0 w-72 h-48 rounded-2xl overflow-hidden shadow-lg relative">
+              <Image src="/images/programs/advocacy.jpg" alt="Advocacy Session 5" fill className="object-cover" />
+            </div>
+            
+            {/* Duplicate set for seamless loop */}
+            <div className="flex-shrink-0 w-72 h-48 rounded-2xl overflow-hidden shadow-lg relative">
+              <Image src="/images/programs/advocacy2.png" alt="Advocacy Session 1" fill className="object-cover" />
+            </div>
+            <div className="flex-shrink-0 w-72 h-48 rounded-2xl overflow-hidden shadow-lg relative">
+              <Image src="/images/programs/advocacy3.png" alt="Advocacy Session 2" fill className="object-cover" />
+            </div>
+            <div className="flex-shrink-0 w-72 h-48 rounded-2xl overflow-hidden shadow-lg relative">
+              <Image src="/images/programs/advocacy4.png" alt="Advocacy Session 3" fill className="object-cover" />
+            </div>
+            <div className="flex-shrink-0 w-72 h-48 rounded-2xl overflow-hidden shadow-lg relative">
+              <Image src="/images/programs/advocacy5.png" alt="Advocacy Session 4" fill className="object-cover" />
+            </div>
+            <div className="flex-shrink-0 w-72 h-48 rounded-2xl overflow-hidden shadow-lg relative">
+              <Image src="/images/programs/advocacy.jpg" alt="Advocacy Session 5" fill className="object-cover" />
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* MAJOR EVENTS & INITIATIVES */}
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-6 md:px-12">
@@ -287,57 +332,6 @@ export default function AdvocacyPage() {
           </div>
 
           
-        </div>
-      </section>
-
-      {/* IMAGE CAROUSEL - 5 Images Moving Right to Left */}
-      <section className="py-16 bg-white overflow-hidden">
-        <div className="max-w-7xl mx-auto px-6 md:px-12 mb-8">
-          <h2 className="text-3xl font-bold text-gray-900">Advocacy in Action</h2>
-          <p className="text-gray-600 mt-2">Moments from our legal clinics, coalition meetings, and community sessions</p>
-        </div>
-        
-        {/* Carousel Container */}
-        <div className="relative">
-          <div className="flex gap-6 animate-scroll-left">
-            {/* Image 1 */}
-            <div className="flex-shrink-0 w-72 h-48 rounded-2xl overflow-hidden shadow-lg relative">
-              <Image src="/images/programs/advocacy2.png" alt="Advocacy Session 1" fill className="object-cover" />
-            </div>
-            {/* Image 2 */}
-            <div className="flex-shrink-0 w-72 h-48 rounded-2xl overflow-hidden shadow-lg relative">
-              <Image src="/images/programs/advocacy3.png" alt="Advocacy Session 2" fill className="object-cover" />
-            </div>
-            {/* Image 3 */}
-            <div className="flex-shrink-0 w-72 h-48 rounded-2xl overflow-hidden shadow-lg relative">
-              <Image src="/images/programs/advocacy4.png" alt="Advocacy Session 3" fill className="object-cover" />
-            </div>
-            {/* Image 4 */}
-            <div className="flex-shrink-0 w-72 h-48 rounded-2xl overflow-hidden shadow-lg relative">
-              <Image src="/images/programs/advocacy5.png" alt="Advocacy Session 4" fill className="object-cover" />
-            </div>
-            {/* Image 5 */}
-            <div className="flex-shrink-0 w-72 h-48 rounded-2xl overflow-hidden shadow-lg relative">
-              <Image src="/images/programs/advocacy.jpg" alt="Advocacy Session 5" fill className="object-cover" />
-            </div>
-            
-            {/* Duplicate set for seamless loop */}
-            <div className="flex-shrink-0 w-72 h-48 rounded-2xl overflow-hidden shadow-lg relative">
-              <Image src="/images/programs/advocacy2.png" alt="Advocacy Session 1" fill className="object-cover" />
-            </div>
-            <div className="flex-shrink-0 w-72 h-48 rounded-2xl overflow-hidden shadow-lg relative">
-              <Image src="/images/programs/advocacy3.png" alt="Advocacy Session 2" fill className="object-cover" />
-            </div>
-            <div className="flex-shrink-0 w-72 h-48 rounded-2xl overflow-hidden shadow-lg relative">
-              <Image src="/images/programs/advocacy4.png" alt="Advocacy Session 3" fill className="object-cover" />
-            </div>
-            <div className="flex-shrink-0 w-72 h-48 rounded-2xl overflow-hidden shadow-lg relative">
-              <Image src="/images/programs/advocacy5.png" alt="Advocacy Session 4" fill className="object-cover" />
-            </div>
-            <div className="flex-shrink-0 w-72 h-48 rounded-2xl overflow-hidden shadow-lg relative">
-              <Image src="/images/programs/advocacy.jpg" alt="Advocacy Session 5" fill className="object-cover" />
-            </div>
-          </div>
         </div>
       </section>
 
