@@ -1,4 +1,4 @@
-// app/events/page.tsx - UPCOMING EVENTS with countdown & Prisma direct
+// app/events/page.tsx - FIXED for USA timezone
 import Link from 'next/link';
 import Image from 'next/image';
 import { PrismaClient } from '@prisma/client';
@@ -26,7 +26,7 @@ function getCountdown(startDate: Date): { days: number; hours: number; minutes: 
   };
 }
 
-// Helper to format date safely
+// Helper to format date for USA display
 function formatDate(date: Date | null): string {
   if (!date) return 'Date TBD';
   return new Date(date).toLocaleDateString('en-US', {
@@ -36,35 +36,29 @@ function formatDate(date: Date | null): string {
     day: 'numeric',
     hour: '2-digit',
     minute: '2-digit',
+    timeZone: 'America/New_York', // USA Eastern Time
   });
 }
 
 async function getUpcomingEvents() {
-  const now = new Date();
-  
-  // Get events that haven't started yet OR are marked as Upcoming
+  // Use server's current time - Vercel servers are typically UTC
+  // But we'll query by category since that's what admin sets
   const events = await prisma.event.findMany({
     where: {
-      OR: [
-        { startDate: { gt: now } }, // Future events
-        { category: 'Upcoming' },   // Explicitly marked upcoming
-      ],
+      category: 'Upcoming', // Just use the category set by admin
       deletedAt: null,
     },
     orderBy: { startDate: 'asc' },
-    take: 6, // Limit for performance
+    take: 6,
   });
 
+  console.log('Found upcoming events:', events.length);
   return events;
 }
 
 async function getRecentPastEvents() {
-  const now = new Date();
-  
-  // Get 3 most recent past events for the "View Past Events" section
   return await prisma.event.findMany({
     where: {
-      startDate: { lt: now },
       category: 'Past',
       deletedAt: null,
     },
@@ -78,6 +72,8 @@ export default async function EventsPage() {
     getUpcomingEvents(),
     getRecentPastEvents(),
   ]);
+
+  console.log('Upcoming:', upcomingEvents.length, 'Past:', recentPastEvents.length);
 
   const featuredEvent = upcomingEvents[0];
   const otherEvents = upcomingEvents.slice(1);
@@ -110,7 +106,7 @@ export default async function EventsPage() {
         </div>
       </section>
 
-      {/* FEATURED EVENT (if exists) */}
+      {/* FEATURED EVENT */}
       {featuredEvent && (
         <section className="py-12 px-6 md:px-12 max-w-7xl mx-auto">
           <div className="bg-white rounded-3xl shadow-2xl overflow-hidden">
@@ -137,9 +133,9 @@ export default async function EventsPage() {
                 </div>
               </div>
 
-              {/* Right: Content with Live Countdown */}
+              {/* Right: Content */}
               <div className="p-8 lg:p-12 flex flex-col justify-center">
-                {/* Live Countdown */}
+                {/* Countdown */}
                 {!getCountdown(featuredEvent.startDate).isExpired && (
                   <div className="mb-6">
                     <p className="text-sm text-gray-500 mb-2 uppercase tracking-wide font-semibold">
@@ -200,9 +196,12 @@ export default async function EventsPage() {
                   </Link>
                   {featuredEvent.registrationLink && (
                     <a 
-                      href={featuredEvent.registrationLink}
-                      target="_blank"
-                      rel="noopener noreferrer"
+                      href={featuredEvent.registrationLink.includes('@') 
+                        ? `mailto:${featuredEvent.registrationLink}` 
+                        : featuredEvent.registrationLink
+                      }
+                      target={featuredEvent.registrationLink.includes('@') ? undefined : "_blank"}
+                      rel={featuredEvent.registrationLink.includes('@') ? undefined : "noopener noreferrer"}
                       className="inline-flex items-center bg-green-600 text-white px-8 py-4 rounded-xl font-bold hover:bg-green-700 transition shadow-lg"
                     >
                       Register Now
@@ -215,7 +214,7 @@ export default async function EventsPage() {
         </section>
       )}
 
-      {/* OTHER UPCOMING EVENTS */}
+      {/* OTHER EVENTS */}
       {otherEvents.length > 0 && (
         <section className="py-12 px-6 md:px-12 max-w-7xl mx-auto">
           <h3 className="text-2xl font-bold text-gray-900 mb-8">More Upcoming Events</h3>
@@ -253,7 +252,7 @@ export default async function EventsPage() {
                         {ev.description?.replace(/<[^>]*>/g, '').slice(0, 120)}...
                       </p>
                       <div className="flex items-center gap-4 text-sm text-gray-500">
-                        <span className="flex items-center gap-1"><FaCalendar /> {new Date(ev.startDate).toLocaleDateString()}</span>
+                        <span className="flex items-center gap-1"><FaCalendar /> {new Date(ev.startDate).toLocaleDateString('en-US')}</span>
                         <span className="flex items-center gap-1"><FaLocationDot /> {ev.location}</span>
                       </div>
                     </div>
@@ -265,13 +264,13 @@ export default async function EventsPage() {
         </section>
       )}
 
-      {/* NO EVENTS STATE */}
+      {/* NO EVENTS */}
       {upcomingEvents.length === 0 && (
         <section className="py-12 px-6 md:px-12 max-w-3xl mx-auto text-center">
           <div className="bg-white rounded-2xl shadow-lg p-12">
             <span className="text-6xl mb-4 block">📭</span>
             <h3 className="text-2xl font-bold text-gray-900 mb-4">No Upcoming Events</h3>
-            <p className="text-gray-600 mb-6">Check back soon for new events, or view our past events to see what we've been up to.</p>
+            <p className="text-gray-600 mb-6">Check back soon for new events.</p>
             <Link 
               href="/events/past"
               className="inline-flex items-center bg-blue-600 text-white px-6 py-3 rounded-xl font-bold hover:bg-blue-700 transition"
@@ -282,7 +281,7 @@ export default async function EventsPage() {
         </section>
       )}
 
-      {/* RECENT PAST EVENTS PREVIEW (Cross-linking) */}
+      {/* PAST EVENTS PREVIEW */}
       {recentPastEvents.length > 0 && (
         <section className="py-16 bg-gray-100">
           <div className="max-w-7xl mx-auto px-6 md:px-12">
@@ -295,7 +294,7 @@ export default async function EventsPage() {
                 href="/events/past"
                 className="text-blue-600 font-bold hover:underline flex items-center"
               >
-                View All Past Events <FaArrowRight className="ml-1"/>
+                View All <FaArrowRight className="ml-1"/>
               </Link>
             </div>
             
@@ -315,7 +314,7 @@ export default async function EventsPage() {
                     </div>
                     <div className="p-4">
                       <h4 className="font-bold text-gray-900 line-clamp-1">{ev.title}</h4>
-                      <p className="text-sm text-gray-500 mt-1">{new Date(ev.startDate).toLocaleDateString()}</p>
+                      <p className="text-sm text-gray-500 mt-1">{new Date(ev.startDate).toLocaleDateString('en-US')}</p>
                     </div>
                   </Link>
                 </article>
@@ -325,7 +324,6 @@ export default async function EventsPage() {
         </section>
       )}
 
-      {/* NEWSLETTER */}
       <NewsletterCTA
         title="Never Miss an Event"
         subtitle="Subscribe to get notified about upcoming events at\nNew International Hope"
