@@ -3,19 +3,20 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { FaArrowRight, FaHome, FaBrain, FaBaby, FaFemale, FaSyringe, FaBookOpen, FaUsers, FaMicrophone, FaSearch } from 'react-icons/fa';
+import NewsletterCTA from '@/components/NewsletterCTA';
 
 export default function HealthPage() {
   return (
     <div className="min-h-screen bg-white">
       {/* HERO SECTION - Image Left, Content Right */}
-      <section className="py-20 pt-32 bg-gradient-to-br from-teal-50 to-white">
+      <section className="py-20 pt-32 bg-gradient-to-br from-brand-background to-white">
         <div className="max-w-7xl mx-auto px-6 md:px-12">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Left: Hero Image */}
             <div className="relative h-96 lg:h-[500px] rounded-3xl overflow-hidden shadow-2xl">
-              <div className="absolute inset-0 bg-gradient-to-br from-teal-600/20 to-emerald-600/20" />
+              <div className="absolute inset-0 bg-gradient-to-br from-brand-primary/20 to-yellow-400/20" />
               {/* Placeholder - Replace with actual image */}
-              <div className="w-full h-full bg-gradient-to-br from-teal-100 to-emerald-100 flex items-center justify-center">
+              <div className="w-full h-full bg-gradient-to-br from-yellow-50 to-yellow-100 flex items-center justify-center">
                 <span className="text-8xl">🏥</span>
               </div>
               {/* <Image src="/images/health-hero.jpg" alt="Health Education Session" fill className="object-cover" priority /> */}
@@ -23,7 +24,7 @@ export default function HealthPage() {
 
             {/* Right: Content */}
             <div>
-              <span className="inline-block bg-teal-600 text-white px-4 py-2 rounded-full text-sm font-bold mb-6">
+              <span className="inline-block bg-brand-primary text-brand-text px-4 py-2 rounded-full text-sm font-bold mb-6">
                 Comprehensive Care
               </span>
               <h1 className="text-5xl md:text-6xl font-black text-gray-900 mb-6 leading-tight">
@@ -38,7 +39,7 @@ export default function HealthPage() {
               <div className="flex flex-wrap gap-4">
                 <Link 
                   href="/contact"
-                  className="inline-flex items-center bg-teal-600 text-white px-8 py-4 rounded-xl font-bold hover:bg-teal-700 transition shadow-lg"
+                  className="inline-flex items-center bg-brand-primary text-brand-text px-8 py-4 rounded-xl font-bold hover:bg-brand-dark transition shadow-lg"
                 >
                   Get More Info <FaArrowRight className="ml-2"/>
                 </Link>
@@ -56,8 +57,8 @@ export default function HealthPage() {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {/* Mental Health & Parenting */}
             <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition hover:-translate-y-1">
-              <div className="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center mb-6">
-                <FaBrain className="text-3xl text-blue-600"/>
+              <div className="w-16 h-16 bg-brand-primary/20 rounded-2xl flex items-center justify-center mb-6">
+                <FaBrain className="text-3xl text-brand-primary"/>
               </div>
               <h3 className="text-xl font-bold text-gray-900 mb-3">Mental Health & Parenting</h3>
               <p className="text-gray-600">
@@ -67,8 +68,8 @@ export default function HealthPage() {
 
             {/* General Health Education */}
             <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition hover:-translate-y-1">
-              <div className="w-16 h-16 bg-green-100 rounded-2xl flex items-center justify-center mb-6">
-                <FaBookOpen className="text-3xl text-green-600"/>
+              <div className="w-16 h-16 bg-brand-primary/20 rounded-2xl flex items-center justify-center mb-6">
+                <FaBookOpen className="text-3xl text-brand-primary"/>
               </div>
               <h3 className="text-xl font-bold text-gray-900 mb-3">Health Education</h3>
               <p className="text-gray-600">
@@ -78,8 +79,8 @@ export default function HealthPage() {
 
             {/* Children's Health */}
             <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition hover:-translate-y-1">
-              <div className="w-16 h-16 bg-yellow-100 rounded-2xl flex items-center justify-center mb-6">
-                <FaBaby className="text-3xl text-yellow-600"/>
+              <div className="w-16 h-16 bg-brand-primary/20 rounded-2xl flex items-center justify-center mb-6">
+                <FaBaby className="text-3xl text-brand-primary"/>
               </div>
               <h3 className="text-xl font-bold text-gray-900 mb-3">Children's Health Education</h3>
               <p className="text-gray-600">
@@ -100,8 +101,8 @@ export default function HealthPage() {
 
             {/* Vaccines */}
             <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition hover:-translate-y-1">
-              <div className="w-16 h-16 bg-purple-100 rounded-2xl flex items-center justify-center mb-6">
-                <FaSyringe className="text-3xl text-purple-600"/>
+              <div className="w-16 h-16 bg-brand-primary/20 rounded-2xl flex items-center justify-center mb-6">
+                <FaSyringe className="text-3xl text-brand-primary"/>
               </div>
               <h3 className="text-xl font-bold text-gray-900 mb-3">Vaccine Education</h3>
               <p className="text-gray-600">
@@ -111,8 +112,8 @@ export default function HealthPage() {
 
             {/* In-Home Delivery */}
             <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition hover:-translate-y-1">
-              <div className="w-16 h-16 bg-teal-100 rounded-2xl flex items-center justify-center mb-6">
-                <FaHome className="text-3xl text-teal-600"/>
+              <div className="w-16 h-16 bg-brand-primary/20 rounded-2xl flex items-center justify-center mb-6">
+                <FaHome className="text-3xl text-brand-primary"/>
               </div>
               <h3 className="text-xl font-bold text-gray-900 mb-3">In-Home Delivery</h3>
               <p className="text-gray-600">
@@ -140,9 +141,9 @@ export default function HealthPage() {
 
           <div className="grid lg:grid-cols-3 gap-8">
             {/* EMPOWER Program */}
-            <div className="bg-gradient-to-br from-orange-50 to-white rounded-2xl p-8 border border-orange-100">
-              <div className="w-16 h-16 bg-orange-100 rounded-2xl flex items-center justify-center mb-6">
-                <FaUsers className="text-3xl text-orange-600"/>
+            <div className="bg-gradient-to-br from-brand-background to-white rounded-2xl p-8 border border-brand-primary/30">
+              <div className="w-16 h-16 bg-brand-primary/20 rounded-2xl flex items-center justify-center mb-6">
+                <FaUsers className="text-3xl text-brand-primary"/>
               </div>
               <h3 className="text-2xl font-bold text-gray-900 mb-4">EMPOWER Program</h3>
               <p className="text-gray-600 mb-4">
@@ -154,9 +155,9 @@ export default function HealthPage() {
             </div>
 
             {/* Ambassador Classes */}
-            <div className="bg-gradient-to-br from-blue-50 to-white rounded-2xl p-8 border border-blue-100">
-              <div className="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center mb-6">
-                <FaMicrophone className="text-3xl text-blue-600"/>
+            <div className="bg-gradient-to-br from-brand-background to-white rounded-2xl p-8 border border-brand-primary/30">
+              <div className="w-16 h-16 bg-brand-primary/20 rounded-2xl flex items-center justify-center mb-6">
+                <FaMicrophone className="text-3xl text-brand-primary"/>
               </div>
               <h3 className="text-2xl font-bold text-gray-900 mb-4">Ambassador Classes</h3>
               <p className="text-gray-600 mb-4">
@@ -168,7 +169,7 @@ export default function HealthPage() {
             </div>
 
             {/* Women's Health Workshops */}
-            <div className="bg-gradient-to-br from-pink-50 to-white rounded-2xl p-8 border border-pink-100">
+            <div className="bg-gradient-to-br from-brand-background to-white rounded-2xl p-8 border border-brand-primary/30">
               <div className="w-16 h-16 bg-pink-100 rounded-2xl flex items-center justify-center mb-6">
                 <FaFemale className="text-3xl text-pink-600"/>
               </div>
@@ -185,7 +186,7 @@ export default function HealthPage() {
       </section>
 
       {/* ADVOCACY SECTION */}
-      <section className="py-20 bg-teal-600 text-white">
+      <section className="py-20 bg-brand-primary text-brand-text">
         <div className="max-w-7xl mx-auto px-6 md:px-12">
           <h2 className="text-4xl font-black text-center mb-16">Advocacy & Outreach</h2>
 
@@ -193,20 +194,20 @@ export default function HealthPage() {
             <div className="space-y-8">
               <div className="bg-white/10 backdrop-blur rounded-2xl p-8">
                 <h3 className="text-2xl font-bold mb-4">Vaccine Clinic Program</h3>
-                <p className="text-teal-100 leading-relaxed">
+                <p className="text-brand-text/80 leading-relaxed">
                   Offered both online and in-person, our vaccine awareness initiative is specifically designed to address the unique concerns of refugee communities. We provide comprehensive education about the immune system, explain the critical importance of immunization for community health, and respectfully address common myths and misconceptions about vaccines that may circulate within communities.
                 </p>
-                <p className="text-teal-100 mt-4 leading-relaxed">
+                <p className="text-brand-text/80 mt-4 leading-relaxed">
                   We create welcoming, judgment-free spaces where clients feel safe asking specific questions about their personal health situations. All educational materials are professionally translated and presented in Dari, Pashto, and Arabic, ensuring that language is never a barrier to understanding life-saving health information.
                 </p>
               </div>
 
               <div className="bg-white/10 backdrop-blur rounded-2xl p-8">
                 <h3 className="text-2xl font-bold mb-4">National Association of Regional Councils (NARC)</h3>
-                <p className="text-teal-100 leading-relaxed">
+                <p className="text-brand-text/80 leading-relaxed">
                   The annual NARC Conference and Exhibition stands as the largest national gathering focused on promoting effective regional cooperation and solutions. Our participation allows us to share best practices with leadership from Councils of Government and Metropolitan Planning Organizations across the country.
                 </p>
-                <p className="text-teal-100 mt-4 leading-relaxed">
+                <p className="text-brand-text/80 mt-4 leading-relaxed">
                   This platform enables us to advocate for refugee health needs at the policy level, learning from congressional and state lawmakers, university researchers, and nonprofit leaders about emerging strategies for serving displaced populations. Our presence ensures that refugee voices are represented in regional health planning discussions.
                 </p>
               </div>
@@ -215,17 +216,17 @@ export default function HealthPage() {
             <div className="space-y-8">
               <div className="bg-white/10 backdrop-blur rounded-2xl p-8">
                 <h3 className="text-2xl font-bold mb-4">Mental Health America Conference</h3>
-                <p className="text-teal-100 leading-relaxed">
+                <p className="text-brand-text/80 leading-relaxed">
                   In June 2022, our representatives took the national stage to share research and expertise on addressing America's refugee mental health crisis. This presentation offered practical, culturally-informed approaches to mental healthcare that respect the diverse backgrounds and experiences of refugee communities.
                 </p>
-                <p className="text-teal-100 mt-4 leading-relaxed">
+                <p className="text-brand-text/80 mt-4 leading-relaxed">
                   By participating in these national conversations, we help shape the broader discourse on refugee mental health, ensuring that service providers across the country understand the unique psychological impacts of forced migration and the specific support structures that promote healing and resilience.
                 </p>
               </div>
 
               <div className="bg-white/10 backdrop-blur rounded-2xl p-8">
                 <h3 className="text-2xl font-bold mb-4">Photovoice Worldwide</h3>
-                <p className="text-teal-100 leading-relaxed">
+                <p className="text-brand-text/80 leading-relaxed">
                   In October 2022, our team member Rachel shared insights from a powerful Photovoice activity conducted with refugee youth in collaboration with Wesleyan University. This innovative methodology allows young people to document their lived experiences through photography, creating visual narratives that communicate their challenges, hopes, and perspectives in ways that traditional interviews cannot capture.
                 </p>
               </div>
@@ -243,8 +244,8 @@ export default function HealthPage() {
             {/* PCORI Project */}
             <div className="bg-white rounded-2xl p-8 shadow-lg">
               <div className="flex items-start gap-6">
-                <div className="w-16 h-16 bg-indigo-100 rounded-2xl flex items-center justify-center flex-shrink-0">
-                  <FaSearch className="text-3xl text-indigo-600"/>
+                <div className="w-16 h-16 bg-brand-primary/20 rounded-2xl flex items-center justify-center flex-shrink-0">
+                  <FaSearch className="text-3xl text-brand-primary"/>
                 </div>
                 <div>
                   <h3 className="text-2xl font-bold text-gray-900 mb-4">PCORI Engagement Award Project</h3>
@@ -297,59 +298,59 @@ export default function HealthPage() {
           <div className="flex gap-6 animate-scroll-left">
             {/* Image 1 */}
             <div className="flex-shrink-0 w-72 h-48 rounded-2xl overflow-hidden shadow-lg">
-              <div className="w-full h-full bg-gradient-to-br from-teal-200 to-teal-300 flex items-center justify-center">
-                <span className="text-4xl">👩‍⚕️</span>
+              <div className="w-full h-full bg-gradient-to-br from-brand-primary to-yellow-300 flex items-center justify-center">
+                <span className="text-4xl">🏥</span>
               </div>
             </div>
             {/* Image 2 */}
             <div className="flex-shrink-0 w-72 h-48 rounded-2xl overflow-hidden shadow-lg">
-              <div className="w-full h-full bg-gradient-to-br from-blue-200 to-blue-300 flex items-center justify-center">
+              <div className="w-full h-full bg-gradient-to-br from-brand-primary to-yellow-300 flex items-center justify-center">
                 <span className="text-4xl">👨‍👩‍👧‍👦</span>
               </div>
             </div>
             {/* Image 3 */}
             <div className="flex-shrink-0 w-72 h-48 rounded-2xl overflow-hidden shadow-lg">
-              <div className="w-full h-full bg-gradient-to-br from-green-200 to-green-300 flex items-center justify-center">
+              <div className="w-full h-full bg-gradient-to-br from-brand-primary to-yellow-300 flex items-center justify-center">
                 <span className="text-4xl">🧠</span>
               </div>
             </div>
             {/* Image 4 */}
             <div className="flex-shrink-0 w-72 h-48 rounded-2xl overflow-hidden shadow-lg">
-              <div className="w-full h-full bg-gradient-to-br from-pink-200 to-pink-300 flex items-center justify-center">
-                <span className="text-4xl">💉</span>
+              <div className="w-full h-full bg-gradient-to-br from-brand-primary to-yellow-300 flex items-center justify-center">
+                <span className="text-4xl">👩‍⚕️</span>
               </div>
             </div>
             {/* Image 5 */}
             <div className="flex-shrink-0 w-72 h-48 rounded-2xl overflow-hidden shadow-lg">
-              <div className="w-full h-full bg-gradient-to-br from-orange-200 to-orange-300 flex items-center justify-center">
-                <span className="text-4xl">📚</span>
+              <div className="w-full h-full bg-gradient-to-br from-brand-primary to-yellow-300 flex items-center justify-center">
+                <span className="text-4xl">💉</span>
               </div>
             </div>
             
             {/* Duplicate set for seamless loop */}
             <div className="flex-shrink-0 w-72 h-48 rounded-2xl overflow-hidden shadow-lg">
-              <div className="w-full h-full bg-gradient-to-br from-teal-200 to-teal-300 flex items-center justify-center">
-                <span className="text-4xl">👩‍⚕️</span>
+              <div className="w-full h-full bg-gradient-to-br from-brand-primary to-yellow-300 flex items-center justify-center">
+                <span className="text-4xl">🏥</span>
               </div>
             </div>
             <div className="flex-shrink-0 w-72 h-48 rounded-2xl overflow-hidden shadow-lg">
-              <div className="w-full h-full bg-gradient-to-br from-blue-200 to-blue-300 flex items-center justify-center">
+              <div className="w-full h-full bg-gradient-to-br from-brand-primary to-yellow-300 flex items-center justify-center">
                 <span className="text-4xl">👨‍👩‍👧‍👦</span>
               </div>
             </div>
             <div className="flex-shrink-0 w-72 h-48 rounded-2xl overflow-hidden shadow-lg">
-              <div className="w-full h-full bg-gradient-to-br from-green-200 to-green-300 flex items-center justify-center">
+              <div className="w-full h-full bg-gradient-to-br from-brand-primary to-yellow-300 flex items-center justify-center">
                 <span className="text-4xl">🧠</span>
               </div>
             </div>
             <div className="flex-shrink-0 w-72 h-48 rounded-2xl overflow-hidden shadow-lg">
-              <div className="w-full h-full bg-gradient-to-br from-pink-200 to-pink-300 flex items-center justify-center">
-                <span className="text-4xl">💉</span>
+              <div className="w-full h-full bg-gradient-to-br from-brand-primary to-yellow-300 flex items-center justify-center">
+                <span className="text-4xl">👩‍⚕️</span>
               </div>
             </div>
             <div className="flex-shrink-0 w-72 h-48 rounded-2xl overflow-hidden shadow-lg">
-              <div className="w-full h-full bg-gradient-to-br from-orange-200 to-orange-300 flex items-center justify-center">
-                <span className="text-4xl">📚</span>
+              <div className="w-full h-full bg-gradient-to-br from-brand-primary to-yellow-300 flex items-center justify-center">
+                <span className="text-4xl">💉</span>
               </div>
             </div>
           </div>
@@ -364,11 +365,11 @@ export default function HealthPage() {
           <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             <Link href="/esl" className="group">
               <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition hover:-translate-y-1">
-                <h3 className="text-2xl font-bold text-gray-900 mb-3 group-hover:text-teal-600 transition">ESL Program</h3>
+                <h3 className="text-2xl font-bold text-gray-900 mb-3 group-hover:text-brand-primary transition">ESL Program</h3>
                 <p className="text-gray-600 mb-4">
                   Our one-on-one English as a Second Language tutoring program is the heart of our mission, providing personalized language instruction with free childcare to remove barriers to learning.
                 </p>
-                <span className="text-teal-600 font-semibold flex items-center gap-2">
+                <span className="text-brand-primary font-semibold flex items-center gap-2">
                   Learn More <FaArrowRight />
                 </span>
               </div>
@@ -376,11 +377,11 @@ export default function HealthPage() {
 
             <Link href="/programs/advocacy" className="group">
               <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition hover:-translate-y-1">
-                <h3 className="text-2xl font-bold text-gray-900 mb-3 group-hover:text-teal-600 transition">Advocacy</h3>
+                <h3 className="text-2xl font-bold text-gray-900 mb-3 group-hover:text-brand-primary transition">Advocacy</h3>
                 <p className="text-gray-600 mb-4">
                   Legal advocacy efforts to address the complex challenges refugees face when navigating immigration systems, housing, employment, and accessing essential services.
                 </p>
-                <span className="text-teal-600 font-semibold flex items-center gap-2">
+                <span className="text-brand-primary font-semibold flex items-center gap-2">
                   Learn More <FaArrowRight />
                 </span>
               </div>
@@ -388,6 +389,9 @@ export default function HealthPage() {
           </div>
         </div>
       </section>
+
+      {/* NEWSLETTER CTA */}
+      <NewsletterCTA />
     </div>
   );
 }

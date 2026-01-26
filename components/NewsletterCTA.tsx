@@ -23,7 +23,7 @@ export default function NewsletterCTA({
             {/* First - Larger */}
             <g transform="translate(100, 50) scale(1.5) translate(-100, -50)">
               <path d="M100,40 Q80,20 60,40 Q40,60 60,80 Q80,60 100,40 M100,40 Q120,20 140,40 Q160,60 140,80 Q120,60 100,40"/>
-              <circle cx="100" cy="50" r="5" fill="#0891b2"/>
+              <circle cx="100" cy="50" r="5" fill="#00a3a3"/>
             </g>
             
             {/* Standard size */}
@@ -58,7 +58,7 @@ export default function NewsletterCTA({
           </g>
           
           {/* Decorative dots */}
-          <g fill="#0891b2">
+          <g fill="#00a3a3">
             <circle cx="150" cy="100" r="4"/>
             <circle cx="1050" cy="100" r="4"/>
             <circle cx="200" cy="150" r="3.5"/>
