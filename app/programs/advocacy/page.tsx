@@ -301,61 +301,41 @@ export default function AdvocacyPage() {
         <div className="relative">
           <div className="flex gap-6 animate-scroll-left">
             {/* Image 1 */}
-            <div className="flex-shrink-0 w-72 h-48 rounded-2xl overflow-hidden shadow-lg">
-              <div className="w-full h-full bg-gradient-to-br from-brand-primary to-yellow-300 flex items-center justify-center">
-                <Image src="/images/programs/advocacy.jpg" alt="Advocacy Session" fill className="object-cover" />
-              </div>
+            <div className="flex-shrink-0 w-72 h-48 rounded-2xl overflow-hidden shadow-lg relative">
+              <Image src="/images/programs/advocacy2.png" alt="Advocacy Session 1" fill className="object-cover" />
             </div>
             {/* Image 2 */}
-            <div className="flex-shrink-0 w-72 h-48 rounded-2xl overflow-hidden shadow-lg">
-              <div className="w-full h-full bg-gradient-to-br from-brand-primary to-yellow-300 flex items-center justify-center">
-                <span className="text-4xl">📋</span>
-              </div>
+            <div className="flex-shrink-0 w-72 h-48 rounded-2xl overflow-hidden shadow-lg relative">
+              <Image src="/images/programs/advocacy3.png" alt="Advocacy Session 2" fill className="object-cover" />
             </div>
             {/* Image 3 */}
-            <div className="flex-shrink-0 w-72 h-48 rounded-2xl overflow-hidden shadow-lg">
-              <div className="w-full h-full bg-gradient-to-br from-brand-primary to-yellow-300 flex items-center justify-center">
-                <span className="text-4xl">🤝</span>
-              </div>
+            <div className="flex-shrink-0 w-72 h-48 rounded-2xl overflow-hidden shadow-lg relative">
+              <Image src="/images/programs/advocacy4.png" alt="Advocacy Session 3" fill className="object-cover" />
             </div>
             {/* Image 4 */}
-            <div className="flex-shrink-0 w-72 h-48 rounded-2xl overflow-hidden shadow-lg">
-              <div className="w-full h-full bg-gradient-to-br from-brand-primary to-yellow-300 flex items-center justify-center">
-                <span className="text-4xl">🏛️</span>
-              </div>
+            <div className="flex-shrink-0 w-72 h-48 rounded-2xl overflow-hidden shadow-lg relative">
+              <Image src="/images/programs/advocacy5.png" alt="Advocacy Session 4" fill className="object-cover" />
             </div>
             {/* Image 5 */}
-            <div className="flex-shrink-0 w-72 h-48 rounded-2xl overflow-hidden shadow-lg">
-              <div className="w-full h-full bg-gradient-to-br from-brand-primary to-yellow-300 flex items-center justify-center">
-                <span className="text-4xl">📢</span>
-              </div>
+            <div className="flex-shrink-0 w-72 h-48 rounded-2xl overflow-hidden shadow-lg relative">
+              <Image src="/images/programs/advocacy.jpg" alt="Advocacy Session 5" fill className="object-cover" />
             </div>
             
             {/* Duplicate set for seamless loop */}
-            <div className="flex-shrink-0 w-72 h-48 rounded-2xl overflow-hidden shadow-lg">
-              <div className="w-full h-full bg-gradient-to-br from-brand-primary to-yellow-300 flex items-center justify-center">
-                <span className="text-4xl">⚖️</span>
-              </div>
+            <div className="flex-shrink-0 w-72 h-48 rounded-2xl overflow-hidden shadow-lg relative">
+              <Image src="/images/programs/advocacy2.png" alt="Advocacy Session 1" fill className="object-cover" />
             </div>
-            <div className="flex-shrink-0 w-72 h-48 rounded-2xl overflow-hidden shadow-lg">
-              <div className="w-full h-full bg-gradient-to-br from-brand-primary to-yellow-300 flex items-center justify-center">
-                <span className="text-4xl">📋</span>
-              </div>
+            <div className="flex-shrink-0 w-72 h-48 rounded-2xl overflow-hidden shadow-lg relative">
+              <Image src="/images/programs/advocacy3.png" alt="Advocacy Session 2" fill className="object-cover" />
             </div>
-            <div className="flex-shrink-0 w-72 h-48 rounded-2xl overflow-hidden shadow-lg">
-              <div className="w-full h-full bg-gradient-to-br from-brand-primary to-yellow-300 flex items-center justify-center">
-                <span className="text-4xl">🤝</span>
-              </div>
+            <div className="flex-shrink-0 w-72 h-48 rounded-2xl overflow-hidden shadow-lg relative">
+              <Image src="/images/programs/advocacy4.png" alt="Advocacy Session 3" fill className="object-cover" />
             </div>
-            <div className="flex-shrink-0 w-72 h-48 rounded-2xl overflow-hidden shadow-lg">
-              <div className="w-full h-full bg-gradient-to-br from-brand-primary to-yellow-300 flex items-center justify-center">
-                <span className="text-4xl">🏛️</span>
-              </div>
+            <div className="flex-shrink-0 w-72 h-48 rounded-2xl overflow-hidden shadow-lg relative">
+              <Image src="/images/programs/advocacy5.png" alt="Advocacy Session 4" fill className="object-cover" />
             </div>
-            <div className="flex-shrink-0 w-72 h-48 rounded-2xl overflow-hidden shadow-lg">
-              <div className="w-full h-full bg-gradient-to-br from-brand-primary to-yellow-300 flex items-center justify-center">
-                <span className="text-4xl">📢</span>
-              </div>
+            <div className="flex-shrink-0 w-72 h-48 rounded-2xl overflow-hidden shadow-lg relative">
+              <Image src="/images/programs/advocacy.jpg" alt="Advocacy Session 5" fill className="object-cover" />
             </div>
           </div>
         </div>

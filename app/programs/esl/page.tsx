@@ -18,7 +18,7 @@ export default function ESLPage() {
               <div className="w-full h-full bg-gradient-to-br from-yellow-50 to-yellow-100 flex items-center justify-center">
                 <span className="text-8xl">📚</span>
               </div>
-              <Image src="/images/esl-hero.jpg" alt="ESL Class" fill className="object-cover" priority />
+              <Image src="/images/programs/esl-hero.jpg" alt="ESL Class" fill className="object-cover" priority />
             </div>
 
             {/* Right: Content */}

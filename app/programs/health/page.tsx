@@ -19,7 +19,7 @@ export default function HealthPage() {
               <div className="w-full h-full bg-gradient-to-br from-yellow-50 to-yellow-100 flex items-center justify-center">
                 <span className="text-8xl">🏥</span>
               </div>
-              {/* <Image src="/images/health-hero.jpg" alt="Health Education Session" fill className="object-cover" priority /> */}
+              <Image src="/images/programs/advocacy5.jpg" alt="Health Education Session" fill className="object-cover" priority />
             </div>
 
             {/* Right: Content */}
