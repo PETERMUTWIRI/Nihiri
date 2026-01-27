@@ -1,3 +1,4 @@
+// app/api/blog/route.ts - UPDATED FOR NEW REQUIREMENTS
 import { NextRequest, NextResponse } from 'next/server';
 import { PrismaClient } from '@prisma/client';
 import { z } from 'zod';
@@ -5,11 +6,19 @@ import { verifyAdminAuth, unauthorizedResponse } from '@/lib/auth/middleware';
 
 const prisma = new PrismaClient();
 
+// Updated schema to include all new fields
 const createSchema = z.object({
   title: z.string().min(3),
   content: z.string().min(10),
   category: z.enum(['News','Impact Story','Event Recap','Advocacy','Opinion']),
-  cover: z.string().optional(),
+  cover: z.string().url().optional().nullable(),
+  excerpt: z.string().min(10).max(500),
+  author: z.string().optional().nullable(),
+  metaTitle: z.string().optional().nullable(),
+  metaDesc: z.string().optional().nullable(),
+  ogImage: z.string().url().optional().nullable(),
+  published: z.boolean().optional().default(true),
+  publishedAt: z.string().optional().nullable(), // ISO date string
 });
 
 /* GET /api/blog?category=News or GET /api/blog?id=1 */
@@ -22,7 +31,10 @@ export async function GET(req: NextRequest) {
     if (id) {
       // Get single post by ID
       const post = await prisma.post.findUnique({
-        where: { id: Number(id) },
+        where: { 
+          id: Number(id),
+          deletedAt: null,
+        },
       });
       if (!post) {
         return NextResponse.json({ error: 'Post not found' }, { status: 404 });
@@ -30,9 +42,15 @@ export async function GET(req: NextRequest) {
       return NextResponse.json(post);
     }
 
-    // Get all posts with optional category filter
+    // Get all posts with optional category filter - only published ones
     const posts = await prisma.post.findMany({
-      where: category && category !== 'All' ? { category } : {},
+      where: {
+        AND: [
+          category && category !== 'All' ? { category } : {},
+          { published: true },
+          { deletedAt: null },
+        ],
+      },
       orderBy: { publishedAt: 'desc' },
     });
     return NextResponse.json(posts);
@@ -49,19 +67,27 @@ export async function POST(req: NextRequest) {
     if (!auth.authorized) return unauthorizedResponse();
 
     const body = await req.json();
-    const { title, content, category, cover } = createSchema.parse(body);
-    const slug = slugify(title);
+    const validated = createSchema.parse(body);
+    
+    const slug = slugify(validated.title);
 
     const post = await prisma.post.create({
       data: { 
-        title, 
+        title: validated.title,
         slug, 
-        content, 
-        category, 
-        cover, 
-        excerpt: content.slice(0, 200).replace(/<[^>]*>/g, '') 
+        content: validated.content, 
+        category: validated.category, 
+        cover: validated.cover || null,
+        excerpt: validated.excerpt,
+        author: validated.author || null,
+        metaTitle: validated.metaTitle || null,
+        metaDesc: validated.metaDesc || null,
+        ogImage: validated.ogImage || null,
+        published: validated.published,
+        publishedAt: validated.published ? (validated.publishedAt ? new Date(validated.publishedAt) : new Date()) : null,
       },
     });
+    
     return NextResponse.json(post);
   } catch (error) {
     console.error('POST /api/blog error:', error);
@@ -79,40 +105,73 @@ export async function PUT(req: NextRequest) {
     if (!auth.authorized) return unauthorizedResponse();
 
     const id = Number(req.nextUrl.searchParams.get('id'));
+    if (!id) {
+      return NextResponse.json({ error: 'Post ID required' }, { status: 400 });
+    }
+
     const body = await req.json();
-    const { title, content, category, cover } = createSchema.parse(body);
+    const validated = createSchema.parse(body);
 
     const post = await prisma.post.update({
       where: { id },
       data: { 
-        title, 
-        content, 
-        category, 
-        cover,
-        excerpt: content.slice(0, 200).replace(/<[^>]*>/g, '')
+        title: validated.title,
+        content: validated.content, 
+        category: validated.category, 
+        cover: validated.cover || null,
+        excerpt: validated.excerpt,
+        author: validated.author || null,
+        metaTitle: validated.metaTitle || null,
+        metaDesc: validated.metaDesc || null,
+        ogImage: validated.ogImage || null,
+        published: validated.published,
+        publishedAt: validated.published ? (validated.publishedAt ? new Date(validated.publishedAt) : new Date()) : null,
       },
     });
+    
     return NextResponse.json(post);
   } catch (error) {
     console.error('PUT /api/blog error:', error);
+    if (error instanceof z.ZodError) {
+      return NextResponse.json({ error: 'Invalid request data', details: error.issues }, { status: 400 });
+    }
     return NextResponse.json({ error: 'Failed to update post' }, { status: 500 });
   }
 }
 
-/* DELETE /api/blog?id=3 (admin only) */
+/* DELETE /api/blog?id=3 (admin only) - Soft delete */
 export async function DELETE(req: NextRequest) {
   try {
     const auth = await verifyAdminAuth(req);
     if (!auth.authorized) return unauthorizedResponse();
 
     const id = Number(req.nextUrl.searchParams.get('id'));
-    await prisma.post.delete({ where: { id } });
-    return NextResponse.json({ ok: true });
+    if (!id) {
+      return NextResponse.json({ error: 'Post ID required' }, { status: 400 });
+    }
+
+    // Soft delete instead of hard delete
+    const post = await prisma.post.update({
+      where: { id },
+      data: { 
+        deletedAt: new Date(),
+        published: false,
+      },
+    });
+    
+    return NextResponse.json({ ok: true, post });
   } catch (error) {
     console.error('DELETE /api/blog error:', error);
     return NextResponse.json({ error: 'Failed to delete post' }, { status: 500 });
   }
 }
 
+// Enhanced slugify function
 const slugify = (str: string) =>
-  str.toLowerCase().trim().replace(/[^\w\s-]/g, '').replace(/[\s_-]+/g, '-').replace(/^-+|-+$/g, '');
+  str
+    .toLowerCase()
+    .trim()
+    .replace(/[^\w\s-]/g, '') // Remove special chars
+    .replace(/[\s_-]+/g, '-') // Replace spaces/underscores with hyphens
+    .replace(/^-+|-+$/g, '') // Remove leading/trailing hyphens
+    .slice(0, 200); // Limit length

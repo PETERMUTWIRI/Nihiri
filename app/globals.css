@@ -58,4 +58,229 @@
   .animate-scroll-right {
     animation: scroll-right 20s linear infinite;
   }
+
+  /* BLOG PAGE SCROLLBAR STYLES */
+  .blog-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: #cbd5e1 #f1f5f9;
+  }
+
+  .blog-scrollbar::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  .blog-scrollbar::-webkit-scrollbar-track {
+    background: #f1f5f9;
+    border-radius: 4px;
+  }
+
+  .blog-scrollbar::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 4px;
+  }
+
+  .blog-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+  }
+
+  /* BLOG NAVIGATION ARROWS */
+  .blog-nav-arrow {
+    @apply absolute top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white shadow-lg rounded-full p-3 transition-all duration-200 hover:scale-110 z-10;
+  }
+
+  .blog-nav-arrow:hover {
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+  }
+
+  .blog-nav-arrow.prev {
+    @apply left-4;
+  }
+
+  .blog-nav-arrow.next {
+    @apply right-4;
+  }
+
+  /* BLOG THUMBNAIL HOVER EFFECTS */
+  .blog-thumbnail {
+    @apply relative overflow-hidden rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-xl;
+  }
+
+  .blog-thumbnail::before {
+    content: '';
+    @apply absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300;
+  }
+
+  .blog-thumbnail-overlay {
+    @apply absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center;
+  }
+
+  .blog-thumbnail-title {
+    @apply absolute bottom-0 left-0 right-0 p-3 text-white text-sm font-medium transform translate-y-full group-hover:translate-y-0 transition-transform duration-300;
+  }
+
+  /* BLOG CONTENT TYPOGRAPHY */
+  .blog-content {
+    @apply prose prose-lg max-w-none prose-headings:text-gray-900 prose-p:text-gray-700 prose-a:text-blue-600 prose-strong:text-gray-900 prose-code:text-pink-600 prose-pre:bg-gray-900 prose-pre:text-gray-100;
+  }
+
+  .blog-content h1 {
+    @apply text-4xl font-bold mb-6 text-gray-900;
+  }
+
+  .blog-content h2 {
+    @apply text-3xl font-semibold mb-4 mt-8 text-gray-900;
+  }
+
+  .blog-content h3 {
+    @apply text-2xl font-semibold mb-3 mt-6 text-gray-900;
+  }
+
+  .blog-content p {
+    @apply mb-4 leading-relaxed text-gray-700;
+  }
+
+  .blog-content blockquote {
+    @apply border-l-4 border-blue-500 pl-6 my-6 italic text-gray-600 bg-blue-50 py-4 rounded-r-lg;
+  }
+
+  .blog-content img {
+    @apply rounded-lg shadow-md my-6 mx-auto;
+  }
+
+  .blog-content ul, .blog-content ol {
+    @apply my-4 ml-6;
+  }
+
+  .blog-content li {
+    @apply mb-2 text-gray-700;
+  }
+
+  /* BLOG SPLIT LAYOUT UTILITIES */
+  .blog-split-container {
+    @apply flex h-screen;
+  }
+
+  .blog-fixed-panel {
+    @apply w-1/2 bg-white border-r border-gray-200 p-8 flex flex-col justify-center overflow-y-auto;
+  }
+
+  .blog-scrollable-panel {
+    @apply w-1/2 bg-white overflow-y-auto;
+  }
+
+  .blog-thumbnail-carousel {
+    @apply flex gap-4 overflow-x-auto pb-4 scrollbar-hide;
+  }
+
+  .blog-thumbnail-item {
+    @apply flex-shrink-0 w-48 h-32 rounded-lg overflow-hidden relative group cursor-pointer transition-all duration-300 hover:scale-105;
+  }
+
+  /* HIDE SCROLLBAR FOR THUMBNAIL CAROUSEL */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* BLOG NAVIGATION BUTTONS */
+  .blog-nav-btn {
+    @apply flex items-center justify-center gap-2 px-4 py-3 rounded-lg font-semibold transition-all duration-200 hover:scale-105;
+  }
+
+  .blog-nav-btn.prev {
+    @apply bg-gray-100 hover:bg-gray-200 text-gray-700;
+  }
+
+  .blog-nav-btn.next {
+    @apply bg-blue-600 hover:bg-blue-700 text-white;
+  }
+
+  /* MOBILE RESPONSIVE */
+  @media (max-width: 768px) {
+    .blog-split-container {
+      @apply flex-col;
+    }
+    
+    .blog-fixed-panel,
+    .blog-scrollable-panel {
+      @apply w-full h-auto;
+    }
+    
+    .blog-fixed-panel {
+      @apply border-r-0 border-b border-gray-200;
+    }
+    
+    .blog-thumbnail-carousel {
+      @apply gap-3;
+    }
+    
+    .blog-thumbnail-item {
+      @apply w-40 h-28;
+    }
+  }
+
+  /* PREVENT BODY SCROLL ON BLOG PAGE */
+  body.blog-no-scroll {
+    overflow: hidden;
+  }
+
+  /* SMOOTH SCROLLING */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* LOADING STATES */
+  .blog-loading {
+    @apply animate-pulse;
+  }
+
+  .blog-loading .blog-loading-bg {
+    @apply bg-gray-200 rounded;
+  }
+
+  /* SHARE BUTTONS */
+  .blog-share-btn {
+    @apply px-4 py-2 rounded-lg font-medium transition-all duration-200 hover:scale-105;
+  }
+
+  .blog-share-facebook {
+    @apply bg-blue-600 hover:bg-blue-700 text-white;
+  }
+
+  .blog-share-twitter {
+    @apply bg-blue-400 hover:bg-blue-500 text-white;
+  }
+
+  /* ACCESSIBILITY IMPROVEMENTS */
+  .blog-content a:focus,
+  .blog-nav-btn:focus,
+  .blog-thumbnail-item:focus {
+    @apply outline-2 outline-blue-500 outline-offset-2;
+  }
+
+  /* HIGH CONTRAST MODE SUPPORT */
+  @media (prefers-contrast: high) {
+    .blog-content {
+      @apply prose-headings:text-black prose-p:text-black prose-a:text-blue-800;
+    }
+  }
+
+  /* REDUCED MOTION SUPPORT */
+  @media (prefers-reduced-motion: reduce) {
+    .blog-thumbnail,
+    .blog-nav-arrow,
+    .blog-nav-btn,
+    .blog-share-btn {
+      @apply transition-none;
+    }
+    
+    .animate-scroll-left,
+    .animate-scroll-right {
+      animation: none;
+    }
+  }
 }
