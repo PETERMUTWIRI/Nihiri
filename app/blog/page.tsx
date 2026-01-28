@@ -1,12 +1,10 @@
-// app/blog/page.tsx - FIXED VERSION
+// app/blog/page.tsx - ENTERPRISE VERSION WITH CACHING
 import { PrismaClient } from '@prisma/client';
-import Image from 'next/image';
-import { FaCalendarAlt, FaUser, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import BlogClient from './BlogClient';
+import { unstable_cache } from 'next/cache';
+import { revalidatePath } from 'next/cache';
 
-const prisma = new PrismaClient();
-
-// Create prisma singleton
+// Create singleton Prisma client
 const globalForPrisma = globalThis as unknown as {
   prisma: PrismaClient | undefined
 }
@@ -22,60 +20,49 @@ const getPrismaClient = () => {
   }
 }
 
-async function getPosts() {
-  try {
-    const client = getPrismaClient();
-    
-    // Get ALL posts to debug
-    const allPosts = await client.post.findMany({
-      orderBy: { createdAt: 'desc' },
-    });
-    
-    console.log('ALL POSTS:', allPosts.map(p => ({
-      id: p.id,
-      title: p.title,
-      published: p.published,
-      publishedAt: p.publishedAt,
-      deletedAt: p.deletedAt,
-      createdAt: p.createdAt
-    })));
+// Cached data fetching with revalidation
+const getCachedPosts = unstable_cache(
+  async () => {
+    try {
+      const client = getPrismaClient();
+      
+      const posts = await client.post.findMany({
+        where: {
+          published: true,
+          deletedAt: null,
+          publishedAt: {
+            not: null,
+            lte: new Date()
+          }
+        },
+        orderBy: { publishedAt: 'desc' },
+      });
 
-    // Get only published, non-deleted posts
-    const posts = await client.post.findMany({
-      where: {
-        published: true,
-        deletedAt: null,
-        publishedAt: {
-          not: null,
-          lte: new Date() // Published date should be in the past or present
-        }
-      },
-      orderBy: { publishedAt: 'desc' },
-    });
-
-    console.log('PUBLISHED POSTS:', posts.length);
-    
-    return posts.map(post => ({
-      ...post,
-      publishedAt: post.publishedAt!.toISOString(),
-      createdAt: post.createdAt.toISOString(),
-      updatedAt: post.updatedAt.toISOString(),
-      excerpt: post.excerpt || post.content.slice(0, 200).replace(/<[^>]*>/g, ''),
-    }));
-  } catch (error) {
-    console.error('Failed to fetch posts:', error);
-    return [];
-  } finally {
-    if (process.env.NODE_ENV !== 'production') {
-      await prisma.$disconnect();
+      console.log(`[${new Date().toISOString()}] Fetched ${posts.length} published posts`);
+      
+      return posts.map(post => ({
+        ...post,
+        publishedAt: post.publishedAt!.toISOString(),
+        createdAt: post.createdAt.toISOString(),
+        updatedAt: post.updatedAt.toISOString(),
+        excerpt: post.excerpt || post.content.slice(0, 200).replace(/<[^>]*>/g, ''),
+      }));
+    } catch (error) {
+      console.error('Failed to fetch posts:', error);
+      return [];
     }
+  },
+  ['blog-posts'],
+  {
+    revalidate: 60, // Revalidate every 60 seconds
+    tags: ['blog-posts'],
   }
-}
+);
 
 export default async function BlogPage() {
-  const posts = await getPosts();
+  const posts = await getCachedPosts();
   
-  console.log('BlogPage received posts:', posts.length);
+  console.log(`[${new Date().toISOString()}] BlogPage rendering with ${posts.length} posts`);
   
   if (posts.length === 0) {
     return (
@@ -83,11 +70,17 @@ export default async function BlogPage() {
         <div className="text-center p-8 bg-white rounded-lg shadow-lg">
           <h2 className="text-2xl font-bold text-gray-900 mb-2">No published posts available</h2>
           <p className="text-gray-600 mb-4">There are no published posts to display.</p>
-          <p className="text-sm text-gray-500">Total posts in database: Check console</p>
+          <p className="text-sm text-gray-500">Check admin panel to publish your first post</p>
         </div>
       </div>
     );
   }
 
   return <BlogClient initialPosts={posts} />;
+}
+
+// Add revalidation endpoint
+export async function revalidateBlog() {
+  revalidatePath('/blog');
+  revalidatePath('/blog/[slug]');
 }

@@ -1,4 +1,4 @@
-// app/api/upload/route.ts - IMGBB VERSION
+// app/api/upload/route.ts
 import { NextResponse } from 'next/server';
 
 export async function POST(req: Request) {
@@ -19,6 +19,7 @@ export async function POST(req: Request) {
     const imgbbForm = new FormData();
     imgbbForm.append('image', base64);
     
+    // ❌ FIXED: Removed space in API key
     const res = await fetch(`https://api.imgbb.com/1/upload?key=${process.env.IMGBB_API_KEY}`, {
       method: 'POST',
       body: imgbbForm,

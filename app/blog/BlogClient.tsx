@@ -1,9 +1,9 @@
-// app/blog/BlogClient.tsx - CLIENT COMPONENT FOR INTERACTIVITY
+// app/blog/BlogClient.tsx - ENTERPRISE VERSION
 'use client';
 
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
-import { FaCalendarAlt, FaUser, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
+import { FaCalendarAlt, FaUser, FaChevronLeft, FaChevronRight, FaExclamationTriangle } from 'react-icons/fa';
 
 interface BlogPost {
   id: number;
@@ -18,11 +18,11 @@ interface BlogPost {
 }
 
 export default function BlogClient({ initialPosts }: { initialPosts: BlogPost[] }) {
-  const [posts] = useState<BlogPost[]>(initialPosts); // No API calls needed!
+  const [posts, setPosts] = useState<BlogPost[]>(initialPosts);
   const [currentPost, setCurrentPost] = useState<BlogPost | null>(initialPosts[0]);
   const [isClient, setIsClient] = useState(false);
+  const [imageErrors, setImageErrors] = useState<Set<number>>(new Set());
 
-  // Prevent hydration mismatch
   useEffect(() => {
     setIsClient(true);
   }, []);
@@ -34,6 +34,10 @@ export default function BlogClient({ initialPosts }: { initialPosts: BlogPost[] 
       month: 'long',
       day: 'numeric'
     });
+  };
+
+  const handleImageError = (postId: number) => {
+    setImageErrors(prev => new Set(prev).add(postId));
   };
 
   const selectPost = (post: BlogPost) => {
@@ -79,19 +83,25 @@ export default function BlogClient({ initialPosts }: { initialPosts: BlogPost[] 
               </span>
             </div>
 
-            {/* Image */}
+            {/* Image with Error Handling */}
             <div className="relative aspect-video rounded-xl overflow-hidden mb-6 bg-gray-100">
-              {currentPost.cover ? (
+              {currentPost.cover && !imageErrors.has(currentPost.id) ? (
                 <Image
                   src={currentPost.cover}
                   alt={currentPost.title}
                   fill
                   className="object-cover"
                   priority
+                  onError={() => handleImageError(currentPost.id)}
                 />
               ) : (
-                <div className="w-full h-full bg-gradient-to-br from-blue-100 to-purple-100 flex items-center justify-center">
-                  <span className="text-6xl">📰</span>
+                <div className="w-full h-full bg-gradient-to-br from-blue-100 to-purple-100 flex flex-col items-center justify-center">
+                  <span className="text-6xl mb-2">📰</span>
+                  {imageErrors.has(currentPost.id) && (
+                    <span className="text-sm text-red-600 flex items-center gap-1">
+                      <FaExclamationTriangle /> Image failed to load
+                    </span>
+                  )}
                 </div>
               )}
             </div>
@@ -181,12 +191,13 @@ export default function BlogClient({ initialPosts }: { initialPosts: BlogPost[] 
                     : 'hover:scale-105 hover:ring-2 hover:ring-blue-300'
                 }`}
               >
-                {post.cover ? (
+                {post.cover && !imageErrors.has(post.id) ? (
                   <Image
                     src={post.cover}
                     alt={post.title}
                     fill
                     className="object-cover"
+                    onError={() => handleImageError(post.id)}
                   />
                 ) : (
                   <div className="w-full h-full bg-gradient-to-br from-gray-200 to-gray-300 flex items-center justify-center">

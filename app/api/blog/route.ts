@@ -1,12 +1,12 @@
-// app/api/blog/route.ts - UPDATED FOR NEW REQUIREMENTS
+// app/api/blog/route.ts - ENTERPRISE VERSION
 import { NextRequest, NextResponse } from 'next/server';
 import { PrismaClient } from '@prisma/client';
 import { z } from 'zod';
 import { verifyAdminAuth, unauthorizedResponse } from '@/lib/auth/middleware';
+import { revalidatePath } from 'next/cache';
 
 const prisma = new PrismaClient();
 
-// Updated schema to include all new fields
 const createSchema = z.object({
   title: z.string().min(3),
   content: z.string().min(10),
@@ -18,10 +18,10 @@ const createSchema = z.object({
   metaDesc: z.string().optional().nullable(),
   ogImage: z.string().url().optional().nullable(),
   published: z.boolean().optional().default(true),
-  publishedAt: z.string().optional().nullable(), // ISO date string
+  publishedAt: z.string().optional().nullable(),
 });
 
-/* GET /api/blog?category=News or GET /api/blog?id=1 */
+/* GET /api/blog */
 export async function GET(req: NextRequest) {
   try {
     const { searchParams } = new URL(req.url);
@@ -29,7 +29,6 @@ export async function GET(req: NextRequest) {
     const category = searchParams.get('category');
 
     if (id) {
-      // Get single post by ID
       const post = await prisma.post.findUnique({
         where: { 
           id: Number(id),
@@ -42,7 +41,6 @@ export async function GET(req: NextRequest) {
       return NextResponse.json(post);
     }
 
-    // Get all posts with optional category filter - only published ones
     const posts = await prisma.post.findMany({
       where: {
         AND: [
@@ -53,6 +51,7 @@ export async function GET(req: NextRequest) {
       },
       orderBy: { publishedAt: 'desc' },
     });
+    
     return NextResponse.json(posts);
   } catch (error) {
     console.error('GET /api/blog error:', error);
@@ -60,7 +59,7 @@ export async function GET(req: NextRequest) {
   }
 }
 
-/* POST /api/blog  (admin only) */
+/* POST /api/blog */
 export async function POST(req: NextRequest) {
   try {
     const auth = await verifyAdminAuth(req);
@@ -88,6 +87,12 @@ export async function POST(req: NextRequest) {
       },
     });
     
+    // ❌ FIXED: Revalidate blog pages after creating post
+    revalidatePath('/blog');
+    revalidatePath('/blog/[slug]');
+    
+    console.log(`[${new Date().toISOString()}] Created post: ${post.title} (published: ${post.published})`);
+    
     return NextResponse.json(post);
   } catch (error) {
     console.error('POST /api/blog error:', error);
@@ -98,7 +103,7 @@ export async function POST(req: NextRequest) {
   }
 }
 
-/* PUT /api/blog?id=3  (admin only) */
+/* PUT /api/blog */
 export async function PUT(req: NextRequest) {
   try {
     const auth = await verifyAdminAuth(req);
@@ -129,6 +134,12 @@ export async function PUT(req: NextRequest) {
       },
     });
     
+    // ❌ FIXED: Revalidate blog pages after updating post
+    revalidatePath('/blog');
+    revalidatePath('/blog/[slug]');
+    
+    console.log(`[${new Date().toISOString()}] Updated post: ${post.title} (published: ${post.published})`);
+    
     return NextResponse.json(post);
   } catch (error) {
     console.error('PUT /api/blog error:', error);
@@ -139,39 +150,11 @@ export async function PUT(req: NextRequest) {
   }
 }
 
-/* DELETE /api/blog?id=3 (admin only) - Soft delete */
-export async function DELETE(req: NextRequest) {
-  try {
-    const auth = await verifyAdminAuth(req);
-    if (!auth.authorized) return unauthorizedResponse();
-
-    const id = Number(req.nextUrl.searchParams.get('id'));
-    if (!id) {
-      return NextResponse.json({ error: 'Post ID required' }, { status: 400 });
-    }
-
-    // Soft delete instead of hard delete
-    const post = await prisma.post.update({
-      where: { id },
-      data: { 
-        deletedAt: new Date(),
-        published: false,
-      },
-    });
-    
-    return NextResponse.json({ ok: true, post });
-  } catch (error) {
-    console.error('DELETE /api/blog error:', error);
-    return NextResponse.json({ error: 'Failed to delete post' }, { status: 500 });
-  }
-}
-
-// Enhanced slugify function
 const slugify = (str: string) =>
   str
     .toLowerCase()
     .trim()
-    .replace(/[^\w\s-]/g, '') // Remove special chars
-    .replace(/[\s_-]+/g, '-') // Replace spaces/underscores with hyphens
-    .replace(/^-+|-+$/g, '') // Remove leading/trailing hyphens
-    .slice(0, 200); // Limit length
+    .replace(/[^\w\s-]/g, '')
+    .replace(/[\s_-]+/g, '-')
+    .replace(/^-+|-+$/g, '')
+    .slice(0, 200);

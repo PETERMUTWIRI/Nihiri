@@ -117,14 +117,15 @@ function BlogEditor() {
     }
   }, [excerpt]);
 
+  // Add to your admin editor save function
   const savePost = async (asDraft = false) => {
     if (!title || !content) return alert('Title & content required');
-    
+  
     setIsLoading(true);
     try {
       const method = editId ? 'PUT' : 'POST';
       const url = editId ? `/api/blog?id=${editId}` : '/api/blog';
-      
+    
       const payload = {
         title,
         content,
@@ -136,7 +137,6 @@ function BlogEditor() {
         metaDesc: metaDesc || undefined,
         ogImage: ogImage || undefined,
         published: asDraft ? false : published,
-        // Only set publishedAt if publishing now and not already set
         publishedAt: asDraft ? null : (publishedAt ? new Date(publishedAt).toISOString() : new Date().toISOString()),
       };
 
@@ -149,6 +149,15 @@ function BlogEditor() {
       if (!res.ok) {
         const error = await res.json();
         throw new Error(error.error || 'Failed to save post');
+      }
+
+      // ❌ FIXED: Auto-revalidate blog after publishing
+      if (!asDraft && published) {
+        await fetch('/api/revalidate', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ paths: ['/blog'] }),
+        });
       }
 
       alert(asDraft ? 'Draft saved!' : editId ? 'Post updated!' : 'Post published!');
