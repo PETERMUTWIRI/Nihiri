@@ -244,18 +244,14 @@ function EventEditor() {
             </div>
 
             {/* GALLERY (NEW) */}
-            <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">Gallery (max 10)</label>
-              <input type="file" accept="image/*" multiple onChange={(e) => e.target.files && uploadImages(e.target.files)} disabled={isLoading || uploadLoading} />
-              {uploadLoading && <span className="text-blue-600 text-sm ml-2">Uploading...</span>}
-              <div className="flex flex-wrap gap-2 mt-2">
-                {form.gallery.map((url, i) => (
-                  <div key={i} className="relative">
-                    <img src={url} alt="" className="h-20 rounded object-cover" />
-                    <button onClick={() => removeGallery(i)} className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-6 h-6 text-xs hover:bg-red-600">×</button>
-                  </div>
-                ))}
-              </div>
+            <div className="flex flex-wrap gap-2 mt-2">
+              {form.gallery.map((url, i) => (
+                <div key={i} className="relative">
+                  {/* ✅ plain img → bypasses Next optimization */}
+                  <img src={url} alt="" className="h-20 rounded object-cover" />
+                  <button onClick={() => removeGallery(i)} className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-6 h-6 text-xs hover:bg-red-600">×</button>
+                </div>
+              ))}
             </div>
 
             {/* description */}
