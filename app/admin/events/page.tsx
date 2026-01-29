@@ -1,4 +1,4 @@
-// app/admin/events/page.tsx - ENTERPRISE REFACTOR (gallery + Past)
+// app/admin/events/page.tsx - ENTERPRISE EVENT EDITOR (mirrors blog)
 'use client';
 
 import { useEffect, useState, Suspense } from 'react';
@@ -19,7 +19,7 @@ function EventEditor() {
   const searchParams = useSearchParams();
   const editId = searchParams.get('id');
 
-  /* ---------- form state ---------- */
+  /* ---------- form state (mirrors blog) ---------- */
   const [form, setForm] = useState({
     title: '',
     description: '',
@@ -38,7 +38,7 @@ function EventEditor() {
     maxAttendees: '',
     isFree: true,
     ticketPrice: '',
-    gallery: [] as string[], // NEW: multi-image
+    gallery: [] as string[], // NEW
   });
 
   const [isLoading, setIsLoading] = useState(false);
@@ -55,7 +55,8 @@ function EventEditor() {
       setIsLoading(true);
       const res = await fetch(`/api/events?id=${id}`);
       const ev = await res.json();
-      setForm({ ...ev, gallery: ev.gallery || [] });
+      // cast maxAttendees to string for input field
+      setForm({ ...ev, gallery: ev.gallery || [], maxAttendees: ev.maxAttendees?.toString() ?? '' });
     } catch (e) {
       console.error(e);
       alert('Failed to load event');
@@ -75,7 +76,7 @@ function EventEditor() {
     }
   };
 
-  /* ---------- auto-generate helpers ---------- */
+  /* ---------- auto-generate helpers (same as blog) ---------- */
   useEffect(() => {
     if (form.description && !form.metaDesc) {
       const plain = form.description.replace(/<[^>]*>/g, '');
@@ -89,7 +90,7 @@ function EventEditor() {
     }
   }, [form.title]);
 
-  /* ---------- multi-image upload (max 10) ---------- */
+  /* ---------- multi-image upload (same as blog) ---------- */
   const uploadImages = async (files: FileList) => {
     if (files.length + form.gallery.length > 10) return alert('Max 10 images');
     setUploadLoading(true);
@@ -108,16 +109,21 @@ function EventEditor() {
   const removeGallery = (index: number) =>
     setForm(p => ({ ...p, gallery: p.gallery.filter((_, i) => i !== index) }));
 
-  /* ---------- save ---------- */
+  /* ---------- cast & save (same clean-up as blog) ---------- */
   const saveEvent = async () => {
+    if (!form.title || !form.location) return alert('Title & location required');
+
     setIsLoading(true);
     try {
       const method = editId ? 'PUT' : 'POST';
       const url = editId ? `/api/events?id=${editId}` : '/api/events';
+
+      /* ---- cast maxAttendees before send ---- */
       const payload = {
         ...form,
         maxAttendees: form.maxAttendees ? Number(form.maxAttendees) : null,
       };
+
       const res = await fetch(url, { method, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
       if (!res.ok) throw new Error('Save failed');
       alert(editId ? 'Event updated!' : 'Event saved!');
@@ -129,7 +135,22 @@ function EventEditor() {
     }
   };
 
-  /* ---------- render ---------- */
+  /* ---------- single image helper (same as blog) ---------- */
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>, field: 'cover' | 'ogImage') => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    const body = new FormData();
+    body.append('file', file);
+    try {
+      const res = await fetch('/api/upload', { method: 'POST', body });
+      const data = await res.json();
+      if (data.url) setForm(p => ({ ...p, [field]: data.url }));
+    } catch (error) {
+      alert('Failed to upload image');
+    }
+  };
+
+  /* ---------- render (mirrors blog structure) ---------- */
   return (
     <div className="max-w-6xl mx-auto bg-white rounded-2xl shadow-xl overflow-hidden">
       {/* header */}
@@ -212,7 +233,7 @@ function EventEditor() {
             {/* COVER IMAGE */}
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-2"><FaImage className="inline mr-1" /> Cover Image</label>
-              <input type="file" accept="image/*" onChange={(e) => e.target.files?.[0] && uploadSingle(e.target.files[0], 'cover')} disabled={isLoading || uploadLoading} />
+              <input type="file" accept="image/*" onChange={(e) => handleImageUpload(e, 'cover')} disabled={isLoading || uploadLoading} />
               {uploadLoading && <span className="text-blue-600 text-sm ml-2">Uploading...</span>}
               {form.cover && (
                 <div className="mt-2 relative inline-block">
@@ -244,56 +265,56 @@ function EventEditor() {
             </div>
 
             {/* save btn */}
-            <button onClick={saveEvent} disabled={isLoading} className="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition disabled:opacity-50">
-              {isLoading ? 'Saving...' : (editId ? 'Update Event' : 'Save Event')}
-            </button>
+            <div className="flex gap-4 mt-8 pt-6 border-t">
+              <button onClick={saveEvent} disabled={isLoading} className="flex-1 bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition flex items-center justify-center gap-2 disabled:opacity-50">
+                <FaSave /> {isLoading ? 'Saving...' : (editId ? 'Update Event' : 'Save Event')}
+              </button>
+            </div>
           </div>
         )}
 
         {/* ---------- SEO TAB ---------- */}
-        {activeTab === 'seo' && (
-          <div className="space-y-6">
-            <div className="bg-blue-50 p-4 rounded-lg mb-6">
-              <h3 className="font-semibold text-blue-900 mb-1">SEO Settings</h3>
-              <p className="text-sm text-blue-700">Optimise how this event appears in search engines and social media.</p>
-            </div>
+        <div className="space-y-6">
+          <div className="bg-blue-50 p-4 rounded-lg mb-6">
+            <h3 className="font-semibold text-blue-900 mb-1">SEO Settings</h3>
+            <p className="text-sm text-blue-700">Optimise how this event appears in search engines and social media.</p>
+          </div>
 
-            <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">Meta Title (60 chars max)</label>
-              <input name="metaTitle" value={form.metaTitle} onChange={handleChange} placeholder="SEO title for search results..." className="w-full px-4 py-3 border rounded-lg" maxLength={60} />
-              <div className="flex justify-between mt-1"><span className="text-xs text-gray-500">{form.metaTitle.length}/60</span><span className="text-xs text-gray-500">Recommended: 50-60 characters</span></div>
-            </div>
+          <div>
+            <label className="block text-sm font-semibold text-gray-700 mb-2">Meta Title (60 chars max)</label>
+            <input name="metaTitle" value={form.metaTitle} onChange={handleChange} placeholder="SEO title for search results..." className="w-full px-4 py-3 border rounded-lg" maxLength={60} />
+            <div className="flex justify-between mt-1"><span className="text-xs text-gray-500">{form.metaTitle.length}/60</span><span className="text-xs text-gray-500">Recommended: 50-60 characters</span></div>
+          </div>
 
-            <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">Meta Description (160 chars max)</label>
-              <textarea name="metaDesc" value={form.metaDesc} onChange={handleChange} placeholder="Brief description for search results..." className="w-full px-4 py-3 border rounded-lg h-24" maxLength={160} />
-              <div className="flex justify-between mt-1"><span className="text-xs text-gray-500">{form.metaDesc.length}/160</span><span className="text-xs text-gray-500">Recommended: 150-160 characters</span></div>
-            </div>
+          <div>
+            <label className="block text-sm font-semibold text-gray-700 mb-2">Meta Description (160 chars max)</label>
+            <textarea name="metaDesc" value={form.metaDesc} onChange={handleChange} placeholder="Brief description for search results..." className="w-full px-4 py-3 border rounded-lg h-24" maxLength={160} />
+            <div className="flex justify-between mt-1"><span className="text-xs text-gray-500">{form.metaDesc.length}/160</span><span className="text-xs text-gray-500">Recommended: 150-160 characters</span></div>
+          </div>
 
-            <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">Social Media Image (Open Graph)</label>
-              <input type="file" accept="image/*" onChange={(e) => e.target.files?.[0] && uploadSingle(e.target.files[0], 'ogImage')} disabled={isLoading || uploadLoading} />
-              {uploadLoading && <span className="text-blue-600 text-sm ml-2">Uploading...</span>}
-              {form.ogImage && (
-                <div className="mt-2 relative inline-block">
-                  <img src={form.ogImage} alt="OG" className="h-24 rounded shadow" />
-                  <button onClick={() => setForm(p => ({ ...p, ogImage: '' }))} className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-6 h-6 text-xs hover:bg-red-600">×</button>
-                </div>
-              )}
-              <p className="text-xs text-gray-500 mt-1">Recommended: 1200×630 pixels</p>
-            </div>
-
-            {/* Google preview */}
-            <div className="border rounded-lg p-4 bg-gray-50">
-              <h4 className="text-sm font-semibold text-gray-700 mb-2">Google Search Preview</h4>
-              <div className="bg-white p-4 rounded border">
-                <div className="text-blue-800 text-lg truncate" style={{ color: '#1a0dab' }}>{form.metaTitle || form.title || 'Event Title'}</div>
-                <div className="text-green-700 text-sm truncate">nihiri.com › events › {(form.title || 'event').toLowerCase().replace(/\s+/g, '-')}</div>
-                <div className="text-gray-600 text-sm line-clamp-2 mt-1">{form.metaDesc || form.description?.replace(/<[^>]*>/g, '').slice(0, 160) || 'No description provided...'}</div>
+          <div>
+            <label className="block text-sm font-semibold text-gray-700 mb-2">Social Media Image (Open Graph)</label>
+            <input type="file" accept="image/*" onChange={(e) => handleImageUpload(e, 'ogImage')} disabled={isLoading || uploadLoading} />
+            {uploadLoading && <span className="text-blue-600 text-sm ml-2">Uploading...</span>}
+            {form.ogImage && (
+              <div className="mt-2 relative inline-block">
+                <img src={form.ogImage} alt="OG" className="h-24 rounded shadow" />
+                <button onClick={() => setForm(p => ({ ...p, ogImage: '' }))} className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-6 h-6 text-xs hover:bg-red-600">×</button>
               </div>
+            )}
+            <p className="text-xs text-gray-500 mt-1">Recommended: 1200×630 pixels</p>
+          </div>
+
+          {/* Google preview */}
+          <div className="border rounded-lg p-4 bg-gray-50">
+            <h4 className="text-sm font-semibold text-gray-700 mb-2">Google Search Preview</h4>
+            <div className="bg-white p-4 rounded border">
+              <div className="text-blue-800 text-lg truncate" style={{ color: '#1a0dab' }}>{form.metaTitle || form.title || 'Event Title'}</div>
+              <div className="text-green-700 text-sm truncate">nihiri.com › events › {(form.title || 'event').toLowerCase().replace(/\s+/g, '-')}</div>
+              <div className="text-gray-600 text-sm line-clamp-2 mt-1">{form.metaDesc || form.description?.replace(/<[^>]*>/g, '').slice(0, 160) || 'No description provided...'}</div>
             </div>
           </div>
-        )}
+        </div>
 
         {/* ---------- SAVE BUTTON ---------- */}
         <div className="flex gap-4 mt-8 pt-6 border-t">
@@ -306,14 +327,17 @@ function EventEditor() {
   );
 }
 
-/* ---------- helper: single image upload ---------- */
-async function uploadSingle(file: File, field: 'cover' | 'ogImage') {
+/* ---------- helper: single image upload (same as blog) ---------- */
+async function handleImageUpload(e: React.ChangeEvent<HTMLInputElement>, field: 'cover' | 'ogImage') {
+  const file = e.target.files?.[0];
+  if (!file) return;
   const body = new FormData();
-  body.append('image', file);
-  const res = await fetch('/api/upload', { method: 'POST', body });
-  const data = await res.json();
-  if (data.url) {
-    // we update via callback to keep hook rules
-    window.dispatchEvent(new CustomEvent('uploadDone', { detail: { field, url: data.url } }));
+  body.append('file', file);
+  try {
+    const res = await fetch('/api/upload', { method: 'POST', body });
+    const data = await res.json();
+    if (data.url) window.dispatchEvent(new CustomEvent('uploadDone', { detail: { field, url: data.url } }));
+  } catch (error) {
+    alert('Failed to upload image');
   }
 }
