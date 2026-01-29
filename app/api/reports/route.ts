@@ -1,4 +1,4 @@
-// app/api/reports/route.ts - FIXED canvaUrl → canvaurl mapping
+// app/api/reports/route.ts - FULL CRUD WITH SAFE PUT
 import { NextRequest, NextResponse } from 'next/server';
 import { PrismaClient } from '@prisma/client';
 import { z } from 'zod';
@@ -37,7 +37,7 @@ export async function POST(req: NextRequest) {
     year: body.year,
     title: body.title,
     cover: body.cover,
-    canvaurl: body.canvaUrl, // ← camelCase → snake_case
+    canvaurl: body.canvaUrl, // snake-case
     published: body.published,
   };
 
@@ -45,19 +45,26 @@ export async function POST(req: NextRequest) {
   return NextResponse.json(created, { status: 201 });
 }
 
-/* ---------- PUT ---------- */
+/* ---------- PUT  (BULLETPROOF) ---------- */
 export async function PUT(req: NextRequest) {
   const auth = await verifyAdminAuth(req);
   if (!auth.authorized) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
 
   const id = Number(new URL(req.url).searchParams.get('id'));
-  const body = schema.parse(await req.json());
+  if (!id) return NextResponse.json({ error: 'ID required' }, { status: 400 });
 
+  const raw = await req.json();
+  console.log('PUT /api/reports body:', raw); // ← log what arrived
+
+  // validate ONLY known fields
+  const body = schema.parse(raw);
+
+  // whitelist ONLY columns that exist in DB
   const data: any = {};
   if (body.year !== undefined) data.year = body.year;
   if (body.title !== undefined) data.title = body.title;
   if (body.cover !== undefined) data.cover = body.cover;
-  if (body.canvaUrl !== undefined) data.canvaurl = body.canvaUrl; // ←
+  if (body.canvaUrl !== undefined) data.canvaurl = body.canvaUrl; // snake-case
   if (body.published !== undefined) data.published = body.published;
 
   const updated = await prisma.annualReport.update({ where: { id }, data });
