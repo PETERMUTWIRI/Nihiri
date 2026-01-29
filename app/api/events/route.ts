@@ -1,4 +1,4 @@
-// app/api/events/route.ts - COMPLETE WORKING VERSION
+// app/api/events/route.ts - FULL CRUD WITH SAFE PUT
 import { NextRequest, NextResponse } from 'next/server';
 import { PrismaClient } from '@prisma/client';
 import { z } from 'zod';
@@ -6,27 +6,15 @@ import { verifyAdminAuth, unauthorizedResponse } from '@/lib/auth/middleware';
 
 const prisma = new PrismaClient();
 
-// Flexible date validator - accepts multiple formats
-const flexibleDateTime = z.string().refine(
-  (val) => {
-    if (!val) return false;
-    const date = new Date(val);
-    return !isNaN(date.getTime());
-  },
-  {
-    message: 'Invalid date format. Use: YYYY-MM-DDTHH:MM (e.g., 2026-01-25T09:00)',
-  }
-);
-
-// Validation schema - NO strict datetime validation
+/* ---------- validation ---------- */
 const eventSchema = z.object({
   title: z.string().min(1, 'Title is required'),
   description: z.string().optional(),
   category: z.enum(['Upcoming', 'Past']),
   cover: z.string().optional(),
   location: z.string().min(1, 'Location is required'),
-  startDate: flexibleDateTime,
-  endDate: flexibleDateTime.optional().nullable(),
+  startDate: z.string().min(1),
+  endDate: z.string().optional().nullable(),
   author: z.string().optional(),
   metaTitle: z.string().max(100).optional(),
   metaDesc: z.string().max(160).optional(),
@@ -40,204 +28,128 @@ const eventSchema = z.object({
   gallery: z.array(z.string()).max(10).optional(),
 });
 
-/* GET /api/events?category=Upcoming or GET /api/events?id=1 */
+/* ---------- GET ---------- */
 export async function GET(req: NextRequest) {
-  try {
-    const { searchParams } = new URL(req.url);
-    const id = searchParams.get('id');
-    const category = searchParams.get('category');
+  const { searchParams } = new URL(req.url);
+  const id = searchParams.get('id');
+  const category = searchParams.get('category');
 
-    if (id) {
-      const event = await prisma.event.findUnique({
-        where: { id: Number(id), deletedAt: null },
-      });
-      if (!event) {
-        return NextResponse.json({ error: 'Event not found' }, { status: 404 });
-      }
-      return NextResponse.json(event);
-    }
-
-    const where: any = { deletedAt: null };
-    if (category && category !== 'All') {
-      where.category = category;
-    }
-
-    const events = await prisma.event.findMany({
-      where,
-      orderBy: { startDate: category === 'Past' ? 'desc' : 'asc' },
-    });
-
-    return NextResponse.json(events);
-  } catch (error) {
-    console.error('GET /api/events error:', error);
-    return NextResponse.json({ error: 'Failed to fetch events' }, { status: 500 });
+  if (id) {
+    const event = await prisma.event.findUnique({ where: { id: Number(id), deletedAt: null } });
+    return event ? NextResponse.json(event) : NextResponse.json({ error: 'Not found' }, { status: 404 });
   }
+
+  const where: any = { deletedAt: null };
+  if (category && category !== 'All') where.category = category;
+
+  const events = await prisma.event.findMany({ where, orderBy: { startDate: category === 'Past' ? 'desc' : 'asc' } });
+  return NextResponse.json(events);
 }
 
-/* POST /api/events (admin only) */
+/* ---------- POST ---------- */
 export async function POST(req: NextRequest) {
-  try {
-    const auth = await verifyAdminAuth(req);
-    if (!auth.authorized) return unauthorizedResponse();
+  const auth = await verifyAdminAuth(req);
+  if (!auth.authorized) return unauthorizedResponse();
 
-    const body = await req.json();
-    console.log('POST body:', body);
+  const raw = await req.json();
+  console.log('POST body:', raw);
 
-    // Validate input
-    const validation = eventSchema.safeParse(body);
-    if (!validation.success) {
-      console.error('Validation failed:', validation.error.issues);
-      return NextResponse.json({ 
-        error: 'Validation failed', 
-        details: validation.error.issues 
-      }, { status: 400 });
-    }
-
-    const data = validation.data;
-    
-    // Generate unique slug
-    const baseSlug = slugify(data.title);
-    const slug = `${baseSlug}-${Date.now()}`;
-
-    const event = await prisma.event.create({
-      data: {
-        title: data.title,
-        slug,
-        description: data.description || null,
-        category: data.category,
-        cover: data.cover || null,
-        location: data.location,
-        startDate: new Date(data.startDate), // Flexible Date parsing
-        endDate: data.endDate ? new Date(data.endDate) : null,
-        author: data.author || null,
-        metaTitle: data.metaTitle || null,
-        metaDesc: data.metaDesc || null,
-        ogImage: data.ogImage || null,
-        venue: data.venue || null,
-        address: data.address || null,
-        registrationLink: data.registrationLink || null,
-        maxAttendees: data.maxAttendees || null,
-        isFree: data.isFree,
-        ticketPrice: data.isFree ? null : data.ticketPrice || null,
-        gallery: data.gallery || [],
-      },
-    });
-
-    console.log('Event created:', event.id);
-    return NextResponse.json(event, { status: 201 });
-  } catch (error) {
-    console.error('POST /api/events error:', error);
-    return NextResponse.json({ error: 'Failed to create event' }, { status: 500 });
+  /* ---- cast / clean ---- */
+  if (raw.maxAttendees === null || raw.maxAttendees === '') {
+    delete raw.maxAttendees; // so z.number().optional() passes
+  } else {
+    raw.maxAttendees = Number(raw.maxAttendees);
   }
+
+  const body = eventSchema.parse(raw);
+
+  const slug = slugify(body.title) + '-' + Date.now();
+
+  const event = await prisma.event.create({
+    data: {
+      title: body.title,
+      slug,
+      description: body.description || null,
+      category: body.category,
+      cover: body.cover || null,
+      location: body.location,
+      startDate: new Date(body.startDate),
+      endDate: body.endDate ? new Date(body.endDate) : null,
+      author: body.author || null,
+      metaTitle: body.metaTitle || null,
+      metaDesc: body.metaDesc || null,
+      ogImage: body.ogImage || null,
+      venue: body.venue || null,
+      address: body.address || null,
+      registrationLink: body.registrationLink || null,
+      maxAttendees: body.maxAttendees || null,
+      isFree: body.isFree,
+      ticketPrice: body.isFree ? null : body.ticketPrice || null,
+      gallery: body.gallery || [],
+    },
+  });
+
+  console.log('Event created:', event.id);
+  return NextResponse.json(event, { status: 201 });
 }
 
-/* PUT /api/events?id=1 (admin only) */
+/* ---------- PUT (BULLETPROOF) ---------- */
 export async function PUT(req: NextRequest) {
-  try {
-    const auth = await verifyAdminAuth(req);
-    if (!auth.authorized) return unauthorizedResponse();
+  const auth = await verifyAdminAuth(req);
+  if (!auth.authorized) return unauthorizedResponse();
 
-    const id = Number(req.nextUrl.searchParams.get('id'));
-    if (!id || isNaN(id)) {
-      return NextResponse.json({ error: 'Invalid event ID' }, { status: 400 });
-    }
+  const id = Number(new URL(req.url).searchParams.get('id'));
+  if (!id) return NextResponse.json({ error: 'ID required' }, { status: 400 });
 
-    const body = await req.json();
-    console.log('PUT body:', body);
+  const raw = await req.json();
+  console.log('PUT /api/events body:', raw); // ← log what arrived
 
-    // Allow partial updates - make all fields optional
-    const updateSchema = z.object({
-      title: z.string().min(1).optional(),
-      description: z.string().optional(),
-      category: z.enum(['Upcoming', 'Past']).optional(),
-      cover: z.string().optional(),
-      location: z.string().min(1).optional(),
-      startDate: flexibleDateTime.optional(),
-      endDate: flexibleDateTime.optional().nullable(),
-      author: z.string().optional(),
-      metaTitle: z.string().max(100).optional(),
-      metaDesc: z.string().max(160).optional(),
-      ogImage: z.string().optional(),
-      venue: z.string().optional(),
-      address: z.string().optional(),
-      registrationLink: z.string().optional(),
-      maxAttendees: z.number().int().positive().optional(),
-      isFree: z.boolean().optional(),
-      ticketPrice: z.string().optional(),
-      gallery: z.array(z.string()).max(10).optional(),
-    });
-
-    const validation = updateSchema.safeParse(body);
-    
-    if (!validation.success) {
-      console.error('Validation failed:', validation.error.issues);
-      return NextResponse.json({ 
-        error: 'Validation failed', 
-        details: validation.error.issues 
-      }, { status: 400 });
-    }
-
-    const data = validation.data;
-
-    // Build update data dynamically
-    const updateData: any = {};
-    if (data.title !== undefined) updateData.title = data.title;
-    if (data.description !== undefined) updateData.description = data.description;
-    if (data.category !== undefined) updateData.category = data.category;
-    if (data.cover !== undefined) updateData.cover = data.cover;
-    if (data.location !== undefined) updateData.location = data.location;
-    if (data.startDate !== undefined) updateData.startDate = new Date(data.startDate);
-    if (data.endDate !== undefined) updateData.endDate = data.endDate ? new Date(data.endDate) : null;
-    if (data.author !== undefined) updateData.author = data.author;
-    if (data.metaTitle !== undefined) updateData.metaTitle = data.metaTitle;
-    if (data.metaDesc !== undefined) updateData.metaDesc = data.metaDesc;
-    if (data.ogImage !== undefined) updateData.ogImage = data.ogImage;
-    if (data.venue !== undefined) updateData.venue = data.venue;
-    if (data.address !== undefined) updateData.address = data.address;
-    if (data.registrationLink !== undefined) updateData.registrationLink = data.registrationLink;
-    if (data.maxAttendees !== undefined) updateData.maxAttendees = data.maxAttendees;
-    if (data.isFree !== undefined) updateData.isFree = data.isFree;
-    if (data.ticketPrice !== undefined) updateData.ticketPrice = data.isFree ? null : data.ticketPrice;
-    if (data.gallery !== undefined) updateData.gallery = data.gallery;
-
-    const event = await prisma.event.update({
-      where: { id },
-      data: updateData,
-    });
-
-    console.log('Event updated:', event.id);
-    return NextResponse.json(event);
-  } catch (error) {
-    console.error('PUT /api/events error:', error);
-    return NextResponse.json({ error: 'Failed to update event' }, { status: 500 });
+  // cast maxAttendees before validation
+  if (raw.maxAttendees === null || raw.maxAttendees === '') {
+    delete raw.maxAttendees; // remove so z.number().optional() passes
+  } else {
+    raw.maxAttendees = Number(raw.maxAttendees);
   }
+
+  // partial update schema
+  const updateSchema = eventSchema.partial();
+  const body = updateSchema.parse(raw);
+
+  // whitelist ONLY columns that exist in DB
+  const data: any = {};
+  if (body.title !== undefined) data.title = body.title;
+  if (body.description !== undefined) data.description = body.description;
+  if (body.category !== undefined) data.category = body.category;
+  if (body.cover !== undefined) data.cover = body.cover;
+  if (body.location !== undefined) data.location = body.location;
+  if (body.startDate !== undefined) data.startDate = new Date(body.startDate);
+  if (body.endDate !== undefined) data.endDate = body.endDate ? new Date(body.endDate) : null;
+  if (body.author !== undefined) data.author = body.author;
+  if (body.metaTitle !== undefined) data.metaTitle = body.metaTitle;
+  if (body.metaDesc !== undefined) data.metaDesc = body.metaDesc;
+  if (body.ogImage !== undefined) data.ogImage = body.ogImage;
+  if (body.venue !== undefined) data.venue = body.venue;
+  if (body.address !== undefined) data.address = body.address;
+  if (body.registrationLink !== undefined) data.registrationLink = body.registrationLink;
+  if (body.maxAttendees !== undefined) data.maxAttendees = body.maxAttendees;
+  if (body.isFree !== undefined) data.isFree = body.isFree;
+  if (body.ticketPrice !== undefined) data.ticketPrice = body.isFree ? null : body.ticketPrice;
+  if (body.gallery !== undefined) data.gallery = body.gallery;
+
+  const updated = await prisma.event.update({ where: { id }, data });
+  console.log('Event updated:', updated.id);
+  return NextResponse.json(updated);
 }
 
-/* DELETE /api/events?id=1 (admin only) - Soft delete */
+/* ---------- DELETE ---------- */
 export async function DELETE(req: NextRequest) {
-  try {
-    const auth = await verifyAdminAuth(req);
-    if (!auth.authorized) return unauthorizedResponse();
+  const auth = await verifyAdminAuth(req);
+  if (!auth.authorized) return unauthorizedResponse();
 
-    const id = Number(req.nextUrl.searchParams.get('id'));
-    if (!id || isNaN(id)) {
-      return NextResponse.json({ error: 'Invalid event ID' }, { status: 400 });
-    }
-
-    await prisma.event.update({
-      where: { id },
-      data: { deletedAt: new Date() },
-    });
-
-    return NextResponse.json({ ok: true, message: 'Event deleted' });
-  } catch (error) {
-    console.error('DELETE /api/events error:', error);
-    return NextResponse.json({ error: 'Failed to delete event' }, { status: 500 });
-  }
+  const id = Number(new URL(req.url).searchParams.get('id'));
+  await prisma.event.update({ where: { id }, data: { deletedAt: new Date() } });
+  return NextResponse.json({ ok: true });
 }
 
-const slugify = (str: string) => 
-  str.toLowerCase().trim()
-    .replace(/[^\w\s-]/g, '')
-    .replace(/[\s_-]+/g, '-')
-    .replace(/^-+|-+$/g, '');
+const slugify = (str: string) =>
+  str.toLowerCase().trim().replace(/[^\w\s-]/g, '').replace(/[\s_-]+/g, '-').replace(/^-+|-+$/g, '');
