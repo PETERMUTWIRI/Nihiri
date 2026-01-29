@@ -56,6 +56,9 @@ model Event {
   maxAttendees     Int?
   isFree           Boolean?  @default(true)
   ticketPrice      String?   @db.VarChar(50)
+  gallery          Json?
+  content          String?
+  excerpt          String?
 
   @@unique([slug, deletedAt])
   @@index([slug])
@@ -73,4 +76,17 @@ model User {
   role      String   @default("user")
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+model AnnualReport {
+  id        Int      @id @default(autoincrement())
+  year      Int      @unique
+  title     String
+  cover     String?
+  canvaurl  String
+  published Boolean  @default(true)
+  createdat DateTime @default(now()) @db.Timestamp(6)
+  updatedat DateTime @default(now()) @db.Timestamp(6)
+
+  @@index([year])
 }

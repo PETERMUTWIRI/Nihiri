@@ -37,6 +37,7 @@ const eventSchema = z.object({
   maxAttendees: z.number().int().positive().optional(),
   isFree: z.boolean().default(true),
   ticketPrice: z.string().optional(),
+  gallery: z.array(z.string()).max(10).optional(),
 });
 
 /* GET /api/events?category=Upcoming or GET /api/events?id=1 */
@@ -118,6 +119,7 @@ export async function POST(req: NextRequest) {
         maxAttendees: data.maxAttendees || null,
         isFree: data.isFree,
         ticketPrice: data.isFree ? null : data.ticketPrice || null,
+        gallery: data.gallery || [],
       },
     });
 
@@ -162,6 +164,7 @@ export async function PUT(req: NextRequest) {
       maxAttendees: z.number().int().positive().optional(),
       isFree: z.boolean().optional(),
       ticketPrice: z.string().optional(),
+      gallery: z.array(z.string()).max(10).optional(),
     });
 
     const validation = updateSchema.safeParse(body);
@@ -195,6 +198,7 @@ export async function PUT(req: NextRequest) {
     if (data.maxAttendees !== undefined) updateData.maxAttendees = data.maxAttendees;
     if (data.isFree !== undefined) updateData.isFree = data.isFree;
     if (data.ticketPrice !== undefined) updateData.ticketPrice = data.isFree ? null : data.ticketPrice;
+    if (data.gallery !== undefined) updateData.gallery = data.gallery;
 
     const event = await prisma.event.update({
       where: { id },
