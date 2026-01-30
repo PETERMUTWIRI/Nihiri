@@ -122,6 +122,7 @@ function EventEditor() {
       const payload = {
         ...form,
         maxAttendees: form.maxAttendees ? Number(form.maxAttendees) : null,
+        ticketPrice: form.isFree ? undefined : form.ticketPrice, 
       };
 
       const res = await fetch(url, { method, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
