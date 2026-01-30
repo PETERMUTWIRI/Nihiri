@@ -88,17 +88,19 @@ export default function EventsClient({ initialEvents }: { initialEvents: Event[]
             {active.registrationLink && (
               <div className="mt-6">
                 <a
-                  href={active.registrationLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href={
+                    active.registrationLink.includes('@')
+                    ? `mailto:${active.registrationLink}`
+                    : active.registrationLink
+                  }
+                  target={active.registrationLink.includes('@') ? undefined : '_blank'}
+                  rel={active.registrationLink.includes('@') ? undefined : 'noopener noreferrer'}
                   className="inline-flex items-center gap-2 bg-blue-600 text-white px-6 py-3 rounded-xl font-bold hover:bg-blue-700 transition"
-                >
-                  <FaExternalLinkAlt /> Join Event
+                  >
+                  <FaExternalLinkAlt />
+                  {active.registrationLink.includes('@') ? 'Email to Register' : 'Join Event'}
                 </a>
-                {active.registrationLink.includes('zoom') && (
-                  <p className="text-xs text-gray-500 mt-2">Opens Zoom / external link</p>
-                )}
-              </div>
+             </div>
             )}
 
             <div className="flex gap-4 mt-8">
