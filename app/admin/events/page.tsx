@@ -242,7 +242,12 @@ function EventEditor() {
                 </div>
               )}
             </div>
-
+            {/* GALLERY (NEW) */}
+            <div>
+              <label className="block text-sm font-semibold text-gray-700 mb-2"><FaImage className="inline mr-1" /> Gallery (max 10)</label>
+              <input type="file" accept="image/*" multiple onChange={(e) => e.target.files && uploadImages(e.target.files)} disabled={isLoading || uploadLoading} />
+              {uploadLoading && <span className="text-blue-600 text-sm ml-2">Uploading...</span>}
+            </div>
             {/* GALLERY (NEW) */}
             <div className="flex flex-wrap gap-2 mt-2">
               {form.gallery.map((url, i) => (
