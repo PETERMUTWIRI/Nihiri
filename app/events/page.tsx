@@ -1,4 +1,4 @@
-// app/events/page.tsx
+// app/events/page.tsx - UPCOMING (latest-created, external CTA)
 import { PrismaClient } from '@prisma/client';
 import EventsClient from './EventsClient';
 import { unstable_cache } from 'next/cache';
@@ -8,10 +8,9 @@ const prisma = new PrismaClient();
 const getCachedUpcoming = unstable_cache(
   async () => {
     const rows = await prisma.event.findMany({
-      where: { category: 'Upcoming', deletedAt: null, startDate: { gte: new Date() } },
-      orderBy: { startDate: 'asc' },
+      where: { category: 'Upcoming', deletedAt: null },
+      orderBy: { createdAt: 'desc' }, // newest first
     });
-
     return rows.map((e) => ({
       id: e.id,
       title: e.title,
@@ -32,6 +31,7 @@ const getCachedUpcoming = unstable_cache(
       ticketPrice: e.ticketPrice,
       maxAttendees: e.maxAttendees,
       gallery: (e.gallery as string[]) ?? [],
+      createdAt: e.createdAt.toISOString(),
     }));
   },
   ['events-upcoming'],

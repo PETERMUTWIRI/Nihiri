@@ -1,7 +1,8 @@
-// app/events/EventsClient.tsx - SPLIT-VIEW + CAROUSEL
+// app/events/EventsClient.tsx - SPLIT-VIEW + EXTERNAL CTA + AUTHOR
 'use client';
-import { useState, useEffect, useRef } from 'react';
-import { FaCalendar, FaLocationDot, FaChevronLeft, FaChevronRight, FaTicket, FaUsers } from 'react-icons/fa6';
+import { useState, useEffect,useRef } from 'react';
+import { FaCalendar, FaLocationDot, FaChevronLeft, FaChevronRight} from 'react-icons/fa6';
+import { FaExternalLinkAlt } from 'react-icons/fa';
 import Link from 'next/link';
 
 interface Event {
@@ -11,27 +12,30 @@ interface Event {
   cover: string | null;
   location: string;
   venue: string | null;
+  address: string | null;
   startDate: string;
   endDate: string | null;
   author: string | null;
-  gallery: string[] | null;
+  gallery: string[];
   registrationLink: string | null;
   isFree: boolean;
   ticketPrice: string | null;
   maxAttendees: number | null;
+  createdAt: string;
+  category: string;
+  excerpt: string;
 }
 
 export default function EventsClient({ initialEvents }: { initialEvents: Event[] }) {
   const [events] = useState(initialEvents);
   const [idx, setIdx] = useState(0);
   const [imgErr, setImgErr] = useState<Set<number>>(new Set());
-  const contentRef = useRef<HTMLDivElement>(null);
-
   const mounted = typeof window !== 'undefined';
+  const contentRef = useRef<HTMLDivElement>(null);
   useEffect(() => { window.addEventListener('keydown', (e) => { if (e.key === 'ArrowLeft') navigate('prev'); if (e.key === 'ArrowRight') navigate('next'); }); }, []);
 
   const navigate = (dir: 'prev' | 'next') => setIdx((i) => (dir === 'prev' ? (i - 1 + events.length) % events.length : (i + 1) % events.length));
-  const select = (i: number) => { setIdx(i); contentRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }); };
+  const select = (i: number) => { setIdx(i); };
 
   const formatDate = (d: string) => new Date(d).toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
   const formatTime = (d: string) => new Date(d).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
@@ -53,10 +57,12 @@ export default function EventsClient({ initialEvents }: { initialEvents: Event[]
       </header>
 
       <div className="flex-1 flex flex-col lg:flex-row">
-        {/* LEFT: teaser */}
+        {/* LEFT: teaser (sticky on desktop) */}
         <div className="w-full lg:w-1/2 bg-white border-r border-gray-200 p-8 flex flex-col justify-center lg:sticky lg:top-[73px] lg:h-screen lg:overflow-y-auto">
           <div className="max-w-md mx-auto w-full">
-            <span className="inline-block bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium mb-4">Upcoming</span>
+            <span className="inline-block bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium mb-4">{active.category}</span>
+
+            {/* IMAGE (like blog) */}
             <div className="relative aspect-video rounded-xl overflow-hidden mb-6 bg-gray-100">
               {active.cover && !imgErr.has(active.id) ? (
                 <img src={active.cover} alt={active.title} className="w-full h-full object-cover" loading="lazy" onError={() => setImgErr((s) => new Set(s).add(active.id))} />
@@ -64,9 +70,36 @@ export default function EventsClient({ initialEvents }: { initialEvents: Event[]
                 <div className="w-full h-full bg-gradient-to-br from-blue-100 to-purple-100 flex items-center justify-center"><span className="text-6xl">📅</span></div>
               )}
             </div>
+
             <h2 className="text-3xl font-bold text-gray-900 mb-4 leading-tight">{active.title}</h2>
+
+            {/* AUTHOR + CREATED (like blog) */}
+            <div className="flex items-center gap-4 text-sm text-gray-600 mb-2">
+              <span>By {active.author || 'Staff Writer'}</span>
+              <span>•</span>
+              <span>{new Date(active.createdAt).toLocaleDateString()}</span>
+            </div>
+
             <div className="flex items-center gap-4 text-sm text-gray-600 mb-4"><FaCalendar /><span>{formatDate(active.startDate)}</span><FaLocationDot /><span>{active.location}</span></div>
-            <p className="text-gray-600 leading-relaxed">{active.description?.replace(/<[^>]*>/g, '').slice(0, 200)}...</p>
+
+            <p className="text-gray-600 leading-relaxed">{active.excerpt}</p>
+
+            {/* EXTERNAL CTA (Givebutter, Zoom, etc.) */}
+            {active.registrationLink && (
+              <div className="mt-6">
+                <a
+                  href={active.registrationLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 bg-blue-600 text-white px-6 py-3 rounded-xl font-bold hover:bg-blue-700 transition"
+                >
+                  <FaExternalLinkAlt /> Join Event
+                </a>
+                {active.registrationLink.includes('zoom') && (
+                  <p className="text-xs text-gray-500 mt-2">Opens Zoom / external link</p>
+                )}
+              </div>
+            )}
 
             <div className="flex gap-4 mt-8">
               <button onClick={() => navigate('prev')} className="flex-1 flex items-center justify-center gap-2 bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-3 rounded-lg transition"><FaChevronLeft /> Previous</button>
@@ -108,7 +141,7 @@ export default function EventsClient({ initialEvents }: { initialEvents: Event[]
         </div>
       </div>
 
-      {/* CAROUSEL: ALL EVENTS */}
+      {/* CAROUSEL: ALL EVENTS (newest-first) */}
       <div className="bg-gray-100 border-t border-gray-200 p-6">
         <div className="max-w-7xl mx-auto">
           <h3 className="text-lg font-semibold text-gray-900 mb-4">All Events</h3>

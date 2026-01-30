@@ -1,4 +1,4 @@
-// app/events/past/page.tsx - PAST EVENTS (blog-pattern)
+// app/events/past/page.tsx - PAST (newest-first, external CTA)
 import { PrismaClient } from '@prisma/client';
 import EventsClient from '../EventsClient';
 import { unstable_cache } from 'next/cache';
@@ -9,7 +9,7 @@ const getCachedPast = unstable_cache(
   async () => {
     const rows = await prisma.event.findMany({
       where: { category: 'Past', deletedAt: null },
-      orderBy: { startDate: 'desc' },
+      orderBy: { createdAt: 'desc' },
     });
     return rows.map((e) => ({
       id: e.id,
@@ -31,6 +31,7 @@ const getCachedPast = unstable_cache(
       ticketPrice: e.ticketPrice,
       maxAttendees: e.maxAttendees,
       gallery: (e.gallery as string[]) ?? [],
+      createdAt: e.createdAt.toISOString(),
     }));
   },
   ['events-past'],
