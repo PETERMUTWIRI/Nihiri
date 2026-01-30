@@ -97,7 +97,7 @@ function EventEditor() {
     const urls: string[] = [];
     for (const file of Array.from(files)) {
       const body = new FormData();
-      body.append('image', file);
+      body.append('file', file);
       const res = await fetch('/api/upload', { method: 'POST', body });
       const data = await res.json();
       if (data.url) urls.push(data.url);
