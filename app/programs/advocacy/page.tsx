@@ -38,7 +38,7 @@ export default function AdvocacyPage() {
               <div className="flex flex-wrap gap-4">
                 <Link 
                   href="/contact"
-                  className="inline-flex items-center bg-brand-primary text-brand-text px-8 py-4 rounded-xl font-bold hover:bg-brand-dark transition shadow-lg"
+                  className="inline-flex items-center bg-brand-primary text-brand-text px-8 py-4 rounded-lg font-semibold hover:bg-brand-dark transition shadow-lg"
                 >
                   Get More Info <FaArrowRight className="ml-2"/>
                 </Link>
@@ -347,7 +347,7 @@ export default function AdvocacyPage() {
                 <p className="text-gray-600 mb-4">
                   Our one-on-one English as a Second Language tutoring program provides personalized language instruction with free childcare, removing barriers to learning and integration.
                 </p>
-                <span className="text-brand-primary font-semibold flex items-center gap-2">
+                <span className="text-blue-600 hover:text-blue-800 font-semibold flex items-center gap-2 transition-colors">
                   Learn More <FaArrowRight />
                 </span>
               </div>
@@ -359,7 +359,7 @@ export default function AdvocacyPage() {
                 <p className="text-gray-600 mb-4">
                   Interactive in-home health education taught by licensed clinicians, focusing on increasing health literacy and patient autonomy within refugee and immigrant communities.
                 </p>
-                <span className="text-brand-primary font-semibold flex items-center gap-2">
+                <span className="text-blue-600 hover:text-blue-800 font-semibold flex items-center gap-2 transition-colors">
                   Learn More <FaArrowRight />
                 </span>
               </div>

@@ -50,8 +50,8 @@ export default function EventsClient({ initialEvents }: { initialEvents: Event[]
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
           <h1 className="text-2xl font-bold text-gray-900">Events</h1>
           <div className="flex gap-2">
-            <Link href="/events" className="px-4 py-2 rounded-lg bg-blue-600 text-white text-sm font-medium">Upcoming</Link>
-            <Link href="/events/past" className="px-4 py-2 rounded-lg bg-gray-200 text-gray-800 text-sm font-medium">Past</Link>
+            <Link href="/events" className="px-4 py-2 rounded-lg bg-brand-primary text-brand-text text-sm font-semibold">Upcoming</Link>
+            <Link href="/events/past" className="px-4 py-2 rounded-lg bg-gray-200 text-gray-800 text-sm font-semibold hover:bg-gray-300 transition">Past</Link>
           </div>
         </div>
       </header>
@@ -60,7 +60,7 @@ export default function EventsClient({ initialEvents }: { initialEvents: Event[]
         {/* LEFT: teaser (sticky on desktop) */}
         <div className="w-full lg:w-1/2 bg-white border-r border-gray-200 p-8 flex flex-col justify-center lg:sticky lg:top-[73px] lg:h-screen lg:overflow-y-auto">
           <div className="max-w-md mx-auto w-full">
-            <span className="inline-block bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium mb-4">{active.category}</span>
+            <span className="inline-block bg-brand-primary/20 text-brand-text px-3 py-1 rounded-full text-sm font-semibold mb-4">{active.category}</span>
 
             {/* IMAGE (like blog) */}
             <div className="relative aspect-video rounded-xl overflow-hidden mb-6 bg-gray-100">
@@ -95,7 +95,7 @@ export default function EventsClient({ initialEvents }: { initialEvents: Event[]
                   }
                   target={active.registrationLink.includes('@') ? undefined : '_blank'}
                   rel={active.registrationLink.includes('@') ? undefined : 'noopener noreferrer'}
-                  className="inline-flex items-center gap-2 bg-blue-600 text-white px-6 py-3 rounded-xl font-bold hover:bg-blue-700 transition"
+                  className="inline-flex items-center gap-2 bg-brand-primary text-brand-text px-6 py-3 rounded-lg font-semibold hover:bg-brand-dark transition"
                   >
                   <FaExternalLinkAlt />
                   {active.registrationLink.includes('@') ? 'Email to Register' : 'Join Event'}
@@ -105,7 +105,7 @@ export default function EventsClient({ initialEvents }: { initialEvents: Event[]
 
             <div className="flex gap-4 mt-8">
               <button onClick={() => navigate('prev')} className="flex-1 flex items-center justify-center gap-2 bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-3 rounded-lg transition"><FaChevronLeft /> Previous</button>
-              <button onClick={() => navigate('next')} className="flex-1 flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-3 rounded-lg transition">Next <FaChevronRight /></button>
+              <button onClick={() => navigate('next')} className="flex-1 flex items-center justify-center gap-2 bg-brand-primary hover:bg-brand-dark text-brand-text px-4 py-3 rounded-lg font-semibold transition">Next <FaChevronRight /></button>
             </div>
           </div>
         </div>
@@ -134,8 +134,8 @@ export default function EventsClient({ initialEvents }: { initialEvents: Event[]
               <div className="mt-12 pt-8 border-t border-gray-200">
                 <h3 className="text-lg font-semibold text-gray-900 mb-4">Share this event</h3>
                 <div className="flex gap-4">
-                  <button className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">Facebook</button>
-                  <button className="bg-blue-400 text-white px-4 py-2 rounded-lg hover:bg-blue-500 transition">Twitter</button>
+                  <button className="bg-brand-primary text-brand-text px-4 py-2 rounded-lg hover:bg-brand-dark font-semibold transition">Facebook</button>
+                  <button className="bg-cyan-500 text-white px-4 py-2 rounded-lg hover:bg-cyan-600 font-semibold transition">Twitter</button>
                 </div>
               </div>
             </div>
@@ -153,7 +153,7 @@ export default function EventsClient({ initialEvents }: { initialEvents: Event[]
                 key={ev.id}
                 onClick={() => select(i)}
                 className={`flex-shrink-0 group relative w-48 h-32 rounded-lg overflow-hidden transition-all ${
-                  i === idx ? 'ring-2 ring-blue-500 scale-105' : 'hover:scale-105 hover:ring-2 hover:ring-blue-300'
+                  i === idx ? 'ring-2 ring-brand-primary scale-105' : 'hover:scale-105 hover:ring-2 hover:ring-brand-primary/50'
                 }`}
               >
                 {ev.cover && !imgErr.has(ev.id) ? (

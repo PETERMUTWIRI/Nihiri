@@ -37,13 +37,13 @@ export default function ESLPage() {
               <div className="flex flex-wrap gap-4">
                 <Link 
                   href="/contact"
-                  className="inline-flex items-center bg-brand-primary text-brand-text px-8 py-4 rounded-xl font-bold hover:bg-brand-dark transition shadow-lg"
+                  className="inline-flex items-center bg-brand-primary text-brand-text px-8 py-4 rounded-lg font-semibold hover:bg-brand-dark transition shadow-lg"
                 >
                   Get More Info <FaArrowRight className="ml-2"/>
                 </Link>
                 <Link 
                   href="/referral"
-                  className="inline-flex items-center bg-white text-brand-primary border-2 border-brand-primary px-8 py-4 rounded-xl font-bold hover:bg-brand-background transition"
+                  className="inline-flex items-center bg-white text-brand-text border-2 border-brand-primary px-8 py-4 rounded-lg font-semibold hover:bg-brand-light transition"
                 >
                   ESL Referral
                 </Link>
@@ -180,7 +180,7 @@ export default function ESLPage() {
                 <p className="text-gray-600 mb-4">
                   Legal advocacy efforts to address the influx of refugees who desperately need assistance navigating complex systems.
                 </p>
-                <span className="text-brand-primary font-semibold flex items-center gap-2">
+                <span className="text-blue-600 hover:text-blue-800 font-semibold flex items-center gap-2 transition-colors">
                   Learn More <FaArrowRight />
                 </span>
               </div>
@@ -192,7 +192,7 @@ export default function ESLPage() {
                 <p className="text-gray-600 mb-4">
                   Interactive, accessible educational programs taught by licensed clinicians to promote wellness and health literacy.
                 </p>
-                <span className="text-brand-primary font-semibold flex items-center gap-2">
+                <span className="text-blue-600 hover:text-blue-800 font-semibold flex items-center gap-2 transition-colors">
                   Learn More <FaArrowRight />
                 </span>
               </div>

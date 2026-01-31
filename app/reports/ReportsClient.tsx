@@ -38,15 +38,15 @@ export default function ReportsClient({ initialReports }: { initialReports: Repo
               {active.cover ? (
                 <img src={active.cover} alt={active.title} className="w-full h-full object-cover" loading="lazy" />
               ) : (
-                <div className="w-full h-full bg-gradient-to-br from-blue-100 to-purple-100 flex items-center justify-center"><span className="text-6xl">📊</span></div>
+                <div className="w-full h-full bg-gradient-to-br from-brand-primary/20 to-brand-light flex items-center justify-center"><span className="text-6xl">📊</span></div>
               )}
             </div>
             <h2 className="text-3xl font-bold text-gray-900 mb-4">{active.title}</h2>
             <p className="text-gray-600 mb-6">Year: {active.year}</p>
 
             <div className="flex gap-4 mt-8">
-              <button onClick={() => setIdx((i) => (i - 1 + reports.length) % reports.length)} className="flex-1 flex items-center justify-center gap-2 bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-3 rounded-lg transition"><FaChevronLeft /> Previous</button>
-              <button onClick={() => setIdx((i) => (i + 1 + reports.length) % reports.length)} className="flex-1 flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-3 rounded-lg transition">Next <FaChevronRight /></button>
+              <button onClick={() => setIdx((i) => (i - 1 + reports.length) % reports.length)} className="flex-1 flex items-center justify-center gap-2 bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-3 rounded-lg font-semibold transition"><FaChevronLeft /> Previous</button>
+              <button onClick={() => setIdx((i) => (i + 1 + reports.length) % reports.length)} className="flex-1 flex items-center justify-center gap-2 bg-brand-primary hover:bg-brand-dark text-brand-text px-4 py-3 rounded-lg font-semibold transition">Next <FaChevronRight /></button>
             </div>
           </div>
         </div>
@@ -60,7 +60,7 @@ export default function ReportsClient({ initialReports }: { initialReports: Repo
               href={active.canvaUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition"
+              className="inline-flex items-center gap-2 bg-brand-primary hover:bg-brand-dark text-brand-text px-6 py-3 rounded-lg font-semibold transition"
             >
               <FaExternalLinkAlt /> Open Interactive Report
             </a>
@@ -68,8 +68,8 @@ export default function ReportsClient({ initialReports }: { initialReports: Repo
             <div className="mt-12 pt-8 border-t border-gray-200">
               <h4 className="text-lg font-semibold text-gray-900 mb-4">Share this report</h4>
               <div className="flex gap-4">
-                <button className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">Facebook</button>
-                <button className="bg-blue-400 text-white px-4 py-2 rounded-lg hover:bg-blue-500 transition">Twitter</button>
+                <button className="bg-brand-primary hover:bg-brand-dark text-brand-text px-4 py-2 rounded-lg font-semibold transition">Facebook</button>
+                <button className="bg-cyan-500 hover:bg-cyan-600 text-white px-4 py-2 rounded-lg font-semibold transition">Twitter</button>
               </div>
             </div>
           </div>
@@ -86,7 +86,7 @@ export default function ReportsClient({ initialReports }: { initialReports: Repo
                 key={r.id}
                 onClick={() => setIdx(i)}
                 className={`flex-shrink-0 group relative w-48 h-32 rounded-lg overflow-hidden transition-all ${
-                  i === idx ? 'ring-2 ring-blue-500 scale-105' : 'hover:scale-105 hover:ring-2 hover:ring-blue-300'
+                  i === idx ? 'ring-2 ring-brand-primary scale-105' : 'hover:scale-105 hover:ring-2 hover:ring-brand-primary/50'
                 }`}
               >
                 {r.cover ? (

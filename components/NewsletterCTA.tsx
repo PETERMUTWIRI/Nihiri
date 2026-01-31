@@ -142,7 +142,7 @@ export default function NewsletterCTA({
               placeholder={placeholder}
               className="flex-1 w-full sm:w-auto px-6 py-3 border-2 border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-brand-primary focus:border-brand-primary transition-all text-brand-text placeholder-gray-500 font-medium"
             />
-            <button className="w-full sm:w-auto bg-brand-primary hover:bg-brand-dark text-brand-text font-extrabold px-8 py-3 rounded-full transition-all transform hover:scale-105 active:scale-95 shadow-lg hover:shadow-xl border border-black/10 flex items-center gap-2">
+            <button className="w-full sm:w-auto bg-brand-primary hover:bg-brand-dark text-brand-text font-bold px-8 py-3 rounded-lg transition-all transform hover:scale-105 active:scale-95 shadow-lg hover:shadow-xl flex items-center gap-2">
               {buttonText} <FaArrowRight className="transition-transform group-hover:translate-x-1" />
             </button>
           </div>

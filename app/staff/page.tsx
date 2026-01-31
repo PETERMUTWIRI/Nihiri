@@ -144,7 +144,7 @@ export default function StaffPage() {
     <div className="min-h-screen bg-brand-background">
       {/* HERO */}
       <section className="relative pt-8 pb-16 px-6 md:px-12 text-center bg-gradient-to-b from-brand-primary/20 to-brand-background">
-        <h1 className="text-5xl md:text-6xl font-black text-black mb-6">Our Staff</h1>
+        <h1 className="text-5xl md:text-6xl font-black text-gray-900 mb-6">Our Staff</h1>
         <p className="text-xl text-gray-700 max-w-3xl mx-auto">
           Meet the passionate people who power our programmes every day.
         </p>
@@ -188,7 +188,7 @@ export default function StaffPage() {
                 />
               </div>
               <h3 className="mt-4 font-extrabold text-gray-900">{m.name}</h3>
-              <p className="text-sm text-brand-primary font-semibold">{m.role}</p>
+              <p className="text-sm text-blue-600 font-semibold">{m.role}</p>
               {m.past && (
                 <span className="mt-2 inline-block px-2 py-1 text-xs bg-gray-200 text-gray-700 rounded">Past Staff</span>
               )}
@@ -227,7 +227,7 @@ export default function StaffPage() {
                   </div>
                   <div>
                     <h2 className="text-2xl font-black text-gray-900">{active.name}</h2>
-                    <p className="text-brand-primary font-semibold">{active.role}</p>
+                    <p className="text-blue-600 font-semibold">{active.role}</p>
                     {active.past && <span className="text-xs text-gray-500">Past Staff</span>}
                   </div>
                 </div>

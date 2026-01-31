@@ -30,7 +30,7 @@ export default function AboutPage() {
       <section className="py-16 px-6 md:px-12 max-w-7xl mx-auto">
         <div className="grid md:grid-cols-2 gap-12 mb-20">
           <div className="text-right pr-8">
-            <h2 className="text-4xl font-black text-cyan-600 mb-4 leading-tight">
+            <h2 className="text-4xl font-black text-gray-900 mb-4 leading-tight">
               Our Mission
             </h2>
             <p className="text-lg text-gray-700 leading-relaxed">
@@ -39,7 +39,7 @@ export default function AboutPage() {
             </p>
           </div>
           <div className="text-left pl-8 border-l border-gray-200">
-            <h2 className="text-4xl font-black text-brand-dark mb-4 leading-tight">
+            <h2 className="text-4xl font-black text-gray-900 mb-4 leading-tight">
               Our Vision
             </h2>
             <p className="text-lg text-gray-700 leading-relaxed">
@@ -74,7 +74,7 @@ export default function AboutPage() {
               In 2018, Jane founded Nihiri to deliver practical, culturally-sensitive solutions she knew 
               could transform lives.
             </p>
-            <Link href="/history" className="inline-flex items-center gap-2 text-brand-primary font-extrabold mt-6 hover:underline group">
+            <Link href="/history" className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-800 font-semibold mt-6 transition-colors group">
               Learn More About Our Journey 
               <FaArrowRight className="transition-transform group-hover:translate-x-1" />
             </Link>
@@ -97,7 +97,7 @@ export default function AboutPage() {
           ].map((value, idx) => (
             <div key={idx} className="flex flex-col md:flex-row items-start md:items-center gap-4 md:gap-8 py-6 group hover:bg-white/50 rounded-xl transition-colors px-4 -mx-4">
               <div className="md:w-1/4 w-full flex-shrink-0">
-                <h3 className="text-xl md:text-2xl font-extrabold text-cyan-600 md:text-right pr-0 md:pr-6">
+                <h3 className="text-xl md:text-2xl font-extrabold text-gray-900 md:text-right pr-0 md:pr-6">
                   {value.title}
                 </h3>
               </div>

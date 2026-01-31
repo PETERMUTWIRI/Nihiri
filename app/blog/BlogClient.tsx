@@ -81,7 +81,7 @@ export default function BlogClient({ initialPosts }: { initialPosts: BlogPost[] 
         {/* left: teaser (sticky on desktop) */}
         <div className="w-full lg:w-1/2 bg-white border-r border-gray-200 p-8 flex flex-col justify-center lg:sticky lg:top-[73px] lg:h-screen lg:overflow-y-auto">
           <div className="max-w-md mx-auto w-full">
-            <span className="inline-block bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium mb-4">{active.category}</span>
+            <span className="inline-block bg-brand-primary/20 text-brand-text px-3 py-1 rounded-full text-sm font-semibold mb-4">{active.category}</span>
 
             {/* image with fallback */}
             <div className="relative aspect-video rounded-xl overflow-hidden mb-6 bg-gray-100">
@@ -117,7 +117,7 @@ export default function BlogClient({ initialPosts }: { initialPosts: BlogPost[] 
               <button onClick={() => navigate('prev')} className="flex-1 flex items-center justify-center gap-2 bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-3 rounded-lg transition">
                 <FaChevronLeft /> Previous
               </button>
-              <button onClick={() => navigate('next')} className="flex-1 flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-3 rounded-lg transition">
+              <button onClick={() => navigate('next')} className="flex-1 flex items-center justify-center gap-2 bg-brand-primary hover:bg-brand-dark text-brand-text px-4 py-3 rounded-lg font-semibold transition">
                 Next <FaChevronRight />
               </button>
             </div>
@@ -133,8 +133,8 @@ export default function BlogClient({ initialPosts }: { initialPosts: BlogPost[] 
               <div className="mt-12 pt-8 border-t border-gray-200">
                 <h3 className="text-lg font-semibold text-gray-900 mb-4">Share this story</h3>
                 <div className="flex gap-4">
-                  <button className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">Share on Facebook</button>
-                  <button className="bg-blue-400 text-white px-4 py-2 rounded-lg hover:bg-blue-500 transition">Share on Twitter</button>
+                  <button className="bg-brand-primary text-brand-text px-4 py-2 rounded-lg hover:bg-brand-dark font-semibold transition">Share on Facebook</button>
+                  <button className="bg-cyan-500 text-white px-4 py-2 rounded-lg hover:bg-cyan-600 font-semibold transition">Share on Twitter</button>
                 </div>
               </div>
             </div>
@@ -152,7 +152,7 @@ export default function BlogClient({ initialPosts }: { initialPosts: BlogPost[] 
                 key={p.id}
                 onClick={() => select(i)}
                 className={`flex-shrink-0 group relative w-48 h-32 rounded-lg overflow-hidden transition-all ${
-                  i === idx ? 'ring-2 ring-blue-500 scale-105' : 'hover:scale-105 hover:ring-2 hover:ring-blue-300'
+                  i === idx ? 'ring-2 ring-brand-primary scale-105' : 'hover:scale-105 hover:ring-2 hover:ring-brand-primary/50'
                 }`}
               >
                 {p.cover && !imgErr.has(p.id) ? (

@@ -114,7 +114,7 @@ const FeaturedCard = ({ post, isLoading }: { post: BlogPost | null; isLoading: b
         </p>
         <Link
           href="/blog"
-          className="text-brand-primary font-extrabold text-xs hover:underline inline-flex items-center gap-1"
+          className="text-blue-600 hover:text-blue-800 font-semibold text-xs inline-flex items-center gap-1 transition-colors"
         >
           View All Posts →
         </Link>
@@ -164,11 +164,11 @@ const FeaturedCard = ({ post, isLoading }: { post: BlogPost | null; isLoading: b
           )}
         </div>
         
-        <span className="inline-block bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300 px-2 py-0.5 rounded text-[10px] font-medium mb-2">
+        <span className="inline-block bg-brand-primary/20 text-brand-text px-2 py-0.5 rounded text-[10px] font-semibold mb-2">
           {post.category}
         </span>
         
-        <h5 className="font-extrabold text-brand-text dark:text-brand-dark-text mb-2 text-sm line-clamp-2 group-hover:text-brand-primary transition-colors">
+        <h5 className="font-extrabold text-gray-900 mb-2 text-sm line-clamp-2 group-hover:text-blue-600 transition-colors">
           {post.title}
         </h5>
         
@@ -179,7 +179,7 @@ const FeaturedCard = ({ post, isLoading }: { post: BlogPost | null; isLoading: b
       
       <Link
         href="/blog"
-        className="text-brand-primary font-extrabold text-xs hover:underline inline-flex items-center gap-1"
+        className="text-blue-600 hover:text-blue-800 font-semibold text-xs inline-flex items-center gap-1 transition-colors"
       >
         Read More →
       </Link>

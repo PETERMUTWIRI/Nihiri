@@ -80,7 +80,13 @@
     @apply px-4 py-2 text-sm hover:bg-brand-light/30 transition-colors block;
   }
   .btn-primary {
-    @apply bg-brand-primary hover:bg-brand-dark text-brand-text px-6 py-3 rounded-md font-semibold transition-all hover:scale-105;
+    @apply bg-brand-primary hover:bg-brand-dark text-brand-text px-6 py-3 rounded-lg font-semibold transition-all hover:scale-105;
+  }
+  .btn-secondary {
+    @apply bg-white border-2 border-brand-primary text-brand-text px-6 py-3 rounded-lg font-semibold hover:bg-brand-light transition-all;
+  }
+  .link-primary {
+    @apply text-blue-600 hover:text-blue-800 font-semibold transition-colors;
   }
 }
 
@@ -248,7 +254,7 @@
   }
 
   .blog-nav-btn.next {
-    @apply bg-blue-600 hover:bg-blue-700 text-white;
+    @apply bg-brand-primary hover:bg-brand-dark text-brand-text;
   }
 
   /* MOBILE RESPONSIVE */
@@ -311,7 +317,7 @@
   .blog-content a:focus,
   .blog-nav-btn:focus,
   .blog-thumbnail-item:focus {
-    @apply outline-2 outline-blue-500 outline-offset-2;
+    @apply outline-2 outline-brand-primary outline-offset-2;
   }
 
   /* HIGH CONTRAST MODE SUPPORT */

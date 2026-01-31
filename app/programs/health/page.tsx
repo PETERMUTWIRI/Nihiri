@@ -35,7 +35,7 @@ export default function HealthPage() {
               <div className="flex flex-wrap gap-4">
                 <Link 
                   href="/contact"
-                  className="inline-flex items-center bg-brand-primary text-brand-text px-8 py-4 rounded-xl font-bold hover:bg-brand-dark transition shadow-lg"
+                  className="inline-flex items-center bg-brand-primary text-brand-text px-8 py-4 rounded-lg font-semibold hover:bg-brand-dark transition shadow-lg"
                 >
                   Get More Info <FaArrowRight className="ml-2"/>
                 </Link>
@@ -339,7 +339,7 @@ export default function HealthPage() {
                 <p className="text-gray-600 mb-4">
                   Our one-on-one English as a Second Language tutoring program is the heart of our mission, providing personalized language instruction with free childcare to remove barriers to learning.
                 </p>
-                <span className="text-brand-primary font-semibold flex items-center gap-2">
+                <span className="text-blue-600 hover:text-blue-800 font-semibold flex items-center gap-2 transition-colors">
                   Learn More <FaArrowRight />
                 </span>
               </div>
@@ -351,7 +351,7 @@ export default function HealthPage() {
                 <p className="text-gray-600 mb-4">
                   Legal advocacy efforts to address the complex challenges refugees face when navigating immigration systems, housing, employment, and accessing essential services.
                 </p>
-                <span className="text-brand-primary font-semibold flex items-center gap-2">
+                <span className="text-blue-600 hover:text-blue-800 font-semibold flex items-center gap-2 transition-colors">
                   Learn More <FaArrowRight />
                 </span>
               </div>
