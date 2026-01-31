@@ -36,13 +36,16 @@ export default function PartnerLogos() {
             className="flex-shrink-0 mx-6 flex items-center justify-center"
             style={{ minWidth: '120px', maxWidth: '160px' }}
           >
-            <Image
-              src={partner.src}
-              alt={partner.name}
-              width={140}
-              height={60}
-              className="max-h-12 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-300 opacity-70 hover:opacity-100"
-            />
+            {/* White background wrapper for consistent appearance */}
+            <div className="bg-white rounded-lg p-3 shadow-sm hover:shadow-md transition-shadow duration-300">
+              <Image
+                src={partner.src}
+                alt={partner.name}
+                width={140}
+                height={60}
+                className="max-h-10 w-auto object-contain"
+              />
+            </div>
           </div>
         ))}
       </div>
