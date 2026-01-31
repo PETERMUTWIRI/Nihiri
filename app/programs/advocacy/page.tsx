@@ -8,7 +8,7 @@ export default function AdvocacyPage() {
   return (
     <div className="min-h-screen bg-white">
       {/* HERO SECTION - Image Left, Content Right */}
-      <section className="py-20 pt-32 bg-gradient-to-br from-brand-background to-white">
+      <section className="py-20 pt-8 bg-gradient-to-br from-brand-background to-white">
         <div className="max-w-7xl mx-auto px-6 md:px-12">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Left: Hero Image */}

@@ -10,7 +10,7 @@ export default function AboutPage() {
     <div className="min-h-screen bg-brand-background">
       
       {/* HERO SECTION */}
-      <section className="relative min-h-[70vh] bg-gradient-to-b from-brand-primary/20 to-brand-background flex items-center justify-center text-center overflow-hidden pt-40">
+      <section className="relative min-h-[70vh] bg-gradient-to-b from-brand-primary/20 to-brand-background flex items-center justify-center text-center overflow-hidden pt-16">
         <div className="absolute inset-0 bg-black/5"></div>
         <div className="relative z-10 px-6 flex flex-col items-center w-full">
           <h1 className="text-5xl md:text-6xl font-black text-black mb-8 tracking-tight">

@@ -87,7 +87,7 @@ export default function BoardPage() {
   return (
     <div className="min-h-screen bg-brand-background">
       {/* HERO */}
-      <section className="py-24 md:py-32 px-6 md:px-12 text-center bg-gradient-to-b from-brand-primary/20 to-brand-background">
+      <section className="py-16 md:py-24 px-6 md:px-12 text-center bg-gradient-to-b from-brand-primary/20 to-brand-background">
         <h1 className="text-5xl md:text-6xl font-black text-black mb-6">Board of Directors</h1>
         <p className="text-xl text-gray-700 max-w-3xl mx-auto">
           Meet the leaders who guide our mission and ensure every refugee family thrives.

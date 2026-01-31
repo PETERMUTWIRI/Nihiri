@@ -9,7 +9,7 @@ export default function HistoryPage() {
   return (
     <div className="min-h-screen bg-brand-background">
       {/* HERO */}
-      <section className="relative pt-32 pb-16 px-6 md:px-12 text-center bg-gradient-to-b from-brand-primary/20 to-brand-background">
+      <section className="relative pt-8 pb-16 px-6 md:px-12 text-center bg-gradient-to-b from-brand-primary/20 to-brand-background">
           <h1 className="text-5xl md:text-6xl font-black text-black mb-6">
              Our History
           </h1>
