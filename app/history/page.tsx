@@ -40,12 +40,75 @@ export default function HistoryPage() {
         </div>
       </section>
 
-      {/* FOUNDER STORY */}
+      {/* FOUNDER STORY - Two Column Text Layout */}
       <section className="py-16 bg-white">
         <div className="max-w-6xl mx-auto px-6 md:px-12">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+          <div className="grid lg:grid-cols-2 gap-12 items-start">
+            {/* Text - Two Columns */}
+            <div className="order-2 lg:order-1">
+              <h2 className="text-3xl font-black text-gray-900 mb-6">
+                The Story of Jane Kinity
+              </h2>
+              
+              {/* Two Column Text Layout */}
+              <div className="grid md:grid-cols-2 gap-6 text-gray-700 leading-relaxed text-sm">
+                <div className="space-y-4">
+                  <p>
+                    Before arriving in the United States, <strong>Jane Kinity</strong> was an educator in Kenya 
+                    alongside her husband, <strong>Isaac Newton Kinity</strong>. Their lives were forever changed 
+                    when political persecution and threats forced them to flee their home.
+                  </p>
+                  <p>
+                    For two years, Jane and her family lived in a refugee camp in Uganda, enduring hardships 
+                    that would break many spirits. But Jane&apos;s commitment to education never wavered.
+                  </p>
+                  <p>
+                    In 2000, they were resettled in New Haven, Connecticut, by 
+                    <Link href="https://irisct.org/" target="_blank" className="text-blue-600 hover:underline font-semibold"> IRIS</Link>.
+                  </p>
+                </div>
+                <div className="space-y-4">
+                  <p>
+                    What began as informal support grew into weekly English classes in her 
+                    living room. Jane understood that language was the key to independence.
+                  </p>
+                  <p>
+                    In 2012, this effort became the <strong>International New Hope for 
+                    Refugees and Immigrants Center</strong>, expanding to health navigation and advocacy.
+                  </p>
+                  <p className="text-blue-600 font-semibold">
+                    In 2025, Jane received the Elena&apos;s Light Leadership Award for her lifelong dedication.
+                  </p>
+                </div>
+              </div>
+
+              {/* External Links - Blue Style */}
+              <div className="mt-8 pt-6 border-t border-gray-200">
+                <h3 className="font-semibold text-gray-900 mb-4">Learn More</h3>
+                <div className="space-y-3">
+                  {externalLinks.map((link) => (
+                    <Link
+                      key={link.name}
+                      href={link.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-start gap-3 p-3 rounded-lg hover:bg-blue-50 transition group"
+                    >
+                      <span className="text-blue-600 mt-1">→</span>
+                      <div>
+                        <p className="font-medium text-blue-600 group-hover:underline">
+                          {link.name}
+                        </p>
+                        <p className="text-sm text-gray-500">{link.desc}</p>
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            </div>
+
             {/* Image */}
-            <div className="relative">
+            <div className="order-1 lg:order-2 relative">
               <div className="relative h-[400px] rounded-2xl overflow-hidden shadow-xl">
                 <Image
                   src="/images/about/Nihiri_founder.jpeg"
@@ -58,66 +121,6 @@ export default function HistoryPage() {
               <div className="absolute -bottom-6 -right-6 bg-brand-primary rounded-xl p-4 shadow-lg">
                 <p className="text-3xl font-black text-brand-text">25+</p>
                 <p className="text-sm text-brand-text/80">Years of Service</p>
-              </div>
-            </div>
-
-            {/* Story */}
-            <div>
-              <h2 className="text-3xl font-black text-gray-900 mb-6">
-                The Story of Jane Kinity
-              </h2>
-              <div className="space-y-4 text-gray-700 leading-relaxed">
-                <p>
-                  Before arriving in the United States, <strong>Jane Kinity</strong> was an educator in Kenya 
-                  alongside her husband, <strong>Isaac Newton Kinity</strong>. Their lives were forever changed 
-                  when political persecution and threats forced them to flee their home, leaving everything behind.
-                </p>
-                <p>
-                  For two years, Jane and her family lived in a refugee camp in Uganda, enduring hardships 
-                  that would break many spirits. But Jane\'s commitment to education and community never wavered. 
-                  In 2000, they were resettled in New Haven, Connecticut, by 
-                  <Link href="https://irisct.org/" target="_blank" className="text-brand-primary hover:underline font-semibold"> Integrated Refugee & Immigrant Services (IRIS)</Link>.
-                </p>
-                <p>
-                  What began as informal support for fellow refugees grew into weekly English classes in her 
-                  living room. Jane understood that language was the key to independence, employment, and dignity. 
-                  Her kitchen became a classroom, her neighbors became students, and her compassion became a movement.
-                </p>
-                <p>
-                  In 2012, this grassroots effort was formalized into the <strong>International New Hope for 
-                  Refugees and Immigrants Center</strong>. Today, the organization has expanded beyond ESL to 
-                  include health navigation, advocacy, and the annual World Refugee Day festival that brings 
-                  together over 1,200 community members.
-                </p>
-                <p className="text-brand-primary font-semibold">
-                  In 2025, Jane\'s dedication was recognized with the Elena\'s Light Leadership and Social 
-                  Service Award — a testament to a life devoted to creating opportunities for families 
-                  rebuilding their lives.
-                </p>
-              </div>
-
-              {/* External Links */}
-              <div className="mt-8 pt-6 border-t border-gray-200">
-                <h3 className="font-semibold text-gray-900 mb-4">Learn More</h3>
-                <div className="space-y-3">
-                  {externalLinks.map((link) => (
-                    <Link
-                      key={link.name}
-                      href={link.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-start gap-3 p-3 rounded-lg hover:bg-gray-50 transition group"
-                    >
-                      <span className="text-brand-primary mt-1">→</span>
-                      <div>
-                        <p className="font-medium text-gray-900 group-hover:text-brand-primary transition">
-                          {link.name}
-                        </p>
-                        <p className="text-sm text-gray-500">{link.desc}</p>
-                      </div>
-                    </Link>
-                  ))}
-                </div>
               </div>
             </div>
           </div>
@@ -201,12 +204,10 @@ export default function HistoryPage() {
       <section className="py-20 bg-white">
         <div className="max-w-4xl mx-auto px-6 md:px-12 text-center">
           <blockquote className="text-2xl md:text-3xl lg:text-4xl font-black text-gray-900 italic leading-tight mb-8">
-            “Empowerment through education—turning the challenges of displacement into the triumphs of new beginnings.”
+            &ldquo;Empowerment through education—turning the challenges of displacement into the triumphs of new beginnings.&rdquo;
           </blockquote>
           <div className="flex items-center justify-center gap-4">
-            <div className="w-12 h-12 bg-brand-primary rounded-full flex items-center justify-center">
-              <span className="text-brand-text font-bold text-lg">J</span>
-            </div>
+            
             <div className="text-left">
               <cite className="not-italic font-bold text-gray-900 block">Jane Kinity</cite>
               <span className="text-gray-600 text-sm">Founder & Executive Director</span>
@@ -215,14 +216,14 @@ export default function HistoryPage() {
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="py-16 bg-gray-900 text-white">
+      {/* CTA - No Dark Background */}
+      <section className="py-16 bg-white border-t border-gray-200">
         <div className="max-w-4xl mx-auto px-6 md:px-12 text-center">
-          <h2 className="text-3xl md:text-4xl font-black mb-6">
+          <h2 className="text-3xl md:text-4xl font-black text-gray-900 mb-6">
             Be Part of Our Story
           </h2>
-          <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
-            Join us in continuing Jane\'s legacy of empowerment through education. 
+          <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+            Join us in continuing Jane&apos;s legacy of empowerment through education. 
             Whether as a volunteer, donor, or partner, you can help write the next chapter.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -234,7 +235,7 @@ export default function HistoryPage() {
             </Link>
             <Link 
               href="/donate" 
-              className="inline-flex items-center justify-center px-8 py-4 bg-white hover:bg-gray-100 text-gray-900 font-semibold rounded-lg transition"
+              className="inline-flex items-center justify-center px-8 py-4 border-2 border-gray-900 hover:bg-gray-900 text-gray-900 hover:text-white font-semibold rounded-lg transition"
             >
               Support Our Mission
             </Link>

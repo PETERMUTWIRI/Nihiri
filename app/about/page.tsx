@@ -1,9 +1,10 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
-import { FaArrowRight, FaXTwitter, FaFacebookF, FaInstagram, FaLinkedinIn, FaYoutube } from 'react-icons/fa6';
+import { FaArrowRight } from 'react-icons/fa6';
 import YouTubeEmbed from '@/components/YouTubeEmbed';
 import NewsletterCTA from '@/components/NewsletterCTA';
+import PartnerLogos from '@/components/PartnerLogos';
 
 export default function AboutPage() {
   return (
@@ -156,6 +157,19 @@ export default function AboutPage() {
               </li>
             </ul>
           </div>
+        </div>
+      </section>
+
+      {/* PARTNERS SECTION */}
+      <section className="py-16 bg-white border-t border-gray-200">
+        <div className="max-w-7xl mx-auto px-6 md:px-12">
+          <h2 className="text-3xl md:text-4xl font-black text-center text-gray-900 mb-4">
+            Our Partners
+          </h2>
+          <p className="text-center text-gray-600 mb-8 max-w-2xl mx-auto">
+            We are grateful to collaborate with these amazing organizations who share our commitment to supporting refugee and immigrant communities.
+          </p>
+          <PartnerLogos />
         </div>
       </section>
 

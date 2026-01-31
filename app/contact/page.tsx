@@ -154,9 +154,7 @@ ${formData.message}`;
               href="tel:+12036759395"
               className="bg-white rounded-2xl shadow-lg p-6 border border-gray-100 hover:shadow-xl hover:-translate-y-1 transition group"
             >
-              <div className="w-12 h-12 bg-brand-primary/20 rounded-xl flex items-center justify-center mb-4 group-hover:bg-brand-primary transition">
-                <span className="text-brand-primary font-bold group-hover:text-brand-text">P</span>
-              </div>
+              
               <h3 className="font-bold text-gray-900 mb-1">Call Us</h3>
               <p className="text-gray-600 text-sm mb-2">Mon-Fri, 9am-5pm</p>
               <p className="text-brand-primary font-semibold">+(203) 675-9395</p>
@@ -167,9 +165,7 @@ ${formData.message}`;
               href="mailto:info@nihri.com"
               className="bg-white rounded-2xl shadow-lg p-6 border border-gray-100 hover:shadow-xl hover:-translate-y-1 transition group"
             >
-              <div className="w-12 h-12 bg-brand-primary/20 rounded-xl flex items-center justify-center mb-4 group-hover:bg-brand-primary transition">
-                <span className="text-brand-primary font-bold group-hover:text-brand-text">E</span>
-              </div>
+              
               <h3 className="font-bold text-gray-900 mb-1">Email Us</h3>
               <p className="text-gray-600 text-sm mb-2">We reply within 24-48hrs</p>
               <p className="text-brand-primary font-semibold">info@nihri.com</p>
@@ -180,9 +176,7 @@ ${formData.message}`;
               onClick={openWhatsApp}
               className="bg-white rounded-2xl shadow-lg p-6 border border-gray-100 hover:shadow-xl hover:-translate-y-1 transition group text-left"
             >
-              <div className="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center mb-4 group-hover:bg-green-500 transition">
-                <span className="text-green-600 font-bold group-hover:text-white">W</span>
-              </div>
+              
               <h3 className="font-bold text-gray-900 mb-1">WhatsApp</h3>
               <p className="text-gray-600 text-sm mb-2">Quick response</p>
               <p className="text-green-600 font-semibold">Chat Now</p>
