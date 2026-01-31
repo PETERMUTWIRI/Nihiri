@@ -546,7 +546,7 @@ export default function Navbar() {
     ],
     getInvolved: [
       { label: 'Volunteer', href: '/volunteer', description: 'Join our volunteer team.' },
-      { label: 'Health Referral', href: '/referral', description: 'Refer someone in need of health services.' },
+      { label: 'Health Referral', href: '/health-referral', description: 'Refer someone in need of health services.' },
       { label: 'ESL Student Onboarding', href: '/esl-onboarding', description: 'Start your English learning journey.' },
       { label: 'Contact Us', href: '/contact', description: 'Get in touch with our team.' },
     ],
