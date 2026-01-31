@@ -289,14 +289,14 @@ const MobileDrawer = ({ open, setOpen, navItems, featuredPost }: {
       {open && (
         <>
           <motion.div
-            className="fixed inset-0 bg-black/50 z-20 md:hidden"
+            className="fixed inset-0 bg-black/50 z-[60] md:hidden"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={() => setOpen(false)}
           />
           <motion.div
-            className="fixed inset-y-0 right-0 w-80 bg-cyan-700 text-white z-30 md:hidden h-screen overflow-y-auto"
+            className="fixed inset-y-0 right-0 w-80 bg-cyan-700 text-white z-[70] md:hidden h-screen overflow-y-auto pt-20"
             initial={shouldReduceMotion ? { x: '100%' } : { x: '100%', clipPath: 'circle(0% at 100% 0)' }}
             animate={shouldReduceMotion ? { x: 0 } : { x: 0, clipPath: 'circle(150% at 100% 0)' }}
             exit={shouldReduceMotion ? { x: '100%' } : { x: '100%', clipPath: 'circle(0% at 100% 0)' }}
@@ -340,10 +340,10 @@ const MobileDrawer = ({ open, setOpen, navItems, featuredPost }: {
               )}
               
               <div className="space-y-1">
-                <MobileAccordion title="About" items={navItems.about} />
-                <MobileAccordion title="Events" items={navItems.events} />
-                <MobileAccordion title="Programs" items={navItems.programs} />
-                <MobileAccordion title="Get Involved" items={navItems.getInvolved} />
+                <MobileAccordion title="About" items={navItems.about} onLinkClick={() => setOpen(false)} />
+                <MobileAccordion title="Events" items={navItems.events} onLinkClick={() => setOpen(false)} />
+                <MobileAccordion title="Programs" items={navItems.programs} onLinkClick={() => setOpen(false)} />
+                <MobileAccordion title="Get Involved" items={navItems.getInvolved} onLinkClick={() => setOpen(false)} />
               </div>
               <div className="px-6 py-6 border-t border-white/20">
                 <DonateButton />
@@ -357,7 +357,7 @@ const MobileDrawer = ({ open, setOpen, navItems, featuredPost }: {
 };
 
 /* ---------- 6. MOBILE ACCORDION ---------- */
-const MobileAccordion = ({ title, items }: { title: string; items: { label: string; href: string }[] }) => {
+const MobileAccordion = ({ title, items, onLinkClick }: { title: string; items: { label: string; href: string }[]; onLinkClick?: () => void }) => {
   const [open, setOpen] = useState(false);
   const shouldReduceMotion = useReducedMotion();
   return (
@@ -387,7 +387,10 @@ const MobileAccordion = ({ title, items }: { title: string; items: { label: stri
                   key={item.href}
                   href={item.href}
                   className="block py-3 px-4 text-white/90 hover:text-white hover:bg-white/10 rounded-lg transition-colors text-sm font-medium"
-                  onClick={() => setOpen(false)}
+                  onClick={() => {
+                    setOpen(false);
+                    onLinkClick?.();
+                  }}
                 >
                   {item.label}
                 </Link>
