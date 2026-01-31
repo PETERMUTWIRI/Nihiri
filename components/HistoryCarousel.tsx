@@ -1,79 +1,45 @@
 'use client';
 
-import { useState, useEffect } from 'react';
 import Image from 'next/image';
-import { FaChevronLeft, FaChevronRight } from 'react-icons/fa6';
 
-const SLIDES = [
-  'history-01-hero.jpeg',
-  'history-02-jane-kitchen.jpg',
-  'history-03-first-esl.jpg',
-  'history-04-501c3.jpg',
-  'history-05-health-nav.jpg',
-  'history-06-world-refugee-day.jpg',
-  'history-07-youth-circle.jpg',
-  'history-08-board-2020.jpg',
-  'history-09-award-ceremony.jpg',
-  'history-10-future-mural.jpg',
+const IMAGES = [
+  { src: 'history-01-hero.jpeg', alt: 'Jane Kinity with community members' },
+  { src: 'history-02-jane-kitchen.jpg', alt: 'Early ESL classes in Jane\'s kitchen' },
+  { src: 'history-03-first-esl.jpg', alt: 'First ESL class' },
+  { src: 'history-04-501c3.jpg', alt: 'Organization founding' },
+  { src: 'history-05-health-nav.jpg', alt: 'Health navigation program' },
+  { src: 'history-06-world-refugee-day.jpg', alt: 'World Refugee Day celebration' },
+  { src: 'history-07-youth-circle.jpg', alt: 'Youth program' },
+  { src: 'history-08-board-2020.jpg', alt: 'Board members' },
+  { src: 'history-09-award-ceremony.jpg', alt: 'Award ceremony' },
+  { src: 'history-10-future-mural.jpg', alt: 'Community mural' },
 ];
 
 export default function HistoryCarousel() {
-  const [idx, setIdx] = useState(0);
-  const [dir, setDir] = useState<'l' | 'r'>('r');
-
-  const next = () => { setDir('r'); setIdx((i) => (i + 1) % SLIDES.length); };
-  const prev = () => { setDir('l'); setIdx((i) => (i - 1 + SLIDES.length) % SLIDES.length); };
-
-  useEffect(() => {
-    const t = setInterval(next, 6000);
-    return () => clearInterval(t);
-  }, []);
+  // Double the images for seamless loop
+  const allImages = [...IMAGES, ...IMAGES];
 
   return (
-    <div className="relative w-full aspect-[16/9] rounded-2xl overflow-hidden shadow-xl">
-      {/* Images */}
-      <div className="relative w-full h-full">
-        {SLIDES.map((src, i) => (
-          <div
-            key={src}
-            className={`absolute inset-0 transition-opacity duration-500 ${i === idx ? 'opacity-100' : 'opacity-0'}`}
+    <div className="relative w-full overflow-hidden py-4">
+      {/* Gradient overlays for smooth edges */}
+      <div className="absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-brand-background to-transparent z-10 pointer-events-none" />
+      <div className="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-brand-background to-transparent z-10 pointer-events-none" />
+      
+      {/* Scrolling container */}
+      <div className="flex animate-scroll-left">
+        {allImages.map((img, idx) => (
+          <div 
+            key={`${img.src}-${idx}`}
+            className="flex-shrink-0 w-48 h-32 mx-2 rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300"
           >
             <Image
-                src={`/images/history/${src}`}
-                alt={`History slide ${i + 1}`}
-                fill
-                className="object-cover object-center"   // ← NEW: keep heads, crop sides
-                priority={i === 0}
+              src={`/images/history/${img.src}`}
+              alt={img.alt}
+              width={192}
+              height={128}
+              className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
             />
           </div>
-        ))}
-      </div>
-
-      {/* Arrows */}
-      <button
-        onClick={prev}
-        className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 grid place-content-center rounded-full bg-black/40 text-white hover:bg-black/60 transition"
-        aria-label="Previous"
-      >
-        <FaChevronLeft />
-      </button>
-      <button
-        onClick={next}
-        className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 grid place-content-center rounded-full bg-black/40 text-white hover:bg-black/60 transition"
-        aria-label="Next"
-      >
-        <FaChevronRight />
-      </button>
-
-      {/* Dots */}
-      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
-        {SLIDES.map((_, i) => (
-          <button
-            key={i}
-            onClick={() => { setDir(i > idx ? 'r' : 'l'); setIdx(i); }}
-            className={`w-2.5 h-2.5 rounded-full transition ${i === idx ? 'bg-brand-primary scale-125' : 'bg-white/60 hover:bg-white'}`}
-            aria-label={`Go to slide ${i + 1}`}
-          />
         ))}
       </div>
     </div>
