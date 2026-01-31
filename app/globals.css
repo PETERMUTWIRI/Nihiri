@@ -341,4 +341,166 @@
       animation: none;
     }
   }
+
+  /* ============================================
+     PREMIUM MICRO-INTERACTIONS & EFFECTS
+     ============================================ */
+
+  /* Magnetic Button Effect Base */
+  .magnetic-btn {
+    @apply relative overflow-hidden transition-all duration-300;
+  }
+
+  .magnetic-btn::before {
+    content: '';
+    @apply absolute inset-0 bg-white/20 translate-y-full transition-transform duration-300;
+  }
+
+  .magnetic-btn:hover::before {
+    @apply translate-y-0;
+  }
+
+  /* Ripple Effect */
+  .ripple {
+    @apply relative overflow-hidden;
+  }
+
+  .ripple::after {
+    content: '';
+    @apply absolute inset-0 bg-white/30 rounded-full scale-0 opacity-0;
+    transform-origin: center;
+  }
+
+  .ripple:active::after {
+    animation: ripple-effect 0.6s ease-out;
+  }
+
+  @keyframes ripple-effect {
+    0% {
+      transform: scale(0);
+      opacity: 0.5;
+    }
+    100% {
+      transform: scale(4);
+      opacity: 0;
+    }
+  }
+
+  /* Smooth Link Underline */
+  .link-underline {
+    @apply relative;
+  }
+
+  .link-underline::after {
+    content: '';
+    @apply absolute bottom-0 left-0 w-0 h-0.5 bg-current transition-all duration-300;
+  }
+
+  .link-underline:hover::after {
+    @apply w-full;
+  }
+
+  /* Image Hover Zoom */
+  .img-zoom {
+    @apply overflow-hidden;
+  }
+
+  .img-zoom img {
+    @apply transition-transform duration-500 ease-out;
+  }
+
+  .img-zoom:hover img {
+    @apply scale-110;
+  }
+
+  /* Card Lift Effect */
+  .card-lift {
+    @apply transition-all duration-300;
+  }
+
+  .card-lift:hover {
+    @apply -translate-y-2 shadow-xl;
+  }
+
+  /* Text Gradient Animation */
+  .text-gradient-animate {
+    @apply bg-gradient-to-r from-cyan-600 via-brand-primary to-cyan-600 bg-clip-text text-transparent;
+    background-size: 200% auto;
+    animation: text-gradient 3s linear infinite;
+  }
+
+  @keyframes text-gradient {
+    0% { background-position: 0% center; }
+    100% { background-position: 200% center; }
+  }
+
+  /* Glass Morphism */
+  .glass {
+    @apply bg-white/80 backdrop-blur-lg border border-white/20;
+  }
+
+  .glass-dark {
+    @apply bg-black/30 backdrop-blur-lg border border-white/10;
+  }
+
+  /* Shimmer Loading Effect */
+  .shimmer {
+    @apply relative overflow-hidden bg-gray-200;
+  }
+
+  .shimmer::after {
+    content: '';
+    @apply absolute inset-0;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.4),
+      transparent
+    );
+    animation: shimmer 1.5s infinite;
+  }
+
+  @keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+  }
+
+  /* Focus Visible Improvements */
+  *:focus-visible {
+    @apply outline-2 outline-offset-2 outline-cyan-500;
+  }
+
+  /* Selection Color */
+  ::selection {
+    @apply bg-brand-primary/30 text-gray-900;
+  }
+
+  /* Smooth Scroll Padding for Anchor Links */
+  html {
+    scroll-padding-top: 120px;
+  }
+
+  /* Premium Typography Scale */
+  .text-display {
+    @apply text-5xl md:text-6xl lg:text-7xl font-black tracking-tight leading-tight;
+  }
+
+  .text-headline {
+    @apply text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight;
+  }
+
+  .text-title {
+    @apply text-xl md:text-2xl font-semibold;
+  }
+
+  .text-body-large {
+    @apply text-lg md:text-xl leading-relaxed;
+  }
+
+  /* Stagger Animation Delays */
+  .stagger-1 { animation-delay: 0.1s; }
+  .stagger-2 { animation-delay: 0.2s; }
+  .stagger-3 { animation-delay: 0.3s; }
+  .stagger-4 { animation-delay: 0.4s; }
+  .stagger-5 { animation-delay: 0.5s; }
 }

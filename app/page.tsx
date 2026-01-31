@@ -5,6 +5,7 @@ import { unstable_cache } from 'next/cache';
 import YouTubeEmbed from '@/components/YouTubeEmbed';
 import PartnerLogos from '@/components/PartnerLogos';
 import NewsletterCTA from '@/components/NewsletterCTA';
+import ScrollReveal, { StaggerContainer, StaggerItem } from '@/components/ScrollReveal';
 
 // Cache the database queries
 const getLatestPost = unstable_cache(
@@ -90,6 +91,8 @@ export default async function HomePage() {
       
       {/* HERO SECTION - Cinematic */}
       <section className="relative min-h-screen bg-cyan-50/30 overflow-hidden">
+        {/* Animated Background Gradient */}
+        <div className="absolute inset-0 bg-gradient-to-br from-cyan-50/50 via-transparent to-brand-primary/10 animate-pulse" style={{ animationDuration: '8s' }} />
         {/* Background Image with Faint Cyan Overlay */}
         <div className="absolute inset-0">
           <Image
@@ -107,7 +110,7 @@ export default async function HomePage() {
           <div className="max-w-7xl mx-auto w-full">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               {/* Left - Text */}
-              <div className="text-gray-900">
+              <ScrollReveal direction="left" className="text-gray-900">
                 <h1 className="text-5xl md:text-6xl lg:text-7xl font-black mb-6 leading-tight">
                   Supporting{' '}
                   <span className="text-cyan-600">
@@ -134,14 +137,14 @@ export default async function HomePage() {
                     Learn Our Story
                   </Link>
                 </div>
-              </div>
+              </ScrollReveal>
 
               {/* Right - Video Card */}
-              <div className="block">
+              <ScrollReveal direction="right" delay={0.2} className="block">
                 <div className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-white">
                   <YouTubeEmbed videoId="6bfSEk_oX60" />
                 </div>
-              </div>
+              </ScrollReveal>
             </div>
           </div>
         </div>
@@ -193,7 +196,8 @@ export default async function HomePage() {
             </div>
 
             {/* Text */}
-            <div>
+            <ScrollReveal direction="right" delay={0.2}>
+              <div>
               <span className="text-cyan-600 font-semibold uppercase tracking-wide text-sm">Our Story</span>
               <h2 className="text-4xl md:text-5xl font-black text-gray-900 mt-2 mb-6">
                 A Journey of Resilience
@@ -221,7 +225,8 @@ export default async function HomePage() {
                 Read the Full Story
                 <span className="transition-transform group-hover:translate-x-1">→</span>
               </Link>
-            </div>
+              </div>
+            </ScrollReveal>
           </div>
         </div>
       </section>
@@ -230,7 +235,8 @@ export default async function HomePage() {
       {latestPost && (
         <section className="py-20 bg-white">
           <div className="max-w-7xl mx-auto px-6 md:px-12">
-            <div className="flex flex-col md:flex-row md:items-end md:justify-between mb-12">
+            <ScrollReveal>
+              <div className="flex flex-col md:flex-row md:items-end md:justify-between mb-12">
               <div>
                 <span className="text-cyan-600 font-semibold uppercase tracking-wide text-sm">Latest Story</span>
                 <h2 className="text-4xl font-black text-gray-900 mt-2">From Our Blog</h2>
@@ -240,9 +246,11 @@ export default async function HomePage() {
               </Link>
             </div>
 
+            </ScrollReveal>
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               {/* Blog Image */}
-              <Link href={`/blog#${latestPost.slug}`} className="group">
+              <ScrollReveal direction="left">
+                <Link href={`/blog#${latestPost.slug}`} className="group block">
                 <div className="relative h-[400px] rounded-2xl overflow-hidden shadow-xl">
                   {latestPost.cover ? (
                     <Image
@@ -265,7 +273,9 @@ export default async function HomePage() {
                 </div>
               </Link>
 
+              </ScrollReveal>
               {/* Blog Content */}
+              <ScrollReveal direction="right" delay={0.2}>
               <div>
                 <p className="text-gray-500 text-sm mb-2">{formatDate(latestPost.publishedAt || '')}</p>
                 <h3 className="text-3xl font-bold text-gray-900 mb-4 hover:text-cyan-600 transition">
@@ -284,6 +294,7 @@ export default async function HomePage() {
                   <span>→</span>
                 </Link>
               </div>
+              </ScrollReveal>
             </div>
           </div>
         </section>
@@ -293,18 +304,18 @@ export default async function HomePage() {
       {hasEvents && (
         <section className="py-20 bg-cyan-50/50">
           <div className="max-w-7xl mx-auto px-6 md:px-12">
-            <div className="text-center mb-12">
+            <ScrollReveal className="text-center mb-12">
               <span className="text-cyan-600 font-semibold uppercase tracking-wide text-sm">Events</span>
               <h2 className="text-4xl font-black text-gray-900 mt-2">Upcoming & Past Events</h2>
               <p className="text-gray-600 mt-4 max-w-2xl mx-auto">
                 Join us at our upcoming events or explore highlights from our recent gatherings.
               </p>
-            </div>
-
+            </ScrollReveal>
             <div className="grid md:grid-cols-2 gap-8">
               {/* Upcoming Event - Left */}
               {upcomingEvent && (
-                <div className="bg-white rounded-2xl overflow-hidden shadow-xl">
+                <ScrollReveal direction="left">
+                <div className="bg-white rounded-2xl overflow-hidden shadow-xl h-full">
                   <div className="relative h-64">
                     {upcomingEvent.cover ? (
                       <Image
@@ -352,11 +363,13 @@ export default async function HomePage() {
                     </div>
                   </div>
                 </div>
+                </ScrollReveal>
               )}
 
               {/* Latest Past Event - Right */}
               {latestPastEvent && (
-                <div className="bg-white rounded-2xl overflow-hidden shadow-xl">
+                <ScrollReveal direction="right">
+                <div className="bg-white rounded-2xl overflow-hidden shadow-xl h-full">
                   <div className="relative h-64">
                     {latestPastEvent.cover ? (
                       <Image
@@ -392,6 +405,7 @@ export default async function HomePage() {
                     </Link>
                   </div>
                 </div>
+                </ScrollReveal>
               )}
             </div>
           </div>
@@ -401,14 +415,14 @@ export default async function HomePage() {
       {/* PARTNERS SECTION */}
       <section className="py-16 bg-white border-t border-gray-200">
         <div className="max-w-7xl mx-auto px-6 md:px-12">
-          <div className="text-center mb-10">
+          <ScrollReveal className="text-center mb-10">
             <span className="text-cyan-600 font-semibold uppercase tracking-wide text-sm">Our Network</span>
             <h2 className="text-3xl md:text-4xl font-black text-gray-900 mt-2">Our Partners</h2>
             <p className="text-gray-600 mt-4 max-w-2xl mx-auto">
               We are grateful to collaborate with these amazing organizations who share our commitment 
               to supporting refugee and immigrant communities.
             </p>
-          </div>
+          </ScrollReveal>
           <PartnerLogos />
         </div>
       </section>
@@ -416,28 +430,30 @@ export default async function HomePage() {
       {/* DONATE CTA SECTION */}
       <section className="py-20 bg-cyan-50/50 relative overflow-hidden">
         <div className="relative z-10 max-w-4xl mx-auto px-6 md:px-12 text-center">
-          <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-6">
-            Help Us Make a Difference
-          </h2>
-          <p className="text-xl text-gray-600 mb-10 max-w-2xl mx-auto">
-            Your donation directly supports ESL classes, health navigation, and advocacy 
-            services for refugee families rebuilding their lives.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link 
-              href="/donate" 
-              className="inline-flex items-center justify-center px-10 py-5 bg-brand-primary hover:bg-brand-dark text-brand-text text-lg font-bold rounded-lg transition transform hover:scale-105 shadow-xl"
-            >
-              Donate
-              <span className="ml-2">→</span>
-            </Link>
-            <Link 
-              href="/volunteer" 
-              className="inline-flex items-center justify-center px-10 py-5 border-2 border-gray-900 text-gray-900 text-lg font-semibold rounded-lg hover:bg-gray-900 hover:text-white transition"
-            >
-              Become a Volunteer
-            </Link>
-          </div>
+          <ScrollReveal>
+            <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-6">
+              Help Us Make a Difference
+            </h2>
+            <p className="text-xl text-gray-600 mb-10 max-w-2xl mx-auto">
+              Your donation directly supports ESL classes, health navigation, and advocacy 
+              services for refugee families rebuilding their lives.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link 
+                href="/donate" 
+                className="inline-flex items-center justify-center px-10 py-5 bg-brand-primary hover:bg-brand-dark text-brand-text text-lg font-bold rounded-lg transition transform hover:scale-105 shadow-xl"
+              >
+                Donate
+                <span className="ml-2">→</span>
+              </Link>
+              <Link 
+                href="/volunteer" 
+                className="inline-flex items-center justify-center px-10 py-5 border-2 border-gray-900 text-gray-900 text-lg font-semibold rounded-lg hover:bg-gray-900 hover:text-white transition"
+              >
+                Become a Volunteer
+              </Link>
+            </div>
+          </ScrollReveal>
         </div>
       </section>
 
