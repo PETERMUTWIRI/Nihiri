@@ -103,7 +103,7 @@ export default async function HomePage() {
         </div>
 
         {/* Content */}
-        <div className="relative z-10 flex flex-col px-6 md:px-12 pt-28 pb-40">
+        <div className="relative z-10 flex flex-col px-6 md:px-12 pt-20 md:pt-28 pb-32 md:pb-40">
           <div className="max-w-7xl mx-auto w-full">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               {/* Left - Text */}
@@ -137,7 +137,7 @@ export default async function HomePage() {
               </div>
 
               {/* Right - Video Card */}
-              <div className="hidden lg:block">
+              <div className="block">
                 <div className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-white">
                   <YouTubeEmbed videoId="6bfSEk_oX60" />
                 </div>
