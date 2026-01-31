@@ -4,19 +4,71 @@
 
 @layer base {
   :root {
-    /* LIGHT mode tokens */
+    /* LIGHT mode tokens - Enterprise Design System */
+    --background: 60 33% 98%;
+    --foreground: 54 70% 24%;
+    --card: 0 0% 100%;
+    --card-foreground: 54 70% 24%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 54 70% 24%;
+    --primary: 56 87% 65%;
+    --primary-foreground: 54 70% 24%;
+    --secondary: 60 33% 96%;
+    --secondary-foreground: 54 70% 24%;
+    --muted: 60 20% 90%;
+    --muted-foreground: 160 5% 38%;
+    --accent: 56 87% 65%;
+    --accent-foreground: 54 70% 24%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 60 10% 85%;
+    --input: 60 10% 85%;
+    --ring: 56 87% 65%;
+    --radius: 0.5rem;
+    
+    /* Legacy brand tokens for backward compatibility */
     --brand-background: #fcfcf5;
     --brand-text: #655c13;
+    --brand-primary: #f3ec59;
+    --brand-dark: #9f972a;
   }
 
   [data-theme='dark'] {
-    /* DARK mode tokens */
-    --brand-background: theme(colors.brand.dark-bg);
-    --brand-text: theme(colors.brand.dark-text);
+    /* DARK mode tokens - Enterprise Design System */
+    --background: 222 47% 11%;
+    --foreground: 210 40% 98%;
+    --card: 222 47% 15%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222 47% 15%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 56 87% 65%;
+    --primary-foreground: 222 47% 11%;
+    --secondary: 222 47% 18%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 222 30% 20%;
+    --muted-foreground: 215 20% 65%;
+    --accent: 56 87% 65%;
+    --accent-foreground: 222 47% 11%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 222 30% 22%;
+    --input: 222 30% 22%;
+    --ring: 56 87% 65%;
+    
+    /* Legacy brand tokens for dark mode */
+    --brand-background: #0f172a;
+    --brand-text: #f8fafc;
+    --brand-primary: #f3ec59;
+    --brand-dark: #9f972a;
   }
 
   body {
-    @apply bg-brand-background text-brand-text antialiased;
+    @apply bg-background text-foreground antialiased;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  html {
+    scroll-behavior: smooth;
   }
 }
 

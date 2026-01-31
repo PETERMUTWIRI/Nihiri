@@ -27,6 +27,7 @@ export async function GET(req: NextRequest) {
     const { searchParams } = new URL(req.url);
     const id = searchParams.get('id');
     const category = searchParams.get('category');
+    const limit = searchParams.get('limit');
 
     if (id) {
       const post = await prisma.post.findUnique({
@@ -50,6 +51,7 @@ export async function GET(req: NextRequest) {
         ],
       },
       orderBy: { publishedAt: 'desc' },
+      take: limit ? Number(limit) : undefined,
     });
     
     return NextResponse.json(posts);
