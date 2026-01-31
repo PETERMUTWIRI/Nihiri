@@ -1,7 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import NewsletterCTA from '@/components/NewsletterCTA';
 
@@ -34,9 +33,9 @@ interface FormErrors {
   [key: string]: string;
 }
 
-const states = [
-  'CT', 'NY', 'NJ', 'MA', 'RI', 'Other'
-];
+const WHATSAPP_NUMBER = '+254713064026';
+
+const states = ['CT', 'NY', 'NJ', 'MA', 'RI', 'Other'];
 
 const immigrationCategories = [
   { value: '', label: 'Select category' },
@@ -60,16 +59,8 @@ const visaTypes = [
 ];
 
 const languages = [
-  'Arabic',
-  'Pashto',
-  'Dari',
-  'Farsi',
-  'Spanish',
-  'Haitian Creole',
-  'Swahili',
-  'French',
-  'English',
-  'Other',
+  'Arabic', 'Pashto', 'Dari', 'Farsi', 'Spanish', 'Haitian Creole',
+  'Swahili', 'French', 'English', 'Other'
 ];
 
 const englishLevels = [
@@ -109,78 +100,52 @@ export default function ESLOnboardingPage() {
   const [errors, setErrors] = useState<FormErrors>({});
   const [showToast, setShowToast] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [currentStep, setCurrentStep] = useState(1);
 
-  const validateForm = (): boolean => {
+  const validateStep = (step: number): boolean => {
     const newErrors: FormErrors = {};
 
-    if (!formData.organization.trim()) {
-      newErrors.organization = 'Organization is required';
+    if (step === 1) {
+      if (!formData.organization.trim()) newErrors.organization = 'Organization is required';
+      if (!formData.refereeFirstName.trim()) newErrors.refereeFirstName = 'First name is required';
+      if (!formData.refereeLastName.trim()) newErrors.refereeLastName = 'Last name is required';
+      if (!formData.refereePhone.trim()) newErrors.refereePhone = 'Phone is required';
+      if (!formData.studentFirstName.trim()) newErrors.studentFirstName = 'First name is required';
+      if (!formData.studentLastName.trim()) newErrors.studentLastName = 'Last name is required';
+      if (!formData.addressLine1.trim()) newErrors.addressLine1 = 'Address is required';
+      if (!formData.city.trim()) newErrors.city = 'City is required';
+      if (!formData.zip.trim()) newErrors.zip = 'ZIP is required';
+      if (!formData.studentPhone.trim()) newErrors.studentPhone = 'Phone is required';
     }
 
-    if (!formData.refereeFirstName.trim()) {
-      newErrors.refereeFirstName = 'First name is required';
-    }
-
-    if (!formData.refereeLastName.trim()) {
-      newErrors.refereeLastName = 'Last name is required';
-    }
-
-    if (!formData.refereePhone.trim()) {
-      newErrors.refereePhone = 'Phone number is required';
-    }
-
-    if (!formData.studentFirstName.trim()) {
-      newErrors.studentFirstName = 'First name is required';
-    }
-
-    if (!formData.studentLastName.trim()) {
-      newErrors.studentLastName = 'Last name is required';
-    }
-
-    if (!formData.addressLine1.trim()) {
-      newErrors.addressLine1 = 'Address is required';
-    }
-
-    if (!formData.city.trim()) {
-      newErrors.city = 'City is required';
-    }
-
-    if (!formData.zip.trim()) {
-      newErrors.zip = 'ZIP code is required';
-    }
-
-    if (!formData.studentPhone.trim()) {
-      newErrors.studentPhone = 'Phone number is required';
-    }
-
-    if (!formData.hasWhatsapp) {
-      newErrors.hasWhatsapp = 'This field is required';
-    }
-
-    if (!formData.immigrationTime) {
-      newErrors.immigrationTime = 'Please select a category';
-    }
-
-    if (!formData.currentAge.trim()) {
-      newErrors.currentAge = 'Current age is required';
-    }
-
-    if (!formData.nativeLanguage) {
-      newErrors.nativeLanguage = 'Native language is required';
-    }
-
-    if (!formData.englishLevel) {
-      newErrors.englishLevel = 'English level is required';
+    if (step === 2) {
+      if (!formData.hasWhatsapp) newErrors.hasWhatsapp = 'This field is required';
+      if (!formData.immigrationTime) newErrors.immigrationTime = 'Please select a category';
+      if (!formData.currentAge.trim()) newErrors.currentAge = 'Current age is required';
+      if (!formData.nativeLanguage) newErrors.nativeLanguage = 'Native language is required';
+      if (!formData.englishLevel) newErrors.englishLevel = 'English level is required';
     }
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
+  const handleNext = () => {
+    if (validateStep(currentStep)) {
+      setCurrentStep(prev => prev + 1);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+
+  const handleBack = () => {
+    setCurrentStep(prev => prev - 1);
+    setErrors({});
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
-    if (!validateForm()) return;
+    if (!validateStep(currentStep)) return;
 
     setIsSubmitting(true);
 
@@ -215,31 +180,24 @@ English Level: ${formData.englishLevel}
 LEARNING GOALS
 ${formData.learningGoals || 'Not provided'}`;
 
-    const encodedMessage = encodeURIComponent(message);
-
     setShowToast(true);
-
     setTimeout(() => {
-      window.open(`https://wa.me/+254713064026?text=${encodedMessage}`, '_blank');
+      window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`, '_blank');
       setIsSubmitting(false);
     }, 1500);
 
-    setTimeout(() => {
-      setShowToast(false);
-    }, 5000);
+    setTimeout(() => setShowToast(false), 5000);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
-    if (errors[name]) {
-      setErrors(prev => ({ ...prev, [name]: '' }));
-    }
+    if (errors[name]) setErrors(prev => ({ ...prev, [name]: '' }));
   };
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Toast Notification */}
+      {/* Toast */}
       <AnimatePresence>
         {showToast && (
           <motion.div
@@ -254,561 +212,352 @@ ${formData.learningGoals || 'Not provided'}`;
         )}
       </AnimatePresence>
 
-      {/* HERO SECTION */}
-      <section className="relative bg-gray-900 text-white">
-        <div className="absolute inset-0 opacity-40">
-          <Image
-            src="/images/programs/esl3.png"
-            alt="ESL Program"
-            fill
-            className="object-cover"
-            priority
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-gray-900 via-gray-900/80 to-transparent" />
+      {/* HERO - Clean, Professional */}
+      <section className="bg-brand-background pt-32 pb-16">
+        <div className="max-w-4xl mx-auto px-6 md:px-12 text-center">
+          <span className="inline-block bg-brand-primary/20 text-brand-text px-4 py-2 rounded-full text-sm font-semibold mb-6">
+            Student Enrollment
+          </span>
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-gray-900 mb-6">
+            ESL Referral Form
+          </h1>
+          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            Please use this form to refer students within your organization to our ESL Program. 
+            All services are provided free of charge.
+          </p>
         </div>
-        
-        <div className="relative max-w-7xl mx-auto px-6 md:px-12 py-24 pt-32">
-          <div className="max-w-2xl">
-            <h1 className="text-4xl md:text-5xl font-bold mb-6">
-              ESL Referral Form
-            </h1>
-            <p className="text-xl text-gray-200 leading-relaxed">
-              Please use this form to refer students within your organization to our ESL Program.
-            </p>
+      </section>
+
+      {/* PROGRAM BENEFITS */}
+      <section className="py-12 bg-white -mt-8">
+        <div className="max-w-6xl mx-auto px-6 md:px-12">
+          <div className="grid md:grid-cols-4 gap-6">
+            {[
+              { label: '100% Free', desc: 'No cost to students' },
+              { label: 'Free Childcare', desc: 'Bring your children' },
+              { label: 'One-on-One', desc: 'Personalized tutoring' },
+              { label: 'Flexible Schedule', desc: 'Learn at your pace' },
+            ].map((item) => (
+              <div key={item.label} className="bg-white rounded-xl p-6 shadow-lg border border-gray-100 text-center hover:shadow-xl transition">
+                <p className="font-bold text-gray-900 text-lg mb-1">{item.label}</p>
+                <p className="text-gray-600 text-sm">{item.desc}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* PROGRAM INFO */}
-      <section className="bg-amber-50 border-b border-amber-100">
-        <div className="max-w-5xl mx-auto px-6 md:px-12 py-8">
-          <div className="bg-white rounded-lg p-6 shadow-sm border border-amber-200">
-            <h2 className="text-lg font-semibold text-gray-900 mb-3">
-              About Our ESL Program
-            </h2>
-            <p className="text-gray-700 mb-4">
-              Our ESL program provides free one-on-one English tutoring for refugee and immigrant women. 
-              Classes include free childcare and are tailored to each student&apos;s needs and schedule.
-            </p>
-            <ul className="space-y-2 text-gray-700">
-              <li className="flex items-start gap-2">
-                <span className="text-amber-600 mt-1">•</span>
-                <span><strong>100% Free</strong> - No cost to students</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-amber-600 mt-1">•</span>
-                <span><strong>Free Childcare</strong> - Bring your children</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-amber-600 mt-1">•</span>
-                <span><strong>Flexible Schedule</strong> - Learn at your own pace</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-amber-600 mt-1">•</span>
-                <span><strong>One-on-One Tutoring</strong> - Personalized instruction</span>
-              </li>
-            </ul>
+      {/* FORM SECTION */}
+      <section className="py-16 bg-brand-background">
+        <div className="max-w-4xl mx-auto px-6 md:px-12">
+          {/* Progress */}
+          <div className="mb-10">
+            <div className="flex justify-between mb-4">
+              {['Organization', 'Student Info', 'Learning Details', 'Review'].map((label, idx) => (
+                <div key={label} className="flex flex-col items-center flex-1">
+                  <div className={`w-10 h-10 rounded-full flex items-center justify-center mb-2 font-bold text-sm ${
+                    idx + 1 <= currentStep ? 'bg-brand-primary text-brand-text' : 'bg-gray-200 text-gray-500'
+                  }`}>
+                    {idx + 1 < currentStep ? '✓' : idx + 1}
+                  </div>
+                  <span className={`text-xs ${idx + 1 <= currentStep ? 'text-gray-900' : 'text-gray-400'}`}>{label}</span>
+                </div>
+              ))}
+            </div>
+            <div className="h-2 bg-gray-200 rounded-full">
+              <div className="h-full bg-brand-primary rounded-full transition-all duration-300" style={{ width: `${(currentStep / 4) * 100}%` }} />
+            </div>
           </div>
-        </div>
-      </section>
 
-      {/* REFERRAL FORM */}
-      <section className="py-16 bg-white">
-        <div className="max-w-5xl mx-auto px-6 md:px-12">
-          <form onSubmit={handleSubmit} className="space-y-10">
-            
-            {/* ORGANIZATION OF ORIGIN */}
-            <div className="bg-gray-50 rounded-lg p-8">
-              <h2 className="text-xl font-semibold text-gray-900 mb-6 pb-2 border-b border-gray-200">
-                Organization of Origin
-              </h2>
-              <div>
-                <label htmlFor="organization" className="block text-sm font-medium text-gray-700 mb-2">
-                  Organization Name <span className="text-red-500">*</span>
-                </label>
-                <input
-                  type="text"
-                  id="organization"
-                  name="organization"
-                  value={formData.organization}
-                  onChange={handleChange}
-                  className={`w-full px-4 py-3 rounded-lg border ${errors.organization ? 'border-red-500' : 'border-gray-300'} focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition bg-white`}
-                  placeholder="Enter organization name"
-                />
-                {errors.organization && (
-                  <p className="mt-1 text-sm text-red-500">{errors.organization}</p>
-                )}
-              </div>
-            </div>
-
-            {/* REFEREE INFORMATION */}
-            <div className="bg-gray-50 rounded-lg p-8">
-              <h2 className="text-xl font-semibold text-gray-900 mb-6 pb-2 border-b border-gray-200">
-                Referee&apos;s Information
-              </h2>
-              
-              <div className="grid md:grid-cols-2 gap-6">
+          <form onSubmit={handleSubmit} className="bg-white rounded-2xl p-8 md:p-10 shadow-xl">
+            {/* STEP 1 */}
+            {currentStep === 1 && (
+              <div className="space-y-8">
                 <div>
-                  <label htmlFor="refereeFirstName" className="block text-sm font-medium text-gray-700 mb-2">
-                    First Name <span className="text-red-500">*</span>
-                  </label>
-                  <input
-                    type="text"
-                    id="refereeFirstName"
-                    name="refereeFirstName"
-                    value={formData.refereeFirstName}
-                    onChange={handleChange}
-                    className={`w-full px-4 py-3 rounded-lg border ${errors.refereeFirstName ? 'border-red-500' : 'border-gray-300'} focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition bg-white`}
-                  />
-                  {errors.refereeFirstName && (
-                    <p className="mt-1 text-sm text-red-500">{errors.refereeFirstName}</p>
-                  )}
+                  <h2 className="text-xl font-bold text-gray-900 mb-6 pb-2 border-b border-gray-200">Organization of Origin</h2>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">Organization Name <span className="text-red-500">*</span></label>
+                    <input type="text" name="organization" value={formData.organization} onChange={handleChange} className={`w-full px-4 py-3 rounded-lg border ${errors.organization ? 'border-red-500' : 'border-gray-200'} focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/20 bg-white`} />
+                    {errors.organization && <p className="mt-1 text-sm text-red-500">{errors.organization}</p>}
+                  </div>
                 </div>
 
                 <div>
-                  <label htmlFor="refereeLastName" className="block text-sm font-medium text-gray-700 mb-2">
-                    Last Name <span className="text-red-500">*</span>
-                  </label>
-                  <input
-                    type="text"
-                    id="refereeLastName"
-                    name="refereeLastName"
-                    value={formData.refereeLastName}
-                    onChange={handleChange}
-                    className={`w-full px-4 py-3 rounded-lg border ${errors.refereeLastName ? 'border-red-500' : 'border-gray-300'} focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition bg-white`}
-                  />
-                  {errors.refereeLastName && (
-                    <p className="mt-1 text-sm text-red-500">{errors.refereeLastName}</p>
-                  )}
+                  <h2 className="text-xl font-bold text-gray-900 mb-6 pb-2 border-b border-gray-200">Referee Information</h2>
+                  <div className="grid md:grid-cols-2 gap-6">
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">First Name <span className="text-red-500">*</span></label>
+                      <input type="text" name="refereeFirstName" value={formData.refereeFirstName} onChange={handleChange} className={`w-full px-4 py-3 rounded-lg border ${errors.refereeFirstName ? 'border-red-500' : 'border-gray-200'} focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/20 bg-white`} />
+                      {errors.refereeFirstName && <p className="mt-1 text-sm text-red-500">{errors.refereeFirstName}</p>}
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">Last Name <span className="text-red-500">*</span></label>
+                      <input type="text" name="refereeLastName" value={formData.refereeLastName} onChange={handleChange} className={`w-full px-4 py-3 rounded-lg border ${errors.refereeLastName ? 'border-red-500' : 'border-gray-200'} focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/20 bg-white`} />
+                      {errors.refereeLastName && <p className="mt-1 text-sm text-red-500">{errors.refereeLastName}</p>}
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                      <input type="email" name="refereeEmail" value={formData.refereeEmail} onChange={handleChange} className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/20 bg-white" />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">Phone <span className="text-red-500">*</span></label>
+                      <input type="tel" name="refereePhone" value={formData.refereePhone} onChange={handleChange} className={`w-full px-4 py-3 rounded-lg border ${errors.refereePhone ? 'border-red-500' : 'border-gray-200'} focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/20 bg-white`} />
+                      {errors.refereePhone && <p className="mt-1 text-sm text-red-500">{errors.refereePhone}</p>}
+                    </div>
+                  </div>
                 </div>
 
                 <div>
-                  <label htmlFor="refereeEmail" className="block text-sm font-medium text-gray-700 mb-2">
-                    Email
-                  </label>
-                  <input
-                    type="email"
-                    id="refereeEmail"
-                    name="refereeEmail"
-                    value={formData.refereeEmail}
-                    onChange={handleChange}
-                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition bg-white"
-                  />
+                  <h2 className="text-xl font-bold text-gray-900 mb-6 pb-2 border-b border-gray-200">Student Contact Information</h2>
+                  <div className="space-y-6">
+                    <div className="grid md:grid-cols-2 gap-6">
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">First Name <span className="text-red-500">*</span></label>
+                        <input type="text" name="studentFirstName" value={formData.studentFirstName} onChange={handleChange} className={`w-full px-4 py-3 rounded-lg border ${errors.studentFirstName ? 'border-red-500' : 'border-gray-200'} focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/20 bg-white`} />
+                        {errors.studentFirstName && <p className="mt-1 text-sm text-red-500">{errors.studentFirstName}</p>}
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">Last Name <span className="text-red-500">*</span></label>
+                        <input type="text" name="studentLastName" value={formData.studentLastName} onChange={handleChange} className={`w-full px-4 py-3 rounded-lg border ${errors.studentLastName ? 'border-red-500' : 'border-gray-200'} focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/20 bg-white`} />
+                        {errors.studentLastName && <p className="mt-1 text-sm text-red-500">{errors.studentLastName}</p>}
+                      </div>
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">Address <span className="text-red-500">*</span></label>
+                      <input type="text" name="addressLine1" value={formData.addressLine1} onChange={handleChange} className={`w-full px-4 py-3 rounded-lg border ${errors.addressLine1 ? 'border-red-500' : 'border-gray-200'} focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/20 bg-white mb-3`} placeholder="Street address" />
+                      <input type="text" name="addressLine2" value={formData.addressLine2} onChange={handleChange} className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/20 bg-white" placeholder="Apartment, suite, etc. (optional)" />
+                      {errors.addressLine1 && <p className="mt-1 text-sm text-red-500">{errors.addressLine1}</p>}
+                    </div>
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                      <div className="col-span-2">
+                        <label className="block text-sm font-medium text-gray-700 mb-2">City <span className="text-red-500">*</span></label>
+                        <input type="text" name="city" value={formData.city} onChange={handleChange} className={`w-full px-4 py-3 rounded-lg border ${errors.city ? 'border-red-500' : 'border-gray-200'} focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/20 bg-white`} />
+                        {errors.city && <p className="mt-1 text-sm text-red-500">{errors.city}</p>}
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">State</label>
+                        <select name="state" value={formData.state} onChange={handleChange} className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/20 bg-white">
+                          {states.map(s => <option key={s} value={s}>{s}</option>)}
+                        </select>
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">ZIP <span className="text-red-500">*</span></label>
+                        <input type="text" name="zip" value={formData.zip} onChange={handleChange} className={`w-full px-4 py-3 rounded-lg border ${errors.zip ? 'border-red-500' : 'border-gray-200'} focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/20 bg-white`} />
+                        {errors.zip && <p className="mt-1 text-sm text-red-500">{errors.zip}</p>}
+                      </div>
+                    </div>
+                    <div className="grid md:grid-cols-2 gap-6">
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                        <input type="email" name="studentEmail" value={formData.studentEmail} onChange={handleChange} className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/20 bg-white" />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">Phone <span className="text-red-500">*</span></label>
+                        <input type="tel" name="studentPhone" value={formData.studentPhone} onChange={handleChange} className={`w-full px-4 py-3 rounded-lg border ${errors.studentPhone ? 'border-red-500' : 'border-gray-200'} focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/20 bg-white`} />
+                        {errors.studentPhone && <p className="mt-1 text-sm text-red-500">{errors.studentPhone}</p>}
+                      </div>
+                    </div>
+                  </div>
                 </div>
 
-                <div>
-                  <label htmlFor="refereePhone" className="block text-sm font-medium text-gray-700 mb-2">
-                    Phone <span className="text-red-500">*</span>
-                  </label>
-                  <input
-                    type="tel"
-                    id="refereePhone"
-                    name="refereePhone"
-                    value={formData.refereePhone}
-                    onChange={handleChange}
-                    className={`w-full px-4 py-3 rounded-lg border ${errors.refereePhone ? 'border-red-500' : 'border-gray-300'} focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition bg-white`}
-                  />
-                  {errors.refereePhone && (
-                    <p className="mt-1 text-sm text-red-500">{errors.refereePhone}</p>
-                  )}
+                <div className="flex justify-end">
+                  <button type="button" onClick={handleNext} className="px-8 py-4 bg-brand-primary hover:bg-brand-dark text-brand-text font-semibold rounded-lg transition shadow-lg">
+                    Continue
+                  </button>
                 </div>
               </div>
-            </div>
+            )}
 
-            {/* STUDENT CONTACT INFORMATION */}
-            <div className="bg-gray-50 rounded-lg p-8">
-              <h2 className="text-xl font-semibold text-gray-900 mb-6 pb-2 border-b border-gray-200">
-                Student&apos;s Contact Information
-              </h2>
-              
-              <div className="space-y-6">
-                <div className="grid md:grid-cols-2 gap-6">
-                  <div>
-                    <label htmlFor="studentFirstName" className="block text-sm font-medium text-gray-700 mb-2">
-                      First Name <span className="text-red-500">*</span>
-                    </label>
-                    <input
-                      type="text"
-                      id="studentFirstName"
-                      name="studentFirstName"
-                      value={formData.studentFirstName}
-                      onChange={handleChange}
-                      className={`w-full px-4 py-3 rounded-lg border ${errors.studentFirstName ? 'border-red-500' : 'border-gray-300'} focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition bg-white`}
-                    />
-                    {errors.studentFirstName && (
-                      <p className="mt-1 text-sm text-red-500">{errors.studentFirstName}</p>
-                    )}
-                  </div>
-
-                  <div>
-                    <label htmlFor="studentLastName" className="block text-sm font-medium text-gray-700 mb-2">
-                      Last Name <span className="text-red-500">*</span>
-                    </label>
-                    <input
-                      type="text"
-                      id="studentLastName"
-                      name="studentLastName"
-                      value={formData.studentLastName}
-                      onChange={handleChange}
-                      className={`w-full px-4 py-3 rounded-lg border ${errors.studentLastName ? 'border-red-500' : 'border-gray-300'} focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition bg-white`}
-                    />
-                    {errors.studentLastName && (
-                      <p className="mt-1 text-sm text-red-500">{errors.studentLastName}</p>
-                    )}
-                  </div>
-                </div>
-
+            {/* STEP 2 */}
+            {currentStep === 2 && (
+              <div className="space-y-8">
                 <div>
-                  <label htmlFor="addressLine1" className="block text-sm font-medium text-gray-700 mb-2">
-                    Address <span className="text-red-500">*</span>
-                  </label>
-                  <input
-                    type="text"
-                    id="addressLine1"
-                    name="addressLine1"
-                    value={formData.addressLine1}
-                    onChange={handleChange}
-                    className={`w-full px-4 py-3 rounded-lg border ${errors.addressLine1 ? 'border-red-500' : 'border-gray-300'} focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition bg-white`}
-                    placeholder="Street address"
-                  />
-                  {errors.addressLine1 && (
-                    <p className="mt-1 text-sm text-red-500">{errors.addressLine1}</p>
-                  )}
-                </div>
-
-                <div>
-                  <label htmlFor="addressLine2" className="block text-sm font-medium text-gray-700 mb-2">
-                    Address Line 2
-                  </label>
-                  <input
-                    type="text"
-                    id="addressLine2"
-                    name="addressLine2"
-                    value={formData.addressLine2}
-                    onChange={handleChange}
-                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition bg-white"
-                    placeholder="Apartment, suite, unit, etc. (optional)"
-                  />
-                </div>
-
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                  <div className="col-span-2">
-                    <label htmlFor="city" className="block text-sm font-medium text-gray-700 mb-2">
-                      City <span className="text-red-500">*</span>
-                    </label>
-                    <input
-                      type="text"
-                      id="city"
-                      name="city"
-                      value={formData.city}
-                      onChange={handleChange}
-                      className={`w-full px-4 py-3 rounded-lg border ${errors.city ? 'border-red-500' : 'border-gray-300'} focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition bg-white`}
-                    />
-                    {errors.city && (
-                      <p className="mt-1 text-sm text-red-500">{errors.city}</p>
-                    )}
-                  </div>
-
+                  <h2 className="text-xl font-bold text-gray-900 mb-6 pb-2 border-b border-gray-200">WhatsApp Access</h2>
                   <div>
-                    <label htmlFor="state" className="block text-sm font-medium text-gray-700 mb-2">
-                      State
-                    </label>
-                    <select
-                      id="state"
-                      name="state"
-                      value={formData.state}
-                      onChange={handleChange}
-                      className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition bg-white"
-                    >
-                      {states.map((state) => (
-                        <option key={state} value={state}>{state}</option>
+                    <label className="block text-sm font-medium text-gray-700 mb-3">Does the Student Have a WhatsApp Account? Are they able to sign up for one if the answer is no? <span className="text-red-500">*</span></label>
+                    <div className="space-y-3">
+                      {['Yes, has WhatsApp', 'No, but can sign up', 'No, cannot sign up'].map((option) => (
+                        <label key={option} className="flex items-center gap-3 cursor-pointer p-3 rounded-lg border border-gray-200 hover:border-brand-primary transition">
+                          <input type="radio" name="hasWhatsapp" value={option} checked={formData.hasWhatsapp === option} onChange={handleChange} className="w-4 h-4 text-brand-primary" />
+                          <span className="text-gray-700">{option}</span>
+                        </label>
                       ))}
-                    </select>
-                  </div>
-
-                  <div>
-                    <label htmlFor="zip" className="block text-sm font-medium text-gray-700 mb-2">
-                      ZIP <span className="text-red-500">*</span>
-                    </label>
-                    <input
-                      type="text"
-                      id="zip"
-                      name="zip"
-                      value={formData.zip}
-                      onChange={handleChange}
-                      className={`w-full px-4 py-3 rounded-lg border ${errors.zip ? 'border-red-500' : 'border-gray-300'} focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition bg-white`}
-                    />
-                    {errors.zip && (
-                      <p className="mt-1 text-sm text-red-500">{errors.zip}</p>
-                    )}
-                  </div>
-                </div>
-
-                <div className="grid md:grid-cols-2 gap-6">
-                  <div>
-                    <label htmlFor="studentEmail" className="block text-sm font-medium text-gray-700 mb-2">
-                      Email
-                    </label>
-                    <input
-                      type="email"
-                      id="studentEmail"
-                      name="studentEmail"
-                      value={formData.studentEmail}
-                      onChange={handleChange}
-                      className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition bg-white"
-                    />
-                  </div>
-
-                  <div>
-                    <label htmlFor="studentPhone" className="block text-sm font-medium text-gray-700 mb-2">
-                      Phone <span className="text-red-500">*</span>
-                    </label>
-                    <input
-                      type="tel"
-                      id="studentPhone"
-                      name="studentPhone"
-                      value={formData.studentPhone}
-                      onChange={handleChange}
-                      className={`w-full px-4 py-3 rounded-lg border ${errors.studentPhone ? 'border-red-500' : 'border-gray-300'} focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition bg-white`}
-                    />
-                    {errors.studentPhone && (
-                      <p className="mt-1 text-sm text-red-500">{errors.studentPhone}</p>
-                    )}
+                    </div>
+                    {errors.hasWhatsapp && <p className="mt-2 text-sm text-red-500">{errors.hasWhatsapp}</p>}
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-3">
-                    Does the Student Have a WhatsApp Account? Are they able to sign up for one if the answer is no? <span className="text-red-500">*</span>
-                  </label>
-                  <div className="flex gap-6">
-                    {['Yes, has WhatsApp', 'No, but can sign up', 'No, cannot sign up'].map((option) => (
-                      <label key={option} className="flex items-center gap-2 cursor-pointer">
-                        <input
-                          type="radio"
-                          name="hasWhatsapp"
-                          value={option}
-                          checked={formData.hasWhatsapp === option}
-                          onChange={handleChange}
-                          className="w-4 h-4 text-amber-600 border-gray-300 focus:ring-amber-500"
-                        />
-                        <span className="text-gray-700">{option}</span>
-                      </label>
-                    ))}
+                  <h2 className="text-xl font-bold text-gray-900 mb-6 pb-2 border-b border-gray-200">Immigration Information</h2>
+                  <div className="space-y-6">
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">Types of immigrants by the time of arrival to the US <span className="text-red-500">*</span></label>
+                      <select name="immigrationTime" value={formData.immigrationTime} onChange={handleChange} className={`w-full px-4 py-3 rounded-lg border ${errors.immigrationTime ? 'border-red-500' : 'border-gray-200'} focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/20 bg-white`}>
+                        {immigrationCategories.map(cat => <option key={cat.value} value={cat.value}>{cat.label}</option>)}
+                      </select>
+                      {errors.immigrationTime && <p className="mt-1 text-sm text-red-500">{errors.immigrationTime}</p>}
+                    </div>
+                    <div className="grid md:grid-cols-2 gap-6">
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">Year You Came</label>
+                        <input type="number" name="yearArrived" value={formData.yearArrived} onChange={handleChange} min="1900" max={new Date().getFullYear()} className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/20 bg-white" placeholder="e.g., 2019" />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">Current Age <span className="text-red-500">*</span></label>
+                        <input type="number" name="currentAge" value={formData.currentAge} onChange={handleChange} min="1" max="120" className={`w-full px-4 py-3 rounded-lg border ${errors.currentAge ? 'border-red-500' : 'border-gray-200'} focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/20 bg-white`} />
+                        {errors.currentAge && <p className="mt-1 text-sm text-red-500">{errors.currentAge}</p>}
+                      </div>
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">Status/Visa Type</label>
+                      <select name="visaStatus" value={formData.visaStatus} onChange={handleChange} className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/20 bg-white">
+                        {visaTypes.map(type => <option key={type.value} value={type.value}>{type.label}</option>)}
+                      </select>
+                    </div>
                   </div>
-                  {errors.hasWhatsapp && (
-                    <p className="mt-2 text-sm text-red-500">{errors.hasWhatsapp}</p>
-                  )}
+                </div>
+
+                <div>
+                  <h2 className="text-xl font-bold text-gray-900 mb-6 pb-2 border-b border-gray-200">Learning Information</h2>
+                  <div className="grid md:grid-cols-2 gap-6">
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">Native Language <span className="text-red-500">*</span></label>
+                      <select name="nativeLanguage" value={formData.nativeLanguage} onChange={handleChange} className={`w-full px-4 py-3 rounded-lg border ${errors.nativeLanguage ? 'border-red-500' : 'border-gray-200'} focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/20 bg-white`}>
+                        <option value="">Select language</option>
+                        {languages.map(lang => <option key={lang} value={lang}>{lang}</option>)}
+                      </select>
+                      {errors.nativeLanguage && <p className="mt-1 text-sm text-red-500">{errors.nativeLanguage}</p>}
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">Current English Level <span className="text-red-500">*</span></label>
+                      <select name="englishLevel" value={formData.englishLevel} onChange={handleChange} className={`w-full px-4 py-3 rounded-lg border ${errors.englishLevel ? 'border-red-500' : 'border-gray-200'} focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/20 bg-white`}>
+                        {englishLevels.map(level => <option key={level.value} value={level.value}>{level.label}</option>)}
+                      </select>
+                      {errors.englishLevel && <p className="mt-1 text-sm text-red-500">{errors.englishLevel}</p>}
+                    </div>
+                  </div>
+                </div>
+
+                <div className="flex justify-between">
+                  <button type="button" onClick={handleBack} className="px-8 py-4 border-2 border-gray-200 text-gray-700 font-semibold rounded-lg hover:bg-gray-50 transition">Back</button>
+                  <button type="button" onClick={handleNext} className="px-8 py-4 bg-brand-primary hover:bg-brand-dark text-brand-text font-semibold rounded-lg transition shadow-lg">Continue</button>
                 </div>
               </div>
-            </div>
+            )}
 
-            {/* IMMIGRATION INFORMATION */}
-            <div className="bg-gray-50 rounded-lg p-8">
-              <h2 className="text-xl font-semibold text-gray-900 mb-6 pb-2 border-b border-gray-200">
-                Immigration Information
-              </h2>
-              
-              <div className="space-y-6">
+            {/* STEP 3 */}
+            {currentStep === 3 && (
+              <div className="space-y-8">
                 <div>
-                  <label htmlFor="immigrationTime" className="block text-sm font-medium text-gray-700 mb-2">
-                    Types of immigrants by the time of arrival to the US <span className="text-red-500">*</span>
-                  </label>
-                  <select
-                    id="immigrationTime"
-                    name="immigrationTime"
-                    value={formData.immigrationTime}
-                    onChange={handleChange}
-                    className={`w-full px-4 py-3 rounded-lg border ${errors.immigrationTime ? 'border-red-500' : 'border-gray-300'} focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition bg-white`}
-                  >
-                    {immigrationCategories.map((cat) => (
-                      <option key={cat.value} value={cat.value}>{cat.label}</option>
-                    ))}
-                  </select>
-                  {errors.immigrationTime && (
-                    <p className="mt-1 text-sm text-red-500">{errors.immigrationTime}</p>
-                  )}
-                </div>
-
-                <div className="grid md:grid-cols-2 gap-6">
+                  <h2 className="text-xl font-bold text-gray-900 mb-6 pb-2 border-b border-gray-200">Learning Goals</h2>
                   <div>
-                    <label htmlFor="yearArrived" className="block text-sm font-medium text-gray-700 mb-2">
-                      Year You Came
-                    </label>
-                    <input
-                      type="number"
-                      id="yearArrived"
-                      name="yearArrived"
-                      value={formData.yearArrived}
-                      onChange={handleChange}
-                      min="1900"
-                      max={new Date().getFullYear()}
-                      className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition bg-white"
-                      placeholder="e.g., 2019"
-                    />
-                  </div>
-
-                  <div>
-                    <label htmlFor="currentAge" className="block text-sm font-medium text-gray-700 mb-2">
-                      Current Age <span className="text-red-500">*</span>
-                    </label>
-                    <input
-                      type="number"
-                      id="currentAge"
-                      name="currentAge"
-                      value={formData.currentAge}
-                      onChange={handleChange}
-                      min="1"
-                      max="120"
-                      className={`w-full px-4 py-3 rounded-lg border ${errors.currentAge ? 'border-red-500' : 'border-gray-300'} focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition bg-white`}
-                    />
-                    {errors.currentAge && (
-                      <p className="mt-1 text-sm text-red-500">{errors.currentAge}</p>
-                    )}
+                    <label className="block text-sm font-medium text-gray-700 mb-2">Tell us about the student&apos;s goals, background, and any special needs</label>
+                    <textarea name="learningGoals" value={formData.learningGoals} onChange={handleChange} rows={6} className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/20 bg-white resize-none" placeholder="What does the student want to achieve? (e.g., speak with children's teachers, get a job, pass citizenship test...)" />
                   </div>
                 </div>
 
-                <div>
-                  <label htmlFor="visaStatus" className="block text-sm font-medium text-gray-700 mb-2">
-                    Status/Visa Type
-                  </label>
-                  <select
-                    id="visaStatus"
-                    name="visaStatus"
-                    value={formData.visaStatus}
-                    onChange={handleChange}
-                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition bg-white"
-                  >
-                    {visaTypes.map((type) => (
-                      <option key={type.value} value={type.value}>{type.label}</option>
-                    ))}
-                  </select>
+                <div className="bg-brand-primary/10 rounded-xl p-6 border border-brand-primary/20">
+                  <h3 className="font-bold text-gray-900 mb-3">What happens next?</h3>
+                  <ul className="space-y-2 text-gray-700">
+                    <li>• We will send a WhatsApp message within 24 hours</li>
+                    <li>• We will match the student with a suitable tutor</li>
+                    <li>• First class will be scheduled at a convenient time</li>
+                    <li>• Free childcare is available during all sessions</li>
+                  </ul>
+                </div>
+
+                <div className="flex justify-between">
+                  <button type="button" onClick={handleBack} className="px-8 py-4 border-2 border-gray-200 text-gray-700 font-semibold rounded-lg hover:bg-gray-50 transition">Back</button>
+                  <button type="button" onClick={handleNext} className="px-8 py-4 bg-brand-primary hover:bg-brand-dark text-brand-text font-semibold rounded-lg transition shadow-lg">Review Application</button>
                 </div>
               </div>
-            </div>
+            )}
 
-            {/* LEARNING INFORMATION */}
-            <div className="bg-gray-50 rounded-lg p-8">
-              <h2 className="text-xl font-semibold text-gray-900 mb-6 pb-2 border-b border-gray-200">
-                Learning Information
-              </h2>
-              
-              <div className="space-y-6">
-                <div className="grid md:grid-cols-2 gap-6">
+            {/* STEP 4 - REVIEW */}
+            {currentStep === 4 && (
+              <div className="space-y-8">
+                <h2 className="text-xl font-bold text-gray-900 mb-6 pb-2 border-b border-gray-200">Review Your Application</h2>
+                
+                <div className="space-y-6 bg-gray-50 rounded-xl p-6">
                   <div>
-                    <label htmlFor="nativeLanguage" className="block text-sm font-medium text-gray-700 mb-2">
-                      Native Language <span className="text-red-500">*</span>
-                    </label>
-                    <select
-                      id="nativeLanguage"
-                      name="nativeLanguage"
-                      value={formData.nativeLanguage}
-                      onChange={handleChange}
-                      className={`w-full px-4 py-3 rounded-lg border ${errors.nativeLanguage ? 'border-red-500' : 'border-gray-300'} focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition bg-white`}
-                    >
-                      <option value="">Select language</option>
-                      {languages.map((lang) => (
-                        <option key={lang} value={lang}>{lang}</option>
-                      ))}
-                    </select>
-                    {errors.nativeLanguage && (
-                      <p className="mt-1 text-sm text-red-500">{errors.nativeLanguage}</p>
-                    )}
+                    <p className="text-sm text-gray-500 mb-1">Organization</p>
+                    <p className="font-medium text-gray-900">{formData.organization}</p>
                   </div>
-
+                  <div className="grid md:grid-cols-2 gap-4">
+                    <div>
+                      <p className="text-sm text-gray-500 mb-1">Referee</p>
+                      <p className="font-medium text-gray-900">{formData.refereeFirstName} {formData.refereeLastName}</p>
+                    </div>
+                    <div>
+                      <p className="text-sm text-gray-500 mb-1">Student</p>
+                      <p className="font-medium text-gray-900">{formData.studentFirstName} {formData.studentLastName}</p>
+                    </div>
+                  </div>
                   <div>
-                    <label htmlFor="englishLevel" className="block text-sm font-medium text-gray-700 mb-2">
-                      Current English Level <span className="text-red-500">*</span>
-                    </label>
-                    <select
-                      id="englishLevel"
-                      name="englishLevel"
-                      value={formData.englishLevel}
-                      onChange={handleChange}
-                      className={`w-full px-4 py-3 rounded-lg border ${errors.englishLevel ? 'border-red-500' : 'border-gray-300'} focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition bg-white`}
-                    >
-                      {englishLevels.map((level) => (
-                        <option key={level.value} value={level.value}>{level.label}</option>
-                      ))}
-                    </select>
-                    {errors.englishLevel && (
-                      <p className="mt-1 text-sm text-red-500">{errors.englishLevel}</p>
-                    )}
+                    <p className="text-sm text-gray-500 mb-1">Address</p>
+                    <p className="font-medium text-gray-900">{formData.addressLine1}, {formData.city}, {formData.state} {formData.zip}</p>
+                  </div>
+                  <div className="grid md:grid-cols-3 gap-4">
+                    <div>
+                      <p className="text-sm text-gray-500 mb-1">English Level</p>
+                      <p className="font-medium text-gray-900">{formData.englishLevel}</p>
+                    </div>
+                    <div>
+                      <p className="text-sm text-gray-500 mb-1">Language</p>
+                      <p className="font-medium text-gray-900">{formData.nativeLanguage}</p>
+                    </div>
+                    <div>
+                      <p className="text-sm text-gray-500 mb-1">Age</p>
+                      <p className="font-medium text-gray-900">{formData.currentAge}</p>
+                    </div>
                   </div>
                 </div>
 
-                <div>
-                  <label htmlFor="learningGoals" className="block text-sm font-medium text-gray-700 mb-2">
-                    Learning Goals
-                  </label>
-                  <textarea
-                    id="learningGoals"
-                    name="learningGoals"
-                    value={formData.learningGoals}
-                    onChange={handleChange}
-                    rows={4}
-                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition bg-white resize-none"
-                    placeholder="What does the student want to achieve? (e.g., speak with children's teachers, get a job, pass citizenship test...)"
-                  />
-                </div>
-              </div>
-            </div>
-
-            {/* SUBMIT SECTION */}
-            <div className="bg-amber-50 rounded-lg p-8">
-              <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-                <div>
-                  <h3 className="font-semibold text-gray-900 mb-1">Ready to Submit?</h3>
-                  <p className="text-sm text-gray-600">
-                    Your referral will be sent directly to our ESL coordinator for review.
+                <div className="bg-green-50 border border-green-200 rounded-xl p-6">
+                  <p className="text-green-800 text-sm">
+                    By submitting this form, the referral will be sent via WhatsApp to our ESL coordinator. 
+                    Please ensure all information is accurate before submitting.
                   </p>
                 </div>
 
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="w-full md:w-auto px-8 py-4 bg-amber-600 hover:bg-amber-700 text-white font-semibold rounded-lg transition shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  {isSubmitting ? (
-                    <span className="flex items-center justify-center gap-2">
-                      <span className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                      Submitting...
-                    </span>
-                  ) : (
-                    'Submit Referral'
-                  )}
-                </button>
+                <div className="flex justify-between">
+                  <button type="button" onClick={handleBack} className="px-8 py-4 border-2 border-gray-200 text-gray-700 font-semibold rounded-lg hover:bg-gray-50 transition">Back</button>
+                  <button type="submit" disabled={isSubmitting} className="px-8 py-4 bg-brand-primary hover:bg-brand-dark text-brand-text font-semibold rounded-lg transition shadow-lg disabled:opacity-50">
+                    {isSubmitting ? 'Sending...' : 'Submit Referral'}
+                  </button>
+                </div>
               </div>
-            </div>
-
-            <p className="text-center text-sm text-gray-500">
-              <span className="text-red-500">*</span> indicates required fields. 
-              All information is kept confidential and used solely for program enrollment.
-            </p>
+            )}
           </form>
         </div>
       </section>
 
-      {/* CONTACT SECTION */}
-      <section className="py-16 bg-amber-600 text-white">
-        <div className="max-w-4xl mx-auto px-6 md:px-12 text-center">
-          <h2 className="text-3xl font-bold mb-4">Questions?</h2>
-          <p className="text-xl text-white/90 mb-6">
-            For questions about referrals or our ESL program, please contact us.
-          </p>
-          <a 
-            href="tel:+12036759395" 
-            className="inline-flex items-center gap-2 bg-white text-amber-600 px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition"
-          >
-            Call (203) 675-9395
-          </a>
+      {/* FAQ SECTION */}
+      <section className="py-16 bg-white">
+        <div className="max-w-4xl mx-auto px-6 md:px-12">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-black text-gray-900 mb-4">Frequently Asked Questions</h2>
+          </div>
+          <div className="space-y-4">
+            {[
+              { q: 'Who is eligible for ESL classes?', a: 'Our ESL program is open to refugee and immigrant women of all English levels. We prioritize those who have been in the US for less than 10 years.' },
+              { q: 'How much do classes cost?', a: 'All our ESL classes are 100% free. There is no cost to students, ever.' },
+              { q: 'Can I bring my children?', a: 'Yes, we provide free childcare during all ESL sessions so mothers can focus on learning.' },
+              { q: 'How long are the classes?', a: 'Classes are typically 1-2 hours, once or twice per week, scheduled at times that work for you.' },
+            ].map((faq, idx) => (
+              <div key={idx} className="bg-gray-50 rounded-xl p-6">
+                <h3 className="font-semibold text-gray-900 mb-2">{faq.q}</h3>
+                <p className="text-gray-600">{faq.a}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
       {/* NEWSLETTER CTA */}
       <NewsletterCTA
-        title="Stay Informed"
-        subtitle="Get updates on our ESL programs"
+        title="Stay Updated"
+        subtitle="Get updates on our ESL programs and success stories"
         placeholder="Enter your email"
         buttonText="Subscribe"
       />
