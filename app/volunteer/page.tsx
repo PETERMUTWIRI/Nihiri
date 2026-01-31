@@ -1,45 +1,64 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import Image from 'next/image';
-import { FaHeart, FaUsers, FaGraduationCap, FaHandHoldingHeart, FaCheckCircle, FaWhatsapp } from 'react-icons/fa';
 import { motion, AnimatePresence } from 'framer-motion';
 import NewsletterCTA from '@/components/NewsletterCTA';
 
 interface FormData {
-  fullName: string;
+  firstName: string;
+  lastName: string;
   email: string;
   phone: string;
-  countryOfOrigin: string;
-  languages: string;
-  availability: string;
-  message: string;
+  startDate: string;
+  position: string;
+  aboutYourself: string;
 }
 
 interface FormErrors {
   [key: string]: string;
 }
 
+const volunteerPositions = [
+  'ESL Tutor',
+  'Health Navigator',
+  'Childcare Provider',
+  'Administrative Support',
+  'Event Coordinator',
+  'Fundraising Assistant',
+  'Interpreter/Translator',
+  'Other',
+];
+
 export default function VolunteerPage() {
   const [formData, setFormData] = useState<FormData>({
-    fullName: '',
+    firstName: '',
+    lastName: '',
     email: '',
     phone: '',
-    countryOfOrigin: '',
-    languages: '',
-    availability: '',
-    message: '',
+    startDate: '',
+    position: '',
+    aboutYourself: '',
   });
 
   const [errors, setErrors] = useState<FormErrors>({});
   const [showToast, setShowToast] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [resumeName, setResumeName] = useState('');
+  const [coverLetterName, setCoverLetterName] = useState('');
+  
+  const resumeRef = useRef<HTMLInputElement>(null);
+  const coverLetterRef = useRef<HTMLInputElement>(null);
 
   const validateForm = (): boolean => {
     const newErrors: FormErrors = {};
 
-    if (!formData.fullName.trim()) {
-      newErrors.fullName = 'Full name is required';
+    if (!formData.firstName.trim()) {
+      newErrors.firstName = 'First name is required';
+    }
+
+    if (!formData.lastName.trim()) {
+      newErrors.lastName = 'Last name is required';
     }
 
     if (!formData.email.trim()) {
@@ -52,8 +71,16 @@ export default function VolunteerPage() {
       newErrors.phone = 'Phone number is required';
     }
 
-    if (!formData.availability) {
-      newErrors.availability = 'Please select your availability';
+    if (!formData.startDate) {
+      newErrors.startDate = 'Available start date is required';
+    }
+
+    if (!formData.position) {
+      newErrors.position = 'Please select a volunteer position';
+    }
+
+    if (!formData.aboutYourself.trim()) {
+      newErrors.aboutYourself = 'Please tell us about yourself';
     }
 
     setErrors(newErrors);
@@ -68,25 +95,31 @@ export default function VolunteerPage() {
     setIsSubmitting(true);
 
     // Format WhatsApp message
-    const message = `*New Volunteer Application*%0A%0A` +
-      `*Name:* ${formData.fullName}%0A` +
-      `*Email:* ${formData.email}%0A` +
-      `*Phone:* ${formData.phone}%0A` +
-      `*Country of Origin:* ${formData.countryOfOrigin || 'Not specified'}%0A` +
-      `*Languages:* ${formData.languages || 'Not specified'}%0A` +
-      `*Availability:* ${formData.availability}%0A` +
-      `*Message/Skills:*%0A${formData.message || 'No additional message'}`;
+    const message = `NEW VOLUNTEER APPLICATION
 
-    // Show success toast
+PERSONAL INFORMATION
+Name: ${formData.firstName} ${formData.lastName}
+Email: ${formData.email}
+Phone: ${formData.phone}
+Available Start Date: ${formData.startDate}
+
+VOLUNTEER POSITION
+Position: ${formData.position}
+Resume: ${resumeName || 'Not uploaded'}
+Cover Letter: ${coverLetterName || 'Not uploaded'}
+
+ABOUT YOURSELF
+${formData.aboutYourself}`;
+
+    const encodedMessage = encodeURIComponent(message);
+
     setShowToast(true);
 
-    // Open WhatsApp after short delay
     setTimeout(() => {
-      window.open(`https://wa.me/+254712345678?text=${message}`, '_blank');
+      window.open(`https://wa.me/+254713064026?text=${encodedMessage}`, '_blank');
       setIsSubmitting(false);
     }, 1500);
 
-    // Hide toast after 5 seconds
     setTimeout(() => {
       setShowToast(false);
     }, 5000);
@@ -95,34 +128,21 @@ export default function VolunteerPage() {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
-    // Clear error when user starts typing
     if (errors[name]) {
       setErrors(prev => ({ ...prev, [name]: '' }));
     }
   };
 
-  const volunteerOpportunities = [
-    {
-      icon: FaGraduationCap,
-      title: 'ESL Tutor',
-      description: 'Help refugee women learn English through one-on-one tutoring sessions.',
-    },
-    {
-      icon: FaHandHoldingHeart,
-      title: 'Health Navigator',
-      description: 'Assist families in understanding and accessing healthcare services.',
-    },
-    {
-      icon: FaUsers,
-      title: 'Youth Mentor',
-      description: 'Guide and support refugee youth in their educational journey.',
-    },
-    {
-      icon: FaHeart,
-      title: 'Childcare Provider',
-      description: 'Provide childcare during ESL classes to enable mothers to learn.',
-    },
-  ];
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>, type: 'resume' | 'coverLetter') => {
+    const file = e.target.files?.[0];
+    if (file) {
+      if (type === 'resume') {
+        setResumeName(file.name);
+      } else {
+        setCoverLetterName(file.name);
+      }
+    }
+  };
 
   return (
     <div className="min-h-screen bg-white">
@@ -133,19 +153,16 @@ export default function VolunteerPage() {
             initial={{ opacity: 0, y: -50 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -50 }}
-            className="fixed top-24 left-1/2 -translate-x-1/2 z-50 bg-green-500 text-white px-6 py-4 rounded-xl shadow-2xl flex items-center gap-3"
+            className="fixed top-24 left-1/2 -translate-x-1/2 z-50 bg-green-600 text-white px-6 py-4 rounded-lg shadow-2xl"
           >
-            <FaCheckCircle className="text-xl" />
-            <div>
-              <p className="font-semibold">Application Submitted!</p>
-              <p className="text-sm text-white/90">Redirecting you to WhatsApp...</p>
-            </div>
+            <p className="font-semibold">Application Submitted Successfully</p>
+            <p className="text-sm text-white/90">Opening WhatsApp...</p>
           </motion.div>
         )}
       </AnimatePresence>
 
-      {/* HERO SECTION - Warm, compassionate design */}
-      <section className="relative min-h-[80vh] bg-gradient-to-br from-orange-50 via-white to-brand-background overflow-hidden">
+      {/* HERO SECTION */}
+      <section className="relative min-h-[70vh] bg-gradient-to-br from-yellow-50 via-white to-cyan-50 overflow-hidden">
         {/* Decorative elements */}
         <div className="absolute top-20 left-10 w-64 h-64 bg-brand-primary/10 rounded-full blur-3xl" />
         <div className="absolute bottom-20 right-10 w-96 h-96 bg-cyan-100/30 rounded-full blur-3xl" />
@@ -154,12 +171,11 @@ export default function VolunteerPage() {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Left: Content */}
             <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              animate={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
             >
-              <span className="inline-flex items-center gap-2 bg-brand-primary/20 text-brand-text px-4 py-2 rounded-full text-sm font-semibold mb-6">
-                <FaHeart className="text-brand-primary" />
+              <span className="inline-block bg-brand-primary/20 text-brand-text px-4 py-2 rounded-full text-sm font-semibold mb-6">
                 Join Our Mission
               </span>
               
@@ -171,24 +187,24 @@ export default function VolunteerPage() {
               </h1>
               
               <p className="text-xl text-gray-600 mb-6 leading-relaxed">
-                At New International Hope, we believe it takes a village to support refugee and immigrant families. 
-                Your time and skills can transform lives and build a community that celebrates diversity.
+                Volunteering with New International Hope is a great way to enrich the life 
+                of a refugee or immigrant while also enriching your own. Your time and skills 
+                can transform lives and build a stronger community.
               </p>
               
               <p className="text-gray-600 mb-8">
-                Inspired by the compassionate work of Elena&apos;s Light, we invite you to join our volunteer family 
-                and make a meaningful difference in the lives of those rebuilding their futures.
+                If you enjoy communicating and are passionate about sharing the gift of 
+                language access, you can be an ESL tutor. Or if you have other skills you 
+                would like to offer, let us know.
               </p>
 
-              <div className="flex flex-wrap gap-4">
-                <a
-                  href="#volunteer-form"
-                  className="inline-flex items-center gap-2 bg-brand-primary hover:bg-brand-dark text-brand-text px-8 py-4 rounded-lg font-semibold transition shadow-lg hover:shadow-xl"
-                >
-                  Apply to Volunteer
-                  <FaHeart />
-                </a>
-              </div>
+              <a
+                href="#volunteer-form"
+                className="inline-flex items-center gap-2 bg-brand-primary hover:bg-brand-dark text-brand-text px-8 py-4 rounded-lg font-semibold transition shadow-lg"
+              >
+                Apply Today
+                <span className="text-lg">→</span>
+              </a>
             </motion.div>
 
             {/* Right: Image */}
@@ -198,7 +214,7 @@ export default function VolunteerPage() {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="relative"
             >
-              <div className="relative h-[500px] rounded-3xl overflow-hidden shadow-2xl">
+              <div className="relative h-[450px] rounded-3xl overflow-hidden shadow-2xl">
                 <Image
                   src="/images/programs/esl3.png"
                   alt="Volunteers making a difference"
@@ -206,20 +222,13 @@ export default function VolunteerPage() {
                   className="object-cover"
                   priority
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
               </div>
               
               {/* Floating stat card */}
-              <div className="absolute -bottom-6 -left-6 bg-white rounded-2xl shadow-xl p-6 max-w-xs">
-                <div className="flex items-center gap-4">
-                  <div className="w-14 h-14 bg-brand-primary/20 rounded-full flex items-center justify-center">
-                    <FaUsers className="text-2xl text-brand-primary" />
-                  </div>
-                  <div>
-                    <p className="text-3xl font-black text-gray-900">150+</p>
-                    <p className="text-sm text-gray-600">Active Volunteers</p>
-                  </div>
-                </div>
+              <div className="absolute -bottom-6 -left-6 bg-white rounded-2xl shadow-xl p-6 max-w-[180px]">
+                <p className="text-3xl font-black text-gray-900">150+</p>
+                <p className="text-sm text-gray-600">Active Volunteers</p>
               </div>
             </motion.div>
           </div>
@@ -231,32 +240,34 @@ export default function VolunteerPage() {
         <div className="max-w-7xl mx-auto px-6 md:px-12">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-black text-gray-900 mb-4">
-              Ways to Make an Impact
+              Volunteer Opportunities
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Whether you have an hour or a day, your contribution matters. 
-              Choose how you&apos;d like to help refugee families thrive.
+              Discover how you can make a meaningful impact in the lives of refugee 
+              and immigrant families.
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {volunteerOpportunities.map((opportunity, idx) => (
+            {[
+              { title: 'ESL Tutor', desc: 'Help adults learn English through one-on-one tutoring sessions. Perfect for patient, caring individuals who love teaching.' },
+              { title: 'Health Navigator', desc: 'Assist families in understanding and accessing healthcare services. Ideal for those with medical or social work backgrounds.' },
+              { title: 'Childcare Provider', desc: 'Provide childcare during ESL classes to enable mothers to learn. Great for those who love working with children.' },
+              { title: 'Administrative Support', desc: 'Help with office tasks, data entry, and program coordination. Perfect for organized, detail-oriented individuals.' },
+            ].map((item, idx) => (
               <motion.div
-                key={opportunity.title}
+                key={item.title}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: idx * 0.1 }}
                 className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition hover:-translate-y-1"
               >
-                <div className="w-16 h-16 bg-brand-primary/20 rounded-2xl flex items-center justify-center mb-6">
-                  <opportunity.icon className="text-3xl text-brand-primary" />
-                </div>
                 <h3 className="text-xl font-bold text-gray-900 mb-3">
-                  {opportunity.title}
+                  {item.title}
                 </h3>
                 <p className="text-gray-600">
-                  {opportunity.description}
+                  {item.desc}
                 </p>
               </motion.div>
             ))}
@@ -264,172 +275,238 @@ export default function VolunteerPage() {
         </div>
       </section>
 
-      {/* VOLUNTEER FORM SECTION */}
+      {/* VOLUNTEER FORM */}
       <section id="volunteer-form" className="py-20 bg-white">
         <div className="max-w-4xl mx-auto px-6 md:px-12">
           <div className="text-center mb-12">
-            <span className="inline-block bg-cyan-100 text-cyan-800 px-4 py-2 rounded-full text-sm font-semibold mb-4">
-              Get Started
-            </span>
             <h2 className="text-4xl font-black text-gray-900 mb-4">
-              Apply to Volunteer
+              Volunteer Today
             </h2>
-            <p className="text-xl text-gray-600">
-              Fill out the form below and we&apos;ll get back to you within 48 hours.
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+              Please fill out this form and someone from our team will get back to you 
+              with next steps. Thank you for your interest in volunteering with us.
             </p>
           </div>
 
-          <form onSubmit={handleSubmit} className="bg-brand-background rounded-3xl p-8 md:p-12 shadow-xl">
-            <div className="grid md:grid-cols-2 gap-6 mb-6">
-              {/* Full Name */}
-              <div>
-                <label htmlFor="fullName" className="block text-sm font-semibold text-gray-700 mb-2">
-                  Full Name <span className="text-red-500">*</span>
-                </label>
-                <input
-                  type="text"
-                  id="fullName"
-                  name="fullName"
-                  value={formData.fullName}
-                  onChange={handleChange}
-                  className={`w-full px-4 py-3 rounded-xl border-2 ${errors.fullName ? 'border-red-500' : 'border-gray-200'} focus:border-brand-primary focus:ring-0 transition bg-white`}
-                  placeholder="Enter your full name"
-                />
-                {errors.fullName && (
-                  <p className="mt-1 text-sm text-red-500">{errors.fullName}</p>
-                )}
-              </div>
+          <form onSubmit={handleSubmit} className="bg-gray-50 rounded-3xl p-8 md:p-12 shadow-xl">
+            
+            {/* PERSONAL INFORMATION */}
+            <div className="mb-10">
+              <h3 className="text-xl font-semibold text-gray-900 mb-6 pb-2 border-b border-gray-200">
+                Personal Information
+              </h3>
+              
+              <div className="grid md:grid-cols-2 gap-6">
+                <div>
+                  <label htmlFor="firstName" className="block text-sm font-medium text-gray-700 mb-2">
+                    First Name <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    id="firstName"
+                    name="firstName"
+                    value={formData.firstName}
+                    onChange={handleChange}
+                    className={`w-full px-4 py-3 rounded-lg border ${errors.firstName ? 'border-red-500' : 'border-gray-300'} focus:border-brand-primary focus:ring-1 focus:ring-brand-primary transition bg-white`}
+                  />
+                  {errors.firstName && (
+                    <p className="mt-1 text-sm text-red-500">{errors.firstName}</p>
+                  )}
+                </div>
 
-              {/* Email */}
-              <div>
-                <label htmlFor="email" className="block text-sm font-semibold text-gray-700 mb-2">
-                  Email Address <span className="text-red-500">*</span>
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  className={`w-full px-4 py-3 rounded-xl border-2 ${errors.email ? 'border-red-500' : 'border-gray-200'} focus:border-brand-primary focus:ring-0 transition bg-white`}
-                  placeholder="your@email.com"
-                />
-                {errors.email && (
-                  <p className="mt-1 text-sm text-red-500">{errors.email}</p>
-                )}
-              </div>
+                <div>
+                  <label htmlFor="lastName" className="block text-sm font-medium text-gray-700 mb-2">
+                    Last Name <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    id="lastName"
+                    name="lastName"
+                    value={formData.lastName}
+                    onChange={handleChange}
+                    className={`w-full px-4 py-3 rounded-lg border ${errors.lastName ? 'border-red-500' : 'border-gray-300'} focus:border-brand-primary focus:ring-1 focus:ring-brand-primary transition bg-white`}
+                  />
+                  {errors.lastName && (
+                    <p className="mt-1 text-sm text-red-500">{errors.lastName}</p>
+                  )}
+                </div>
 
-              {/* Phone */}
-              <div>
-                <label htmlFor="phone" className="block text-sm font-semibold text-gray-700 mb-2">
-                  Phone Number <span className="text-red-500">*</span>
-                </label>
-                <input
-                  type="tel"
-                  id="phone"
-                  name="phone"
-                  value={formData.phone}
-                  onChange={handleChange}
-                  className={`w-full px-4 py-3 rounded-xl border-2 ${errors.phone ? 'border-red-500' : 'border-gray-200'} focus:border-brand-primary focus:ring-0 transition bg-white`}
-                  placeholder="+1 (555) 000-0000"
-                />
-                {errors.phone && (
-                  <p className="mt-1 text-sm text-red-500">{errors.phone}</p>
-                )}
-              </div>
+                <div>
+                  <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+                    Email <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    className={`w-full px-4 py-3 rounded-lg border ${errors.email ? 'border-red-500' : 'border-gray-300'} focus:border-brand-primary focus:ring-1 focus:ring-brand-primary transition bg-white`}
+                    placeholder="your@email.com"
+                  />
+                  {errors.email && (
+                    <p className="mt-1 text-sm text-red-500">{errors.email}</p>
+                  )}
+                </div>
 
-              {/* Country of Origin */}
-              <div>
-                <label htmlFor="countryOfOrigin" className="block text-sm font-semibold text-gray-700 mb-2">
-                  Country of Origin
-                </label>
-                <input
-                  type="text"
-                  id="countryOfOrigin"
-                  name="countryOfOrigin"
-                  value={formData.countryOfOrigin}
-                  onChange={handleChange}
-                  className="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-brand-primary focus:ring-0 transition bg-white"
-                  placeholder="e.g., Afghanistan, Syria, etc."
-                />
-              </div>
+                <div>
+                  <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">
+                    Phone <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    type="tel"
+                    id="phone"
+                    name="phone"
+                    value={formData.phone}
+                    onChange={handleChange}
+                    className={`w-full px-4 py-3 rounded-lg border ${errors.phone ? 'border-red-500' : 'border-gray-300'} focus:border-brand-primary focus:ring-1 focus:ring-brand-primary transition bg-white`}
+                    placeholder="+1 (555) 000-0000"
+                  />
+                  {errors.phone && (
+                    <p className="mt-1 text-sm text-red-500">{errors.phone}</p>
+                  )}
+                </div>
 
-              {/* Languages */}
-              <div className="md:col-span-2">
-                <label htmlFor="languages" className="block text-sm font-semibold text-gray-700 mb-2">
-                  Languages Spoken
-                </label>
-                <input
-                  type="text"
-                  id="languages"
-                  name="languages"
-                  value={formData.languages}
-                  onChange={handleChange}
-                  className="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-brand-primary focus:ring-0 transition bg-white"
-                  placeholder="e.g., English, Dari, Pashto, Arabic, etc."
-                />
-              </div>
+                <div>
+                  <label htmlFor="startDate" className="block text-sm font-medium text-gray-700 mb-2">
+                    Available Start Date <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    type="date"
+                    id="startDate"
+                    name="startDate"
+                    value={formData.startDate}
+                    onChange={handleChange}
+                    className={`w-full px-4 py-3 rounded-lg border ${errors.startDate ? 'border-red-500' : 'border-gray-300'} focus:border-brand-primary focus:ring-1 focus:ring-brand-primary transition bg-white`}
+                  />
+                  {errors.startDate && (
+                    <p className="mt-1 text-sm text-red-500">{errors.startDate}</p>
+                  )}
+                </div>
 
-              {/* Availability */}
-              <div className="md:col-span-2">
-                <label htmlFor="availability" className="block text-sm font-semibold text-gray-700 mb-2">
-                  Availability <span className="text-red-500">*</span>
-                </label>
-                <select
-                  id="availability"
-                  name="availability"
-                  value={formData.availability}
-                  onChange={handleChange}
-                  className={`w-full px-4 py-3 rounded-xl border-2 ${errors.availability ? 'border-red-500' : 'border-gray-200'} focus:border-brand-primary focus:ring-0 transition bg-white`}
-                >
-                  <option value="">Select your availability</option>
-                  <option value="Weekday mornings">Weekday mornings</option>
-                  <option value="Weekday afternoons">Weekday afternoons</option>
-                  <option value="Weekday evenings">Weekday evenings</option>
-                  <option value="Weekend mornings">Weekend mornings</option>
-                  <option value="Weekend afternoons">Weekend afternoons</option>
-                  <option value="Weekend evenings">Weekend evenings</option>
-                  <option value="Flexible">Flexible schedule</option>
-                </select>
-                {errors.availability && (
-                  <p className="mt-1 text-sm text-red-500">{errors.availability}</p>
-                )}
-              </div>
-
-              {/* Message/Skills */}
-              <div className="md:col-span-2">
-                <label htmlFor="message" className="block text-sm font-semibold text-gray-700 mb-2">
-                  Message / Skills
-                </label>
-                <textarea
-                  id="message"
-                  name="message"
-                  value={formData.message}
-                  onChange={handleChange}
-                  rows={4}
-                  className="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-brand-primary focus:ring-0 transition bg-white resize-none"
-                  placeholder="Tell us about your skills, experience, or why you'd like to volunteer..."
-                />
+                <div>
+                  <label htmlFor="position" className="block text-sm font-medium text-gray-700 mb-2">
+                    Volunteer position you are interested in? <span className="text-red-500">*</span>
+                  </label>
+                  <select
+                    id="position"
+                    name="position"
+                    value={formData.position}
+                    onChange={handleChange}
+                    className={`w-full px-4 py-3 rounded-lg border ${errors.position ? 'border-red-500' : 'border-gray-300'} focus:border-brand-primary focus:ring-1 focus:ring-brand-primary transition bg-white`}
+                  >
+                    <option value="">Select a position</option>
+                    {volunteerPositions.map((pos) => (
+                      <option key={pos} value={pos}>{pos}</option>
+                    ))}
+                  </select>
+                  {errors.position && (
+                    <p className="mt-1 text-sm text-red-500">{errors.position}</p>
+                  )}
+                </div>
               </div>
             </div>
 
-            {/* Submit Button */}
-            <div className="flex flex-col sm:flex-row items-center gap-4">
+            {/* ABOUT YOURSELF */}
+            <div className="mb-10">
+              <h3 className="text-xl font-semibold text-gray-900 mb-6 pb-2 border-b border-gray-200">
+                About Yourself
+              </h3>
+              
+              <div>
+                <label htmlFor="aboutYourself" className="block text-sm font-medium text-gray-700 mb-2">
+                  Tell us about yourself, your skills, volunteer experience etc. Why are you interested in volunteering with us? <span className="text-red-500">*</span>
+                </label>
+                <textarea
+                  id="aboutYourself"
+                  name="aboutYourself"
+                  value={formData.aboutYourself}
+                  onChange={handleChange}
+                  rows={6}
+                  className={`w-full px-4 py-3 rounded-lg border ${errors.aboutYourself ? 'border-red-500' : 'border-gray-300'} focus:border-brand-primary focus:ring-1 focus:ring-brand-primary transition bg-white resize-none`}
+                  placeholder="Share your story, experience, and what motivates you to volunteer..."
+                />
+                {errors.aboutYourself && (
+                  <p className="mt-1 text-sm text-red-500">{errors.aboutYourself}</p>
+                )}
+              </div>
+            </div>
+
+            {/* FILE UPLOADS */}
+            <div className="mb-10">
+              <h3 className="text-xl font-semibold text-gray-900 mb-6 pb-2 border-b border-gray-200">
+                Documents (Optional)
+              </h3>
+              
+              <div className="grid md:grid-cols-2 gap-6">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Upload your resume
+                  </label>
+                  <div
+                    onClick={() => resumeRef.current?.click()}
+                    className="w-full px-4 py-8 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer hover:border-brand-primary hover:bg-brand-primary/5 transition text-center"
+                  >
+                    <input
+                      ref={resumeRef}
+                      type="file"
+                      accept=".pdf,.doc,.docx"
+                      onChange={(e) => handleFileChange(e, 'resume')}
+                      className="hidden"
+                    />
+                    {resumeName ? (
+                      <p className="text-sm text-gray-700 font-medium">{resumeName}</p>
+                    ) : (
+                      <>
+                        <p className="text-sm text-gray-500 mb-1">Click to upload</p>
+                        <p className="text-xs text-gray-400">PDF, DOC, or DOCX</p>
+                      </>
+                    )}
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Upload your cover letter
+                  </label>
+                  <div
+                    onClick={() => coverLetterRef.current?.click()}
+                    className="w-full px-4 py-8 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer hover:border-brand-primary hover:bg-brand-primary/5 transition text-center"
+                  >
+                    <input
+                      ref={coverLetterRef}
+                      type="file"
+                      accept=".pdf,.doc,.docx"
+                      onChange={(e) => handleFileChange(e, 'coverLetter')}
+                      className="hidden"
+                    />
+                    {coverLetterName ? (
+                      <p className="text-sm text-gray-700 font-medium">{coverLetterName}</p>
+                    ) : (
+                      <>
+                        <p className="text-sm text-gray-500 mb-1">Click to upload</p>
+                        <p className="text-xs text-gray-400">PDF, DOC, or DOCX</p>
+                      </>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* SUBMIT BUTTON */}
+            <div className="flex flex-col items-center gap-4">
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-brand-primary hover:bg-brand-dark text-brand-text px-8 py-4 rounded-lg font-semibold transition shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full md:w-auto px-12 py-4 bg-brand-primary hover:bg-brand-dark text-brand-text font-semibold rounded-lg transition shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {isSubmitting ? (
-                  <>
-                    <div className="w-5 h-5 border-2 border-brand-text/30 border-t-brand-text rounded-full animate-spin" />
+                  <span className="flex items-center justify-center gap-2">
+                    <span className="w-5 h-5 border-2 border-brand-text/30 border-t-brand-text rounded-full animate-spin" />
                     Sending...
-                  </>
+                  </span>
                 ) : (
-                  <>
-                    <FaWhatsapp className="text-lg" />
-                    Submit Application
-                  </>
+                  'Submit Application'
                 )}
               </button>
               
@@ -439,36 +516,68 @@ export default function VolunteerPage() {
             </div>
 
             {/* WhatsApp Note */}
-            <div className="mt-6 p-4 bg-green-50 rounded-xl flex items-start gap-3">
-              <FaWhatsapp className="text-green-600 text-xl mt-0.5" />
-              <p className="text-sm text-gray-600">
-                Your application will be sent via WhatsApp to our volunteer coordinator. 
-                Make sure you have WhatsApp installed on your device.
+            <div className="mt-8 p-4 bg-green-50 rounded-xl">
+              <p className="text-sm text-gray-700">
+                <strong>Note:</strong> Your application will be sent via WhatsApp to our volunteer coordinator. 
+                Please ensure you have WhatsApp installed on your device.
               </p>
             </div>
           </form>
         </div>
       </section>
 
-      {/* INSPIRATIONAL QUOTE */}
-      <section className="py-20 bg-gradient-to-br from-cyan-600 to-cyan-700 text-white">
+      {/* IMPACT SECTION */}
+      <section className="py-20 bg-brand-background">
+        <div className="max-w-7xl mx-auto px-6 md:px-12">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-black text-gray-900 mb-4">
+              Your Impact
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              See how volunteers like you are transforming lives every day.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {[
+              { number: '500+', label: 'Students Taught', desc: 'Adults who have learned English through our program' },
+              { number: '150+', label: 'Active Volunteers', desc: 'Dedicated individuals making a difference' },
+              { number: '50+', label: 'Countries Represented', desc: 'Diverse communities we serve' },
+            ].map((stat, idx) => (
+              <div key={stat.label} className="text-center">
+                <p className="text-5xl font-black text-gray-900 mb-2">{stat.number}</p>
+                <p className="text-lg font-semibold text-gray-700 mb-1">{stat.label}</p>
+                <p className="text-gray-600">{stat.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA SECTION */}
+      <section className="py-16 bg-gradient-to-r from-cyan-600 to-cyan-700 text-white">
         <div className="max-w-4xl mx-auto px-6 md:px-12 text-center">
-          <FaHeart className="text-4xl text-brand-primary mx-auto mb-6" />
-          <blockquote className="text-2xl md:text-3xl font-medium leading-relaxed mb-6">
-            &ldquo;We know that it really does take a village. Together, we can provide 
-            refugee and immigrant families with all the tools they need to cultivate 
-            and exercise their individual independence.&rdquo;
-          </blockquote>
-          <cite className="text-white/80 not-italic">
-            — Inspired by Elena&apos;s Light
-          </cite>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">
+            Ready to Make a Difference?
+          </h2>
+          <p className="text-xl text-white/90 mb-8">
+            Every journey begins with a single step. Take yours today and help 
+            refugee and immigrant families build brighter futures.
+          </p>
+          <a
+            href="#volunteer-form"
+            className="inline-flex items-center gap-2 bg-brand-primary hover:bg-brand-dark text-brand-text px-8 py-4 rounded-lg font-semibold transition shadow-lg"
+          >
+            Apply Today
+            <span>→</span>
+          </a>
         </div>
       </section>
 
       {/* NEWSLETTER CTA */}
       <NewsletterCTA
         title="Stay Connected"
-        subtitle="Join our community of changemakers"
+        subtitle="Get updates on volunteer opportunities and success stories"
         placeholder="Enter your email"
         buttonText="Subscribe"
       />
