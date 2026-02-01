@@ -109,7 +109,7 @@ export default async function HomePage() {
         <div className="relative z-10 flex flex-col px-6 md:px-12 pt-20 md:pt-28 pb-32 md:pb-40">
           <div className="max-w-7xl mx-auto w-full">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
-              {/* Left - Text */}
+              {/* Left - Text & Mobile Video */}
               <ScrollReveal direction="left" className="text-gray-900">
                 <h1 className="text-5xl md:text-6xl lg:text-7xl font-black mb-6 leading-tight">
                   Supporting{' '}
@@ -122,6 +122,15 @@ export default async function HomePage() {
                   From a refugee camp in Uganda to a beacon of hope in New Haven, 
                   we empower families with education, health navigation, and community.
                 </p>
+                
+                {/* Mobile Video - Small Preview (before buttons) */}
+                <div className="lg:hidden mb-6">
+                  <YouTubeEmbed 
+                    videoId="6bfSEk_oX60" 
+                    mini={true}
+                  />
+                </div>
+
                 <div className="flex flex-col sm:flex-row gap-4">
                   <Link 
                     href="/donate" 
@@ -139,8 +148,8 @@ export default async function HomePage() {
                 </div>
               </ScrollReveal>
 
-              {/* Right - Video Card */}
-              <ScrollReveal direction="right" delay={0.2} className="block">
+              {/* Right - Desktop Video Card (hidden on mobile) */}
+              <ScrollReveal direction="right" delay={0.2} className="hidden lg:block">
                 <div className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-white">
                   <YouTubeEmbed videoId="6bfSEk_oX60" />
                 </div>
