@@ -131,19 +131,20 @@ export default async function HomePage() {
                   />
                 </div>
 
-                <div className="flex flex-col sm:flex-row gap-4">
+                {/* Buttons - 2 columns on mobile, horizontal on sm+ */}
+                <div className="grid grid-cols-2 gap-3 sm:flex sm:flex-row sm:gap-4">
                   <Link 
                     href="/donate" 
-                    className="inline-flex items-center justify-center px-8 py-4 bg-brand-primary hover:bg-brand-dark text-brand-text font-bold rounded-lg transition transform hover:scale-105"
+                    className="inline-flex items-center justify-center px-4 sm:px-8 py-4 bg-brand-primary hover:bg-brand-dark text-brand-text font-bold rounded-lg transition transform hover:scale-105 text-sm sm:text-base"
                   >
                     Donate
-                    <span className="ml-2">→</span>
+                    <span className="ml-1 sm:ml-2">→</span>
                   </Link>
                   <Link 
                     href="/about" 
-                    className="inline-flex items-center justify-center px-8 py-4 border-2 border-gray-900 text-gray-900 font-semibold rounded-lg hover:bg-gray-900 hover:text-white transition"
+                    className="inline-flex items-center justify-center px-4 sm:px-8 py-4 border-2 border-gray-900 text-gray-900 font-semibold rounded-lg hover:bg-gray-900 hover:text-white transition text-sm sm:text-base"
                   >
-                    Learn Our Story
+                    Learn More
                   </Link>
                 </div>
               </ScrollReveal>
