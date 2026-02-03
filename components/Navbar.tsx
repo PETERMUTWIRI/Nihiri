@@ -627,7 +627,7 @@ export default function Navbar() {
                 className="flex flex-col"
               >
                 <h2 className="text-xl font-extrabold text-black dark:text-white tracking-tight leading-tight">
-                  nihiri's hope
+                  nihri's hope
                 </h2>
                 <p className="text-sm text-gray-600 dark:text-gray-400 font-medium">For Refugees And Immigrants</p>
               </motion.div>

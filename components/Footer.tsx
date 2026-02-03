@@ -74,7 +74,7 @@ export default function Footer() {
                 </div>
                 <div className="flex flex-col">
                   <h2 className="text-lg font-extrabold text-white tracking-tight leading-tight">
-                    nihiri&apos;s hope
+                    nihri&apos;s hope
                   </h2>
                   <p className="text-xs text-white/80 font-medium">
                     For Refugees And Immigrants
@@ -83,7 +83,7 @@ export default function Footer() {
               </div>
             </Link>
             <p className="text-white/80 text-sm leading-relaxed">
-              nihiri&apos;s hope empowers refugee and immigrant families with the tools, education, 
+              nihri&apos;s hope empowers refugee and immigrant families with the tools, education, 
               and support they need to build independent, thriving lives in our community.
             </p>
             <div className="flex space-x-4 pt-4">
@@ -201,7 +201,7 @@ export default function Footer() {
         <div className="max-w-7xl mx-auto px-4 md:px-8 py-6">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             <p className="text-white/70 text-sm text-center md:text-left">
-              © {currentYear} nihiri&apos;s hope. All rights reserved. | 501(c)(3) Nonprofit Organization
+              © {currentYear} nihri&apos;s hope. All rights reserved. | 501(c)(3) Nonprofit Organization
             </p>
             
             <div className="flex items-center space-x-6 text-sm">

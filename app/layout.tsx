@@ -17,14 +17,14 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: {
-    default: "nihiri's hope",
-    template: "%s | nihiri's hope",
+    default: "nihri's hope",
+    template: "%s | nihri's hope",
   },
   description: "New International Hope for Refugees and Immigrants - Empowering refugee and immigrant families in New Haven, CT with ESL education, health navigation, and advocacy services. A 501(c)(3) nonprofit organization.",
   keywords: ['refugee support', 'immigrant services', 'ESL classes', 'New Haven', 'nonprofit', '501(c)(3)', 'health navigation', 'advocacy'],
-  authors: [{ name: "nihiri's hope" }],
-  creator: "nihiri's hope",
-  publisher: "nihiri's hope",
+  authors: [{ name: "nihri's hope" }],
+  creator: "nihri's hope",
+  publisher: "nihri's hope",
   formatDetection: {
     email: false,
     address: false,
@@ -35,16 +35,16 @@ export const metadata: Metadata = {
     canonical: '/',
   },
   openGraph: {
-    title: "nihiri's hope",
+    title: "nihri's hope",
     description: "New International Hope for Refugees and Immigrants - Empowering refugee and immigrant families with education, health navigation, and advocacy services.",
     url: 'https://nihrihope.com',
-    siteName: "nihiri's hope",
+    siteName: "nihri's hope",
     locale: 'en_US',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: "nihiri's hope",
+    title: "nihri's hope",
     description: "New International Hope for Refugees and Immigrants - Empowering refugee and immigrant families with education, health navigation, and advocacy services.",
   },
   robots: {
@@ -60,6 +60,11 @@ export const metadata: Metadata = {
   },
   verification: {
     google: 'your-google-verification-code',
+  },
+  icons: {
+    icon: '/favicon.ico',
+    shortcut: '/favicon.ico',
+    apple: '/apple-touch-icon.png',
   },
 };
 
