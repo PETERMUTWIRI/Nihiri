@@ -184,59 +184,76 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* OUR STORY SECTION */}
+      {/* OUR STORY SECTION - Structured like Elena's Light: content-driven with profile accent */}
       <section className="py-20 bg-brand-background">
         <div className="max-w-7xl mx-auto px-6 md:px-12">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            {/* Image */}
-            <div className="relative">
-              <div className="relative h-[500px] rounded-2xl overflow-hidden shadow-2xl">
-                <Image
-                  src="/images/about/Nihiri_founder.jpeg"
-                  alt="Jane Kinity, Founder"
-                  fill
-                  className="object-cover"
-                />
-              </div>
-              <div className="absolute -bottom-6 -right-6 bg-brand-primary rounded-xl p-5 shadow-lg">
-                <p className="text-sm text-brand-text/80 mb-1">Founded by</p>
-                <p className="text-xl font-bold text-brand-text">Jane Kinity</p>
-                <p className="text-sm text-brand-text/80">2025 Award Recipient</p>
-              </div>
-            </div>
+          {/* Section Header */}
+          <ScrollReveal className="text-center mb-12">
+            <span className="text-cyan-600 font-semibold uppercase tracking-wide text-sm">Our Story</span>
+            <h2 className="text-4xl md:text-5xl font-black text-gray-900 mt-2">
+              A Journey of Resilience
+            </h2>
+          </ScrollReveal>
 
-            {/* Text */}
-            <ScrollReveal direction="right" delay={0.2}>
-              <div>
-              <span className="text-cyan-600 font-semibold uppercase tracking-wide text-sm">Our Story</span>
-              <h2 className="text-4xl md:text-5xl font-black text-gray-900 mt-2 mb-6">
-                A Journey of Resilience
-              </h2>
-              <div className="space-y-4 text-gray-700 leading-relaxed">
-                <p>
-                  Before arriving in the United States, <strong>Jane Kinity</strong> was an educator in Kenya 
-                  alongside her husband, Isaac Newton Kinity. Political persecution forced them to flee, 
-                  spending two years in a Ugandan refugee camp.
-                </p>
-                <p>
-                  In 2000, they were resettled in New Haven by IRIS. What began as informal support for 
-                  fellow refugees grew into weekly English classes in Jane&apos;s living room. Her kitchen 
-                  became a classroom, her compassion a movement.
-                </p>
-                <p>
-                  In 2012, this grassroots effort became the International New Hope for Refugees and 
-                  Immigrants Center. Today, we serve over 500 families annually.
-                </p>
-              </div>
-              <Link 
-                href="/history" 
-                className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-800 font-semibold mt-6 group"
-              >
-                Read the Full Story
-                <span className="transition-transform group-hover:translate-x-1">→</span>
-              </Link>
+          {/* Founder Statement with Profile Image - Text is primary, image accent on edge */}
+          <div className="relative max-w-4xl mx-auto">
+            <ScrollReveal direction="up" delay={0.1}>
+              <div className="relative bg-white rounded-2xl shadow-xl p-8 md:p-12 pr-24 md:pr-32">
+                {/* Profile Image - Small, circular, positioned at right edge */}
+                <div className="absolute top-8 right-4 md:right-6">
+                  <div className="relative">
+                    <div className="w-20 h-20 md:w-28 md:h-28 rounded-full overflow-hidden border-4 border-brand-primary shadow-lg">
+                      <Image
+                        src="/images/hero/kinity.jpeg"
+                        alt="Jane Kinity"
+                        width={112}
+                        height={112}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                    {/* Decorative ring */}
+                    <div className="absolute -inset-1 rounded-full border-2 border-cyan-200/50"></div>
+                  </div>
+                </div>
+
+                {/* Statement Content */}
+                <div className="prose prose-lg max-w-none">
+                  <p className="text-gray-700 leading-relaxed mb-4 pr-16 md:pr-8">
+                    <strong className="text-gray-900">Jane Kinity</strong> is the CEO and founder of International New Hope for Refugees and Immigrants. A passionate advocate for displaced communities, she serves as an elected <strong>Refugee Congress Delegate</strong> representing the State of Connecticut.
+                  </p>
+                  
+                  <p className="text-gray-700 leading-relaxed mb-4">
+                    She is also an elected <strong>Democratic Delegate</strong> for the City of New Haven and the <strong>Co-Chair of the Democratic Party</strong> for the Dwight neighborhood in New Haven. In addition, she represents the City of New Haven as a Connecticut Delegate for the <strong>Communist Party USA (CPUSA)</strong>.
+                  </p>
+                  
+                  <p className="text-gray-700 leading-relaxed mb-4">
+                    Jane works per diem as a <strong>Swahili translator at IRIS</strong> (Integrated Refugee & Immigrant Services), helping bridge communication gaps for new arrivals. Her dedication has been recognized widely: in 2012, she received an honorary award during the Connecticut Immigration Day Celebration, accompanied by an official statement from Governor Dannel Malloy. She also works at Middle Town private code conservator.
+                  </p>
+                  
+                  <p className="text-gray-700 leading-relaxed mb-4">
+                    A graduate from University of Bridgeport, she is currently pursuing her career in Ashwood University to become a Psychologist and a Chancellor.
+                  </p>
+                  
+                  <p className="text-gray-700 leading-relaxed">
+                    She holds a <strong>Community Service Award</strong> from her Organization&apos;s Management Team recognizing her outstanding contributions to the Community. Through every role, she remains committed to empowering Refugees and Immigrants, and marginalized Communities across Connecticut and beyond.
+                  </p>
+                </div>
+
+                {/* CTA Link */}
+                <div className="mt-8 pt-6 border-t border-gray-100">
+                  <Link 
+                    href="/history" 
+                    className="inline-flex items-center gap-2 text-cyan-600 hover:text-cyan-800 font-semibold group"
+                  >
+                    Read the Full Story
+                    <span className="transition-transform group-hover:translate-x-1">→</span>
+                  </Link>
+                </div>
               </div>
             </ScrollReveal>
+
+            {/* Decorative Elements - Visual connection to other sections */}
+            <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 w-3/4 h-4 bg-brand-primary/20 rounded-full blur-xl"></div>
           </div>
         </div>
       </section>
