@@ -96,14 +96,14 @@ export default async function HomePage() {
         {/* Clean background - no image */}
 
         {/* Content */}
-        <div className="relative z-10 flex flex-col px-6 md:px-12 pt-20 md:pt-28 pb-32 md:pb-40">
+        <div className="relative z-10 flex flex-col px-6 md:px-12 pt-20 md:pt-28 pb-20">
           <div className="max-w-7xl mx-auto w-full">
             {/* MOBILE LAYOUT - Keep original */}
             <div className="lg:hidden">
               <div className="grid lg:grid-cols-2 gap-12 items-center">
                 {/* Left - Text & Mobile Video */}
                 <ScrollReveal direction="left" className="text-gray-900">
-                  <h1 className="text-5xl md:text-6xl lg:text-7xl font-black mb-6 leading-tight">
+                  <h1 className="text-4xl md:text-5xl font-black mb-6 leading-tight">
                     Supporting{' '}
                     <span className="text-cyan-600">
                       Refugee
@@ -111,8 +111,7 @@ export default async function HomePage() {
                     Women and Children
                   </h1>
                   <p className="text-xl md:text-2xl text-gray-700 mb-8 max-w-xl leading-relaxed">
-                    From a refugee camp in Uganda to a beacon of hope in New Haven, 
-                    we empower families with education, health navigation, and community.
+                    At nihri&apos;s hope, we work hard to provide refugee and immigrant families with all the tools they need to cultivate and exercise their individual independence.
                   </p>
                   
                   {/* Mobile Video - Small Preview */}
@@ -144,10 +143,10 @@ export default async function HomePage() {
             </div>
 
             {/* DESKTOP LAYOUT - New Design */}
-            <div className="hidden lg:grid lg:grid-cols-2 gap-12 items-start">
+            <div className="hidden lg:grid lg:grid-cols-2 gap-12 items-center min-h-[600px]">
               {/* Left - Text Content */}
-              <ScrollReveal direction="left" className="text-gray-900 pt-8">
-                <h1 className="text-6xl xl:text-7xl font-black mb-8 leading-tight">
+              <ScrollReveal direction="left" className="text-gray-900">
+                <h1 className="text-5xl xl:text-6xl font-black mb-8 leading-tight">
                   Supporting{' '}
                   <span className="text-cyan-600">
                     Refugee
@@ -180,30 +179,6 @@ export default async function HomePage() {
               <ScrollReveal direction="right" delay={0.2}>
                 <HeroCarousel />
               </ScrollReveal>
-            </div>
-          </div>
-        </div>
-
-        {/* Stats Bar - Positioned at bottom */}
-        <div className="absolute bottom-0 left-0 right-0 bg-white/90 backdrop-blur-sm border-t border-gray-200">
-          <div className="max-w-7xl mx-auto px-6 md:px-12 py-6">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-              <div>
-                <p className="text-3xl md:text-4xl font-black text-cyan-600">25+</p>
-                <p className="text-gray-600 text-sm">Years of Service</p>
-              </div>
-              <div>
-                <p className="text-3xl md:text-4xl font-black text-cyan-600">500+</p>
-                <p className="text-gray-600 text-sm">Families Served</p>
-              </div>
-              <div>
-                <p className="text-3xl md:text-4xl font-black text-cyan-600">150+</p>
-                <p className="text-gray-600 text-sm">Volunteers</p>
-              </div>
-              <div>
-                <p className="text-3xl md:text-4xl font-black text-cyan-600">50+</p>
-                <p className="text-gray-600 text-sm">Countries</p>
-              </div>
             </div>
           </div>
         </div>

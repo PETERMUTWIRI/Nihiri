@@ -5,10 +5,10 @@ import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const slides = [
-  { type: 'image', src: '/images/programs/esl1.png', alt: 'ESL Program - Learning English' },
-  { type: 'image', src: '/images/programs/esl2.png', alt: 'Community Support' },
-  { type: 'image', src: '/images/programs/esl3.png', alt: 'Education Programs' },
-  { type: 'image', src: '/images/programs/esl4.png', alt: 'Family Support' },
+  { type: 'image', src: '/images/programs/advocacy3.png', alt: 'Advocacy Program' },
+  { type: 'image', src: '/images/programs/advocacy4.png', alt: 'Community Support' },
+  { type: 'image', src: '/images/programs/advocacy5.png', alt: 'Advocacy Work' },
+  { type: 'image', src: '/images/programs/health5.png', alt: 'Health Services' },
   { type: 'video', videoId: '6bfSEk_oX60', alt: 'Our Story Video' },
 ];
 
