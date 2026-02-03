@@ -321,7 +321,7 @@ export default async function HomePage() {
                 </ScrollReveal>
               )}
 
-              {/* Latest Past Event - Right */}
+              {/* Latest Past Event - R */}
               {latestPastEvent && (
                 <ScrollReveal direction="right">
                 <div className="bg-white rounded-2xl overflow-hidden shadow-xl h-full">
