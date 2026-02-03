@@ -96,7 +96,7 @@ export default async function HomePage() {
         {/* Clean background - no image */}
 
         {/* Content */}
-        <div className="relative z-10 flex flex-col px-6 md:px-12 pt-16 md:pt-20 pb-12 md:pb-16">
+        <div className="relative z-10 flex flex-col px-6 md:px-12 pt-16 md:pt-20 pb-4 md:pb-8">
           <div className="max-w-7xl mx-auto w-full">
             {/* MOBILE LAYOUT - Keep original */}
             <div className="lg:hidden">
@@ -104,11 +104,10 @@ export default async function HomePage() {
                 {/* Left - Text & Mobile Video */}
                 <ScrollReveal direction="left" className="text-gray-900">
                   <h1 className="text-4xl md:text-5xl font-black mb-6 leading-tight">
-                    Supporting{' '}
-                    <span className="text-cyan-600">
-                      Refugee
-                    </span>{' '}
-                    Women and Children
+                    <span className="block">Supporting</span>
+                    <span className="block text-cyan-600">Refugee</span>
+                    <span className="block">Women</span>
+                    <span className="block">and Children</span>
                   </h1>
                   <p className="text-xl md:text-2xl text-gray-700 mb-8 max-w-xl leading-relaxed">
                     At nihri&apos;s hope, we work hard to provide refugee and immigrant families with all the tools they need to cultivate and exercise their individual independence.
