@@ -17,10 +17,10 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: {
-    default: "nihiri's hope | Refugee & Immigrant Support",
+    default: "nihiri's hope",
     template: "%s | nihiri's hope",
   },
-  description: 'Empowering refugee and immigrant families in New Haven, CT with ESL education, health navigation, and advocacy services. A 501(c)(3) nonprofit organization.',
+  description: "New International Hope for Refugees and Immigrants - Empowering refugee and immigrant families in New Haven, CT with ESL education, health navigation, and advocacy services. A 501(c)(3) nonprofit organization.",
   keywords: ['refugee support', 'immigrant services', 'ESL classes', 'New Haven', 'nonprofit', '501(c)(3)', 'health navigation', 'advocacy'],
   authors: [{ name: "nihiri's hope" }],
   creator: "nihiri's hope",
@@ -35,8 +35,8 @@ export const metadata: Metadata = {
     canonical: '/',
   },
   openGraph: {
-    title: "nihiri's hope | Refugee & Immigrant Support",
-    description: 'Empowering refugee and immigrant families with education, health navigation, and advocacy services.',
+    title: "nihiri's hope",
+    description: "New International Hope for Refugees and Immigrants - Empowering refugee and immigrant families with education, health navigation, and advocacy services.",
     url: 'https://nihrihope.com',
     siteName: "nihiri's hope",
     locale: 'en_US',
@@ -44,8 +44,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: "nihiri's hope | Refugee & Immigrant Support",
-    description: 'Empowering refugee and immigrant families with education, health navigation, and advocacy services.',
+    title: "nihiri's hope",
+    description: "New International Hope for Refugees and Immigrants - Empowering refugee and immigrant families with education, health navigation, and advocacy services.",
   },
   robots: {
     index: true,
