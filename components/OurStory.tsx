@@ -42,7 +42,7 @@ export default function OurStory() {
   );
 
   return (
-    <section className="py-6 md:py-8 bg-brand-background">
+    <section className="pt-2 pb-6 md:pt-0 md:pb-8 bg-brand-background">
       <div className="max-w-7xl mx-auto px-6 md:px-12">
         {/* Section Header */}
         <ScrollReveal className="text-center mb-12">

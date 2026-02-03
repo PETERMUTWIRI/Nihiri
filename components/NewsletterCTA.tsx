@@ -1,4 +1,8 @@
+'use client';
+
+import { useState } from 'react';
 import { FaArrowRight } from 'react-icons/fa6';
+import { useNewsletter } from '@/lib/hooks/useNewsletter';
 
 interface NewsletterCTAProps {
   title?: string;
@@ -9,12 +13,40 @@ interface NewsletterCTAProps {
 
 export default function NewsletterCTA({ 
   title = "Stay up to date with the latest",
-  subtitle = "New International Hope\nFor Refugees And Immigrants",
+  subtitle = "Nihri's hope\nFor Refugees And Immigrants",
   placeholder = "Enter your email address",
-  buttonText = "Send"
+  buttonText = "Subscribe"
 }: NewsletterCTAProps) {
+  const [email, setEmail] = useState('');
+  const [message, setMessage] = useState('');
+  const [status, setStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const { subscribe, loading } = useNewsletter();
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    if (!email || !email.includes('@')) {
+      setStatus('error');
+      setMessage('Please enter a valid email address');
+      return;
+    }
+
+    const result = await subscribe(email);
+    
+    if (result.success) {
+      setStatus('success');
+      setMessage(result.message);
+      setEmail('');
+    } else {
+      setStatus('error');
+      setMessage(result.message);
+    }
+  };
+
+  const [line1, line2] = subtitle.split('\n');
+
   return (
-    <section className="relative pt-o pb-12 px-6 md:px-12 overflow-hidden bg-white">
+    <section className="relative pt-0 pb-12 px-6 md:px-12 overflow-hidden bg-white">
       {/* Decorative SVG Pattern - Top */}
       <div className="absolute top-0 left-0 right-0 h-24 opacity-100 pointer-events-none">
         <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 200" preserveAspectRatio="none">
@@ -128,28 +160,52 @@ export default function NewsletterCTA({
             </h2>
             <div className="mb-4">
               <p className="text-2xl md:text-3xl font-extrabold text-black">
-                New International Hope
+                {line1}
               </p>
-              <p className="text-lg md:text-xl font-extrabold text-brand-primary">
-                For Refugees And Immigrants
+              <p className="text-lg md:text-xl font-extrabold text-gray-900">
+                {line2}
               </p>
             </div>
           </div>
 
-          <div className="flex flex-col sm:flex-row gap-3 items-center justify-center">
+          <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 items-center justify-center">
             <input
               type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               placeholder={placeholder}
               className="flex-1 w-full sm:w-auto px-6 py-3 border-2 border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-brand-primary focus:border-brand-primary transition-all text-brand-text placeholder-gray-500 font-medium"
+              disabled={loading}
             />
-            <button className="w-full sm:w-auto bg-brand-primary hover:bg-brand-dark text-brand-text font-bold px-8 py-3 rounded-lg transition-all transform hover:scale-105 active:scale-95 shadow-lg hover:shadow-xl flex items-center gap-2">
-              {buttonText} <FaArrowRight className="transition-transform group-hover:translate-x-1" />
+            <button 
+              type="submit"
+              disabled={loading}
+              className="w-full sm:w-auto bg-brand-primary hover:bg-brand-dark text-brand-text font-bold px-8 py-3 rounded-lg transition-all transform hover:scale-105 active:scale-95 shadow-lg hover:shadow-xl flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              {loading ? 'Subscribing...' : buttonText} <FaArrowRight className="transition-transform group-hover:translate-x-1" />
             </button>
-          </div>
+          </form>
 
-          <p className="text-center text-xs text-gray-600 mt-4 font-medium tracking-wide">
-            We respect your privacy. Unsubscribe at any time.
-          </p>
+          {/* Status Message */}
+          {message && (
+            <p className={`text-center text-sm mt-3 font-medium ${
+              status === 'success' ? 'text-green-600' : 'text-red-600'
+            }`}>
+              {message}
+            </p>
+          )}
+
+          <div className="text-center mt-4 space-y-1">
+            <p className="text-xs text-gray-600 font-medium tracking-wide">
+              We respect your privacy.
+            </p>
+            <a 
+              href="/unsubscribe" 
+              className="text-xs text-blue-600 hover:text-blue-800 underline font-medium inline-block"
+            >
+              Unsubscribe
+            </a>
+          </div>
         </div>
       </div>
     </section>

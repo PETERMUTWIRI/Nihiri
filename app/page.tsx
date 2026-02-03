@@ -96,7 +96,7 @@ export default async function HomePage() {
         {/* Clean background - no image */}
 
         {/* Content */}
-        <div className="relative z-10 flex flex-col px-6 md:px-12 pt-16 md:pt-20 pb-4 md:pb-8">
+        <div className="relative z-10 flex flex-col px-6 md:px-12 pt-16 md:pt-20 pb-0 md:pb-8">
           <div className="max-w-7xl mx-auto w-full">
             {/* MOBILE LAYOUT - Keep original */}
             <div className="lg:hidden">
@@ -305,7 +305,7 @@ export default async function HomePage() {
                           rel="noopener noreferrer"
                           className="inline-flex items-center px-6 py-3 bg-brand-primary hover:bg-brand-dark text-brand-text font-bold rounded-lg transition"
                         >
-                          Register Now
+                          Register 
                           <span className="ml-2">→</span>
                         </a>
                       ) : null}
