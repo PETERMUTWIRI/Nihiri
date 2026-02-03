@@ -96,14 +96,14 @@ export default async function HomePage() {
         {/* Clean background - no image */}
 
         {/* Content */}
-        <div className="relative z-10 flex flex-col px-6 md:px-12 pt-20 md:pt-28 pb-20">
+        <div className="relative z-10 flex flex-col px-6 md:px-12 pt-16 md:pt-20 pb-12 md:pb-16">
           <div className="max-w-7xl mx-auto w-full">
             {/* MOBILE LAYOUT - Keep original */}
             <div className="lg:hidden">
               <div className="grid lg:grid-cols-2 gap-12 items-center">
                 {/* Left - Text & Mobile Video */}
                 <ScrollReveal direction="left" className="text-gray-900">
-                  <h1 className="text-3xl md:text-4xl font-black mb-6 leading-tight">
+                  <h1 className="text-4xl md:text-5xl font-black mb-6 leading-tight">
                     Supporting{' '}
                     <span className="text-cyan-600">
                       Refugee
@@ -143,17 +143,17 @@ export default async function HomePage() {
             </div>
 
             {/* DESKTOP LAYOUT - New Design */}
-            <div className="hidden lg:grid lg:grid-cols-2 gap-12 items-center min-h-[600px]">
+            <div className="hidden lg:grid lg:grid-cols-2 gap-12 items-center">
               {/* Left - Text Content */}
               <ScrollReveal direction="left" className="text-gray-900">
-                <h1 className="text-3xl xl:text-4xl font-black mb-8 leading-tight">
+                <h1 className="text-4xl xl:text-5xl font-black mb-6 leading-tight">
                   Supporting{' '}
                   <span className="text-cyan-600">
                     Refugee
                   </span>{' '}
                   Women and Children
                 </h1>
-                <p className="text-xl xl:text-2xl text-gray-700 mb-10 max-w-xl leading-relaxed">
+                <p className="text-lg xl:text-xl text-gray-700 mb-8 max-w-xl leading-relaxed">
                   At Nihri's hope, we work hard to provide refugee and immigrant families with all the tools they need to cultivate and exercise their individual independence.
                 </p>
                 
