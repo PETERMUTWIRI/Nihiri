@@ -155,7 +155,7 @@ export default async function HomePage() {
                   Women and Children
                 </h1>
                 <p className="text-xl xl:text-2xl text-gray-700 mb-10 max-w-xl leading-relaxed">
-                  At nihrislight, we work hard to provide refugee and immigrant families with all the tools they need to cultivate and exercise their individual independence.
+                  At nihri's hope, we work hard to provide refugee and immigrant families with all the tools they need to cultivate and exercise their individual independence.
                 </p>
                 
                 {/* Buttons */}
@@ -176,15 +176,9 @@ export default async function HomePage() {
                 </div>
               </ScrollReveal>
 
-              {/* Right - Carousel & Video Stack */}
-              <ScrollReveal direction="right" delay={0.2} className="space-y-6">
-                {/* Image Carousel */}
+              {/* Right - Carousel with Video */}
+              <ScrollReveal direction="right" delay={0.2}>
                 <HeroCarousel />
-                
-                {/* Video Below Carousel */}
-                <div className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-white">
-                  <YouTubeEmbed videoId="6bfSEk_oX60" autoplay={true} />
-                </div>
               </ScrollReveal>
             </div>
           </div>
