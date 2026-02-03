@@ -9,9 +9,10 @@ import Image from 'next/image';
 interface YouTubeEmbedProps {
   videoId: string;
   mini?: boolean;
+  autoplay?: boolean;
 }
 
-export default function YouTubeEmbed({ videoId, mini = false }: YouTubeEmbedProps) {
+export default function YouTubeEmbed({ videoId, mini = false, autoplay = false }: YouTubeEmbedProps) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -69,6 +70,22 @@ export default function YouTubeEmbed({ videoId, mini = false }: YouTubeEmbedProp
   const handleThumbError = () => {
     setThumbError(prev => prev + 1);
   };
+
+  // DESKTOP AUTPLAY MODE - Full size with autoplay (muted)
+  if (autoplay && !mini) {
+    return (
+      <div className="relative w-full aspect-video rounded-2xl overflow-hidden shadow-2xl border-4 border-white bg-black">
+        <iframe
+          src={autoplayUrl}
+          title="nihri's hope - Our Story"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowFullScreen
+          className="absolute inset-0 w-full h-full"
+          referrerPolicy="strict-origin-when-cross-origin"
+        />
+      </div>
+    );
+  }
 
   // MINI MODE - Small preview with autoplay
   if (mini) {

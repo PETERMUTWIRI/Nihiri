@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { PrismaClient } from '@prisma/client';
 import { unstable_cache } from 'next/cache';
 import YouTubeEmbed from '@/components/YouTubeEmbed';
+import HeroCarousel from '@/components/HeroCarousel';
 import PartnerLogos from '@/components/PartnerLogos';
 import NewsletterCTA from '@/components/NewsletterCTA';
 import OurStory from '@/components/OurStory';
@@ -90,70 +91,99 @@ export default async function HomePage() {
   return (
     <div className="min-h-screen bg-white">
       
-      {/* HERO SECTION - Cinematic */}
+      {/* HERO SECTION - Desktop: Carousel + Video | Mobile: Original Layout */}
       <section className="relative min-h-screen bg-cyan-50/30 overflow-hidden">
-        {/* Animated Background Gradient */}
-        <div className="absolute inset-0 bg-gradient-to-br from-cyan-50/50 via-transparent to-brand-primary/10 animate-pulse" style={{ animationDuration: '8s' }} />
-        {/* Background Image with Faint Cyan Overlay */}
-        <div className="absolute inset-0">
-          <Image
-            src="/images/programs/esl3.png"
-            alt="Community support"
-            fill
-            className="object-cover"
-            priority
-          />
-          <div className="absolute inset-0 bg-cyan-50/80" />
-        </div>
+        {/* Clean background - no image */}
 
         {/* Content */}
         <div className="relative z-10 flex flex-col px-6 md:px-12 pt-20 md:pt-28 pb-32 md:pb-40">
           <div className="max-w-7xl mx-auto w-full">
-            <div className="grid lg:grid-cols-2 gap-12 items-center">
-              {/* Left - Text & Mobile Video */}
-              <ScrollReveal direction="left" className="text-gray-900">
-                <h1 className="text-5xl md:text-6xl lg:text-7xl font-black mb-6 leading-tight">
+            {/* MOBILE LAYOUT - Keep original */}
+            <div className="lg:hidden">
+              <div className="grid lg:grid-cols-2 gap-12 items-center">
+                {/* Left - Text & Mobile Video */}
+                <ScrollReveal direction="left" className="text-gray-900">
+                  <h1 className="text-5xl md:text-6xl lg:text-7xl font-black mb-6 leading-tight">
+                    Supporting{' '}
+                    <span className="text-cyan-600">
+                      Refugee
+                    </span>{' '}
+                    Women and Children
+                  </h1>
+                  <p className="text-xl md:text-2xl text-gray-700 mb-8 max-w-xl leading-relaxed">
+                    From a refugee camp in Uganda to a beacon of hope in New Haven, 
+                    we empower families with education, health navigation, and community.
+                  </p>
+                  
+                  {/* Mobile Video - Small Preview */}
+                  <div className="mb-6">
+                    <YouTubeEmbed 
+                      videoId="6bfSEk_oX60" 
+                      mini={true}
+                    />
+                  </div>
+
+                  {/* Buttons */}
+                  <div className="grid grid-cols-2 gap-3 sm:flex sm:flex-row sm:gap-4">
+                    <Link 
+                      href="/donate" 
+                      className="inline-flex items-center justify-center px-4 sm:px-8 py-4 bg-brand-primary hover:bg-brand-dark text-brand-text font-bold rounded-lg transition transform hover:scale-105 text-sm sm:text-base"
+                    >
+                      Donate
+                      <span className="ml-1 sm:ml-2">→</span>
+                    </Link>
+                    <Link 
+                      href="/about" 
+                      className="inline-flex items-center justify-center px-4 sm:px-8 py-4 border-2 border-gray-900 text-gray-900 font-semibold rounded-lg hover:bg-gray-900 hover:text-white transition text-sm sm:text-base"
+                    >
+                      Learn More
+                    </Link>
+                  </div>
+                </ScrollReveal>
+              </div>
+            </div>
+
+            {/* DESKTOP LAYOUT - New Design */}
+            <div className="hidden lg:grid lg:grid-cols-2 gap-12 items-start">
+              {/* Left - Text Content */}
+              <ScrollReveal direction="left" className="text-gray-900 pt-8">
+                <h1 className="text-6xl xl:text-7xl font-black mb-8 leading-tight">
                   Supporting{' '}
                   <span className="text-cyan-600">
                     Refugee
                   </span>{' '}
                   Women and Children
                 </h1>
-                <p className="text-xl md:text-2xl text-gray-700 mb-8 max-w-xl leading-relaxed">
-                  From a refugee camp in Uganda to a beacon of hope in New Haven, 
-                  we empower families with education, health navigation, and community.
+                <p className="text-xl xl:text-2xl text-gray-700 mb-10 max-w-xl leading-relaxed">
+                  At nihrislight, we work hard to provide refugee and immigrant families with all the tools they need to cultivate and exercise their individual independence.
                 </p>
                 
-                {/* Mobile Video - Small Preview (before buttons) */}
-                <div className="lg:hidden mb-6">
-                  <YouTubeEmbed 
-                    videoId="6bfSEk_oX60" 
-                    mini={true}
-                  />
-                </div>
-
-                {/* Buttons - 2 columns on mobile, horizontal on sm+ */}
-                <div className="grid grid-cols-2 gap-3 sm:flex sm:flex-row sm:gap-4">
+                {/* Buttons */}
+                <div className="flex flex-row gap-4">
                   <Link 
                     href="/donate" 
-                    className="inline-flex items-center justify-center px-4 sm:px-8 py-4 bg-brand-primary hover:bg-brand-dark text-brand-text font-bold rounded-lg transition transform hover:scale-105 text-sm sm:text-base"
+                    className="inline-flex items-center justify-center px-8 py-4 bg-brand-primary hover:bg-brand-dark text-brand-text font-bold rounded-lg transition transform hover:scale-105 text-base"
                   >
                     Donate
-                    <span className="ml-1 sm:ml-2">→</span>
+                    <span className="ml-2">→</span>
                   </Link>
                   <Link 
                     href="/about" 
-                    className="inline-flex items-center justify-center px-4 sm:px-8 py-4 border-2 border-gray-900 text-gray-900 font-semibold rounded-lg hover:bg-gray-900 hover:text-white transition text-sm sm:text-base"
+                    className="inline-flex items-center justify-center px-8 py-4 border-2 border-gray-900 text-gray-900 font-semibold rounded-lg hover:bg-gray-900 hover:text-white transition text-base"
                   >
                     Learn More
                   </Link>
                 </div>
               </ScrollReveal>
 
-              {/* Right - Desktop Video Card (hidden on mobile) */}
-              <ScrollReveal direction="right" delay={0.2} className="hidden lg:block">
+              {/* Right - Carousel & Video Stack */}
+              <ScrollReveal direction="right" delay={0.2} className="space-y-6">
+                {/* Image Carousel */}
+                <HeroCarousel />
+                
+                {/* Video Below Carousel */}
                 <div className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-white">
-                  <YouTubeEmbed videoId="6bfSEk_oX60" />
+                  <YouTubeEmbed videoId="6bfSEk_oX60" autoplay={true} />
                 </div>
               </ScrollReveal>
             </div>
