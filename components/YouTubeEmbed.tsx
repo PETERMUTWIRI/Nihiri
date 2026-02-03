@@ -77,7 +77,7 @@ export default function YouTubeEmbed({ videoId, mini = false, autoplay = false }
       <div className="relative w-full aspect-video rounded-2xl overflow-hidden shadow-2xl border-4 border-white bg-black">
         <iframe
           src={autoplayUrl}
-          title="nihri's hope - Our Story"
+          title="Nihri's hope - Our Story"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           allowFullScreen
           className="absolute inset-0 w-full h-full"

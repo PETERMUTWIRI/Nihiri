@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const slides = [
-  { type: 'image', src: '/images/programs/advocacy3.png', alt: 'Advocacy Program' },
+  { type: 'image', src: '/images/programs/advocacy2.png', alt: 'Advocacy Program' },
   { type: 'image', src: '/images/programs/advocacy4.png', alt: 'Community Support' },
   { type: 'image', src: '/images/programs/advocacy5.png', alt: 'Advocacy Work' },
   { type: 'image', src: '/images/programs/health5.png', alt: 'Health Services' },

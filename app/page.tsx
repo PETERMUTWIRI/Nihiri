@@ -103,7 +103,7 @@ export default async function HomePage() {
               <div className="grid lg:grid-cols-2 gap-12 items-center">
                 {/* Left - Text & Mobile Video */}
                 <ScrollReveal direction="left" className="text-gray-900">
-                  <h1 className="text-4xl md:text-5xl font-black mb-6 leading-tight">
+                  <h1 className="text-3xl md:text-4xl font-black mb-6 leading-tight">
                     Supporting{' '}
                     <span className="text-cyan-600">
                       Refugee
@@ -146,7 +146,7 @@ export default async function HomePage() {
             <div className="hidden lg:grid lg:grid-cols-2 gap-12 items-center min-h-[600px]">
               {/* Left - Text Content */}
               <ScrollReveal direction="left" className="text-gray-900">
-                <h1 className="text-5xl xl:text-6xl font-black mb-8 leading-tight">
+                <h1 className="text-3xl xl:text-4xl font-black mb-8 leading-tight">
                   Supporting{' '}
                   <span className="text-cyan-600">
                     Refugee
@@ -154,7 +154,7 @@ export default async function HomePage() {
                   Women and Children
                 </h1>
                 <p className="text-xl xl:text-2xl text-gray-700 mb-10 max-w-xl leading-relaxed">
-                  At nihri's hope, we work hard to provide refugee and immigrant families with all the tools they need to cultivate and exercise their individual independence.
+                  At Nihri's hope, we work hard to provide refugee and immigrant families with all the tools they need to cultivate and exercise their individual independence.
                 </p>
                 
                 {/* Buttons */}
