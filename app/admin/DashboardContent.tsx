@@ -3,7 +3,7 @@
 
 import useSWR from 'swr';
 import Link from 'next/link';
-import { FaEdit, FaTrash, FaPlus, FaCalendar, FaFileAlt, FaPen, FaPhotoFilm } from 'react-icons/fa';
+import { FaEdit, FaTrash, FaPlus, FaCalendar, FaFileAlt, FaPen, FaImages } from 'react-icons/fa';
 
 /* ---------- types ---------- */
 interface Post {
