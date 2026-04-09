@@ -98,7 +98,7 @@ export default function DashboardContent() {
       <div className="grid md:grid-cols-4 gap-6 mb-10">
         <MetricCard label="Blog Posts" value={posts.length} icon={<FaPen />} href="/admin/blog" />
         <MetricCard label="Events" value={events.length} icon={<FaCalendar />} href="/admin/events" />
-        <MetricCard label="Gallery Images" value={gallery.length} icon={<FaPhotoFilm />} href="/admin/gallery" />
+        <MetricCard label="Gallery Images" value={gallery.length} icon={<FaImages />} href="/admin/gallery" />
         <MetricCard label="Reports" value={reports.length} icon={<FaFileAlt />} href="/admin/reports" />
       </div>
 
