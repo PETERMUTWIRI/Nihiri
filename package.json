@@ -24,7 +24,8 @@
     "react-dom": "^19.2.3",
     "react-icons": "^5.5.0",
     "stripe": "^20.2.0",
-    "swr": "^2.3.8"
+    "swr": "^2.3.8",
+    "zod": "^4.25.1"
   },
   "devDependencies": {
     "@types/node": "^22.19.7",
