@@ -74,3 +74,8 @@ export default function SignUpPage() {
               </div>
             </div>
           </NeonAuthUIProvider>
+        </div>
+      </div>
+    </NeonAuthUIProvider>
+  );
+}

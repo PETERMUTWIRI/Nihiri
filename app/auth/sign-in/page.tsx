@@ -78,3 +78,8 @@ export default function SignInPage() {
               </div>
             </div>
           </NeonAuthUIProvider>
+        </div>
+      </div>
+    </NeonAuthUIProvider>
+  );
+}
