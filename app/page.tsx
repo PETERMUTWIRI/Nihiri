@@ -189,8 +189,11 @@ export default async function HomePage() {
 
       {/* LATEST BLOG SECTION */}
       {latestPost && (
-        <section className="py-20 bg-white">
-          <div className="max-w-7xl mx-auto px-6 md:px-12">
+        <section className="relative py-20 overflow-hidden bg-cover bg-center" style={{backgroundImage: `url('/images/blog/youth.jpeg')`}}>
+          {/* White overlay with 97% opacity - solid overlay */}
+          <div className="absolute inset-0" style={{backgroundColor: 'rgba(255, 255, 255, 0.97)'}}></div>
+          
+          <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12">
             <ScrollReveal>
               <div className="flex flex-col md:flex-row md:items-end md:justify-between mb-12">
               <div>
@@ -253,6 +256,7 @@ export default async function HomePage() {
               </ScrollReveal>
             </div>
           </div>
+
         </section>
       )}
 
