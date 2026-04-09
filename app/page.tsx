@@ -191,7 +191,7 @@ export default async function HomePage() {
       {latestPost && (
         <section className="relative py-20 overflow-hidden bg-cover bg-center" style={{backgroundImage: `url('/images/blog/youth.jpeg')`}}>
           {/* White overlay with 97% opacity - solid overlay */}
-          <div className="absolute inset-0" style={{backgroundColor: 'rgba(255, 255, 255, 0.97)'}}></div>
+          <div className="absolute inset-0" style={{backgroundColor: 'rgba(255, 255, 255, 0.88)'}}></div>
           
           <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12">
             <ScrollReveal>
