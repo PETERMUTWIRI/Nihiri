@@ -35,13 +35,18 @@ export default function SignInPage() {
             </div>
 
             <style jsx>{`
+              /* Ensure all text inside the form container is visible and readable */
+              #sign-in-form * {
+                color: #0f172a !important;
+              }
+
               #sign-in-form label {
                 color: #1e293b !important;
                 font-weight: 600 !important;
                 display: block !important;
                 margin-bottom: 0.5rem !important;
               }
-              
+
               #sign-in-form input[type="email"],
               #sign-in-form input[type="password"],
               #sign-in-form input[type="text"],
@@ -54,13 +59,14 @@ export default function SignInPage() {
                 padding: 0.75rem 0.9rem !important;
                 font-size: 1rem !important;
               }
-              
+
+              /* visible placeholders */
               #sign-in-form input::placeholder,
               #sign-in-form textarea::placeholder {
                 color: #64748b !important;
                 opacity: 1 !important;
               }
-              
+
               #sign-in-form input:focus,
               #sign-in-form textarea:focus,
               #sign-in-form select:focus {
@@ -68,7 +74,7 @@ export default function SignInPage() {
                 border-color: #0ea5e9 !important;
                 box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.1) !important;
               }
-              
+
               #sign-in-form button,
               #sign-in-form input[type="submit"],
               #sign-in-form input[type="button"] {
@@ -82,7 +88,7 @@ export default function SignInPage() {
                 cursor: pointer !important;
                 box-shadow: 0 4px 12px rgba(14, 165, 233, 0.3) !important;
               }
-              
+
               #sign-in-form button:hover,
               #sign-in-form input[type="submit"]:hover,
               #sign-in-form input[type="button"]:hover {

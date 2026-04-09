@@ -31,13 +31,18 @@ export default function SignUpPage() {
             </div>
 
             <style jsx>{`
+              /* Ensure all text inside the sign-up form container is visible */
+              #sign-up-form * {
+                color: #0f172a !important;
+              }
+
               #sign-up-form label {
                 color: #1e293b !important;
                 font-weight: 600 !important;
                 display: block !important;
                 margin-bottom: 0.5rem !important;
               }
-              
+
               #sign-up-form input[type="email"],
               #sign-up-form input[type="password"],
               #sign-up-form input[type="text"],
@@ -50,13 +55,13 @@ export default function SignUpPage() {
                 padding: 0.75rem 0.9rem !important;
                 font-size: 1rem !important;
               }
-              
+
               #sign-up-form input::placeholder,
               #sign-up-form textarea::placeholder {
                 color: #64748b !important;
                 opacity: 1 !important;
               }
-              
+
               #sign-up-form input:focus,
               #sign-up-form textarea:focus,
               #sign-up-form select:focus {
@@ -64,7 +69,7 @@ export default function SignUpPage() {
                 border-color: #0ea5e9 !important;
                 box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.1) !important;
               }
-              
+
               #sign-up-form button,
               #sign-up-form input[type="submit"],
               #sign-up-form input[type="button"] {
@@ -78,7 +83,7 @@ export default function SignUpPage() {
                 cursor: pointer !important;
                 box-shadow: 0 4px 12px rgba(14, 165, 233, 0.3) !important;
               }
-              
+
               #sign-up-form button:hover,
               #sign-up-form input[type="submit"]:hover,
               #sign-up-form input[type="button"]:hover {
