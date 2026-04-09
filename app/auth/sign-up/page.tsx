@@ -16,7 +16,7 @@ export default function SignUpPage() {
             <p className="mt-4 text-slate-300">If you already have an account, <a href="/auth/sign-in" className="text-sky-400 underline">sign in here</a>.</p>
           </div>
 
-          <div className="bg-white rounded-3xl shadow-2xl p-8 md:p-10">
+          <div className="bg-white rounded-3xl shadow-2xl p-8 md:p-10 auth-form">
             <div className="text-center mb-6">
               <h3 className="text-2xl font-bold text-gray-900 tracking-tight">nihri admin</h3>
               <p className="text-sm text-gray-500 mt-1">Admin Portal</p>
@@ -30,34 +30,19 @@ export default function SignUpPage() {
               <Link href="/auth/sign-in" className="text-sm text-sky-600 hover:underline">Already have an account?</Link>
             </div>
 
-            <style jsx global>{`
-              /* Neon Auth UI - Professional styling */
-              
-              /* Ensure all text is visible */
-              * {
-                color: inherit;
-              }
-              
-              /* Target all neon-auth elements */
-              [class*="neon"], [class*="auth"], [class*="form"] {
-                color: #1e293b !important;
-              }
-              
-              /* Labels */
-              label {
+            <style jsx>{`
+              .auth-form label {
                 color: #1e293b !important;
                 font-weight: 600 !important;
                 display: block !important;
                 margin-bottom: 0.5rem !important;
               }
               
-              /* Input fields */
-              input[type="email"],
-              input[type="password"],
-              input[type="text"],
-              input:not([type]),
-              textarea,
-              select {
+              .auth-form input[type="email"],
+              .auth-form input[type="password"],
+              .auth-form input[type="text"],
+              .auth-form textarea,
+              .auth-form select {
                 background-color: #ffffff !important;
                 color: #0f172a !important;
                 border: 2px solid #cbd5e1 !important;
@@ -66,26 +51,23 @@ export default function SignUpPage() {
                 font-size: 1rem !important;
               }
               
-              /* Placeholder text - visible and readable */
-              input::placeholder,
-              textarea::placeholder {
+              .auth-form input::placeholder,
+              .auth-form textarea::placeholder {
                 color: #64748b !important;
                 opacity: 1 !important;
               }
               
-              /* Input focus state */
-              input:focus,
-              textarea:focus,
-              select:focus {
+              .auth-form input:focus,
+              .auth-form textarea:focus,
+              .auth-form select:focus {
                 outline: none !important;
                 border-color: #0ea5e9 !important;
                 box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.1) !important;
               }
               
-              /* Buttons */
-              button,
-              input[type="submit"],
-              input[type="button"] {
+              .auth-form button,
+              .auth-form input[type="submit"],
+              .auth-form input[type="button"] {
                 background: linear-gradient(90deg, #0ea5e9, #06b6d4) !important;
                 color: #ffffff !important;
                 padding: 0.75rem 1.5rem !important;
@@ -95,38 +77,21 @@ export default function SignUpPage() {
                 border: none !important;
                 cursor: pointer !important;
                 box-shadow: 0 4px 12px rgba(14, 165, 233, 0.3) !important;
-                text-transform: capitalize !important;
               }
               
-              button:hover,
-              input[type="submit"]:hover,
-              input[type="button"]:hover {
+              .auth-form button:hover,
+              .auth-form input[type="submit"]:hover,
+              .auth-form input[type="button"]:hover {
                 background: linear-gradient(90deg, #0284c7, #0891b2) !important;
                 box-shadow: 0 6px 16px rgba(14, 165, 233, 0.4) !important;
               }
               
-              /* Form text and paragraphs */
-              p, span, div {
-                color: #334155 !important;
-              }
-              
-              /* Links */
-              a {
+              .auth-form a {
                 color: #0ea5e9 !important;
-                text-decoration: underline !important;
               }
               
-              a:hover {
+              .auth-form a:hover {
                 color: #0284c7 !important;
-              }
-              
-              /* Error and success messages */
-              .error, [role="alert"] {
-                color: #dc2626 !important;
-              }
-              
-              .success {
-                color: #16a34a !important;
               }
             `}</style>
           </div>
