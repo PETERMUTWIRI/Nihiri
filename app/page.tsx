@@ -92,8 +92,9 @@ export default async function HomePage() {
     <div className="min-h-screen bg-white">
       
       {/* HERO SECTION - Desktop: Carousel + Video | Mobile: Original Layout */}
-      <section className="relative min-h-screen bg-cyan-50/30 overflow-hidden">
-        {/* Clean background - no image */}
+      <section className="relative min-h-screen overflow-hidden bg-cover bg-center" style={{backgroundImage: `url('/images/hero/graduation.jpeg')`}}>
+        {/* White overlay with 88% opacity */}
+        <div className="absolute inset-0 bg-white/88"></div>
 
         {/* Content */}
         <div className="relative z-10 flex flex-col px-6 md:px-12 pt-16 md:pt-20 pb-0 md:pb-8">
