@@ -35,40 +35,61 @@ export default function SignInPage() {
             </div>
 
             <style jsx global>{`
-              /* Auth UI overrides for professional appearance */
+              /* Neon Auth UI - Professional styling */
               
-              /* Labels and text */
-              .neon-auth label, .neon-auth .neon-auth-label, [class*="label"] {
+              /* Ensure all text is visible */
+              * {
+                color: inherit;
+              }
+              
+              /* Target all neon-auth elements */
+              [class*="neon"], [class*="auth"], [class*="form"] {
+                color: #1e293b !important;
+              }
+              
+              /* Labels */
+              label {
                 color: #1e293b !important;
                 font-weight: 600 !important;
                 display: block !important;
                 margin-bottom: 0.5rem !important;
               }
               
-              /* Inputs */
-              .neon-auth input, .neon-auth textarea, .neon-auth select {
+              /* Input fields */
+              input[type="email"],
+              input[type="password"],
+              input[type="text"],
+              input:not([type]),
+              textarea,
+              select {
                 background-color: #ffffff !important;
                 color: #0f172a !important;
                 border: 2px solid #cbd5e1 !important;
                 border-radius: 0.5rem !important;
                 padding: 0.75rem 0.9rem !important;
                 font-size: 1rem !important;
-                font-weight: 500 !important;
               }
               
-              .neon-auth input::placeholder, .neon-auth textarea::placeholder {
+              /* Placeholder text - visible and readable */
+              input::placeholder,
+              textarea::placeholder {
                 color: #64748b !important;
                 opacity: 1 !important;
               }
               
-              .neon-auth input:focus, .neon-auth textarea:focus, .neon-auth select:focus {
-                box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.1) !important;
-                border-color: #0ea5e9 !important;
+              /* Input focus state */
+              input:focus,
+              textarea:focus,
+              select:focus {
                 outline: none !important;
+                border-color: #0ea5e9 !important;
+                box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.1) !important;
               }
               
               /* Buttons */
-              .neon-auth button, [class*="button"], [role="button"] {
+              button,
+              input[type="submit"],
+              input[type="button"] {
                 background: linear-gradient(90deg, #0ea5e9, #06b6d4) !important;
                 color: #ffffff !important;
                 padding: 0.75rem 1.5rem !important;
@@ -81,38 +102,34 @@ export default function SignInPage() {
                 text-transform: capitalize !important;
               }
               
-              .neon-auth button:hover, [class*="button"]:hover {
+              button:hover,
+              input[type="submit"]:hover,
+              input[type="button"]:hover {
                 background: linear-gradient(90deg, #0284c7, #0891b2) !important;
                 box-shadow: 0 6px 16px rgba(14, 165, 233, 0.4) !important;
               }
               
-              /* Form elements and divs */
-              .neon-auth form, .neon-auth .form-group, .neon-auth [role="form"] {
-                color: #1e293b !important;
-              }
-              
-              .neon-auth div, .neon-auth span, .neon-auth p {
+              /* Form text and paragraphs */
+              p, span, div {
                 color: #334155 !important;
               }
               
               /* Links */
-              .neon-auth a {
+              a {
                 color: #0ea5e9 !important;
                 text-decoration: underline !important;
-                cursor: pointer !important;
               }
               
-              .neon-auth a:hover {
+              a:hover {
                 color: #0284c7 !important;
               }
               
-              /* Error messages */
-              .neon-auth [role="alert"], .neon-auth .error {
+              /* Error and success messages */
+              .error, [role="alert"] {
                 color: #dc2626 !important;
               }
               
-              /* Success messages */
-              .neon-auth .success {
+              .success {
                 color: #16a34a !important;
               }
             `}</style>
