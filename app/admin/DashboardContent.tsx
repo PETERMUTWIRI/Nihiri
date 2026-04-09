@@ -3,7 +3,7 @@
 
 import useSWR from 'swr';
 import Link from 'next/link';
-import { FaEdit, FaTrash, FaPlus, FaCalendar, FaFileAlt, FaPen } from 'react-icons/fa';
+import { FaEdit, FaTrash, FaPlus, FaCalendar, FaFileAlt, FaPen, FaPhotoFilm } from 'react-icons/fa';
 
 /* ---------- types ---------- */
 interface Post {
@@ -30,12 +30,20 @@ interface Report {
   published: boolean;
 }
 
+interface GalleryItem {
+  id: number;
+  imageUrl: string;
+  description?: string;
+  createdAt: string;
+}
+
 const fetcher = (url: string) => fetch(url).then((r) => r.json());
 
 export default function DashboardContent() {
   const { data: posts, mutate: mutatePosts } = useSWR<Post[]>('/api/blog', fetcher);
   const { data: events, mutate: mutateEvents } = useSWR<Event[]>('/api/events', fetcher);
   const { data: reports, mutate: mutateReports } = useSWR<Report[]>('/api/reports', fetcher);
+  const { data: gallery, mutate: mutateGallery } = useSWR<GalleryItem[]>('/api/gallery', fetcher);
 
   const deletePost = async (id: number) => {
     if (!confirm('Delete this post?')) return;
@@ -49,6 +57,12 @@ export default function DashboardContent() {
     mutateEvents(events?.filter((e) => e.id !== id) ?? [], false);
   };
 
+  const deleteGallery = async (id: number) => {
+    if (!confirm('Delete this gallery image?')) return;
+    await fetch(`/api/gallery?id=${id}`, { method: 'DELETE' });
+    mutateGallery(gallery?.filter((item) => item.id !== id) ?? [], false);
+  };
+
   const deleteReport = async (id: number) => {
     if (!confirm('Delete this report?')) return;
     await fetch(`/api/reports?id=${id}`, { method: 'DELETE' });
@@ -56,7 +70,7 @@ export default function DashboardContent() {
   };
 
   /* ---------- skeleton while loading ---------- */
-  if (!posts || !events || !reports)
+  if (!posts || !events || !reports || !gallery)
     return (
       <div className="max-w-7xl mx-auto p-8">
         <div className="h-10 bg-gray-200 rounded mb-8 animate-pulse" />
@@ -84,12 +98,12 @@ export default function DashboardContent() {
       <div className="grid md:grid-cols-4 gap-6 mb-10">
         <MetricCard label="Blog Posts" value={posts.length} icon={<FaPen />} href="/admin/blog" />
         <MetricCard label="Events" value={events.length} icon={<FaCalendar />} href="/admin/events" />
+        <MetricCard label="Gallery Images" value={gallery.length} icon={<FaPhotoFilm />} href="/admin/gallery" />
         <MetricCard label="Reports" value={reports.length} icon={<FaFileAlt />} href="/admin/reports" />
-        <MetricCard label="Quick Add" value="+" icon={<FaPlus />} href="/admin" />
       </div>
 
       {/* CONTENT GRID */}
-      <div className="grid md:grid-cols-3 gap-8">
+      <div className="grid md:grid-cols-2 xl:grid-cols-4 gap-8">
         {/* BLOG SECTION */}
         <SectionCard
           title="Blog Posts"
@@ -140,6 +154,23 @@ export default function DashboardContent() {
               cover={r.cover}
               editLink={`/admin/reports?id=${r.id}`}
               onDelete={() => deleteReport(r.id)}
+            />
+          )}
+        />
+
+        <SectionCard
+          title="Gallery Images"
+          href="/admin/gallery"
+          onNew="/admin/gallery"
+          items={gallery}
+          render={(item) => (
+            <ItemRow
+              id={item.id}
+              title={item.description ? item.description.slice(0, 30) : 'Gallery image'}
+              subtitle={item.description || 'No description'}
+              cover={item.imageUrl}
+              editLink={`/admin/gallery?id=${item.id}`}
+              onDelete={() => deleteGallery(item.id)}
             />
           )}
         />

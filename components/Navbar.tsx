@@ -534,6 +534,7 @@ export default function Navbar() {
       { label: 'Staff', href: '/staff', description: 'Meet all the people that make us happen.' },
       { label: 'Annual Reports', href: '/reports', description: 'View our annual reports.' },
       { label: 'Blog & News', href: '/blog', description: 'Read the latest from our blog.' },
+      { label: 'Gallery', href: '/gallery', description: 'Browse our latest community photo gallery.' },
     ],
     events: [
       { label: 'Upcoming Events', href: '/events', description: 'Join us at our next event.' },
