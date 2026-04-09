@@ -8,6 +8,7 @@ import StickyDonateBar from '@/components/StickyDonateBar';
 import BackToTop from '@/components/BackToTop';
 import CookieConsent from '@/components/CookieConsent';
 import WhatsAppChat from '@/components/WhatsAppChat';
+import { Providers } from './providers';
 
 const inter = Inter({ 
   subsets: ['latin'],
@@ -82,17 +83,19 @@ export default function RootLayout({
   return (
     <html lang="en" className={inter.variable}>
       <body className={`${inter.className} antialiased`}>
-        <Navbar />
-        <StickyDonateBar />
-        <main className="pt-[80px] md:pt-[100px] lg:pt-[136px]">
-          <PageTransition>
-            {children}
-          </PageTransition>
-        </main>
-        <Footer />
-        <BackToTop />
-        <WhatsAppChat />
-        <CookieConsent />
+        <Providers>
+          <Navbar />
+          <StickyDonateBar />
+          <main className="pt-[80px] md:pt-[100px] lg:pt-[136px]">
+            <PageTransition>
+              {children}
+            </PageTransition>
+          </main>
+          <Footer />
+          <BackToTop />
+          <WhatsAppChat />
+          <CookieConsent />
+        </Providers>
       </body>
     </html>
   );
