@@ -388,7 +388,10 @@ export default async function HomePage() {
       </section>
 
       {/* DONATE CTA SECTION */}
-      <section className="py-20 bg-cyan-50/50 relative overflow-hidden">
+      <section className="relative py-20 overflow-hidden bg-cover bg-center" style={{backgroundImage: `url('/images/cto/community.jpeg')`}}>
+        {/* White overlay with 97% opacity - solid overlay */}
+        <div className="absolute inset-0" style={{backgroundColor: 'rgba(255, 255, 255, 0.90)'}}></div>
+        
         <div className="relative z-10 max-w-4xl mx-auto px-6 md:px-12 text-center">
           <ScrollReveal>
             <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-6">
