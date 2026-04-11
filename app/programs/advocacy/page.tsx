@@ -18,7 +18,7 @@ export default function AdvocacyPage() {
               <div className="w-full h-full bg-gradient-to-br from-yellow-50 to-yellow-100 flex items-center justify-center">
                 <span className="text-8xl">⚖️</span>
               </div>
-              <Image src="/images/programs/advocacy.jpg" alt="Advocacy Session" fill className="object-cover" priority />
+              <Image src="/images/WhatsApp Image 2026-04-08 at 7.40.16 PM.jpeg" alt="Advocacy Session" fill className="object-contain" priority />
             </div>
 
             {/* Right: Content */}
