@@ -7,41 +7,40 @@ import NewsletterCTA from '@/components/NewsletterCTA';
 export default function AdvocacyPage() {
   return (
     <div className="min-h-screen bg-white">
-      {/* HERO SECTION - Image Left, Content Right */}
-      <section className="py-20 pt-8 bg-gradient-to-br from-brand-background to-white">
-        <div className="max-w-7xl mx-auto px-6 md:px-12">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            {/* Left: Hero Image */}
-            <div className="relative h-96 lg:h-[500px] rounded-3xl overflow-hidden shadow-2xl">
-              <div className="absolute inset-0 bg-gradient-to-br from-brand-primary/20 to-yellow-400/20" />
-              {/* Placeholder - Replace with actual image */}
-              <div className="w-full h-full bg-gradient-to-br from-yellow-50 to-yellow-100 flex items-center justify-center">
-                <span className="text-8xl">⚖️</span>
+      {/* HERO SECTION - Image Background with Overlay */}
+      <section className="relative min-h-[720px] overflow-hidden bg-cover bg-center" style={{ backgroundImage: "url('/images/history/history-01-hero.jpeg')" }}>
+        <div className="absolute inset-0 bg-slate-950/70" />
+        <div className="absolute inset-0 bg-gradient-to-b from-slate-950/10 via-slate-950/30 to-slate-950/80" />
+        <div className="relative z-10 py-24">
+          <div className="max-w-7xl mx-auto px-6 md:px-12">
+            <div className="grid lg:grid-cols-2 gap-12 items-center">
+              <div className="space-y-6 text-white">
+                <span className="inline-block bg-white/10 text-white border border-white/20 px-4 py-2 rounded-full text-sm font-bold mb-6">
+                  Legal Protection
+                </span>
+                <h1 className="text-5xl md:text-6xl font-black leading-tight">
+                  Advocacy Program
+                </h1>
+                <p className="text-lg md:text-xl text-slate-200 max-w-2xl leading-relaxed">
+                  In response to the growing humanitarian crisis affecting displaced populations from Venezuela, Haiti, and Central America in 2022, New International Hope mobilized to expand our advocacy efforts in the legal realm.
+                </p>
+                <p className="text-slate-200 max-w-2xl leading-relaxed">
+                  We recognized that thousands of families arriving at our borders were navigating an impossibly complex immigration system without adequate legal representation or understanding of their rights.
+                </p>
+                <div className="flex flex-wrap gap-4">
+                  <Link
+                    href="/contact"
+                    className="inline-flex items-center bg-white text-slate-900 px-8 py-4 rounded-lg font-semibold hover:bg-slate-100 transition shadow-lg"
+                  >
+                    Get More Info <FaArrowRight className="ml-2" />
+                  </Link>
+                </div>
               </div>
-              <Image src="/images/WhatsApp Image 2026-04-08 at 7.40.16 PM.jpeg" alt="Advocacy Session" fill className="object-contain" priority />
-            </div>
-
-            {/* Right: Content */}
-            <div>
-              <span className="inline-block bg-brand-primary text-brand-text px-4 py-2 rounded-full text-sm font-bold mb-6">
-                Legal Protection
-              </span>
-              <h1 className="text-5xl md:text-6xl font-black text-gray-900 mb-6 leading-tight">
-                Advocacy Program
-              </h1>
-              <p className="text-xl text-gray-600 mb-6 leading-relaxed">
-                In response to the growing humanitarian crisis affecting displaced populations from Venezuela, Haiti, and Central America in 2022, New International Hope mobilized to expand our advocacy efforts in the legal realm. We recognized that thousands of families arriving at our borders were navigating an impossibly complex immigration system without adequate legal representation or understanding of their rights.
-              </p>
-              <p className="text-gray-600 mb-8">
-                Our advocacy program was born from the urgent need to bridge this gap. We have developed comprehensive legal education initiatives, established partnerships with immigration attorneys across multiple states, and created sustainable support networks that empower refugees to advocate for themselves within the American legal framework. Every family deserves fair representation and clear understanding of their pathway to safety.
-              </p>
-              <div className="flex flex-wrap gap-4">
-                <Link 
-                  href="/contact"
-                  className="inline-flex items-center bg-brand-primary text-brand-text px-8 py-4 rounded-lg font-semibold hover:bg-brand-dark transition shadow-lg"
-                >
-                  Get More Info <FaArrowRight className="ml-2"/>
-                </Link>
+              <div className="relative rounded-[2rem] overflow-hidden border border-white/20 shadow-2xl bg-white/5 backdrop-blur-sm">
+                <div className="absolute inset-0 bg-black/20" />
+                <div className="relative h-96">
+                  <Image src="/images/WhatsApp Image 2026-04-08 at 7.40.16 PM.jpeg" alt="Advocacy Flyer" fill className="object-contain" priority />
+                </div>
               </div>
             </div>
           </div>
@@ -49,8 +48,9 @@ export default function AdvocacyPage() {
       </section>
 
       {/* KEY INITIATIVES */}
-      <section className="py-20 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-6 md:px-12">
+      <section className="relative py-20 bg-cover bg-center" style={{ backgroundImage: "url('/images/history/history-02-jane-kitchen.jpg')" }}>
+        <div className="absolute inset-0 bg-white/90" />
+        <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12">
           <h2 className="text-4xl font-black text-center text-gray-900 mb-16">Legal Education & Support</h2>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -102,58 +102,66 @@ export default function AdvocacyPage() {
       </section>
 
       {/* IMAGE CAROUSEL */}
-      <section className="py-16 bg-white overflow-hidden">
-        <div className="relative">
-          <div className="flex gap-6 animate-scroll-right">
-            {/* Image 1 */}
-            <div className="flex-shrink-0 w-72 h-48 rounded-2xl overflow-hidden shadow-lg relative">
-              <Image src="/images/programs/advocacy2.png" alt="Advocacy Session 1" fill className="object-cover" />
-            </div>
-            {/* Image 2 */}
-            <div className="flex-shrink-0 w-72 h-48 rounded-2xl overflow-hidden shadow-lg relative">
-              <Image src="/images/programs/advocacy3.png" alt="Advocacy Session 2" fill className="object-cover" />
-            </div>
-            {/* Image 3 */}
-            <div className="flex-shrink-0 w-72 h-48 rounded-2xl overflow-hidden shadow-lg relative">
-              <Image src="/images/programs/advocacy4.png" alt="Advocacy Session 3" fill className="object-cover" />
-            </div>
-            {/* Image 4 */}
-            <div className="flex-shrink-0 w-72 h-48 rounded-2xl overflow-hidden shadow-lg relative">
-              <Image src="/images/programs/advocacy5.png" alt="Advocacy Session 4" fill className="object-cover" />
-            </div>
-            {/* Image 5 */}
-            <div className="flex-shrink-0 w-72 h-48 rounded-2xl overflow-hidden shadow-lg relative">
-              <Image src="/images/programs/advocacy.jpg" alt="Advocacy Session 5" fill className="object-cover" />
-            </div>
-            
-            {/* Duplicate set for seamless loop */}
-            <div className="flex-shrink-0 w-72 h-48 rounded-2xl overflow-hidden shadow-lg relative">
-              <Image src="/images/programs/advocacy2.png" alt="Advocacy Session 1" fill className="object-cover" />
-            </div>
-            <div className="flex-shrink-0 w-72 h-48 rounded-2xl overflow-hidden shadow-lg relative">
-              <Image src="/images/programs/advocacy3.png" alt="Advocacy Session 2" fill className="object-cover" />
-            </div>
-            <div className="flex-shrink-0 w-72 h-48 rounded-2xl overflow-hidden shadow-lg relative">
-              <Image src="/images/programs/advocacy4.png" alt="Advocacy Session 3" fill className="object-cover" />
-            </div>
-            <div className="flex-shrink-0 w-72 h-48 rounded-2xl overflow-hidden shadow-lg relative">
-              <Image src="/images/programs/advocacy5.png" alt="Advocacy Session 4" fill className="object-cover" />
-            </div>
-            <div className="flex-shrink-0 w-72 h-48 rounded-2xl overflow-hidden shadow-lg relative">
-              <Image src="/images/programs/advocacy.jpg" alt="Advocacy Session 5" fill className="object-cover" />
+      <section className="relative py-16 overflow-hidden bg-cover bg-center" style={{ backgroundImage: "url('/images/history/history-03-first-esl.jpg')" }}>
+        <div className="absolute inset-0 bg-slate-950/75" />
+        <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12">
+          <div className="mb-12 text-center">
+            <span className="text-sm uppercase tracking-[0.3em] text-cyan-300">Advocacy Highlights</span>
+            <h2 className="mt-3 text-4xl font-black text-white">Community Impact In Motion</h2>
+          </div>
+          <div className="relative">
+            <div className="flex gap-6 animate-scroll-right">
+              {/* Image 1 */}
+              <div className="flex-shrink-0 w-72 h-48 rounded-2xl overflow-hidden shadow-lg relative">
+                <Image src="/images/programs/advocacy2.png" alt="Advocacy Session 1" fill className="object-cover" />
+              </div>
+              {/* Image 2 */}
+              <div className="flex-shrink-0 w-72 h-48 rounded-2xl overflow-hidden shadow-lg relative">
+                <Image src="/images/programs/advocacy3.png" alt="Advocacy Session 2" fill className="object-cover" />
+              </div>
+              {/* Image 3 */}
+              <div className="flex-shrink-0 w-72 h-48 rounded-2xl overflow-hidden shadow-lg relative">
+                <Image src="/images/programs/advocacy4.png" alt="Advocacy Session 3" fill className="object-cover" />
+              </div>
+              {/* Image 4 */}
+              <div className="flex-shrink-0 w-72 h-48 rounded-2xl overflow-hidden shadow-lg relative">
+                <Image src="/images/programs/advocacy5.png" alt="Advocacy Session 4" fill className="object-cover" />
+              </div>
+              {/* Image 5 */}
+              <div className="flex-shrink-0 w-72 h-48 rounded-2xl overflow-hidden shadow-lg relative">
+                <Image src="/images/programs/advocacy.jpg" alt="Advocacy Session 5" fill className="object-cover" />
+              </div>
+              
+              {/* Duplicate set for seamless loop */}
+              <div className="flex-shrink-0 w-72 h-48 rounded-2xl overflow-hidden shadow-lg relative">
+                <Image src="/images/programs/advocacy2.png" alt="Advocacy Session 1" fill className="object-cover" />
+              </div>
+              <div className="flex-shrink-0 w-72 h-48 rounded-2xl overflow-hidden shadow-lg relative">
+                <Image src="/images/programs/advocacy3.png" alt="Advocacy Session 2" fill className="object-cover" />
+              </div>
+              <div className="flex-shrink-0 w-72 h-48 rounded-2xl overflow-hidden shadow-lg relative">
+                <Image src="/images/programs/advocacy4.png" alt="Advocacy Session 3" fill className="object-cover" />
+              </div>
+              <div className="flex-shrink-0 w-72 h-48 rounded-2xl overflow-hidden shadow-lg relative">
+                <Image src="/images/programs/advocacy5.png" alt="Advocacy Session 4" fill className="object-cover" />
+              </div>
+              <div className="flex-shrink-0 w-72 h-48 rounded-2xl overflow-hidden shadow-lg relative">
+                <Image src="/images/programs/advocacy.jpg" alt="Advocacy Session 5" fill className="object-cover" />
+              </div>
             </div>
           </div>
         </div>
       </section>
 
       {/* MAJOR EVENTS & INITIATIVES */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-6 md:px-12">
-          <h2 className="text-4xl font-black text-center text-gray-900 mb-16">Recent Advocacy Efforts</h2>
+      <section className="relative py-20 bg-cover bg-center" style={{ backgroundImage: "url('/images/history/history-05-health-nav.jpg')" }}>
+        <div className="absolute inset-0 bg-brand-primary/80" />
+        <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12">
+          <h2 className="text-4xl font-black text-center text-white mb-16">Recent Advocacy Efforts</h2>
 
           <div className="space-y-12">
             {/* Event 1 */}
-            <div className="bg-gradient-to-r from-brand-background to-white rounded-2xl p-8 border border-brand-primary/30">
+            <div className="bg-white/90 rounded-2xl p-8 border border-white/30 shadow-xl backdrop-blur-md backdrop-saturate-150">
               <div className="grid md:grid-cols-3 gap-8 items-center">
                 <div className="md:col-span-2">
                   <span className="text-brand-primary font-bold text-sm uppercase tracking-wide">March 2023</span>
@@ -178,7 +186,7 @@ export default function AdvocacyPage() {
             </div>
 
             {/* Event 2 */}
-            <div className="bg-gradient-to-r from-brand-background to-white rounded-2xl p-8 border border-brand-primary/30">
+            <div className="bg-white/90 rounded-2xl p-8 border border-white/30 shadow-xl backdrop-blur-md backdrop-saturate-150">
               <div className="grid md:grid-cols-3 gap-8 items-center">
                 <div className="md:col-span-2">
                   <span className="text-brand-primary font-bold text-sm uppercase tracking-wide">September 2023</span>
@@ -203,7 +211,7 @@ export default function AdvocacyPage() {
             </div>
 
             {/* Event 3 */}
-            <div className="bg-gradient-to-r from-brand-background to-white rounded-2xl p-8 border border-brand-primary/30">
+            <div className="bg-white/90 rounded-2xl p-8 border border-white/30 shadow-xl backdrop-blur-md backdrop-saturate-150">
               <div className="grid md:grid-cols-3 gap-8 items-center">
                 <div className="md:col-span-2">
                   <span className="text-brand-primary font-bold text-sm uppercase tracking-wide">Ongoing Initiative</span>
@@ -231,12 +239,13 @@ export default function AdvocacyPage() {
       </section>
 
       {/* NATIONAL COALITIONS */}
-      <section className="py-20 bg-brand-cyan text-white">
-        <div className="max-w-7xl mx-auto px-6 md:px-12">
+      <section className="relative py-20 bg-cover bg-center text-white" style={{ backgroundImage: "url('/images/history/history-08-board-2020.jpg')" }}>
+        <div className="absolute inset-0 bg-slate-950/75" />
+        <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12">
           <h2 className="text-4xl font-black text-center mb-16">National Coalition Participation</h2>
 
           <div className="grid md:grid-cols-2 gap-12">
-            <div className="bg-white/10 backdrop-blur rounded-2xl p-8">
+            <div className="bg-white/10 backdrop-blur rounded-2xl p-8 border border-white/20">
               <h3 className="text-2xl font-bold mb-4">We Are All America (WAAA)</h3>
               <p className="text-white/80 leading-relaxed">
                 As active members of the WAAA coalition, we participate in coordinated national campaigns to advance refugee protection and resettlement. This includes the annual Refugee Advocacy Summit in Washington D.C., where our representatives meet with congressional offices from Illinois, Michigan, and Ohio to advocate for increased refugee admissions ceilings and restored resettlement infrastructure.
@@ -246,7 +255,7 @@ export default function AdvocacyPage() {
               </p>
             </div>
 
-            <div className="bg-white/10 backdrop-blur rounded-2xl p-8">
+            <div className="bg-white/10 backdrop-blur rounded-2xl p-8 border border-white/20">
               <h3 className="text-2xl font-bold mb-4">Refugee Council USA (RCUSA)</h3>
               <p className="text-white/80 leading-relaxed">
                 Our policy team regularly participates in RCUSA working groups focused on asylum reform, unaccompanied child protection, and Afghan evacuation efforts. We contribute field perspectives from our direct service work to inform national policy recommendations and legislative strategies.
@@ -266,17 +275,18 @@ export default function AdvocacyPage() {
       </section>
 
       {/* SOCIAL MEDIA RESOURCES - Big Icons */}
-      <section className="py-20 bg-gray-50">
-        <div className="max-w-4xl mx-auto px-6 md:px-12 text-center">
-          <h2 className="text-4xl font-black text-gray-900 mb-6">Connect With Us</h2>
-          <p className="text-xl text-gray-600 mb-12">
+      <section className="relative py-20 bg-cover bg-center" style={{ backgroundImage: "url('/images/history/history-09-award-ceremony.jpg')" }}>
+        <div className="absolute inset-0 bg-slate-950/80" />
+        <div className="relative z-10 max-w-4xl mx-auto px-6 md:px-12 text-center">
+          <h2 className="text-4xl font-black text-white mb-6">Connect With Us</h2>
+          <p className="text-xl text-slate-200 mb-12">
             Follow our social media channels to watch educational recordings, see community updates, and join the conversation on refugee advocacy.
           </p>
 
-          <div className="flex justify-center items-center gap-8 md:gap-16">
+          <div className="flex justify-center items-center gap-8 md:gap-16 flex-wrap">
             {/* YouTube */}
-            <Link 
-              href="https://youtube.com/newinternationalhope" 
+            <Link
+              href="https://youtube.com/newinternationalhope"
               target="_blank"
               rel="noopener noreferrer"
               className="group flex flex-col items-center"
@@ -284,13 +294,13 @@ export default function AdvocacyPage() {
               <div className="w-24 h-24 md:w-32 md:h-32 bg-red-600 rounded-2xl flex items-center justify-center shadow-lg group-hover:shadow-2xl transition-all duration-300 group-hover:-translate-y-2">
                 <FaYoutube className="text-5xl md:text-6xl text-white" />
               </div>
-              <span className="mt-4 font-bold text-gray-700 group-hover:text-red-600 transition">YouTube</span>
-              <span className="text-sm text-gray-500">Watch our KYR sessions</span>
+              <span className="mt-4 font-bold text-white group-hover:text-red-300 transition">YouTube</span>
+              <span className="text-sm text-slate-300">Watch our KYR sessions</span>
             </Link>
 
             {/* TikTok */}
-            <Link 
-              href="https://tiktok.com/@newinternationalhope" 
+            <Link
+              href="https://tiktok.com/@newinternationalhope"
               target="_blank"
               rel="noopener noreferrer"
               className="group flex flex-col items-center"
@@ -298,13 +308,13 @@ export default function AdvocacyPage() {
               <div className="w-24 h-24 md:w-32 md:h-32 bg-black rounded-2xl flex items-center justify-center shadow-lg group-hover:shadow-2xl transition-all duration-300 group-hover:-translate-y-2">
                 <FaTiktok className="text-5xl md:text-6xl text-white" />
               </div>
-              <span className="mt-4 font-bold text-gray-700 group-hover:text-black transition">TikTok</span>
-              <span className="text-sm text-gray-500">Daily advocacy tips</span>
+              <span className="mt-4 font-bold text-white group-hover:text-slate-200 transition">TikTok</span>
+              <span className="text-sm text-slate-300">Daily advocacy tips</span>
             </Link>
 
             {/* Facebook */}
-            <Link 
-              href="https://facebook.com/newinternationalhope" 
+            <Link
+              href="https://facebook.com/newinternationalhope"
               target="_blank"
               rel="noopener noreferrer"
               className="group flex flex-col items-center"
@@ -312,13 +322,13 @@ export default function AdvocacyPage() {
               <div className="w-24 h-24 md:w-32 md:h-32 bg-blue-600 rounded-2xl flex items-center justify-center shadow-lg group-hover:shadow-2xl transition-all duration-300 group-hover:-translate-y-2">
                 <FaFacebook className="text-5xl md:text-6xl text-white" />
               </div>
-              <span className="mt-4 font-bold text-gray-700 group-hover:text-brand-primary transition">Facebook</span>
-              <span className="text-sm text-gray-500">Community updates</span>
+              <span className="mt-4 font-bold text-white group-hover:text-blue-200 transition">Facebook</span>
+              <span className="text-sm text-slate-300">Community updates</span>
             </Link>
 
             {/* Instagram */}
-            <Link 
-              href="https://instagram.com/newinternationalhope" 
+            <Link
+              href="https://instagram.com/newinternationalhope"
               target="_blank"
               rel="noopener noreferrer"
               className="group flex flex-col items-center"
@@ -326,18 +336,17 @@ export default function AdvocacyPage() {
               <div className="w-24 h-24 md:w-32 md:h-32 bg-gradient-to-br from-purple-600 via-pink-500 to-orange-400 rounded-2xl flex items-center justify-center shadow-lg group-hover:shadow-2xl transition-all duration-300 group-hover:-translate-y-2">
                 <FaInstagram className="text-5xl md:text-6xl text-white" />
               </div>
-              <span className="mt-4 font-bold text-gray-700 group-hover:text-pink-600 transition">Instagram</span>
-              <span className="text-sm text-gray-500">Stories from our community</span>
+              <span className="mt-4 font-bold text-white group-hover:text-pink-200 transition">Instagram</span>
+              <span className="text-sm text-slate-300">Stories from our community</span>
             </Link>
           </div>
-
-          
         </div>
       </section>
 
       {/* OTHER PROGRAMS */}
-      <section className="py-20 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-6 md:px-12">
+      <section className="relative py-20 bg-cover bg-center" style={{ backgroundImage: "url('/images/history/history-10-future-mural.jpg')" }}>
+        <div className="absolute inset-0 bg-white/90" />
+        <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12">
           <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">Other Programs</h2>
           
           <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
