@@ -8,8 +8,12 @@ export default function ESLPage() {
   return (
     <div className="min-h-screen bg-white">
       {/* HERO SECTION - Image Left, Content Right */}
-      <section className="py-20 pt-8 bg-gradient-to-br from-brand-background to-white">
-        <div className="max-w-7xl mx-auto px-6 md:px-12">
+      <section
+        className="relative py-20 pt-8 bg-cover bg-center"
+        style={{ backgroundImage: "url('/images/history/history-03-first-esl.jpg')" }}
+      >
+        <div className="absolute inset-0 bg-white/90" />
+        <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Left: Hero Image */}
             <div className="relative h-96 lg:h-[500px] rounded-3xl overflow-hidden shadow-2xl">
@@ -54,8 +58,12 @@ export default function ESLPage() {
       </section>
 
       {/* IMPACT SECTION */}
-      <section className="py-16 bg-white text-gray-900">
-        <div className="max-w-4xl mx-auto px-6 text-center">
+      <section
+        className="relative py-16 bg-cover bg-center text-gray-900"
+        style={{ backgroundImage: "url('/images/history/history-07-youth-circle.jpg')" }}
+      >
+        <div className="absolute inset-0 bg-white/90" />
+        <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
           <h2 className="text-3xl font-bold mb-6">Transforming Lives Through Language</h2>
           <p className="text-xl text-gray-600 leading-relaxed">
             Through our ESL programs, refugee women develop essential language skills, build confidence, 
@@ -67,8 +75,12 @@ export default function ESLPage() {
       </section>
 
       {/* ESL INITIATIVES */}
-      <section className="py-20 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-6 md:px-12">
+      <section
+        className="relative py-20 bg-cover bg-center"
+        style={{ backgroundImage: "url('/images/history/history-10-future-mural.jpg')" }}
+      >
+        <div className="absolute inset-0 bg-white/90" />
+        <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12">
           <h2 className="text-4xl font-black text-center text-gray-900 mb-16">ESL Initiatives</h2>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -124,7 +136,12 @@ export default function ESLPage() {
       </section>
 
       {/* IMAGE CAROUSEL - 5 Images Visible, Moving Right to Left */}
-      <section className="py-16 bg-white overflow-hidden">
+      <section
+        className="relative py-16 bg-cover bg-center overflow-hidden"
+        style={{ backgroundImage: "url('/images/history/history-02-jane-kitchen.jpg')" }}
+      >
+        <div className="absolute inset-0 bg-white/90" />
+        <div className="relative z-10">
         <div className="relative">
           <div className="flex gap-6 animate-scroll-right">
             {/* Image 1 */}
@@ -169,8 +186,12 @@ export default function ESLPage() {
       </section>
 
       {/* OTHER PROGRAMS */}
-      <section className="py-20 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-6 md:px-12">
+      <section
+        className="relative py-20 bg-cover bg-center"
+        style={{ backgroundImage: "url('/images/history/history-01-hero.jpeg')" }}
+      >
+        <div className="absolute inset-0 bg-white/90" />
+        <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12">
           <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">Other Programs</h2>
           
           <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">

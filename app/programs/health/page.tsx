@@ -9,8 +9,12 @@ export default function HealthPage() {
   return (
     <div className="min-h-screen bg-white">
       {/* HERO SECTION - Image Left, Content Right */}
-      <section className="py-20 pt-8 bg-gradient-to-br from-brand-background to-white">
-        <div className="max-w-7xl mx-auto px-6 md:px-12">
+      <section
+        className="relative py-20 pt-8 bg-cover bg-center"
+        style={{ backgroundImage: "url('/images/history/history-05-health-nav.jpg')" }}
+      >
+        <div className="absolute inset-0 bg-white/90" />
+        <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Left: Hero Image */}
             <div className="relative h-96 lg:h-[500px] rounded-3xl overflow-hidden shadow-2xl">
@@ -46,8 +50,12 @@ export default function HealthPage() {
       </section>
 
       {/* CORE HEALTH SERVICES */}
-      <section className="py-20 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-6 md:px-12">
+      <section
+        className="relative py-20 bg-cover bg-center"
+        style={{ backgroundImage: "url('/images/history/history-09-award-ceremony.jpg')" }}
+      >
+        <div className="absolute inset-0 bg-white/90" />
+        <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12">
           <h2 className="text-4xl font-black text-center text-gray-900 mb-16">Core Health Services</h2>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -131,8 +139,12 @@ export default function HealthPage() {
       </section>
 
       {/* EDUCATION & LITERACY SECTION */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-6 md:px-12">
+      <section
+        className="relative py-20 bg-cover bg-center"
+        style={{ backgroundImage: "url('/images/history/history-06-world-refugee-day.jpg')" }}
+      >
+        <div className="absolute inset-0 bg-white/90" />
+        <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12">
           <h2 className="text-4xl font-black text-center text-gray-900 mb-16">Education & Literacy Initiatives</h2>
 
           <div className="grid lg:grid-cols-3 gap-8">
@@ -182,7 +194,12 @@ export default function HealthPage() {
       </section>
 
       {/* IMAGE CAROUSEL */}
-      <section className="py-16 bg-white overflow-hidden">
+      <section
+        className="relative py-16 bg-cover bg-center overflow-hidden"
+        style={{ backgroundImage: "url('/images/history/history-08-board-2020.jpg')" }}
+      >
+        <div className="absolute inset-0 bg-white/90" />
+        <div className="relative z-10">
         <div className="relative">
           <div className="flex gap-6 animate-scroll-right">
             {/* Image 1 */}
@@ -227,8 +244,12 @@ export default function HealthPage() {
       </section>
 
       {/* ADVOCACY SECTION */}
-      <section className="py-20 bg-white text-gray-900">
-        <div className="max-w-7xl mx-auto px-6 md:px-12">
+      <section
+        className="relative py-20 bg-cover bg-center text-gray-900"
+        style={{ backgroundImage: "url('/images/history/history-10-future-mural.jpg')" }}
+      >
+        <div className="absolute inset-0 bg-white/90" />
+        <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12">
           <h2 className="text-4xl font-black text-center mb-16">Advocacy & Outreach</h2>
 
           <div className="grid md:grid-cols-2 gap-12">
