@@ -241,6 +241,7 @@ export default function HealthPage() {
             </div>
           </div>
         </div>
+      </div>
       </section>
 
       {/* ADVOCACY SECTION */}
