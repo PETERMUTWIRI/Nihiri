@@ -183,6 +183,7 @@ export default function ESLPage() {
             </div>
           </div>
         </div>
+      </div>
       </section>
 
       {/* OTHER PROGRAMS */}
