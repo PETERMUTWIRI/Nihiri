@@ -5,7 +5,6 @@ import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { FaCalendarAlt, FaUser, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
-import ReadingProgressBar from '@/components/ReadingProgressBar';
 
 export interface BlogPost {
   id: number;
@@ -70,9 +69,6 @@ export default function BlogClient({ initialPosts }: { initialPosts: BlogPost[] 
   /* ---------- render ---------- */
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col text-render-premium">
-      {/* Reading Progress Bar */}
-      <ReadingProgressBar />
-      
       {/* header */}
       <header className="bg-white shadow-sm border-b sticky top-0 z-10">
         <div className="max-w-7xl mx-auto px-6 py-4">

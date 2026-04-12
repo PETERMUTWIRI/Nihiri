@@ -51,9 +51,22 @@ export default function Footer() {
 
   return (
     // After
-    <footer className="bg-cyan-600 text-white relative overflow-hidden">
+    <footer className="text-white relative overflow-hidden">
+      {/* Background Image */}
+      <div className="absolute inset-0">
+        <Image
+          src="/images/hero/kinity1.webp"
+          alt="Footer background"
+          fill
+          className="object-cover object-center"
+          priority={false}
+        />
+        {/* Cyan overlay with 90% opacity */}
+        <div className="absolute inset-0 bg-cyan-600/90"></div>
+      </div>
+      
       {/* Decorative wave pattern */}
-      <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-brand-primary via-brand-light to-brand-primary opacity-30"></div>
+      <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-brand-primary via-brand-light to-brand-primary opacity-30 z-10"></div>
       
       {/* Main Footer Content */}
       <div className="max-w-7xl mx-auto px-4 md:px-8 py-16 relative z-10">
