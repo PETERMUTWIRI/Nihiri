@@ -223,21 +223,21 @@ export default function Footer() {
       </div>
 
       {/* Bottom Bar - Darker Blue */}
-      <div className="bg-cyan-700 border-t border-cyan-500">
-        <div className="max-w-7xl mx-auto px-4 md:px-8 py-6">
+      <div className="bg-cyan-800 border-t border-cyan-600">
+        <div className="max-w-7xl mx-auto px-4 md:px-8 py-4">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-            <p className="text-white/70 text-sm text-center md:text-left">
-              © {currentYear} Nihri&apos;s hope. All rights reserved. | 501(c)(3) Nonprofit Organization
+            <p className="text-white text-sm text-center md:text-left font-medium">
+              © {currentYear} <span className="text-brand-primary font-semibold">Nihri&apos;s hope</span>. All rights reserved. | 501(c)(3) Nonprofit
             </p>
             
             <div className="flex items-center space-x-6 text-sm">
-              <Link href="/privacy" className="text-white/70 hover:text-brand-primary transition-colors">
-                Privacy Policy
+              <Link href="/privacy" className="text-white hover:text-brand-primary transition-colors font-medium">
+                Privacy
               </Link>
-              <Link href="/terms" className="text-white/70 hover:text-brand-primary transition-colors">
-                Terms of Service
+              <Link href="/terms" className="text-white hover:text-brand-primary transition-colors font-medium">
+                Terms
               </Link>
-              <Link href="/accessibility" className="text-white/70 hover:text-brand-primary transition-colors">
+              <Link href="/accessibility" className="text-white hover:text-brand-primary transition-colors font-medium">
                 Accessibility
               </Link>
             </div>
