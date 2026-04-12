@@ -211,8 +211,8 @@ export default function Footer() {
       </div>
 
       {/* Newsletter Section */}
-      <div className="bg-cyan-800/50 border-t border-cyan-500/50">
-        <div className="max-w-7xl mx-auto px-4 md:px-8 py-8">
+      <div className="bg-cyan-800 border-t border-cyan-500">
+        <div className="max-w-7xl mx-auto px-4 md:px-8 py-6">
           <NewsletterCTA compact />
         </div>
       </div>

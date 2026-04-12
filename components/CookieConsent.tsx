@@ -38,26 +38,26 @@ export default function CookieConsent() {
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: 100, opacity: 0 }}
           transition={{ duration: 0.4, ease: 'easeOut' }}
-          className="fixed bottom-0 left-0 right-0 z-50 bg-white shadow-2xl border-t border-gray-200"
+          className="fixed bottom-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md shadow-2xl border-t border-cyan-100"
         >
           <div className="max-w-7xl mx-auto px-4 md:px-8 py-4 md:py-6">
             <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
               <div className="flex items-start gap-4 flex-1">
-                <div className="w-12 h-12 bg-brand-primary/20 rounded-full flex items-center justify-center flex-shrink-0">
-                  <FaCookieBite className="w-6 h-6 text-brand-text" />
+                <div className="w-12 h-12 bg-cyan-100 rounded-full flex items-center justify-center flex-shrink-0">
+                  <FaCookieBite className="w-6 h-6 text-cyan-600" />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-gray-900 mb-1">
-                    We value your privacy
+                  <h3 className="font-serif font-medium text-gray-900 mb-1">
+                    We value your <span className="italic text-cyan-600">privacy</span>
                   </h3>
                   <p className="text-sm text-gray-600 leading-relaxed">
                     We use cookies to enhance your browsing experience, serve personalized content, 
                     and analyze our traffic. By clicking &quot;Accept All&quot;, you consent to our use of cookies.{' '}
                     <Link 
                       href="/privacy" 
-                      className="text-cyan-600 hover:text-cyan-700 font-medium underline"
+                      className="text-cyan-600 hover:text-cyan-800 font-semibold hover:underline transition-colors"
                     >
-                      Learn more
+                      Learn more →
                     </Link>
                   </p>
                 </div>
@@ -72,7 +72,7 @@ export default function CookieConsent() {
                 </button>
                 <button
                   onClick={handleAccept}
-                  className="flex-1 md:flex-none inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-brand-primary hover:bg-brand-dark text-brand-text font-semibold rounded-lg transition"
+                  className="flex-1 md:flex-none inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-cyan-600 hover:bg-cyan-700 text-white font-semibold rounded-lg transition shadow-lg shadow-cyan-600/25"
                 >
                   <FaCheck className="w-4 h-4" />
                   Accept All
