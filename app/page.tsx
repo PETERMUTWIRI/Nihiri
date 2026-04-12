@@ -138,12 +138,12 @@ export default async function HomePage() {
     <div className="min-h-screen bg-white text-render-premium">
       
       {/* HERO SECTION - Desktop: Carousel + Video | Mobile: Original Layout */}
-      <section className="relative min-h-screen overflow-hidden bg-cover bg-center" style={{backgroundImage: `url('/images/hero/graduation.jpeg')`}}>
+      <section className="relative overflow-hidden bg-cover bg-center" style={{backgroundImage: `url('/images/hero/graduation.jpeg')`}}>
         {/* White overlay with 97% opacity - solid overlay */}
         <div className="absolute inset-0" style={{backgroundColor: 'rgba(255, 255, 255, 0.90)'}}></div>
 
         {/* Content */}
-        <div className="relative z-10 flex flex-col px-6 md:px-12 pt-16 md:pt-20 pb-0 md:pb-8">
+        <div className="relative z-10 flex flex-col px-6 md:px-12 pt-16 md:pt-20 pb-12 md:pb-16">
           <div className="max-w-7xl mx-auto w-full">
             {/* MOBILE LAYOUT - Keep original */}
             <div className="lg:hidden">
