@@ -58,25 +58,46 @@ export default function BoardPage() {
   return (
     <div className="min-h-screen bg-brand-background">
       {/* HERO */}
-      <section className="relative py-20 md:py-28 px-6 md:px-12 text-center bg-gradient-to-br from-brand-primary/30 via-brand-primary/10 to-brand-background overflow-hidden">
-        <div className="absolute inset-0 bg-[url('/images/pattern.svg')] opacity-5"></div>
-        <div className="relative max-w-4xl mx-auto">
+      <section className="relative min-h-[60vh] md:min-h-[70vh] flex items-center justify-center px-6 md:px-12 overflow-hidden">
+        {/* Background Image */}
+        <div className="absolute inset-0">
+          <Image
+            src="/images/hero/kinity6.webp"
+            alt="Board of Directors Background"
+            fill
+            className="object-cover"
+            priority
+          />
+          {/* Dark Overlay for readability */}
+          <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-black/80"></div>
+        </div>
+        
+        {/* Content */}
+        <div className="relative z-10 max-w-4xl mx-auto text-center py-16">
           <motion.h1 
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-4xl md:text-6xl font-black text-gray-900 mb-6"
+            transition={{ duration: 0.8 }}
+            className="text-4xl md:text-6xl lg:text-7xl font-black text-white mb-6 drop-shadow-lg"
           >
             Board of <span className="text-brand-primary">Directors</span>
           </motion.h1>
           <motion.p 
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-lg md:text-xl text-gray-700 max-w-2xl mx-auto leading-relaxed"
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="text-lg md:text-xl lg:text-2xl text-white/90 max-w-2xl mx-auto leading-relaxed drop-shadow-md"
           >
-            Meet the dedicated leaders who guide our mission and ensure every refugee family has the support they need to thrive in our community.
+            Meet the dedicated leaders who guide our mission with compassion and ensure every refugee family has the support they need to thrive.
           </motion.p>
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="mt-8"
+          >
+            <span className="inline-block w-20 h-1 bg-brand-primary rounded-full"></span>
+          </motion.div>
         </div>
       </section>
 

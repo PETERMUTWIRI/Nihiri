@@ -28,7 +28,7 @@ export default function EmploymentPage() {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Left: Hero Image */}
             <div className="relative h-96 lg:h-[500px] rounded-3xl overflow-hidden shadow-2xl">
-              <Image src="/images/programs/esl3.png" alt="Job Training" fill className="object-cover" priority />
+              <Image src="/images/hero/kinity1.webp" alt="Employment Support" fill className="object-cover" priority />
               <div className="absolute inset-0 bg-gradient-to-br from-brand-primary/20 to-yellow-400/20" />
             </div>
 

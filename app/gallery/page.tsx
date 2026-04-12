@@ -49,11 +49,11 @@ export default async function GalleryPage() {
         <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
           {items.map((item) => (
             <div key={item.id} className="group overflow-hidden rounded-3xl border border-gray-200 shadow-sm transition hover:-translate-y-1 hover:shadow-xl">
-              <div className="aspect-[4/3] overflow-hidden bg-gray-100">
+              <div className="overflow-hidden bg-gray-100">
                 <img
                   src={item.imageUrl}
                   alt={item.description || 'Community image'}
-                  className="w-full h-full object-cover transition duration-500 group-hover:scale-105"
+                  className="w-full h-auto object-contain transition duration-500 group-hover:scale-105"
                   loading="lazy"
                 />
               </div>
