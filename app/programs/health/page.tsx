@@ -1,8 +1,27 @@
 
-// app/health/page.tsx - HEALTH PROGRAM PAGE
+// app/programs/health/page.tsx - HEALTH & WELLNESS PROGRAM PAGE
 import Image from 'next/image';
 import Link from 'next/link';
-import { FaArrowRight, FaHome, FaBrain, FaBaby, FaFemale, FaSyringe, FaBookOpen, FaUsers, FaMicrophone, FaSearch } from 'react-icons/fa';
+import { 
+  FaArrowRight, 
+  FaHome, 
+  FaBrain, 
+  FaBaby, 
+  FaFemale, 
+  FaSyringe, 
+  FaBookOpen, 
+  FaUsers, 
+  FaMicrophone, 
+  FaSearch,
+  FaHeart,
+  FaPhoneAlt,
+  FaCalendarCheck,
+  FaBus,
+  FaHandHoldingMedical,
+  FaHospital,
+  FaUserMd,
+  FaClinicMedical
+} from 'react-icons/fa';
 import NewsletterCTA from '@/components/NewsletterCTA';
 
 export default function HealthPage() {
@@ -28,13 +47,18 @@ export default function HealthPage() {
                 Comprehensive Care
               </span>
               <h1 className="text-5xl md:text-6xl font-black text-gray-900 mb-6 leading-tight">
-                Health Program
+                Health & Wellness Programs
               </h1>
               <p className="text-xl text-gray-600 mb-6 leading-relaxed">
-                Our interactive in-home health education program brings licensed healthcare professionals directly into the homes of refugee and immigrant families. We understand that navigating a new healthcare system can be overwhelming, especially when language barriers and cultural differences create additional obstacles to receiving proper care.
+                Our comprehensive health and wellness programs address the physical, mental, and emotional 
+                wellbeing of refugees and immigrants. From in-home health education to counseling support 
+                and medical care navigation, we ensure families have access to the care they need.
               </p>
               <p className="text-gray-600 mb-8">
-                We partner with established health systems to deliver education that addresses the unique barriers faced by newcomer populations. Our mission is threefold: to increase health literacy among our clients, to encourage patient autonomy so individuals can advocate for their own wellbeing, and to help families develop sustainable, healthy behaviors that will serve them throughout their lives. Every session includes professional interpretation services to ensure complete understanding, and as with all our programs, these vital health classes are offered completely free of charge.
+                We understand that navigating a new healthcare system can be overwhelming, especially when 
+                language barriers and cultural differences create additional obstacles. Our mission is to 
+                increase health literacy, encourage patient autonomy, and help families develop sustainable, 
+                healthy behaviors while providing emotional support throughout their healing journey.
               </p>
               <div className="flex flex-wrap gap-4">
                 <Link 
@@ -298,6 +322,166 @@ export default function HealthPage() {
         </div>
       </section>
 
+      {/* COUNSELING & EMOTIONAL SUPPORT */}
+      <section
+        className="relative py-20 bg-cover bg-center"
+        style={{ backgroundImage: "url('/images/history/history-07-youth-circle.jpg')" }}
+      >
+        <div className="absolute inset-0 bg-brand-primary/90" />
+        <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12">
+          <div className="text-center mb-16">
+            <span className="text-white/80 font-bold text-sm uppercase tracking-wide">Mental Wellness</span>
+            <h2 className="text-4xl font-black text-white mt-2">Counseling & Emotional Support</h2>
+            <p className="text-white/80 mt-4 max-w-2xl mx-auto">
+              Adjusting to a new country can be challenging. We offer compassionate support and connections 
+              to professional mental health services for refugees and immigrants processing trauma and building resilience.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {/* Emotional Support */}
+            <div className="bg-white/95 backdrop-blur rounded-2xl p-8 shadow-xl">
+              <div className="w-16 h-16 bg-brand-primary/20 rounded-2xl flex items-center justify-center mb-6">
+                <FaHeart className="text-3xl text-brand-primary"/>
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-3">Emotional Support</h3>
+              <p className="text-gray-600">
+                Caring guidance and a listening ear for those navigating the stress of displacement, 
+                cultural adjustment, and rebuilding lives in an unfamiliar environment.
+              </p>
+            </div>
+
+            {/* Mental Health Referrals */}
+            <div className="bg-white/95 backdrop-blur rounded-2xl p-8 shadow-xl">
+              <div className="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center mb-6">
+                <FaUserMd className="text-3xl text-blue-600"/>
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-3">Professional Counseling Referrals</h3>
+              <p className="text-gray-600">
+                Connections to licensed mental health professionals and counseling services with 
+                cultural competency and interpretation support available.
+              </p>
+            </div>
+
+            {/* Trauma-Informed Care */}
+            <div className="bg-white/95 backdrop-blur rounded-2xl p-8 shadow-xl">
+              <div className="w-16 h-16 bg-purple-100 rounded-2xl flex items-center justify-center mb-6">
+                <FaBrain className="text-3xl text-purple-600"/>
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-3">Trauma-Informed Resources</h3>
+              <p className="text-gray-600">
+                Access to trauma-informed care resources and support groups for individuals and families 
+                processing experiences of violence, loss, and displacement.
+              </p>
+            </div>
+
+            {/* Family & Youth Support */}
+            <div className="bg-white/95 backdrop-blur rounded-2xl p-8 shadow-xl">
+              <div className="w-16 h-16 bg-green-100 rounded-2xl flex items-center justify-center mb-6">
+                <FaUsers className="text-3xl text-green-600"/>
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-3">Family & Youth Support</h3>
+              <p className="text-gray-600">
+                Specialized support services for children, adolescents, and families addressing 
+                intergenerational trauma, parenting challenges, and family dynamics.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* HEALTHCARE & MEDICAL SUPPORT */}
+      <section
+        className="relative py-20 bg-cover bg-center"
+        style={{ backgroundImage: "url('/images/history/history-06-world-refugee-day.jpg')" }}
+      >
+        <div className="absolute inset-0 bg-white/90" />
+        <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12">
+          <div className="text-center mb-16">
+            <span className="text-brand-primary font-bold text-sm uppercase tracking-wide">Medical Care Access</span>
+            <h2 className="text-4xl font-black text-gray-900 mt-2">Healthcare & Medical Support</h2>
+            <p className="text-gray-600 mt-4 max-w-2xl mx-auto">
+              Helping clients access essential healthcare services by navigating the complex medical system, 
+              scheduling appointments, and ensuring transportation to receive proper care.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {/* Clinic Connections */}
+            <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition hover:-translate-y-1">
+              <div className="w-16 h-16 bg-green-100 rounded-2xl flex items-center justify-center mb-6">
+                <FaClinicMedical className="text-3xl text-green-600"/>
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-3">Free & Low-Cost Clinics</h3>
+              <p className="text-gray-600">
+                Connecting clients to community health centers, free clinics, and sliding-scale 
+                medical providers that offer quality care regardless of insurance status or ability to pay.
+              </p>
+            </div>
+
+            {/* Appointment Scheduling */}
+            <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition hover:-translate-y-1">
+              <div className="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center mb-6">
+                <FaCalendarCheck className="text-3xl text-blue-600"/>
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-3">Appointment Assistance</h3>
+              <p className="text-gray-600">
+                Helping clients schedule medical appointments, prepare for visits, and understand 
+                follow-up care instructions with cultural and linguistic support throughout the process.
+              </p>
+            </div>
+
+            {/* Medical Transport */}
+            <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition hover:-translate-y-1">
+              <div className="w-16 h-16 bg-brand-primary/20 rounded-2xl flex items-center justify-center mb-6">
+                <FaBus className="text-3xl text-brand-primary"/>
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-3">Medical Transportation</h3>
+              <p className="text-gray-600">
+                Coordinating transportation to and from medical visits for clients who lack reliable 
+                transport, ensuring they never miss critical appointments due to mobility barriers.
+              </p>
+            </div>
+
+            {/* Insurance Guidance */}
+            <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition hover:-translate-y-1">
+              <div className="w-16 h-16 bg-purple-100 rounded-2xl flex items-center justify-center mb-6">
+                <FaHandHoldingMedical className="text-3xl text-purple-600"/>
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-3">Health Insurance Enrollment</h3>
+              <p className="text-gray-600">
+                Guidance on understanding and enrolling in health insurance options including Medicaid, 
+                CHIP, marketplace plans, and refugee medical assistance programs.
+              </p>
+            </div>
+
+            {/* Maternal Health */}
+            <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition hover:-translate-y-1">
+              <div className="w-16 h-16 bg-pink-100 rounded-2xl flex items-center justify-center mb-6">
+                <FaFemale className="text-3xl text-pink-600"/>
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-3">Maternal & Child Health</h3>
+              <p className="text-gray-600">
+                Specialized referrals for prenatal care, pediatric services, family planning, and 
+                maternal health programs ensuring healthy outcomes for mothers and children.
+              </p>
+            </div>
+
+            {/* Hospital Navigation */}
+            <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition hover:-translate-y-1">
+              <div className="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center mb-6">
+                <FaHospital className="text-3xl text-red-600"/>
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-3">Hospital Navigation</h3>
+              <p className="text-gray-600">
+                Support during hospital visits and emergency care, including interpretation services 
+                and advocacy to ensure patients understand their treatment and rights.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* RESEARCH SECTION */}
       <section className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-6 md:px-12">
@@ -354,12 +538,12 @@ export default function HealthPage() {
         <div className="max-w-7xl mx-auto px-6 md:px-12">
           <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">Other Programs</h2>
           
-          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            <Link href="/esl" className="group">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-5xl mx-auto">
+            <Link href="/programs/esl" className="group">
               <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition hover:-translate-y-1">
-                <h3 className="text-2xl font-bold text-gray-900 mb-3 group-hover:text-brand-primary transition">ESL Program</h3>
+                <h3 className="text-2xl font-bold text-gray-900 mb-3 group-hover:text-brand-primary transition">ESL Education</h3>
                 <p className="text-gray-600 mb-4">
-                  Our one-on-one English as a Second Language tutoring program is the heart of our mission, providing personalized language instruction with free childcare to remove barriers to learning.
+                  English language classes, digital literacy, and translation services for effective communication.
                 </p>
                 <span className="text-blue-600 hover:text-blue-800 font-semibold flex items-center gap-2 transition-colors">
                   Learn More <FaArrowRight />
@@ -371,7 +555,19 @@ export default function HealthPage() {
               <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition hover:-translate-y-1">
                 <h3 className="text-2xl font-bold text-gray-900 mb-3 group-hover:text-brand-primary transition">Advocacy</h3>
                 <p className="text-gray-600 mb-4">
-                  Legal advocacy efforts to address the complex challenges refugees face when navigating immigration systems, housing, employment, and accessing essential services.
+                  Legal advocacy and immigration support for navigating complex systems and understanding rights.
+                </p>
+                <span className="text-blue-600 hover:text-blue-800 font-semibold flex items-center gap-2 transition-colors">
+                  Learn More <FaArrowRight />
+                </span>
+              </div>
+            </Link>
+
+            <Link href="/programs/basic-needs" className="group">
+              <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition hover:-translate-y-1">
+                <h3 className="text-2xl font-bold text-gray-900 mb-3 group-hover:text-brand-primary transition">Basic Needs</h3>
+                <p className="text-gray-600 mb-4">
+                  Food assistance, housing support, and transportation services for stable living conditions.
                 </p>
                 <span className="text-blue-600 hover:text-blue-800 font-semibold flex items-center gap-2 transition-colors">
                   Learn More <FaArrowRight />

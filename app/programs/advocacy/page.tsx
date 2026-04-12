@@ -1,7 +1,24 @@
-// app/advocacy/page.tsx - ADVOCACY PROGRAM PAGE
+// app/programs/advocacy/page.tsx - ADVOCACY & LEGAL SUPPORT PROGRAM PAGE
 import Image from 'next/image';
 import Link from 'next/link';
-import { FaArrowRight, FaBalanceScale, FaGavel, FaHandsHelping, FaFileAlt, FaYoutube, FaTiktok, FaFacebook, FaInstagram } from 'react-icons/fa';
+import { 
+  FaArrowRight, 
+  FaBalanceScale, 
+  FaGavel, 
+  FaHandsHelping, 
+  FaFileAlt, 
+  FaYoutube, 
+  FaTiktok, 
+  FaFacebook, 
+  FaInstagram,
+  FaUserTie,
+  FaPassport,
+  FaHandshake,
+  FaShieldAlt,
+  FaPhoneAlt,
+  FaScroll,
+  FaGlobe
+} from 'react-icons/fa';
 import NewsletterCTA from '@/components/NewsletterCTA';
 
 export default function AdvocacyPage() {
@@ -19,13 +36,17 @@ export default function AdvocacyPage() {
                   Legal Protection
                 </span>
                 <h1 className="text-5xl md:text-6xl font-black leading-tight">
-                  Advocacy Program
+                  Advocacy & Legal Support
                 </h1>
                 <p className="text-lg md:text-xl text-slate-200 max-w-2xl leading-relaxed">
-                  In response to the growing humanitarian crisis affecting displaced populations from Venezuela, Haiti, and Central America in 2022, New International Hope mobilized to expand our advocacy efforts in the legal realm.
+                  In response to the growing humanitarian crisis affecting displaced populations, New International Hope 
+                  provides comprehensive advocacy and legal support services. We guide clients through complex immigration 
+                  systems and connect them with trusted legal resources.
                 </p>
                 <p className="text-slate-200 max-w-2xl leading-relaxed">
-                  We recognized that thousands of families arriving at our borders were navigating an impossibly complex immigration system without adequate legal representation or understanding of their rights.
+                  We recognize that thousands of families arriving at our borders navigate impossibly complex systems 
+                  without adequate legal representation. Our team works tirelessly to ensure every refugee and immigrant 
+                  understands their rights and has access to quality legal guidance.
                 </p>
                 <div className="flex flex-wrap gap-4">
                   <Link
@@ -238,6 +259,96 @@ export default function AdvocacyPage() {
         </div>
       </section>
 
+      {/* LEGAL & IMMIGRATION SUPPORT */}
+      <section className="relative py-20 bg-cover bg-center" style={{ backgroundImage: "url('/images/history/history-05-health-nav.jpg')" }}>
+        <div className="absolute inset-0 bg-white/90" />
+        <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12">
+          <div className="text-center mb-16">
+            <span className="text-brand-primary font-bold text-sm uppercase tracking-wide">Legal Guidance</span>
+            <h2 className="text-4xl font-black text-gray-900 mt-2">Legal & Immigration Support</h2>
+            <p className="text-gray-600 mt-4 max-w-2xl mx-auto">
+              Navigating immigration processes and legal systems can be overwhelming. We guide clients to trusted 
+              legal help and provide support in understanding documentation, processes, and rights.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {/* Immigration Attorney Referrals */}
+            <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition hover:-translate-y-1">
+              <div className="w-16 h-16 bg-brand-primary/20 rounded-2xl flex items-center justify-center mb-6">
+                <FaUserTie className="text-3xl text-brand-primary"/>
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-3">Immigration Attorney Referrals</h3>
+              <p className="text-gray-600">
+                Connections to trusted immigration attorneys and legal aid organizations providing pro bono 
+                or low-cost services for asylum seekers, refugees, and immigrant families navigating complex 
+                immigration processes.
+              </p>
+            </div>
+
+            {/* Legal Aid Organizations */}
+            <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition hover:-translate-y-1">
+              <div className="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center mb-6">
+                <FaBalanceScale className="text-3xl text-blue-600"/>
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-3">Legal Aid Connections</h3>
+              <p className="text-gray-600">
+                Referrals to legal aid organizations specializing in refugee and immigrant services, 
+                including help with work authorization, family reunification, and permanent residency applications.
+              </p>
+            </div>
+
+            {/* Documentation Assistance */}
+            <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition hover:-translate-y-1">
+              <div className="w-16 h-16 bg-green-100 rounded-2xl flex items-center justify-center mb-6">
+                <FaFileAlt className="text-3xl text-green-600"/>
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-3">Documentation Guidance</h3>
+              <p className="text-gray-600">
+                Assistance understanding required documentation, forms, and processes for various immigration 
+                pathways including asylum applications, TPS, humanitarian parole, and naturalization.
+              </p>
+            </div>
+
+            {/* Asylum Support */}
+            <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition hover:-translate-y-1">
+              <div className="w-16 h-16 bg-purple-100 rounded-2xl flex items-center justify-center mb-6">
+                <FaShieldAlt className="text-3xl text-purple-600"/>
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-3">Asylum & Refugee Support</h3>
+              <p className="text-gray-600">
+                Connections to asylum support services, refugee resettlement agencies, and specialized 
+                legal resources for individuals seeking protection and beginning new lives in safety.
+              </p>
+            </div>
+
+            {/* Know Your Rights */}
+            <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition hover:-translate-y-1">
+              <div className="w-16 h-16 bg-orange-100 rounded-2xl flex items-center justify-center mb-6">
+                <FaScroll className="text-3xl text-orange-600"/>
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-3">Know Your Rights Education</h3>
+              <p className="text-gray-600">
+                Educational sessions on immigrant rights, what to do during encounters with immigration 
+                officials, workplace rights, and how to protect oneself and family members in various situations.
+              </p>
+            </div>
+
+            {/* Family Reunification */}
+            <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition hover:-translate-y-1">
+              <div className="w-16 h-16 bg-pink-100 rounded-2xl flex items-center justify-center mb-6">
+                <FaHandshake className="text-3xl text-pink-600"/>
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-3">Family Reunification Help</h3>
+              <p className="text-gray-600">
+                Guidance on family reunification processes, humanitarian parole programs, and resources 
+                for bringing family members to safety and keeping families together.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* NATIONAL COALITIONS */}
       <section className="relative py-20 bg-cover bg-center text-white" style={{ backgroundImage: "url('/images/history/history-08-board-2020.jpg')" }}>
         <div className="absolute inset-0 bg-slate-950/75" />
@@ -349,12 +460,12 @@ export default function AdvocacyPage() {
         <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12">
           <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">Other Programs</h2>
           
-          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            <Link href="/esl" className="group">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-5xl mx-auto">
+            <Link href="/programs/esl" className="group">
               <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition hover:-translate-y-1">
-                <h3 className="text-2xl font-bold text-gray-900 mb-3 group-hover:text-brand-primary transition">ESL Program</h3>
+                <h3 className="text-2xl font-bold text-gray-900 mb-3 group-hover:text-brand-primary transition">ESL Education</h3>
                 <p className="text-gray-600 mb-4">
-                  Our one-on-one English as a Second Language tutoring program provides personalized language instruction with free childcare, removing barriers to learning and integration.
+                  English language classes, digital literacy, and translation services for effective communication.
                 </p>
                 <span className="text-blue-600 hover:text-blue-800 font-semibold flex items-center gap-2 transition-colors">
                   Learn More <FaArrowRight />
@@ -362,11 +473,23 @@ export default function AdvocacyPage() {
               </div>
             </Link>
 
-            <Link href="/health" className="group">
+            <Link href="/programs/health" className="group">
               <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition hover:-translate-y-1">
-                <h3 className="text-2xl font-bold text-gray-900 mb-3 group-hover:text-brand-primary transition">Health Program</h3>
+                <h3 className="text-2xl font-bold text-gray-900 mb-3 group-hover:text-brand-primary transition">Health Services</h3>
                 <p className="text-gray-600 mb-4">
-                  Interactive in-home health education taught by licensed clinicians, focusing on increasing health literacy and patient autonomy within refugee and immigrant communities.
+                  Medical referrals, wellness programs, and counseling support for holistic wellbeing.
+                </p>
+                <span className="text-blue-600 hover:text-blue-800 font-semibold flex items-center gap-2 transition-colors">
+                  Learn More <FaArrowRight />
+                </span>
+              </div>
+            </Link>
+
+            <Link href="/programs/community" className="group">
+              <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition hover:-translate-y-1">
+                <h3 className="text-2xl font-bold text-gray-900 mb-3 group-hover:text-brand-primary transition">Community Integration</h3>
+                <p className="text-gray-600 mb-4">
+                  Cultural orientation, youth programs, and community events for meaningful connections.
                 </p>
                 <span className="text-blue-600 hover:text-blue-800 font-semibold flex items-center gap-2 transition-colors">
                   Learn More <FaArrowRight />

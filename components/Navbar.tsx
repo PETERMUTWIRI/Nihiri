@@ -541,9 +541,12 @@ export default function Navbar() {
       { label: 'Past Events', href: '/events/past', description: 'See photos and recaps.' },
     ],
     programs: [
-      { label: 'ESL Education', href: '/programs/esl', description: 'English language classes for all levels.' },
-      { label: 'Health Services', href: '/programs/health', description: 'Medical referrals and wellness programs.' },
-      { label: 'Advocacy', href: '/programs/advocacy', description: 'Legal support and community representation.' },
+      { label: 'ESL & Education', href: '/programs/esl', description: 'English classes, digital literacy, and translation services.' },
+      { label: 'Health & Wellness', href: '/programs/health', description: 'Medical referrals, counseling, and healthcare navigation.' },
+      { label: 'Advocacy & Legal', href: '/programs/advocacy', description: 'Legal support, immigration guidance, and rights education.' },
+      { label: 'Basic Needs', href: '/programs/basic-needs', description: 'Food assistance, housing, and transportation support.' },
+      { label: 'Employment', href: '/programs/employment', description: 'Job training, career guidance, and employer connections.' },
+      { label: 'Community', href: '/programs/community', description: 'Cultural orientation, youth programs, and integration support.' },
     ],
     getInvolved: [
       { label: 'Volunteer', href: '/volunteer', description: 'Join our volunteer team.' },

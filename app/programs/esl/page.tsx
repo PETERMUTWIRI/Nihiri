@@ -1,7 +1,19 @@
-// app/esl/page.tsx - ESL PROGRAM PAGE
+// app/programs/esl/page.tsx - ESL & EDUCATION PROGRAM PAGE
 import Image from 'next/image';
 import Link from 'next/link';
-import { FaArrowRight, FaChild, FaCar, FaUsers, FaLaptop } from 'react-icons/fa';
+import { 
+  FaArrowRight, 
+  FaChild, 
+  FaCar, 
+  FaUsers, 
+  FaLaptop, 
+  FaLanguage,
+  FaFileAlt,
+  FaGraduationCap,
+  FaKeyboard,
+  FaGlobe,
+  FaVideo
+} from 'react-icons/fa';
 import NewsletterCTA from '@/components/NewsletterCTA';
 
 export default function ESLPage() {
@@ -27,16 +39,17 @@ export default function ESLPage() {
                 Flagship Program
               </span>
               <h1 className="text-5xl md:text-6xl font-black text-gray-900 mb-6 leading-tight">
-                ESL Program
+                ESL & Education Programs
               </h1>
               <p className="text-xl text-gray-600 mb-6 leading-relaxed">
-                Our one-on-one English as a Second Language tutoring program is the heart of New International Hope. 
-                We provide free childcare during sessions, allowing women to focus on their personal growth 
-                without barriers.
+                Our comprehensive language and education programs are the heart of New International Hope. 
+                From English language instruction to digital literacy and translation services, we provide 
+                the tools for effective communication and lifelong learning.
               </p>
               <p className="text-gray-600 mb-8">
-                Our customizable curriculum focuses on practical, working ESL skills—preparing clients 
-                to embrace independence and navigate their new communities with confidence.
+                We offer free childcare during sessions, allowing women to focus on their personal growth 
+                without barriers. Our customizable curriculum focuses on practical, working skills—preparing 
+                clients to embrace independence and navigate their new communities with confidence.
               </p>
               <div className="flex flex-wrap gap-4">
                 <Link 
@@ -186,6 +199,200 @@ export default function ESLPage() {
       </div>
       </section>
 
+      {/* ENGLISH LANGUAGE LEARNING SECTION */}
+      <section
+        className="relative py-20 bg-cover bg-center"
+        style={{ backgroundImage: "url('/images/history/history-03-first-esl.jpg')" }}
+      >
+        <div className="absolute inset-0 bg-brand-primary/90" />
+        <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12">
+          <div className="text-center mb-16">
+            <span className="text-white/80 font-bold text-sm uppercase tracking-wide">Language Mastery</span>
+            <h2 className="text-4xl font-black text-white mt-2">English Language Learning</h2>
+            <p className="text-white/80 mt-4 max-w-2xl mx-auto">
+              Comprehensive ESL instruction from beginner to advanced levels, helping clients improve 
+              communication skills for daily life, work, and community participation.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {/* Beginner to Advanced Classes */}
+            <div className="bg-white/95 backdrop-blur rounded-2xl p-8 shadow-xl">
+              <div className="w-16 h-16 bg-brand-primary/20 rounded-2xl flex items-center justify-center mb-6">
+                <FaGraduationCap className="text-3xl text-brand-primary"/>
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-3">All Levels Welcome</h3>
+              <p className="text-gray-600">
+                Structured classes from beginner to advanced, ensuring every learner finds their 
+                appropriate level and progresses at a comfortable pace with personalized attention.
+              </p>
+            </div>
+
+            {/* Conversation Practice */}
+            <div className="bg-white/95 backdrop-blur rounded-2xl p-8 shadow-xl">
+              <div className="w-16 h-16 bg-green-100 rounded-2xl flex items-center justify-center mb-6">
+                <FaUsers className="text-3xl text-green-600"/>
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-3">Conversation Groups</h3>
+              <p className="text-gray-600">
+                Practice speaking in a supportive group environment. These sessions build confidence 
+                through real-world conversations on topics relevant to daily life and work.
+              </p>
+            </div>
+
+            {/* Literacy Support */}
+            <div className="bg-white/95 backdrop-blur rounded-2xl p-8 shadow-xl">
+              <div className="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center mb-6">
+                <FaFileAlt className="text-3xl text-blue-600"/>
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-3">Literacy Support</h3>
+              <p className="text-gray-600">
+                Specialized support for adults and youth developing reading and writing skills, 
+                including phonics instruction and practical literacy for everyday tasks.
+              </p>
+            </div>
+
+            {/* Certified ESL Referrals */}
+            <div className="bg-white/95 backdrop-blur rounded-2xl p-8 shadow-xl">
+              <div className="w-16 h-16 bg-purple-100 rounded-2xl flex items-center justify-center mb-6">
+                <FaGlobe className="text-3xl text-purple-600"/>
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-3">Certified ESL Referrals</h3>
+              <p className="text-gray-600">
+                Referrals to accredited ESL programs for clients seeking formal certification, 
+                advanced academic English, or specialized professional language training.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* EDUCATION & SKILL DEVELOPMENT */}
+      <section
+        className="relative py-20 bg-cover bg-center"
+        style={{ backgroundImage: "url('/images/history/history-05-health-nav.jpg')" }}
+      >
+        <div className="absolute inset-0 bg-white/90" />
+        <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12">
+          <div className="text-center mb-16">
+            <span className="text-brand-primary font-bold text-sm uppercase tracking-wide">Digital Age Skills</span>
+            <h2 className="text-4xl font-black text-gray-900 mt-2">Education & Skill Development</h2>
+            <p className="text-gray-600 mt-4 max-w-2xl mx-auto">
+              Empowering individuals with essential digital and professional skills for independence 
+              and employment in today's technology-driven world.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {/* Computer Training */}
+            <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition hover:-translate-y-1">
+              <div className="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center mb-6">
+                <FaLaptop className="text-3xl text-blue-600"/>
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-3">Basic Computer Skills</h3>
+              <p className="text-gray-600">
+                Foundational training in computer use, email management, internet navigation, and 
+                essential software applications needed for modern life and employment.
+              </p>
+            </div>
+
+            {/* Digital Literacy */}
+            <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition hover:-translate-y-1">
+              <div className="w-16 h-16 bg-brand-primary/20 rounded-2xl flex items-center justify-center mb-6">
+                <FaKeyboard className="text-3xl text-brand-primary"/>
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-3">Digital Literacy Classes</h3>
+              <p className="text-gray-600">
+                Comprehensive digital literacy covering online safety, using smartphones and tablets, 
+                accessing government services online, and navigating digital platforms confidently.
+              </p>
+            </div>
+
+            {/* Job Readiness */}
+            <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition hover:-translate-y-1">
+              <div className="w-16 h-16 bg-green-100 rounded-2xl flex items-center justify-center mb-6">
+                <FaFileAlt className="text-3xl text-green-600"/>
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-3">Job Search Skills</h3>
+              <p className="text-gray-600">
+                Training on online job searching, creating professional profiles, submitting digital 
+                applications, and using technology to find and secure employment opportunities.
+              </p>
+            </div>
+
+            {/* Career Mentorship */}
+            <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition hover:-translate-y-1">
+              <div className="w-16 h-16 bg-purple-100 rounded-2xl flex items-center justify-center mb-6">
+                <FaGraduationCap className="text-3xl text-purple-600"/>
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-3">Career Guidance</h3>
+              <p className="text-gray-600">
+                Mentorship and guidance on career pathways, credential recognition, continuing education 
+                options, and professional development opportunities.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* TRANSLATION & INTERPRETATION */}
+      <section
+        className="relative py-20 bg-cover bg-center"
+        style={{ backgroundImage: "url('/images/history/history-08-board-2020.jpg')" }}
+      >
+        <div className="absolute inset-0 bg-slate-950/80" />
+        <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12">
+          <div className="text-center mb-16">
+            <span className="text-white/80 font-bold text-sm uppercase tracking-wide">Breaking Barriers</span>
+            <h2 className="text-4xl font-black text-white mt-2">Translation & Interpretation Services</h2>
+            <p className="text-white/80 mt-4 max-w-2xl mx-auto">
+              Bridging language barriers to ensure clear communication in critical situations including 
+              medical appointments, legal proceedings, and educational settings.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {/* Document Translation */}
+            <div className="bg-white/10 backdrop-blur rounded-2xl p-8 border border-white/20">
+              <div className="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center mb-6">
+                <FaFileAlt className="text-3xl text-white"/>
+              </div>
+              <h3 className="text-xl font-bold text-white mb-3">Document Translation</h3>
+              <p className="text-white/80">
+                Professional translation of essential documents including medical records, legal paperwork, 
+                school transcripts, employment documents, and immigration forms to ensure accurate 
+                understanding and proper processing.
+              </p>
+            </div>
+
+            {/* In-Person Interpretation */}
+            <div className="bg-white/10 backdrop-blur rounded-2xl p-8 border border-white/20">
+              <div className="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center mb-6">
+                <FaLanguage className="text-3xl text-white"/>
+              </div>
+              <h3 className="text-xl font-bold text-white mb-3">In-Person & Virtual Interpretation</h3>
+              <p className="text-white/80">
+                Skilled interpreters available for in-person appointments and virtual meetings, ensuring 
+                clear two-way communication between clients and service providers in any setting.
+              </p>
+            </div>
+
+            {/* Appointment Support */}
+            <div className="bg-white/10 backdrop-blur rounded-2xl p-8 border border-white/20">
+              <div className="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center mb-6">
+                <FaVideo className="text-3xl text-white"/>
+              </div>
+              <h3 className="text-xl font-bold text-white mb-3">Appointment Assistance</h3>
+              <p className="text-white/80">
+                Interpretation support during medical visits, legal consultations, social services 
+                meetings, and educational conferences—ensuring clients fully understand and can 
+                participate in important conversations about their lives.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* OTHER PROGRAMS */}
       <section
         className="relative py-20 bg-cover bg-center"
@@ -195,12 +402,12 @@ export default function ESLPage() {
         <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12">
           <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">Other Programs</h2>
           
-          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-5xl mx-auto">
             <Link href="/programs/advocacy" className="group">
               <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition hover:-translate-y-1">
                 <h3 className="text-2xl font-bold text-gray-900 mb-3 group-hover:text-brand-primary transition">Advocacy</h3>
                 <p className="text-gray-600 mb-4">
-                  Legal advocacy efforts to address the influx of refugees who desperately need assistance navigating complex systems.
+                  Legal advocacy and immigration support for navigating complex systems and understanding rights.
                 </p>
                 <span className="text-blue-600 hover:text-blue-800 font-semibold flex items-center gap-2 transition-colors">
                   Learn More <FaArrowRight />
@@ -212,7 +419,19 @@ export default function ESLPage() {
               <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition hover:-translate-y-1">
                 <h3 className="text-2xl font-bold text-gray-900 mb-3 group-hover:text-brand-primary transition">Health</h3>
                 <p className="text-gray-600 mb-4">
-                  Interactive, accessible educational programs taught by licensed clinicians to promote wellness and health literacy.
+                  Health education, medical referrals, and counseling support for holistic wellbeing.
+                </p>
+                <span className="text-blue-600 hover:text-blue-800 font-semibold flex items-center gap-2 transition-colors">
+                  Learn More <FaArrowRight />
+                </span>
+              </div>
+            </Link>
+
+            <Link href="/programs/employment" className="group">
+              <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition hover:-translate-y-1">
+                <h3 className="text-2xl font-bold text-gray-900 mb-3 group-hover:text-brand-primary transition">Employment</h3>
+                <p className="text-gray-600 mb-4">
+                  Job readiness training and career support for economic independence.
                 </p>
                 <span className="text-blue-600 hover:text-blue-800 font-semibold flex items-center gap-2 transition-colors">
                   Learn More <FaArrowRight />
