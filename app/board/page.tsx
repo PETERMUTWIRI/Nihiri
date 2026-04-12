@@ -6,12 +6,14 @@ import { FaTimes } from 'react-icons/fa';
 import { FaLinkedinIn, FaEnvelope } from 'react-icons/fa6';
 import { AnimatePresence, motion } from 'framer-motion';
 import NewsletterCTA from '@/components/NewsletterCTA';
+
 type Member = {
   id: number;
   name: string;
   role: string;
   img: string;
   bio: string;
+  quote?: string;
   email?: string;
   linkedin?: string;
 };
@@ -21,63 +23,32 @@ const board: Member[] = [
     id: 1,
     name: 'Jane Kinity',
     role: 'Founder & Executive Director',
-    img: '/images/board/jane-kinity.jpg',
-    bio: 'Jane arrived in New Haven in 2000 and has spent two decades advocating for refugee families. She serves as Connecticut’s Refugee Congress Delegate and was the 2025 Elena’s Light Leadership Award recipient.',
+    img: '/images/employees/Jane-Kinity.avif',
+    bio: 'Refugee Congress Woman for the state of Connecticut, Elected democrat city of New Haven town committee, Elected Ward 2 Co-chair 10 years, Appointed by the Court as Conservator Middleton Court. Jane Kinity moved to New Haven, Connecticut in 2000.',
+    quote: 'I am passionate about helping others succeed and improve their lives. I believe that God opened the door for me so that I can do the same for others.',
     email: 'jane@nihri.com',
-    linkedin: 'https://linkedin.com/in/jane-kinity',
   },
   {
     id: 2,
-    name: 'Dr. Amina Hassan',
-    role: 'Board Chair',
-    img: '/images/board/amina-hassan.jpg',
-    bio: 'A family-medicine physician at Yale New Haven Hospital. Dr. Hassan oversees our health-navigation program and brings front-line insight into refugee health disparities.',
-    linkedin: 'https://linkedin.com/in/amina-hassan',
+    name: 'Eshe Abood',
+    role: 'Vice Chair',
+    img: '/images/employees/Eshe-Abood.avif',
+    bio: 'Eshe Abood brings a wealth of experience and a deep commitment to humanitarian causes to her new role as Vice Chair. With a background in social work and international development, Eshe has dedicated her career to advocating for the rights and well-being of displaced individuals and marginalized communities around the globe.',
   },
   {
     id: 3,
-    name: 'Carlos Martínez',
-    role: 'Treasurer',
-    img: '/images/board/carlos-martinez.jpg',
-    bio: 'CPA and partner at a New Haven accounting firm. Carlos ensures fiscal transparency and guides our annual budgeting process.',
+    name: 'Ann Mbugwa',
+    role: 'Secretary',
+    img: '/images/employees/Ann-Mbugwa.avif',
+    bio: 'Anne Mbugua graduated with BSBA in Human Resource Management on May 7, 2022. She believes that determined people working together can accomplish anything. Member of SHRM RI Society for Human Resource Management.',
   },
   {
     id: 4,
-    name: 'Rebecca Lee',
-    role: 'Secretary',
-    img: '/images/board/rebecca-lee.jpg',
-    bio: 'An attorney specializing in immigration law. Rebecca keeps board minutes and leads our pro-bono legal clinic partnerships.',
-    linkedin: 'https://linkedin.com/in/rebecca-lee-esq',
-  },
-  {
-    id: 5,
-    name: 'Rev. Michael Osei',
-    role: 'Community Liaison',
-    img: '/images/board/michael-osei.jpg',
-    bio: 'Pastor of Dwight Church and former refugee from Ghana. Rev. Osei amplifies refugee voices in faith-based coalitions.',
-  },
-  {
-    id: 6,
-    name: 'Dr. Laila Al-Salam',
-    role: 'Education Advisor',
-    img: '/images/board/laila-al-salam.jpg',
-    bio: 'Professor of TESOL at Southern Connecticut State. Laila designs our ESL curriculum and trains volunteer tutors.',
-    linkedin: 'https://linkedin.com/in/laila-al-salam',
-  },
-  {
-    id: 7,
-    name: 'Nadia Ibrahim',
-    role: 'Youth Representative',
-    img: '/images/board/nadia-ibrahim.jpg',
-    bio: 'Former ESL student and current UConn sophomore. Nadia chairs our youth advisory council and coordinates peer mentorship.',
-  },
-  {
-    id: 8,
-    name: 'Mark Thompson',
-    role: 'Development Advisor',
-    img: '/images/board/mark-thompson.jpg',
-    bio: 'Ex-fundraising director at Save the Children. Mark crafts donor strategy and grant proposals.',
-    linkedin: 'https://linkedin.com/in/mark-thompson-fundraising',
+    name: 'Joseph Kazadi',
+    role: 'Vice-President',
+    img: '/images/employees/Joseph-Kazadi.avif',
+    bio: 'Joseph Kazadi is a machine operator for Towels laboratories LTD from the Democratic Republic of Congo. He is an active member in his community, volunteering for Old Lyme fire department. He also serves as Associate Refugee Congress Delegate of Connecticut.',
+    quote: 'As Vice-President, I aim to help my community come together and lead us to a happy life.',
   },
 ];
 
@@ -87,108 +58,176 @@ export default function BoardPage() {
   return (
     <div className="min-h-screen bg-brand-background">
       {/* HERO */}
-      <section className="py-16 md:py-24 px-6 md:px-12 text-center bg-gradient-to-b from-brand-primary/20 to-brand-background">
-        <h1 className="text-5xl md:text-6xl font-black text-gray-900 mb-6">Board of Directors</h1>
-        <p className="text-xl text-gray-700 max-w-3xl mx-auto">
-          Meet the leaders who guide our mission and ensure every refugee family thrives.
-        </p>
+      <section className="relative py-20 md:py-28 px-6 md:px-12 text-center bg-gradient-to-br from-brand-primary/30 via-brand-primary/10 to-brand-background overflow-hidden">
+        <div className="absolute inset-0 bg-[url('/images/pattern.svg')] opacity-5"></div>
+        <div className="relative max-w-4xl mx-auto">
+          <motion.h1 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="text-4xl md:text-6xl font-black text-gray-900 mb-6"
+          >
+            Board of <span className="text-brand-primary">Directors</span>
+          </motion.h1>
+          <motion.p 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="text-lg md:text-xl text-gray-700 max-w-2xl mx-auto leading-relaxed"
+          >
+            Meet the dedicated leaders who guide our mission and ensure every refugee family has the support they need to thrive in our community.
+          </motion.p>
+        </div>
       </section>
 
-      {/* GRID */}
-      <section className="py-16 px-6 md:px-12 max-w-7xl mx-auto">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-          {board.map((m) => (
-            <button
-              key={m.id}
-              onClick={() => setActive(m)}
-              className="group bg-white rounded-2xl shadow hover:shadow-lg transition-all p-4 text-center"
+      {/* BOARD GRID */}
+      <section className="py-16 md:py-20 px-6 md:px-12 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {board.map((member, index) => (
+            <motion.button
+              key={member.id}
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              onClick={() => setActive(member)}
+              className="group bg-white rounded-3xl shadow-md hover:shadow-xl transition-all duration-300 p-6 text-left overflow-hidden border border-gray-100"
             >
-              <div className="w-32 h-32 mx-auto rounded-full overflow-hidden ring-4 ring-white group-hover:ring-brand-primary transition">
-                <Image
-                  src={m.img}
-                  alt={m.name}
-                  width={128}
-                  height={128}
-                  className="w-full h-full object-cover"
-                />
+              <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6">
+                <div className="relative w-28 h-28 sm:w-32 sm:h-32 flex-shrink-0">
+                  <div className="absolute inset-0 rounded-full bg-gradient-to-br from-brand-primary to-brand-primary/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 scale-105"></div>
+                  <div className="relative w-full h-full rounded-full overflow-hidden ring-4 ring-white shadow-lg">
+                    <Image
+                      src={member.img}
+                      alt={member.name}
+                      fill
+                      className="object-cover transition-transform duration-300 group-hover:scale-105"
+                    />
+                  </div>
+                </div>
+                <div className="flex-1 text-center sm:text-left">
+                  <h3 className="text-xl font-bold text-gray-900 group-hover:text-brand-primary transition-colors">
+                    {member.name}
+                  </h3>
+                  <p className="text-sm font-semibold text-blue-600 mt-1">{member.role}</p>
+                  <p className="text-gray-600 text-sm mt-3 line-clamp-3 leading-relaxed">
+                    {member.bio}
+                  </p>
+                  <span className="inline-flex items-center gap-1 text-sm font-medium text-brand-primary mt-4 opacity-0 group-hover:opacity-100 transition-opacity">
+                    Read more 
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </span>
+                </div>
               </div>
-              <h3 className="mt-4 font-extrabold text-gray-900">{m.name}</h3>
-              <p className="text-sm text-blue-600 font-semibold">{m.role}</p>
-            </button>
+            </motion.button>
           ))}
         </div>
       </section>
-      {/* LAST SECTION */}
+
+      {/* MISSION STATEMENT */}
+      <section className="py-16 px-6 md:px-12 bg-white">
+        <div className="max-w-4xl mx-auto text-center">
+          <div className="w-16 h-1 bg-brand-primary mx-auto mb-8 rounded-full"></div>
+          <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6">Our Commitment</h2>
+          <p className="text-lg text-gray-600 leading-relaxed">
+            Our board members bring diverse expertise and a shared passion for empowering refugees and immigrants. 
+            Together, they provide strategic direction and ensure we remain true to our mission of creating 
+            a welcoming community where everyone can succeed.
+          </p>
+        </div>
+      </section>
+
+      {/* NEWSLETTER */}
       <NewsletterCTA
-        title="Stay up to date with the latest  at"
-        subtitle="New International Hope\nFor Refugees And Immigrants"
+        title="Stay up to date with the latest at"
+        subtitle="New International Hope
+For Refugees And Immigrants"
       />
 
       {/* MODAL */}
       <AnimatePresence>
         {active && (
           <>
-            {/* backdrop */}
+            {/* Backdrop */}
             <motion.div
-              className="fixed inset-0 bg-black/60 z-40"
+              className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setActive(null)}
             />
-            {/* panel */}
+            {/* Panel */}
             <motion.div
-              className="fixed inset-x-4 top-1/2 -translate-y-1/2 max-w-2xl mx-auto bg-white rounded-2xl shadow-2xl z-50 p-6 md:p-8"
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.9, opacity: 0 }}
+              className="fixed inset-x-4 top-1/2 -translate-y-1/2 max-w-2xl mx-auto bg-white rounded-3xl shadow-2xl z-50 overflow-hidden"
+              initial={{ scale: 0.9, opacity: 0, y: '-45%' }}
+              animate={{ scale: 1, opacity: 1, y: '-50%' }}
+              exit={{ scale: 0.9, opacity: 0, y: '-45%' }}
             >
-              <div className="flex items-start justify-between mb-4">
-                <div className="flex items-center gap-4">
-                  <div className="w-20 h-20 rounded-full overflow-hidden ring-2 ring-brand-primary">
-                    <Image
-                      src={active.img}
-                      alt={active.name}
-                      width={80}
-                      height={80}
-                      className="w-full h-full object-cover"
-                    />
+              {/* Header with gradient */}
+              <div className="h-24 bg-gradient-to-br from-brand-primary/20 to-brand-primary/5 relative"></div>
+              
+              <div className="px-6 md:px-8 pb-8">
+                {/* Profile section */}
+                <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6 -mt-12">
+                  <div className="relative w-24 h-24 sm:w-28 sm:h-28 flex-shrink-0">
+                    <div className="absolute inset-0 rounded-full bg-gradient-to-br from-brand-primary to-brand-primary/60 scale-105"></div>
+                    <div className="relative w-full h-full rounded-full overflow-hidden ring-4 ring-white shadow-lg">
+                      <Image
+                        src={active.img}
+                        alt={active.name}
+                        fill
+                        className="object-cover"
+                      />
+                    </div>
                   </div>
-                  <div>
-                    <h2 className="text-2xl font-black text-gray-900">{active.name}</h2>
+                  <div className="flex-1 text-center sm:text-left mt-2 sm:mt-14">
+                    <h2 className="text-2xl font-bold text-gray-900">{active.name}</h2>
                     <p className="text-blue-600 font-semibold">{active.role}</p>
                   </div>
+                  <button
+                    onClick={() => setActive(null)}
+                    className="absolute top-4 right-4 w-10 h-10 flex items-center justify-center rounded-full bg-white/80 hover:bg-white text-gray-500 hover:text-gray-900 transition shadow-sm"
+                    aria-label="Close modal"
+                  >
+                    <FaTimes size={18} />
+                  </button>
                 </div>
-                <button
-                  onClick={() => setActive(null)}
-                  className="text-gray-400 hover:text-black transition"
-                  aria-label="Close modal"
-                >
-                  <FaTimes size={20} />
-                </button>
-              </div>
 
-              <p className="text-gray-700 leading-relaxed mb-6">{active.bio}</p>
+                {/* Content */}
+                <div className="mt-6 space-y-4">
+                  <p className="text-gray-700 leading-relaxed">{active.bio}</p>
+                  
+                  {active.quote && (
+                    <blockquote className="border-l-4 border-brand-primary pl-4 py-2 bg-brand-primary/5 rounded-r-lg">
+                      <p className="text-gray-700 italic">&ldquo;{active.quote}&rdquo;</p>
+                    </blockquote>
+                  )}
+                </div>
 
-              <div className="flex items-center gap-4">
-                {active.email && (
-                  <a
-                    href={`mailto:${active.email}`}
-                    className="btn-primary inline-flex items-center gap-2"
-                  >
-                    <FaEnvelope /> Email
-                  </a>
-                )}
-                {active.linkedin && (
-                  <a
-                    href={active.linkedin}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="btn-primary inline-flex items-center gap-2"
-                  >
-                    <FaLinkedinIn /> LinkedIn
-                  </a>
-                )}
+                {/* Contact buttons */}
+                <div className="flex flex-wrap items-center gap-3 mt-8 pt-6 border-t border-gray-100">
+                  {active.email && (
+                    <a
+                      href={`mailto:${active.email}`}
+                      className="inline-flex items-center gap-2 px-5 py-2.5 bg-brand-primary text-black font-semibold rounded-full hover:bg-brand-primary/90 transition shadow-sm hover:shadow-md"
+                    >
+                      <FaEnvelope size={16} /> 
+                      <span>Contact</span>
+                    </a>
+                  )}
+                  {active.linkedin && (
+                    <a
+                      href={active.linkedin}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 px-5 py-2.5 bg-gray-900 text-white font-semibold rounded-full hover:bg-gray-800 transition shadow-sm hover:shadow-md"
+                    >
+                      <FaLinkedinIn size={16} /> 
+                      <span>LinkedIn</span>
+                    </a>
+                  )}
+                </div>
               </div>
             </motion.div>
           </>
@@ -197,4 +236,3 @@ export default function BoardPage() {
     </div>
   );
 }
-
