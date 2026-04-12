@@ -3,7 +3,7 @@
 
 import useSWR from 'swr';
 import Link from 'next/link';
-import { FaEdit, FaTrash, FaPlus, FaCalendar, FaFileAlt, FaPen, FaImages } from 'react-icons/fa';
+import { FaEdit, FaTrash, FaPlus, FaCalendar, FaFileAlt, FaPen, FaImages, FaAward } from 'react-icons/fa';
 
 /* ---------- types ---------- */
 interface Post {
@@ -37,6 +37,16 @@ interface GalleryItem {
   createdAt: string;
 }
 
+interface RewardItem {
+  id: number;
+  imageUrl: string;
+  title: string;
+  description?: string;
+  awardedBy?: string;
+  awardedDate?: string;
+  createdAt: string;
+}
+
 const fetcher = (url: string) => fetch(url).then((r) => r.json());
 
 export default function DashboardContent() {
@@ -44,6 +54,7 @@ export default function DashboardContent() {
   const { data: events, mutate: mutateEvents } = useSWR<Event[]>('/api/events', fetcher);
   const { data: reports, mutate: mutateReports } = useSWR<Report[]>('/api/reports', fetcher);
   const { data: gallery, mutate: mutateGallery } = useSWR<GalleryItem[]>('/api/gallery', fetcher);
+  const { data: rewards, mutate: mutateRewards } = useSWR<RewardItem[]>('/api/rewards', fetcher);
 
   const deletePost = async (id: number) => {
     if (!confirm('Delete this post?')) return;
@@ -69,8 +80,14 @@ export default function DashboardContent() {
     mutateReports(reports?.filter((r) => r.id !== id) ?? [], false);
   };
 
+  const deleteReward = async (id: number) => {
+    if (!confirm('Delete this award/certificate?')) return;
+    await fetch(`/api/rewards?id=${id}`, { method: 'DELETE' });
+    mutateRewards(rewards?.filter((r) => r.id !== id) ?? [], false);
+  };
+
   /* ---------- skeleton while loading ---------- */
-  if (!posts || !events || !reports || !gallery)
+  if (!posts || !events || !reports || !gallery || !rewards)
     return (
       <div className="max-w-7xl mx-auto p-8">
         <div className="h-10 bg-gray-200 rounded mb-8 animate-pulse" />
@@ -95,11 +112,12 @@ export default function DashboardContent() {
       <h1 className="text-3xl font-black text-gray-900 mb-8">Admin Dashboard</h1>
 
       {/* KPI CARDS */}
-      <div className="grid md:grid-cols-4 gap-6 mb-10">
+      <div className="grid md:grid-cols-5 gap-6 mb-10">
         <MetricCard label="Blog Posts" value={posts.length} icon={<FaPen />} href="/admin/blog" />
         <MetricCard label="Events" value={events.length} icon={<FaCalendar />} href="/admin/events" />
         <MetricCard label="Gallery Images" value={gallery.length} icon={<FaImages />} href="/admin/gallery" />
         <MetricCard label="Reports" value={reports.length} icon={<FaFileAlt />} href="/admin/reports" />
+        <MetricCard label="Awards" value={rewards.length} icon={<FaAward />} href="/admin/rewards" />
       </div>
 
       {/* CONTENT GRID */}
@@ -171,6 +189,23 @@ export default function DashboardContent() {
               cover={item.imageUrl}
               editLink={`/admin/gallery?id=${item.id}`}
               onDelete={() => deleteGallery(item.id)}
+            />
+          )}
+        />
+
+        <SectionCard
+          title="Awards & Recognition"
+          href="/admin/rewards"
+          onNew="/admin/rewards"
+          items={rewards}
+          render={(item) => (
+            <ItemRow
+              id={item.id}
+              title={item.title}
+              subtitle={item.awardedBy || 'No organization'}
+              cover={item.imageUrl}
+              editLink={`/admin/rewards?id=${item.id}`}
+              onDelete={() => deleteReward(item.id)}
             />
           )}
         />

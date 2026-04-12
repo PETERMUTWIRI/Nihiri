@@ -532,6 +532,7 @@ export default function Navbar() {
       { label: 'Our History', href: '/history', description: 'Learn how we got here.' },
       { label: 'Board of Directors', href: '/board', description: 'Discover our board.' },
       { label: 'Staff', href: '/staff', description: 'Meet all the people that make us happen.' },
+      { label: 'Awards & Recognition', href: '/recognition', description: 'View our certificates, awards, and recognition.' },
       { label: 'Annual Reports', href: '/reports', description: 'View our annual reports.' },
       { label: 'Blog & News', href: '/blog', description: 'Read the latest from our blog.' },
       { label: 'Gallery', href: '/gallery', description: 'Browse our latest community photo gallery.' },
