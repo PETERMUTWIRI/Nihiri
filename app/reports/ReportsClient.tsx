@@ -23,10 +23,12 @@ export default function ReportsClient({ initialReports }: { initialReports: Repo
   const active = reports[idx];
 
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col">
+    <div className="min-h-screen bg-gray-50 flex flex-col text-render-premium">
       <header className="bg-white shadow-sm border-b sticky top-0 z-10">
         <div className="max-w-7xl mx-auto px-6 py-4">
-          <h1 className="text-2xl font-bold text-gray-900">Annual Reports</h1>
+          <h1 className="heading-editorial text-2xl text-gray-900">
+            Annual <span className="heading-accent">Reports</span>
+          </h1>
         </div>
       </header>
 
@@ -34,6 +36,7 @@ export default function ReportsClient({ initialReports }: { initialReports: Repo
         {/* LEFT: teaser */}
         <div className="w-full lg:w-1/2 bg-white border-r border-gray-200 p-8 flex flex-col justify-center lg:sticky lg:top-[73px] lg:h-screen lg:overflow-y-auto">
           <div className="max-w-md mx-auto w-full">
+            <span className="kicker mb-4 block">{active.year}</span>
             <div className="relative aspect-[4/5] rounded-xl overflow-hidden mb-6 bg-gray-100">
               {active.cover ? (
                 <img src={active.cover} alt={active.title} className="w-full h-full object-cover" loading="lazy" />
@@ -41,12 +44,11 @@ export default function ReportsClient({ initialReports }: { initialReports: Repo
                 <div className="w-full h-full bg-gradient-to-br from-brand-primary/20 to-brand-light flex items-center justify-center"><span className="text-6xl">📊</span></div>
               )}
             </div>
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">{active.title}</h2>
-            <p className="text-gray-600 mb-6">Year: {active.year}</p>
+            <h2 className="content-title text-gray-900 mb-4">{active.title}</h2>
 
             <div className="flex gap-4 mt-8">
-              <button onClick={() => setIdx((i) => (i - 1 + reports.length) % reports.length)} className="flex-1 flex items-center justify-center gap-2 bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-3 rounded-lg font-semibold transition"><FaChevronLeft /> Previous</button>
-              <button onClick={() => setIdx((i) => (i + 1 + reports.length) % reports.length)} className="flex-1 flex items-center justify-center gap-2 bg-brand-primary hover:bg-brand-dark text-brand-text px-4 py-3 rounded-lg font-semibold transition">Next <FaChevronRight /></button>
+              <button onClick={() => setIdx((i) => (i - 1 + reports.length) % reports.length)} className="flex-1 flex items-center justify-center gap-2 bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-3 rounded-lg font-semibold transition btn-text"><FaChevronLeft /> Previous</button>
+              <button onClick={() => setIdx((i) => (i + 1 + reports.length) % reports.length)} className="flex-1 flex items-center justify-center gap-2 bg-brand-primary hover:bg-brand-dark text-brand-text px-4 py-3 rounded-lg font-semibold transition btn-text">Next <FaChevronRight /></button>
             </div>
           </div>
         </div>
@@ -54,22 +56,23 @@ export default function ReportsClient({ initialReports }: { initialReports: Repo
         {/* RIGHT: full content */}
         <div className="w-full lg:w-1/2 bg-white p-8 overflow-y-auto" style={{ maxHeight: 'calc(100vh - 73px)' }}>
           <div className="max-w-2xl mx-auto">
-            <h3 className="text-2xl font-bold text-gray-900 mb-4">{active.title}</h3>
-            <p className="text-gray-600 mb-6">Annual report for year {active.year}.</p>
+            <span className="kicker mb-4 block">Report Details</span>
+            <h3 className="content-title text-gray-900 mb-4">{active.title}</h3>
+            <p className="body-editorial text-gray-600 mb-6">Annual report for year {active.year}. View our impact, financials, and program outcomes.</p>
             <a
               href={active.canvaUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 bg-brand-primary hover:bg-brand-dark text-brand-text px-6 py-3 rounded-lg font-semibold transition"
+              className="inline-flex items-center gap-2 bg-brand-primary hover:bg-brand-dark text-brand-text px-6 py-3 rounded-lg font-semibold transition btn-text"
             >
               <FaExternalLinkAlt /> Open Interactive Report
             </a>
 
             <div className="mt-12 pt-8 border-t border-gray-200">
-              <h4 className="text-lg font-semibold text-gray-900 mb-4">Share this report</h4>
+              <h4 className="font-serif font-medium text-lg text-gray-900 mb-4">Share this report</h4>
               <div className="flex gap-4">
-                <button className="bg-brand-primary hover:bg-brand-dark text-brand-text px-4 py-2 rounded-lg font-semibold transition">Facebook</button>
-                <button className="bg-cyan-500 hover:bg-cyan-600 text-white px-4 py-2 rounded-lg font-semibold transition">Twitter</button>
+                <button className="bg-brand-primary hover:bg-brand-dark text-brand-text px-4 py-2 rounded-lg font-semibold transition btn-text">Facebook</button>
+                <button className="bg-cyan-500 hover:bg-cyan-600 text-white px-4 py-2 rounded-lg font-semibold transition btn-text">Twitter</button>
               </div>
             </div>
           </div>
@@ -79,7 +82,7 @@ export default function ReportsClient({ initialReports }: { initialReports: Repo
       {/* CAROUSEL: ALL REPORTS */}
       <div className="bg-gray-100 border-t border-gray-200 p-6">
         <div className="max-w-7xl mx-auto">
-          <h3 className="text-lg font-semibold text-gray-900 mb-4">All Reports</h3>
+          <h3 className="font-serif font-medium text-lg text-gray-900 mb-4">All Reports</h3>
           <div className="flex gap-4 overflow-x-auto scrollbar-hide pb-2">
             {reports.map((r, i) => (
               <button

@@ -69,14 +69,16 @@ export default function BlogClient({ initialPosts }: { initialPosts: BlogPost[] 
 
   /* ---------- render ---------- */
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col">
+    <div className="min-h-screen bg-gray-50 flex flex-col text-render-premium">
       {/* Reading Progress Bar */}
       <ReadingProgressBar />
       
       {/* header */}
       <header className="bg-white shadow-sm border-b sticky top-0 z-10">
         <div className="max-w-7xl mx-auto px-6 py-4">
-          <h1 className="text-2xl font-bold text-gray-900">Our Stories</h1>
+          <h1 className="heading-editorial text-2xl text-gray-900">
+            Our <span className="heading-accent">Stories</span>
+          </h1>
         </div>
       </header>
 
@@ -85,7 +87,7 @@ export default function BlogClient({ initialPosts }: { initialPosts: BlogPost[] 
         {/* left: teaser (sticky on desktop) */}
         <div className="w-full lg:w-1/2 bg-white border-r border-gray-200 p-8 flex flex-col justify-center lg:sticky lg:top-[73px] lg:h-screen lg:overflow-y-auto">
           <div className="max-w-md mx-auto w-full">
-            <span className="inline-block bg-brand-primary/20 text-brand-text px-3 py-1 rounded-full text-sm font-semibold mb-4">{active.category}</span>
+            <span className="inline-block bg-brand-primary/20 text-brand-dark px-3 py-1 rounded-full text-xs font-semibold mb-4 uppercase tracking-wider">{active.category}</span>
 
             {/* image with fallback */}
             <div className="relative aspect-video rounded-xl overflow-hidden mb-6 bg-gray-100">
@@ -105,7 +107,7 @@ export default function BlogClient({ initialPosts }: { initialPosts: BlogPost[] 
               )}
             </div>
 
-            <h2 className="text-3xl font-bold text-gray-900 mb-4 leading-tight">{active.title}</h2>
+            <h2 className="content-title text-gray-900 mb-4">{active.title}</h2>
 
             <div className="flex items-center gap-4 text-sm text-gray-600 mb-6">
               <FaUser className="text-gray-400" />
@@ -114,14 +116,14 @@ export default function BlogClient({ initialPosts }: { initialPosts: BlogPost[] 
               <span>{formatDate(active.publishedAt)}</span>
             </div>
 
-            <p className="text-gray-600 leading-relaxed">{active.excerpt}</p>
+            <p className="body-editorial text-gray-600">{active.excerpt}</p>
 
             {/* prev/next */}
             <div className="flex gap-4 mt-8">
-              <button onClick={() => navigate('prev')} className="flex-1 flex items-center justify-center gap-2 bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-3 rounded-lg transition">
+              <button onClick={() => navigate('prev')} className="flex-1 flex items-center justify-center gap-2 bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-3 rounded-lg transition btn-text">
                 <FaChevronLeft /> Previous
               </button>
-              <button onClick={() => navigate('next')} className="flex-1 flex items-center justify-center gap-2 bg-brand-primary hover:bg-brand-dark text-brand-text px-4 py-3 rounded-lg font-semibold transition">
+              <button onClick={() => navigate('next')} className="flex-1 flex items-center justify-center gap-2 bg-brand-primary hover:bg-brand-dark text-brand-text px-4 py-3 rounded-lg font-semibold transition btn-text">
                 Next <FaChevronRight />
               </button>
             </div>
@@ -135,10 +137,10 @@ export default function BlogClient({ initialPosts }: { initialPosts: BlogPost[] 
               <article className="prose prose-lg max-w-none" dangerouslySetInnerHTML={{ __html: active.content }} />
 
               <div className="mt-12 pt-8 border-t border-gray-200">
-                <h3 className="text-lg font-semibold text-gray-900 mb-4">Share this story</h3>
+                <h3 className="card-title text-gray-900 mb-4">Share this story</h3>
                 <div className="flex gap-4">
-                  <button className="bg-brand-primary text-brand-text px-4 py-2 rounded-lg hover:bg-brand-dark font-semibold transition">Share on Facebook</button>
-                  <button className="bg-cyan-500 text-white px-4 py-2 rounded-lg hover:bg-cyan-600 font-semibold transition">Share on Twitter</button>
+                  <button className="bg-brand-primary text-brand-text px-4 py-2 rounded-lg hover:bg-brand-dark font-semibold transition btn-text">Share on Facebook</button>
+                  <button className="bg-cyan-500 text-white px-4 py-2 rounded-lg hover:bg-cyan-600 font-semibold transition btn-text">Share on Twitter</button>
                 </div>
               </div>
             </div>
@@ -149,7 +151,7 @@ export default function BlogClient({ initialPosts }: { initialPosts: BlogPost[] 
       {/* carousel: ALL posts */}
       <div className="bg-gray-100 border-t border-gray-200 p-6">
         <div className="max-w-7xl mx-auto">
-          <h3 className="text-lg font-semibold text-gray-900 mb-4">All Stories</h3>
+          <h3 className="font-serif font-medium text-lg text-gray-900 mb-4">All Stories</h3>
           <div className="flex gap-4 overflow-x-auto scrollbar-hide pb-2">
             {posts.map((p, i) => (
               <button

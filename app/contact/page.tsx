@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import Image from 'next/image';
 import NewsletterCTA from '@/components/NewsletterCTA';
 
 interface FormData {
@@ -111,7 +112,7 @@ ${formData.message}`;
   };
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white text-render-premium">
       {/* Toast Notification */}
       <AnimatePresence>
         {showToast && (
@@ -127,17 +128,17 @@ ${formData.message}`;
         )}
       </AnimatePresence>
 
-      {/* HERO SECTION - Theme Consistent */}
-      <section className="relative bg-brand-background pt-32 pb-16">
-        <div className="max-w-7xl mx-auto px-6 md:px-12">
+      {/* HERO SECTION - With Background */}
+      <section className="relative bg-cover bg-center pt-32 pb-20" style={{backgroundImage: `url('/images/history/history-03-first-esl.jpg')`}}>
+        <div className="absolute inset-0 bg-white/85"></div>
+        <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12">
           <div className="text-center max-w-3xl mx-auto">
-            <span className="inline-block bg-brand-primary/20 text-brand-text px-4 py-2 rounded-full text-sm font-semibold mb-6">
-              We Are Here to Help
-            </span>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-gray-900 mb-6">
-              Get in Touch
+            <span className="kicker mb-6 block">We Are Here to Help</span>
+            <h1 className="heading-editorial text-4xl md:text-5xl lg:text-6xl text-gray-900 mb-6">
+              Get in <span className="heading-accent">Touch</span>
             </h1>
-            <p className="text-xl text-gray-600 leading-relaxed">
+            <div className="hr-elegant mx-auto my-6"></div>
+            <p className="hero-subtitle text-gray-600">
               Have questions about our programs? Want to volunteer or partner with us? 
               We would love to hear from you.
             </p>
@@ -154,10 +155,9 @@ ${formData.message}`;
               href="tel:+12036759395"
               className="bg-white rounded-2xl shadow-lg p-6 border border-gray-100 hover:shadow-xl hover:-translate-y-1 transition group"
             >
-              
-              <h3 className="font-bold text-gray-900 mb-1">Call Us</h3>
+              <h3 className="card-title text-gray-900 mb-1">Call Us</h3>
               <p className="text-gray-600 text-sm mb-2">Mon-Fri, 9am-5pm</p>
-              <p className="text-brand-primary font-semibold">+(203) 675-9395</p>
+              <p className="text-brand-dark font-semibold">+(203) 675-9395</p>
             </a>
 
             {/* Email */}
@@ -165,10 +165,9 @@ ${formData.message}`;
               href="mailto:info@nihri.com"
               className="bg-white rounded-2xl shadow-lg p-6 border border-gray-100 hover:shadow-xl hover:-translate-y-1 transition group"
             >
-              
-              <h3 className="font-bold text-gray-900 mb-1">Email Us</h3>
+              <h3 className="card-title text-gray-900 mb-1">Email Us</h3>
               <p className="text-gray-600 text-sm mb-2">We reply within 24-48hrs</p>
-              <p className="text-brand-primary font-semibold">info@nihri.com</p>
+              <p className="text-brand-dark font-semibold">info@nihri.com</p>
             </a>
 
             {/* WhatsApp */}
@@ -176,8 +175,7 @@ ${formData.message}`;
               onClick={openWhatsApp}
               className="bg-white rounded-2xl shadow-lg p-6 border border-gray-100 hover:shadow-xl hover:-translate-y-1 transition group text-left"
             >
-              
-              <h3 className="font-bold text-gray-900 mb-1">WhatsApp</h3>
+              <h3 className="card-title text-gray-900 mb-1">WhatsApp</h3>
               <p className="text-gray-600 text-sm mb-2">Quick response</p>
               <p className="text-green-600 font-semibold">Chat Now</p>
             </button>
@@ -186,17 +184,19 @@ ${formData.message}`;
       </section>
 
       {/* CONTACT FORM & INFO */}
-      <section className="py-16 bg-brand-background">
-        <div className="max-w-7xl mx-auto px-6 md:px-12">
+      <section className="relative py-20 bg-cover bg-center" style={{backgroundImage: `url('/images/history/history-05-health-nav.jpg')`}}>
+        <div className="absolute inset-0 bg-white/85"></div>
+        <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12">
           <div className="grid lg:grid-cols-5 gap-12">
             
             {/* LEFT: Contact Form */}
             <div className="lg:col-span-3">
               <div className="bg-white rounded-2xl p-8 md:p-10 shadow-lg">
-                <h2 className="text-2xl font-black text-gray-900 mb-2">
-                  Send us a Message
+                <span className="kicker mb-4 block">Send a Message</span>
+                <h2 className="heading-editorial text-2xl md:text-3xl text-gray-900 mb-2">
+                  Send us a <span className="heading-accent">Message</span>
                 </h2>
-                <p className="text-gray-600 mb-8">
+                <p className="body-editorial text-gray-600 mb-8">
                   Fill out the form below and we will get back to you shortly.
                 </p>
 
@@ -305,7 +305,7 @@ ${formData.message}`;
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full inline-flex items-center justify-center gap-2 bg-brand-primary hover:bg-brand-dark text-brand-text px-8 py-4 rounded-lg font-semibold transition shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="w-full inline-flex items-center justify-center gap-2 bg-brand-primary hover:bg-brand-dark text-brand-text px-8 py-4 rounded-lg font-semibold transition shadow-lg disabled:opacity-50 disabled:cursor-not-allowed btn-text"
                   >
                     {isSubmitting ? (
                       <>
@@ -328,7 +328,7 @@ ${formData.message}`;
             <div className="lg:col-span-2 space-y-6">
               {/* Office Hours */}
               <div className="bg-white rounded-2xl p-6 shadow-lg">
-                <h3 className="font-bold text-gray-900 mb-4">Office Hours</h3>
+                <h3 className="card-title text-gray-900 mb-4">Office Hours</h3>
                 <div className="space-y-2 text-sm">
                   <div className="flex justify-between">
                     <span className="text-gray-600">Monday - Friday</span>
@@ -347,8 +347,8 @@ ${formData.message}`;
 
               {/* Response Time */}
               <div className="bg-brand-primary/10 rounded-2xl p-6 border border-brand-primary/20">
-                <h3 className="font-bold text-gray-900 mb-2">Expected Response Time</h3>
-                <p className="text-gray-700 text-sm">
+                <h3 className="card-title text-gray-900 mb-2">Expected Response Time</h3>
+                <p className="text-gray-700 text-sm body-editorial">
                   We aim to respond to all inquiries within <strong>24-48 hours</strong> during business days. 
                   For urgent matters, please call or WhatsApp us directly.
                 </p>
@@ -356,8 +356,8 @@ ${formData.message}`;
 
               {/* Address */}
               <div className="bg-white rounded-2xl p-6 shadow-lg">
-                <h3 className="font-bold text-gray-900 mb-4">Our Office</h3>
-                <address className="not-italic text-gray-600 text-sm space-y-1">
+                <h3 className="card-title text-gray-900 mb-4">Our Office</h3>
+                <address className="not-italic text-gray-600 text-sm space-y-1 body-editorial">
                   <p className="font-medium text-gray-900">New International Hope</p>
                   <p>475 Elm St.</p>
                   <p>New Haven, CT 06511</p>
@@ -367,13 +367,13 @@ ${formData.message}`;
 
               {/* Social Links */}
               <div className="bg-white rounded-2xl p-6 shadow-lg">
-                <h3 className="font-bold text-gray-900 mb-4">Follow Us</h3>
+                <h3 className="card-title text-gray-900 mb-4">Follow Us</h3>
                 <div className="flex flex-wrap gap-2">
                   {['Facebook', 'Instagram', 'LinkedIn', 'YouTube'].map((social) => (
                     <a
                       key={social}
                       href="#"
-                      className="px-4 py-2 bg-gray-100 hover:bg-brand-primary hover:text-brand-text rounded-lg text-sm font-medium text-gray-700 transition"
+                      className="px-4 py-2 bg-gray-100 hover:bg-brand-primary hover:text-brand-text rounded-lg text-sm font-medium text-gray-700 transition btn-text"
                     >
                       {social}
                     </a>
@@ -389,10 +389,11 @@ ${formData.message}`;
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-6 md:px-12">
           <div className="text-center mb-8">
-            <h2 className="text-3xl font-black text-gray-900 mb-4">
-              Visit Our Office
+            <span className="kicker mb-4 block">Location</span>
+            <h2 className="heading-editorial text-3xl text-gray-900 mb-4">
+              Visit Our <span className="heading-accent">Office</span>
             </h2>
-            <p className="text-gray-600">
+            <p className="body-editorial text-gray-600">
               We are located in the heart of New Haven, Connecticut.
             </p>
           </div>
@@ -415,13 +416,15 @@ ${formData.message}`;
       </section>
 
       {/* FAQ SECTION */}
-      <section className="py-16 bg-brand-background">
-        <div className="max-w-4xl mx-auto px-6 md:px-12">
+      <section className="relative py-20 bg-cover bg-center" style={{backgroundImage: `url('/images/history/history-07-youth-circle.jpg')`}}>
+        <div className="absolute inset-0 bg-white/85"></div>
+        <div className="relative z-10 max-w-4xl mx-auto px-6 md:px-12">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-black text-gray-900 mb-4">
-              Frequently Asked Questions
+            <span className="kicker mb-4 block">FAQ</span>
+            <h2 className="heading-editorial text-3xl md:text-4xl text-gray-900 mb-4">
+              Frequently Asked <span className="heading-accent">Questions</span>
             </h2>
-            <p className="text-gray-600">
+            <p className="body-editorial text-gray-600">
               Quick answers to common questions.
             </p>
           </div>
@@ -446,8 +449,8 @@ ${formData.message}`;
               },
             ].map((faq, idx) => (
               <div key={idx} className="bg-white rounded-xl p-6 shadow-sm">
-                <h3 className="font-semibold text-gray-900 mb-2">{faq.q}</h3>
-                <p className="text-gray-600">{faq.a}</p>
+                <h3 className="font-serif font-medium text-gray-900 mb-2">{faq.q}</h3>
+                <p className="body-editorial text-gray-600">{faq.a}</p>
               </div>
             ))}
           </div>

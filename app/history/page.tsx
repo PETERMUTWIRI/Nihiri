@@ -23,17 +23,17 @@ const externalLinks = [
 
 export default function HistoryPage() {
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white text-render-premium">
       {/* HERO SECTION */}
-      <section className="bg-brand-background pt-32 pb-16">
-        <div className="max-w-4xl mx-auto px-6 md:px-12 text-center">
-          <span className="inline-block bg-brand-primary/20 text-brand-text px-4 py-2 rounded-full text-sm font-semibold mb-6">
-            Our Journey
-          </span>
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-gray-900 mb-6">
-            Our History
+      <section className="relative bg-cover bg-center pt-32 pb-20" style={{backgroundImage: `url('/images/history/history-01-hero.jpeg')`}}>
+        <div className="absolute inset-0 bg-white/85"></div>
+        <div className="relative z-10 max-w-4xl mx-auto px-6 md:px-12 text-center">
+          <span className="kicker mb-6 block">Our Journey</span>
+          <h1 className="heading-editorial text-4xl md:text-5xl lg:text-6xl text-gray-900 mb-6">
+            Our <span className="heading-accent">History</span>
           </h1>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+          <div className="hr-elegant my-6 mx-auto"></div>
+          <p className="hero-subtitle text-gray-600 max-w-2xl mx-auto">
             From a refugee camp in Uganda to a beacon of hope in New Haven, 
             our story is one of resilience, community, and transformative education.
           </p>
@@ -41,21 +41,23 @@ export default function HistoryPage() {
       </section>
 
       {/* FOUNDER STORY - Two Column Text Layout */}
-      <section className="py-16 bg-white">
+      <section className="py-20 bg-white">
         <div className="max-w-6xl mx-auto px-6 md:px-12">
           <div className="grid lg:grid-cols-2 gap-12 items-start">
             {/* Text - Two Columns */}
             <div className="order-2 lg:order-1">
-              <h2 className="text-3xl font-black text-gray-900 mb-6">
-                The Story of Jane Kinity
+              <span className="kicker mb-4 block">The Founder</span>
+              <h2 className="heading-editorial text-3xl md:text-4xl text-gray-900 mb-6">
+                The Story of <span className="heading-accent">Jane Kinity</span>
               </h2>
+              <div className="w-16 h-1 bg-brand-primary rounded-full mb-6"></div>
               
               {/* Two Column Text Layout */}
-              <div className="grid md:grid-cols-2 gap-6 text-gray-700 leading-relaxed text-sm">
+              <div className="grid md:grid-cols-2 gap-6 text-gray-600 body-editorial text-sm">
                 <div className="space-y-4">
                   <p>
-                    Before arriving in the United States, <strong>Jane Kinity</strong> was an educator in Kenya 
-                    alongside her husband, <strong>Isaac Newton Kinity</strong>. Their lives were forever changed 
+                    Before arriving in the United States, <strong className="text-gray-900">Jane Kinity</strong> was an educator in Kenya 
+                    alongside her husband, <strong className="text-gray-900">Isaac Newton Kinity</strong>. Their lives were forever changed 
                     when political persecution and threats forced them to flee their home.
                   </p>
                   <p>
@@ -64,7 +66,7 @@ export default function HistoryPage() {
                   </p>
                   <p>
                     In 2000, they were resettled in New Haven, Connecticut, by 
-                    <Link href="https://irisct.org/" target="_blank" className="text-blue-600 hover:underline font-semibold"> IRIS</Link>.
+                    <Link href="https://irisct.org/" target="_blank" className="text-brand-dark hover:underline font-semibold"> IRIS</Link>.
                   </p>
                 </div>
                 <div className="space-y-4">
@@ -73,10 +75,10 @@ export default function HistoryPage() {
                     living room. Jane understood that language was the key to independence.
                   </p>
                   <p>
-                    In 2012, this effort became the <strong>International New Hope for 
+                    In 2012, this effort became the <strong className="text-gray-900">International New Hope for 
                     Refugees and Immigrants Center</strong>, expanding to health navigation and advocacy.
                   </p>
-                  <p className="text-blue-600 font-semibold">
+                  <p className="text-brand-dark font-semibold">
                     In 2025, Jane received the Elena&apos;s Light Leadership Award for her lifelong dedication.
                   </p>
                 </div>
@@ -84,7 +86,7 @@ export default function HistoryPage() {
 
               {/* External Links - Blue Style */}
               <div className="mt-8 pt-6 border-t border-gray-200">
-                <h3 className="font-semibold text-gray-900 mb-4">Learn More</h3>
+                <h3 className="font-serif font-medium text-gray-900 mb-4">Learn More</h3>
                 <div className="space-y-3">
                   {externalLinks.map((link) => (
                     <Link
@@ -92,11 +94,11 @@ export default function HistoryPage() {
                       href={link.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-start gap-3 p-3 rounded-lg hover:bg-blue-50 transition group"
+                      className="flex items-start gap-3 p-3 rounded-lg hover:bg-brand-primary/10 transition group"
                     >
-                      <span className="text-blue-600 mt-1">→</span>
+                      <span className="text-brand-dark mt-1">→</span>
                       <div>
-                        <p className="font-medium text-blue-600 group-hover:underline">
+                        <p className="font-medium text-brand-dark group-hover:underline">
                           {link.name}
                         </p>
                         <p className="text-sm text-gray-500">{link.desc}</p>
@@ -109,7 +111,7 @@ export default function HistoryPage() {
 
             {/* Image */}
             <div className="order-1 lg:order-2 relative">
-              <div className="relative h-[400px] rounded-2xl overflow-hidden shadow-xl">
+              <div className="relative h-[400px] rounded-2xl overflow-hidden shadow-xl img-zoom">
                 <Image
                   src="/images/about/Nihiri_founder.jpeg"
                   alt="Jane Kinity, Founder"
@@ -119,7 +121,7 @@ export default function HistoryPage() {
                 />
               </div>
               <div className="absolute -bottom-6 -right-6 bg-brand-primary rounded-xl p-4 shadow-lg">
-                <p className="text-3xl font-black text-brand-text">25+</p>
+                <p className="stat-number text-3xl text-brand-text">25+</p>
                 <p className="text-sm text-brand-text/80">Years of Service</p>
               </div>
             </div>
@@ -128,21 +130,26 @@ export default function HistoryPage() {
       </section>
 
       {/* IMAGE CAROUSEL - Marquee Style */}
-      <section className="py-12 bg-brand-background border-y border-gray-200">
-        <div className="max-w-7xl mx-auto px-6 md:px-12">
-          <h2 className="text-2xl font-bold text-gray-900 text-center mb-8">
-            Moments Through the Years
+      <section className="relative py-16 bg-cover bg-center border-y border-gray-200" style={{backgroundImage: `url('/images/history/history-02-jane-kitchen.jpg')`}}>
+        <div className="absolute inset-0 bg-white/85"></div>
+        <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12">
+          <h2 className="heading-editorial text-2xl md:text-3xl text-gray-900 text-center mb-8">
+            Moments Through the <span className="heading-accent">Years</span>
           </h2>
           <HistoryCarousel />
         </div>
       </section>
 
       {/* TIMELINE */}
-      <section className="py-20 bg-white">
+      <section className="py-24 bg-white">
         <div className="max-w-4xl mx-auto px-6 md:px-12">
-          <h2 className="text-3xl md:text-4xl font-black text-gray-900 text-center mb-16">
-            Key Milestones
-          </h2>
+          <div className="text-center mb-16">
+            <span className="kicker mb-4 block">Timeline</span>
+            <h2 className="heading-editorial text-3xl md:text-4xl lg:text-5xl text-gray-900 mb-4">
+              Key <span className="heading-accent">Milestones</span>
+            </h2>
+            <div className="hr-elegant mx-auto my-6"></div>
+          </div>
           
           <div className="relative">
             {/* Vertical line */}
@@ -162,13 +169,13 @@ export default function HistoryPage() {
                 <div className={`ml-12 md:ml-0 md:w-5/12 ${
                   idx % 2 === 0 ? 'md:pr-12 md:text-right' : 'md:pl-12'
                 }`}>
-                  <span className="inline-block bg-brand-primary/10 text-brand-text px-3 py-1 rounded-full text-sm font-bold mb-2">
+                  <span className="inline-block bg-brand-primary/10 text-brand-dark px-3 py-1 rounded-full text-xs font-bold mb-2 uppercase tracking-wider">
                     {milestone.year}
                   </span>
-                  <h3 className="text-xl font-bold text-gray-900 mb-2">
+                  <h3 className="card-title text-gray-900 mb-2">
                     {milestone.title}
                   </h3>
-                  <p className="text-gray-600 leading-relaxed">
+                  <p className="text-gray-600 leading-relaxed body-editorial">
                     {milestone.desc}
                   </p>
                 </div>
@@ -182,8 +189,15 @@ export default function HistoryPage() {
       </section>
 
       {/* IMPACT STATS */}
-      <section className="py-16 bg-brand-background">
-        <div className="max-w-6xl mx-auto px-6 md:px-12">
+      <section className="relative py-20 bg-cover bg-center" style={{backgroundImage: `url('/images/history/history-04-501c3.jpg')`}}>
+        <div className="absolute inset-0 bg-white/85"></div>
+        <div className="relative z-10 max-w-6xl mx-auto px-6 md:px-12">
+          <div className="text-center mb-12">
+            <span className="kicker mb-4 block">Impact</span>
+            <h2 className="heading-editorial text-3xl md:text-4xl text-gray-900 mb-4">
+              Our <span className="heading-accent">Numbers</span>
+            </h2>
+          </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             {[
               { number: '25+', label: 'Years of Service' },
@@ -192,8 +206,8 @@ export default function HistoryPage() {
               { number: '150+', label: 'Active Volunteers' },
             ].map((stat) => (
               <div key={stat.label}>
-                <p className="text-4xl md:text-5xl font-black text-gray-900 mb-2">{stat.number}</p>
-                <p className="text-gray-600">{stat.label}</p>
+                <p className="stat-number text-4xl md:text-5xl text-gray-900 mb-2">{stat.number}</p>
+                <p className="text-gray-600 body-editorial">{stat.label}</p>
               </div>
             ))}
           </div>
@@ -201,35 +215,36 @@ export default function HistoryPage() {
       </section>
 
       {/* QUOTE */}
-      <section className="py-20 bg-white">
+      <section className="py-24 bg-white">
         <div className="max-w-4xl mx-auto px-6 md:px-12 text-center">
-          <blockquote className="text-2xl md:text-3xl lg:text-4xl font-black text-gray-900 italic leading-tight mb-8">
+          <blockquote className="quote-editorial text-gray-900 mb-8">
             &ldquo;Empowerment through education—turning the challenges of displacement into the triumphs of new beginnings.&rdquo;
           </blockquote>
           <div className="flex items-center justify-center gap-4">
-            
             <div className="text-left">
-              <cite className="not-italic font-bold text-gray-900 block">Jane Kinity</cite>
+              <cite className="not-italic font-serif font-medium text-gray-900 block">Jane Kinity</cite>
               <span className="text-gray-600 text-sm">Founder & Executive Director</span>
             </div>
           </div>
         </div>
       </section>
 
-      {/* CTA - No Dark Background */}
-      <section className="py-16 bg-white border-t border-gray-200">
-        <div className="max-w-4xl mx-auto px-6 md:px-12 text-center">
-          <h2 className="text-3xl md:text-4xl font-black text-gray-900 mb-6">
-            Be Part of Our Story
+      {/* CTA - With Background */}
+      <section className="relative py-20 bg-cover bg-center" style={{backgroundImage: `url('/images/history/history-09-award-ceremony.jpg')`}}>
+        <div className="absolute inset-0 bg-white/85"></div>
+        <div className="relative z-10 max-w-4xl mx-auto px-6 md:px-12 text-center">
+          <span className="kicker mb-4 block">Join Us</span>
+          <h2 className="heading-editorial text-3xl md:text-4xl text-gray-900 mb-6">
+            Be Part of Our <span className="heading-accent">Story</span>
           </h2>
-          <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+          <p className="hero-subtitle text-gray-600 mb-8 max-w-2xl mx-auto">
             Join us in continuing Jane&apos;s legacy of empowerment through education. 
             Whether as a volunteer, donor, or partner, you can help write the next chapter.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link 
               href="/volunteer" 
-              className="inline-flex items-center justify-center px-8 py-4 bg-brand-primary hover:bg-brand-dark text-brand-text font-semibold rounded-lg transition"
+              className="inline-flex items-center justify-center px-8 py-4 bg-brand-primary hover:bg-brand-dark text-brand-text font-semibold rounded-lg transition btn-text"
             >
               Volunteer With Us
             </Link>

@@ -89,7 +89,7 @@ export default async function HomePage() {
   const hasEvents = upcomingEvent || latestPastEvent;
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white text-render-premium">
       
       {/* HERO SECTION - Desktop: Carousel + Video | Mobile: Original Layout */}
       <section className="relative min-h-screen overflow-hidden bg-cover bg-center" style={{backgroundImage: `url('/images/hero/graduation.jpeg')`}}>
@@ -104,13 +104,14 @@ export default async function HomePage() {
               <div className="grid lg:grid-cols-2 gap-12 items-center">
                 {/* Left - Text & Mobile Video */}
                 <ScrollReveal direction="left" className="text-gray-900">
-                  <h1 className="text-4xl md:text-5xl font-black mb-6 leading-tight">
+                  <span className="kicker mb-4 block text-brand-neutral">Empowering Communities</span>
+                  <h1 className="heading-editorial text-4xl md:text-5xl mb-6 leading-tight">
                     <span className="block">Supporting</span>
-                    <span className="block text-cyan-600">Refugee</span>
+                    <span className="block text-cyan-600 heading-accent">Refugee</span>
                     <span className="block">Women</span>
                     <span className="block">and Children</span>
                   </h1>
-                  <p className="text-xl md:text-2xl text-gray-700 mb-8 max-w-xl leading-relaxed">
+                  <p className="hero-subtitle text-gray-600 mb-8 max-w-xl">
                     At nihri&apos;s hope, we work hard to provide refugee and immigrant families with all the tools they need to cultivate and exercise their individual independence.
                   </p>
                   
@@ -126,7 +127,7 @@ export default async function HomePage() {
                   <div className="grid grid-cols-2 gap-3 sm:flex sm:flex-row sm:gap-4">
                     <Link 
                       href="/donate" 
-                      className="inline-flex items-center justify-center px-4 sm:px-8 py-4 bg-brand-primary hover:bg-brand-dark text-brand-text font-bold rounded-lg transition transform hover:scale-105 text-sm sm:text-base"
+                      className="inline-flex items-center justify-center px-4 sm:px-8 py-4 bg-brand-primary hover:bg-brand-dark text-brand-text font-bold rounded-lg transition transform hover:scale-105 text-sm sm:text-base btn-text"
                     >
                       Donate
                       <span className="ml-1 sm:ml-2">→</span>
@@ -146,14 +147,15 @@ export default async function HomePage() {
             <div className="hidden lg:grid lg:grid-cols-2 gap-12 items-center">
               {/* Left - Text Content */}
               <ScrollReveal direction="left" className="text-gray-900">
-                <h1 className="text-4xl xl:text-5xl font-black mb-6 leading-tight">
+                <span className="kicker mb-4 block text-brand-neutral">Empowering Communities</span>
+                <h1 className="heading-editorial text-4xl xl:text-5xl mb-6 leading-tight">
                   Supporting{' '}
-                  <span className="text-cyan-600">
+                  <span className="text-cyan-600 heading-accent">
                     Refugee
                   </span>{' '}
                   Women and Children
                 </h1>
-                <p className="text-lg xl:text-xl text-gray-700 mb-8 max-w-xl leading-relaxed">
+                <p className="hero-subtitle text-gray-600 mb-8 max-w-xl">
                   At Nihri's hope, we work hard to provide refugee and immigrant families with all the tools they need to cultivate and exercise their individual independence.
                 </p>
                 
@@ -161,7 +163,7 @@ export default async function HomePage() {
                 <div className="flex flex-row gap-4">
                   <Link 
                     href="/donate" 
-                    className="inline-flex items-center justify-center px-8 py-4 bg-brand-primary hover:bg-brand-dark text-brand-text font-bold rounded-lg transition transform hover:scale-105 text-base"
+                    className="inline-flex items-center justify-center px-8 py-4 bg-brand-primary hover:bg-brand-dark text-brand-text font-bold rounded-lg transition transform hover:scale-105 text-base btn-text"
                   >
                     Donate
                     <span className="ml-2">→</span>
@@ -196,67 +198,66 @@ export default async function HomePage() {
           <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12">
             <ScrollReveal>
               <div className="flex flex-col md:flex-row md:items-end md:justify-between mb-12">
-              <div>
-                <span className="text-cyan-600 font-semibold uppercase tracking-wide text-sm">Latest Story</span>
-                <h2 className="text-4xl font-black text-gray-900 mt-2">From Our Blog</h2>
+                <div>
+                  <span className="kicker mb-2 block">Stories</span>
+                  <h2 className="heading-editorial text-4xl md:text-5xl text-gray-900 mt-2">
+                    From Our <span className="heading-accent">Blog</span>
+                  </h2>
+                </div>
+                <Link href="/blog" className="text-brand-dark hover:text-brand-text font-semibold mt-4 md:mt-0 btn-text inline-flex items-center gap-1">
+                  View All Stories <span>→</span>
+                </Link>
               </div>
-              <Link href="/blog" className="text-blue-600 hover:text-blue-800 font-semibold mt-4 md:mt-0">
-                View All Stories →
-              </Link>
-            </div>
-
             </ScrollReveal>
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               {/* Blog Image */}
               <ScrollReveal direction="left">
                 <Link href={`/blog#${latestPost.slug}`} className="group block">
-                <div className="relative h-[400px] rounded-2xl overflow-hidden shadow-xl">
-                  {latestPost.cover ? (
-                    <Image
-                      src={latestPost.cover}
-                      alt={latestPost.title}
-                      fill
-                      className="object-cover transition-transform duration-500 group-hover:scale-105"
-                    />
-                  ) : (
-                    <div className="w-full h-full bg-gradient-to-br from-brand-primary/20 to-cyan-200 flex items-center justify-center">
-                      <span className="text-6xl">📰</span>
+                  <div className="relative h-[400px] rounded-2xl overflow-hidden shadow-xl">
+                    {latestPost.cover ? (
+                      <Image
+                        src={latestPost.cover}
+                        alt={latestPost.title}
+                        fill
+                        className="object-cover transition-transform duration-500 group-hover:scale-105"
+                      />
+                    ) : (
+                      <div className="w-full h-full bg-gradient-to-br from-brand-primary/20 to-cyan-200 flex items-center justify-center">
+                        <span className="text-6xl">📰</span>
+                      </div>
+                    )}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                    <div className="absolute bottom-0 left-0 right-0 p-6">
+                      <span className="inline-block bg-brand-primary text-brand-text px-3 py-1 rounded-full text-sm font-semibold mb-2">
+                        {latestPost.category}
+                      </span>
                     </div>
-                  )}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                  <div className="absolute bottom-0 left-0 right-0 p-6">
-                    <span className="inline-block bg-brand-primary text-brand-text px-3 py-1 rounded-full text-sm font-semibold mb-2">
-                      {latestPost.category}
-                    </span>
                   </div>
-                </div>
-              </Link>
-
+                </Link>
               </ScrollReveal>
               {/* Blog Content */}
               <ScrollReveal direction="right" delay={0.2}>
-              <div>
-                <p className="text-gray-500 text-sm mb-2">{formatDate(latestPost.publishedAt || '')}</p>
-                <h3 className="text-3xl font-bold text-gray-900 mb-4 hover:text-cyan-600 transition">
-                  <Link href={`/blog#${latestPost.slug}`}>
-                    {latestPost.title}
+                <div>
+                  <p className="text-gray-500 text-sm mb-2">{formatDate(latestPost.publishedAt || '')}</p>
+                  <h3 className="content-title text-gray-900 mb-4 hover:text-cyan-600 transition">
+                    <Link href={`/blog#${latestPost.slug}`}>
+                      {latestPost.title}
+                    </Link>
+                  </h3>
+                  <p className="body-editorial text-gray-600 mb-6">
+                    {latestPost.excerpt}
+                  </p>
+                  <Link 
+                    href={`/blog#${latestPost.slug}`}
+                    className="inline-flex items-center gap-2 bg-brand-primary hover:bg-brand-dark text-brand-text px-6 py-3 rounded-lg font-semibold transition btn-text"
+                  >
+                    Read Full Story
+                    <span>→</span>
                   </Link>
-                </h3>
-                <p className="text-gray-700 leading-relaxed mb-6">
-                  {latestPost.excerpt}
-                </p>
-                <Link 
-                  href={`/blog#${latestPost.slug}`}
-                  className="inline-flex items-center gap-2 bg-brand-primary hover:bg-brand-dark text-brand-text px-6 py-3 rounded-lg font-semibold transition"
-                >
-                  Read Full Story
-                  <span>→</span>
-                </Link>
-              </div>
+                </div>
               </ScrollReveal>
             </div>
           </div>
-
         </section>
       )}
 
@@ -265,9 +266,11 @@ export default async function HomePage() {
         <section className="py-20 bg-cyan-50/50">
           <div className="max-w-7xl mx-auto px-6 md:px-12">
             <ScrollReveal className="text-center mb-12">
-              <span className="text-cyan-600 font-semibold uppercase tracking-wide text-sm">Events</span>
-              <h2 className="text-4xl font-black text-gray-900 mt-2">Upcoming & Past Events</h2>
-              <p className="text-gray-600 mt-4 max-w-2xl mx-auto">
+              <span className="kicker mb-2 block">Gatherings</span>
+              <h2 className="heading-editorial text-4xl md:text-5xl text-gray-900 mt-2">
+                Upcoming & <span className="heading-accent">Past</span> Events
+              </h2>
+              <p className="body-editorial text-gray-600 mt-4 max-w-2xl mx-auto">
                 Join us at our upcoming events or explore highlights from our recent gatherings.
               </p>
             </ScrollReveal>
@@ -275,96 +278,96 @@ export default async function HomePage() {
               {/* Upcoming Event - Left */}
               {upcomingEvent && (
                 <ScrollReveal direction="left">
-                <div className="bg-white rounded-2xl overflow-hidden shadow-xl h-full">
-                  <div className="relative h-64">
-                    {upcomingEvent.cover ? (
-                      <Image
-                        src={upcomingEvent.cover}
-                        alt={upcomingEvent.title}
-                        fill
-                        className="object-cover"
-                      />
-                    ) : (
-                      <div className="w-full h-full bg-gradient-to-br from-cyan-100 to-cyan-200 flex items-center justify-center">
-                        <span className="text-6xl">📅</span>
+                  <div className="bg-white rounded-2xl overflow-hidden shadow-xl h-full">
+                    <div className="relative h-64">
+                      {upcomingEvent.cover ? (
+                        <Image
+                          src={upcomingEvent.cover}
+                          alt={upcomingEvent.title}
+                          fill
+                          className="object-cover"
+                        />
+                      ) : (
+                        <div className="w-full h-full bg-gradient-to-br from-cyan-100 to-cyan-200 flex items-center justify-center">
+                          <span className="text-6xl">📅</span>
+                        </div>
+                      )}
+                      <div className="absolute top-4 left-4">
+                        <span className="inline-block bg-brand-primary text-brand-text px-4 py-1 rounded-full text-sm font-bold">
+                          Upcoming
+                        </span>
                       </div>
-                    )}
-                    <div className="absolute top-4 left-4">
-                      <span className="inline-block bg-brand-primary text-brand-text px-4 py-1 rounded-full text-sm font-bold">
-                        Upcoming
-                      </span>
                     </div>
-                  </div>
-                  <div className="p-6">
-                    <p className="text-cyan-600 text-sm font-semibold mb-2">{formatDate(upcomingEvent.startDate)}</p>
-                    <h3 className="text-2xl font-bold text-gray-900 mb-3">{upcomingEvent.title}</h3>
-                    <p className="text-gray-600 mb-2">
-                      <span className="font-semibold">Location:</span> {upcomingEvent.location}
-                    </p>
-                    <p className="text-gray-600 line-clamp-2 mb-6">{upcomingEvent.excerpt}</p>
-                    <div className="flex flex-wrap gap-3">
-                      {upcomingEvent.registrationLink ? (
-                        <a 
-                          href={upcomingEvent.registrationLink}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center px-6 py-3 bg-brand-primary hover:bg-brand-dark text-brand-text font-bold rounded-lg transition"
+                    <div className="p-6">
+                      <p className="text-cyan-600 text-sm font-semibold mb-2 uppercase tracking-wider">{formatDate(upcomingEvent.startDate)}</p>
+                      <h3 className="card-title text-gray-900 mb-3">{upcomingEvent.title}</h3>
+                      <p className="text-gray-600 mb-2">
+                        <span className="font-semibold">Location:</span> {upcomingEvent.location}
+                      </p>
+                      <p className="text-gray-600 line-clamp-2 mb-6 body-editorial">{upcomingEvent.excerpt}</p>
+                      <div className="flex flex-wrap gap-3">
+                        {upcomingEvent.registrationLink ? (
+                          <a 
+                            href={upcomingEvent.registrationLink}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center px-6 py-3 bg-brand-primary hover:bg-brand-dark text-brand-text font-bold rounded-lg transition btn-text"
+                          >
+                            Register 
+                            <span className="ml-2">→</span>
+                          </a>
+                        ) : null}
+                        <Link 
+                          href="/events"
+                          className="inline-flex items-center px-6 py-3 border-2 border-gray-900 text-gray-900 font-semibold rounded-lg hover:bg-gray-900 hover:text-white transition"
                         >
-                          Register 
-                          <span className="ml-2">→</span>
-                        </a>
-                      ) : null}
-                      <Link 
-                        href="/events"
-                        className="inline-flex items-center px-6 py-3 border-2 border-gray-900 text-gray-900 font-semibold rounded-lg hover:bg-gray-900 hover:text-white transition"
-                      >
-                        Learn More
-                      </Link>
+                          Learn More
+                        </Link>
+                      </div>
                     </div>
                   </div>
-                </div>
                 </ScrollReveal>
               )}
 
-              {/* Latest Past Event - R */}
+              {/* Latest Past Event - Right */}
               {latestPastEvent && (
                 <ScrollReveal direction="right">
-                <div className="bg-white rounded-2xl overflow-hidden shadow-xl h-full">
-                  <div className="relative h-64">
-                    {latestPastEvent.cover ? (
-                      <Image
-                        src={latestPastEvent.cover}
-                        alt={latestPastEvent.title}
-                        fill
-                        className="object-cover"
-                      />
-                    ) : (
-                      <div className="w-full h-full bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center">
-                        <span className="text-6xl">📅</span>
+                  <div className="bg-white rounded-2xl overflow-hidden shadow-xl h-full">
+                    <div className="relative h-64">
+                      {latestPastEvent.cover ? (
+                        <Image
+                          src={latestPastEvent.cover}
+                          alt={latestPastEvent.title}
+                          fill
+                          className="object-cover"
+                        />
+                      ) : (
+                        <div className="w-full h-full bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center">
+                          <span className="text-6xl">📅</span>
+                        </div>
+                      )}
+                      <div className="absolute top-4 left-4">
+                        <span className="inline-block bg-gray-600 text-white px-4 py-1 rounded-full text-sm font-bold">
+                          Past Event
+                        </span>
                       </div>
-                    )}
-                    <div className="absolute top-4 left-4">
-                      <span className="inline-block bg-gray-600 text-white px-4 py-1 rounded-full text-sm font-bold">
-                        Past Event
-                      </span>
+                    </div>
+                    <div className="p-6">
+                      <p className="text-gray-500 text-sm font-semibold mb-2 uppercase tracking-wider">{formatDate(latestPastEvent.startDate)}</p>
+                      <h3 className="card-title text-gray-900 mb-3">{latestPastEvent.title}</h3>
+                      <p className="text-gray-600 mb-2">
+                        <span className="font-semibold">Location:</span> {latestPastEvent.location}
+                      </p>
+                      <p className="text-gray-600 line-clamp-2 mb-6 body-editorial">{latestPastEvent.excerpt}</p>
+                      <Link 
+                        href="/events/past"
+                        className="inline-flex items-center px-6 py-3 border-2 border-gray-900 text-gray-900 font-semibold rounded-lg hover:bg-gray-900 hover:text-white transition"
+                      >
+                        View Past Events
+                        <span className="ml-2">→</span>
+                      </Link>
                     </div>
                   </div>
-                  <div className="p-6">
-                    <p className="text-gray-500 text-sm font-semibold mb-2">{formatDate(latestPastEvent.startDate)}</p>
-                    <h3 className="text-2xl font-bold text-gray-900 mb-3">{latestPastEvent.title}</h3>
-                    <p className="text-gray-600 mb-2">
-                      <span className="font-semibold">Location:</span> {latestPastEvent.location}
-                    </p>
-                    <p className="text-gray-600 line-clamp-2 mb-6">{latestPastEvent.excerpt}</p>
-                    <Link 
-                      href="/events/past"
-                      className="inline-flex items-center px-6 py-3 border-2 border-gray-900 text-gray-900 font-semibold rounded-lg hover:bg-gray-900 hover:text-white transition"
-                    >
-                      View Past Events
-                      <span className="ml-2">→</span>
-                    </Link>
-                  </div>
-                </div>
                 </ScrollReveal>
               )}
             </div>
@@ -376,9 +379,11 @@ export default async function HomePage() {
       <section className="py-16 bg-white border-t border-gray-200">
         <div className="max-w-7xl mx-auto px-6 md:px-12">
           <ScrollReveal className="text-center mb-10">
-            <span className="text-cyan-600 font-semibold uppercase tracking-wide text-sm">Our Network</span>
-            <h2 className="text-3xl md:text-4xl font-black text-gray-900 mt-2">Our Partners</h2>
-            <p className="text-gray-600 mt-4 max-w-2xl mx-auto">
+            <span className="kicker mb-2 block">Collaboration</span>
+            <h2 className="heading-editorial text-3xl md:text-4xl text-gray-900 mt-2">
+              Our <span className="heading-accent">Partners</span>
+            </h2>
+            <p className="body-editorial text-gray-600 mt-4 max-w-2xl mx-auto">
               We are grateful to collaborate with these amazing organizations who share our commitment 
               to supporting refugee and immigrant communities.
             </p>
@@ -394,17 +399,18 @@ export default async function HomePage() {
         
         <div className="relative z-10 max-w-4xl mx-auto px-6 md:px-12 text-center">
           <ScrollReveal>
-            <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-6">
-              Help Us Make a Difference
+            <span className="kicker mb-4 block">Make an Impact</span>
+            <h2 className="heading-editorial text-4xl md:text-5xl text-gray-900 mb-6">
+              Help Us Make a <span className="heading-accent">Difference</span>
             </h2>
-            <p className="text-xl text-gray-600 mb-10 max-w-2xl mx-auto">
+            <p className="hero-subtitle text-gray-600 mb-10 max-w-2xl mx-auto">
               Your donation directly supports ESL classes, health navigation, and advocacy 
               services for refugee families rebuilding their lives.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link 
                 href="/donate" 
-                className="inline-flex items-center justify-center px-10 py-5 bg-brand-primary hover:bg-brand-dark text-brand-text text-lg font-bold rounded-lg transition transform hover:scale-105 shadow-xl"
+                className="inline-flex items-center justify-center px-10 py-5 bg-brand-primary hover:bg-brand-dark text-brand-text text-lg font-bold rounded-lg transition transform hover:scale-105 shadow-xl btn-text"
               >
                 Donate
                 <span className="ml-2">→</span>
