@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { FaTimes } from 'react-icons/fa';
 import { FaLinkedinIn, FaEnvelope } from 'react-icons/fa6';
 import { AnimatePresence, motion } from 'framer-motion';
-import NewsletterCTA from '@/components/NewsletterCTA';
+
 
 type Member = {
   id: number;
@@ -163,12 +163,7 @@ export default function BoardPage() {
         </div>
       </section>
 
-      {/* NEWSLETTER */}
-      <NewsletterCTA
-        title="Stay up to date with the latest at"
-        subtitle="New International Hope
-For Refugees And Immigrants"
-      />
+
 
       {/* MODAL */}
       <AnimatePresence>

@@ -13,7 +13,7 @@ import {
   FaBuilding,
   FaGraduationCap
 } from 'react-icons/fa';
-import NewsletterCTA from '@/components/NewsletterCTA';
+
 
 export default function EmploymentPage() {
   return (
@@ -396,8 +396,7 @@ export default function EmploymentPage() {
         </div>
       </section>
 
-      {/* NEWSLETTER CTA */}
-      <NewsletterCTA />
+
     </div>
   );
 }

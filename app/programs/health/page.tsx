@@ -18,7 +18,7 @@ import {
   FaChevronRight,
   FaUsers
 } from 'react-icons/fa';
-import NewsletterCTA from '@/components/NewsletterCTA';
+
 
 export default function HealthPage() {
   return (
@@ -495,8 +495,7 @@ export default function HealthPage() {
         </div>
       </section>
 
-      {/* NEWSLETTER CTA */}
-      <NewsletterCTA />
+
     </div>
   );
 }

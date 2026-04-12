@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import HistoryCarousel from '@/components/HistoryCarousel';
-import NewsletterCTA from '@/components/NewsletterCTA';
+
 
 const milestones = [
   { year: '2000', title: 'A New Beginning', desc: 'Jane and Isaac Newton Kinity arrive in New Haven after two years in a Ugandan refugee camp, resettled by IRIS.' },
@@ -264,13 +264,7 @@ export default function HistoryPage() {
         </div>
       </section>
 
-      {/* NEWSLETTER */}
-      <NewsletterCTA
-        title="Stay Connected"
-        subtitle="Follow our journey and stay updated on our impact"
-        placeholder="Enter your email"
-        buttonText="Subscribe"
-      />
+
     </div>
   );
 }

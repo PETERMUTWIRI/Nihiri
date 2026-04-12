@@ -3,7 +3,7 @@ import Link from 'next/link';
 import React from 'react';
 import { FaArrowRight } from 'react-icons/fa6';
 import YouTubeEmbed from '@/components/YouTubeEmbed';
-import NewsletterCTA from '@/components/NewsletterCTA';
+
 import PartnerLogos from '@/components/PartnerLogos';
 
 export default function AboutPage() {
@@ -255,12 +255,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* NEWSLETTER CTA - With Your SVG Background */}
-      <NewsletterCTA 
-        title="Stay up to date with the latest at"
-        placeholder="Enter your email address"
-        buttonText="Send →"
-      />
+
     </div>
   );
 }

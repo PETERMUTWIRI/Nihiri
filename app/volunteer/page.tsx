@@ -3,7 +3,7 @@
 import { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
-import NewsletterCTA from '@/components/NewsletterCTA';
+
 
 interface FormData {
   firstName: string;
@@ -458,13 +458,7 @@ ${formData.aboutYourself}`;
         </div>
       </section>
 
-      {/* NEWSLETTER CTA */}
-      <NewsletterCTA
-        title="Stay Connected"
-        subtitle="Get updates on volunteer opportunities and success stories"
-        placeholder="Enter your email"
-        buttonText="Subscribe"
-      />
+
     </div>
   );
 }

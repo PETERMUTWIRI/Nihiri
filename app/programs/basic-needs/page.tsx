@@ -13,7 +13,7 @@ import {
   FaMapMarkedAlt,
   FaBriefcase
 } from 'react-icons/fa';
-import NewsletterCTA from '@/components/NewsletterCTA';
+
 
 export default function BasicNeedsPage() {
   return (
@@ -403,8 +403,7 @@ export default function BasicNeedsPage() {
         </div>
       </section>
 
-      {/* NEWSLETTER CTA */}
-      <NewsletterCTA />
+
     </div>
   );
 }

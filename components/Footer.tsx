@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import NewsletterCTA from './NewsletterCTA';
 import { 
   FaXTwitter, 
   FaFacebookF, 
@@ -206,6 +207,13 @@ export default function Footer() {
 
             
           </div>
+        </div>
+      </div>
+
+      {/* Newsletter Section */}
+      <div className="bg-cyan-800/50 border-t border-cyan-500/50">
+        <div className="max-w-7xl mx-auto px-4 md:px-8 py-8">
+          <NewsletterCTA compact />
         </div>
       </div>
 

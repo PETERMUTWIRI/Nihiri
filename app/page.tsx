@@ -5,7 +5,7 @@ import { unstable_cache } from 'next/cache';
 import YouTubeEmbed from '@/components/YouTubeEmbed';
 import HeroCarousel from '@/components/HeroCarousel';
 import PartnerLogos from '@/components/PartnerLogos';
-import NewsletterCTA from '@/components/NewsletterCTA';
+
 import OurStory from '@/components/OurStory';
 import ScrollReveal, { StaggerContainer, StaggerItem } from '@/components/ScrollReveal';
 
@@ -70,11 +70,30 @@ const getLatestPastEvent = unstable_cache(
   { revalidate: 60 }
 );
 
+const getLatestGalleryImages = unstable_cache(
+  async () => {
+    const prisma = new PrismaClient();
+    const images = await prisma.galleryImage.findMany({
+      orderBy: { createdAt: 'desc' },
+      take: 8,
+    });
+    await prisma.$disconnect();
+    return images.map((img) => ({
+      id: img.id,
+      imageUrl: img.imageUrl,
+      description: img.description?.trim() || null,
+    }));
+  },
+  ['latest-gallery-images'],
+  { revalidate: 60 }
+);
+
 export default async function HomePage() {
-  const [latestPost, upcomingEvent, latestPastEvent] = await Promise.all([
+  const [latestPost, upcomingEvent, latestPastEvent, galleryImages] = await Promise.all([
     getLatestPost(),
     getUpcomingEvent(),
     getLatestPastEvent(),
+    getLatestGalleryImages(),
   ]);
 
   const formatDate = (d: string | null | undefined) => {
@@ -375,6 +394,83 @@ export default async function HomePage() {
         </section>
       )}
 
+      {/* GALLERY CAROUSEL SECTION */}
+      {galleryImages.length > 0 && (
+        <section className="py-16 bg-gray-50 overflow-hidden">
+          <div className="max-w-7xl mx-auto px-6 md:px-12">
+            <ScrollReveal className="text-center mb-10">
+              <span className="kicker-cyan mb-2 block">Visual Stories</span>
+              <h2 className="heading-editorial text-3xl md:text-4xl text-gray-900 mt-2">
+                Community <span className="heading-accent-cyan">Gallery</span>
+              </h2>
+              <p className="body-editorial text-gray-600 mt-4 max-w-2xl mx-auto">
+                Moments from our programs, events, and community gatherings.
+              </p>
+            </ScrollReveal>
+            
+            {/* Gallery Carousel */}
+            <div className="relative">
+              <div className="flex gap-4 animate-scroll-right">
+                {galleryImages.map((image) => (
+                  <Link
+                    key={image.id}
+                    href="/gallery"
+                    className="flex-shrink-0 w-64 md:w-72 group"
+                  >
+                    <div className="relative h-48 md:h-56 rounded-2xl overflow-hidden shadow-lg">
+                      <img
+                        src={image.imageUrl}
+                        alt={image.description || 'Gallery image'}
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                        loading="lazy"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                      {image.description && (
+                        <div className="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                          <p className="text-white text-sm line-clamp-2">{image.description}</p>
+                        </div>
+                      )}
+                    </div>
+                  </Link>
+                ))}
+                {/* Duplicate for seamless loop */}
+                {galleryImages.map((image) => (
+                  <Link
+                    key={`dup-${image.id}`}
+                    href="/gallery"
+                    className="flex-shrink-0 w-64 md:w-72 group"
+                  >
+                    <div className="relative h-48 md:h-56 rounded-2xl overflow-hidden shadow-lg">
+                      <img
+                        src={image.imageUrl}
+                        alt={image.description || 'Gallery image'}
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                        loading="lazy"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                      {image.description && (
+                        <div className="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                          <p className="text-white text-sm line-clamp-2">{image.description}</p>
+                        </div>
+                      )}
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </div>
+            
+            <div className="text-center mt-8">
+              <Link 
+                href="/gallery" 
+                className="inline-flex items-center gap-2 text-cyan-600 hover:text-cyan-700 font-semibold transition"
+              >
+                View Full Gallery <span>→</span>
+              </Link>
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* PARTNERS SECTION */}
       <section className="py-16 bg-white border-t border-cyan-100">
         <div className="max-w-7xl mx-auto px-6 md:px-12">
@@ -426,13 +522,6 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* NEWSLETTER */}
-      <NewsletterCTA
-        title="Stay Connected"
-        subtitle="Get the latest stories, events, and updates from our community"
-        placeholder="Enter your email"
-        buttonText="Subscribe"
-      />
     </div>
   );
 }

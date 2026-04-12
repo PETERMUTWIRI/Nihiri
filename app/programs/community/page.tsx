@@ -13,7 +13,7 @@ import {
   FaComments,
   FaStar
 } from 'react-icons/fa';
-import NewsletterCTA from '@/components/NewsletterCTA';
+
 
 export default function CommunityPage() {
   return (
@@ -450,8 +450,7 @@ export default function CommunityPage() {
         </div>
       </section>
 
-      {/* NEWSLETTER CTA */}
-      <NewsletterCTA />
+
     </div>
   );
 }

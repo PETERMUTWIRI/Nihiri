@@ -19,7 +19,7 @@ import {
   FaScroll,
   FaGlobe
 } from 'react-icons/fa';
-import NewsletterCTA from '@/components/NewsletterCTA';
+
 
 export default function AdvocacyPage() {
   return (
@@ -517,8 +517,7 @@ export default function AdvocacyPage() {
         </div>
       </section>
 
-      {/* NEWSLETTER CTA */}
-      <NewsletterCTA />
+
     </div>
   );
 }

@@ -14,7 +14,7 @@ import {
   FaGlobe,
   FaVideo
 } from 'react-icons/fa';
-import NewsletterCTA from '@/components/NewsletterCTA';
+
 
 export default function ESLPage() {
   return (
@@ -454,8 +454,7 @@ export default function ESLPage() {
         </div>
       </section>
 
-      {/* NEWSLETTER CTA */}
-      <NewsletterCTA />
+
     </div>
   );
 }

@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import NewsletterCTA from '@/components/NewsletterCTA';
+
 
 interface FormData {
   organization: string;
@@ -560,14 +560,6 @@ ${formData.learningGoals || 'Not provided'}`;
           </div>
         </div>
       </section>
-
-      {/* NEWSLETTER CTA */}
-      <NewsletterCTA
-        title="Stay Updated"
-        subtitle="Get updates on our ESL programs and success stories"
-        placeholder="Enter your email"
-        buttonText="Subscribe"
-      />
     </div>
   );
 }

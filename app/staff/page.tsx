@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { FaTimes } from 'react-icons/fa';
 import { FaLinkedinIn, FaEnvelope, FaPhone } from 'react-icons/fa6';
 import { AnimatePresence, motion } from 'framer-motion';
-import NewsletterCTA from '@/components/NewsletterCTA';
+
 
 type Member = {
   id: number;
@@ -362,12 +362,7 @@ export default function StaffPage() {
         )}
       </AnimatePresence>
 
-      {/* NEWSLETTER */}
-      <NewsletterCTA
-        title="Stay up to date with the latest at"
-        subtitle="New International Hope
-For Refugees And Immigrants"
-      />
+
     </div>
   );
 }

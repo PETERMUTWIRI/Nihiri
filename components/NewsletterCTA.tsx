@@ -9,13 +9,15 @@ interface NewsletterCTAProps {
   subtitle?: string;
   placeholder?: string;
   buttonText?: string;
+  compact?: boolean;
 }
 
 export default function NewsletterCTA({ 
   title = "Stay up to date with the latest",
   subtitle = "Nihri's hope\nFor Refugees And Immigrants",
   placeholder = "Enter your email address",
-  buttonText = "Subscribe"
+  buttonText = "Subscribe",
+  compact = false
 }: NewsletterCTAProps) {
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
@@ -45,142 +47,131 @@ export default function NewsletterCTA({
 
   const [line1, line2] = subtitle.split('\n');
 
+  if (compact) {
+    // Compact version for footer
+    return (
+      <div className="w-full">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+          <div className="flex-shrink-0">
+            <div className="w-12 h-12 bg-cyan-100 rounded-xl flex items-center justify-center">
+              <FaEnvelope className="text-xl text-cyan-600" />
+            </div>
+          </div>
+          <div className="flex-1 w-full">
+            <h4 className="font-serif text-lg font-medium text-white mb-1">
+              Stay <span className="italic text-cyan-300">Connected</span>
+            </h4>
+            <p className="text-sm text-white/70 mb-3">Get updates on our programs and impact</p>
+            
+            <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-2">
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder={placeholder}
+                className="flex-1 px-4 py-2.5 bg-white/10 border border-white/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 transition-all text-white placeholder-white/50 text-sm"
+                disabled={loading}
+              />
+              <button 
+                type="submit"
+                disabled={loading}
+                className="px-5 py-2.5 bg-cyan-600 hover:bg-cyan-700 text-white font-semibold rounded-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed text-sm whitespace-nowrap"
+              >
+                {loading ? '...' : buttonText}
+              </button>
+            </form>
+            
+            {message && (
+              <p className={`text-xs mt-2 ${status === 'success' ? 'text-cyan-300' : 'text-red-300'}`}>
+                {status === 'success' ? '✓ ' : '✗ '}{message}
+              </p>
+            )}
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // Full version (smaller than before)
   return (
-    <section className="relative py-20 px-6 md:px-12 overflow-hidden bg-white">
-      {/* Decorative Background Elements */}
+    <section className="relative py-12 px-6 md:px-12 overflow-hidden bg-white">
+      {/* Subtle Background */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        {/* Top-left decorative circle */}
-        <div className="absolute -top-20 -left-20 w-64 h-64 bg-cyan-50 rounded-full opacity-60 blur-3xl" />
-        {/* Bottom-right decorative circle */}
-        <div className="absolute -bottom-20 -right-20 w-80 h-80 bg-cyan-100 rounded-full opacity-40 blur-3xl" />
-        {/* Small floating dots */}
-        <div className="absolute top-20 right-1/4 w-3 h-3 bg-cyan-400 rounded-full opacity-60 animate-pulse" />
-        <div className="absolute bottom-32 left-1/4 w-2 h-2 bg-cyan-300 rounded-full opacity-80 animate-pulse delay-75" />
-        <div className="absolute top-1/2 right-20 w-4 h-4 bg-cyan-200 rounded-full opacity-50 animate-pulse delay-150" />
+        <div className="absolute -top-10 -left-10 w-40 h-40 bg-cyan-50 rounded-full opacity-40 blur-2xl" />
+        <div className="absolute -bottom-10 -right-10 w-48 h-48 bg-cyan-100 rounded-full opacity-30 blur-2xl" />
       </div>
 
       {/* Content Container */}
-      <div className="relative max-w-5xl mx-auto">
-        {/* Main Card */}
-        <div className="relative bg-white rounded-3xl shadow-2xl border border-cyan-100 overflow-hidden">
-          {/* Cyan Accent Bar at Top */}
-          <div className="h-2 bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600" />
+      <div className="relative max-w-4xl mx-auto">
+        {/* Main Card - Smaller padding */}
+        <div className="relative bg-white rounded-2xl shadow-xl border border-cyan-100 overflow-hidden">
+          {/* Cyan Accent Bar */}
+          <div className="h-1.5 bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600" />
           
-          <div className="px-8 md:px-16 py-12 md:py-16">
-            {/* Header Section */}
-            <div className="text-center mb-10">
-              {/* Kicker */}
-              <span className="kicker-cyan mb-4 block">
-                Newsletter
-              </span>
-              
-              {/* Main Title */}
-              <h2 className="heading-editorial text-3xl md:text-4xl lg:text-5xl text-gray-900 mb-4">
-                {title.includes('Stay') ? (
-                  <>
-                    Stay <span className="heading-accent-cyan">Connected</span>
-                  </>
-                ) : (
-                  title
-                )}
+          <div className="px-6 md:px-10 py-8">
+            {/* Header - Compact */}
+            <div className="text-center mb-6">
+              <h2 className="heading-editorial text-2xl md:text-3xl text-gray-900 mb-2">
+                Stay <span className="heading-accent-cyan">Connected</span>
               </h2>
-              
-              {/* Divider */}
-              <div className="hr-cyan mx-auto my-6" />
-              
-              {/* Subtitle */}
-              <div className="space-y-1">
-                <p className="text-xl md:text-2xl font-serif font-medium text-gray-900">
-                  {line1}
-                </p>
-                {line2 && (
-                  <p className="text-lg md:text-xl font-serif italic text-cyan-600">
-                    {line2}
-                  </p>
-                )}
-              </div>
+              <p className="text-gray-600 body-editorial text-sm max-w-md mx-auto">
+                Get the latest stories, events, and updates from our community
+              </p>
             </div>
 
-            {/* Email Icon */}
-            <div className="flex justify-center mb-8">
-              <div className="w-16 h-16 bg-cyan-100 rounded-2xl flex items-center justify-center shadow-lg">
-                <FaEnvelope className="text-3xl text-cyan-600" />
-              </div>
-            </div>
-
-            {/* Form Section */}
-            <form onSubmit={handleSubmit} className="max-w-2xl mx-auto">
-              <div className="flex flex-col sm:flex-row gap-4">
-                {/* Email Input */}
+            {/* Form Section - Compact */}
+            <form onSubmit={handleSubmit} className="max-w-xl mx-auto">
+              <div className="flex flex-col sm:flex-row gap-3">
                 <div className="flex-1 relative">
                   <input
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder={placeholder}
-                    className="w-full px-6 py-4 pl-12 bg-gray-50 border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 transition-all text-gray-900 placeholder-gray-400 font-medium"
+                    className="w-full px-5 py-3 pl-11 bg-gray-50 border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 transition-all text-gray-900 placeholder-gray-400 text-sm"
                     disabled={loading}
                   />
-                  <FaEnvelope className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" />
+                  <FaEnvelope className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400 text-sm" />
                 </div>
                 
-                {/* Submit Button */}
                 <button 
                   type="submit"
                   disabled={loading}
-                  className="btn-cyan whitespace-nowrap disabled:opacity-50 disabled:cursor-not-allowed group"
+                  className="px-6 py-3 bg-cyan-600 hover:bg-cyan-700 text-white font-semibold rounded-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed text-sm whitespace-nowrap flex items-center justify-center gap-2 group"
                 >
                   {loading ? (
-                    <>
-                      <span className="animate-spin mr-2">⏳</span>
-                      Subscribing...
-                    </>
+                    <span className="animate-spin">⏳</span>
                   ) : (
                     <>
                       {buttonText} 
-                      <FaPaperPlane className="ml-2 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
+                      <FaPaperPlane className="text-xs transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                     </>
                   )}
                 </button>
               </div>
 
-              {/* Status Message */}
               {message && (
-                <div className={`mt-4 p-4 rounded-xl text-center font-medium ${
+                <div className={`mt-3 p-3 rounded-lg text-center text-sm font-medium ${
                   status === 'success' 
                     ? 'bg-green-50 text-green-700 border border-green-200' 
                     : 'bg-red-50 text-red-700 border border-red-200'
                 }`}>
-                  {status === 'success' ? '✓ ' : '✗ '}
-                  {message}
+                  {status === 'success' ? '✓ ' : '✗ '}{message}
                 </div>
               )}
             </form>
 
-            {/* Footer Links */}
-            <div className="mt-8 pt-6 border-t border-gray-100 text-center space-y-2">
-              <p className="text-sm text-gray-500 font-medium">
-                We respect your privacy. Unsubscribe at any time.
+            {/* Footer Links - Compact */}
+            <div className="mt-6 pt-4 border-t border-gray-100 text-center">
+              <p className="text-xs text-gray-500">
+                We respect your privacy. 
+                <a href="/unsubscribe" className="text-cyan-600 hover:text-cyan-800 font-medium hover:underline ml-1">
+                  Unsubscribe
+                </a>
               </p>
-              <a 
-                href="/unsubscribe" 
-                className="text-sm text-cyan-600 hover:text-cyan-800 font-semibold hover:underline transition-colors inline-flex items-center gap-1"
-              >
-                Unsubscribe
-                <FaArrowRight className="text-xs" />
-              </a>
             </div>
           </div>
-
-          {/* Decorative Side Elements */}
-          <div className="absolute top-1/2 -left-3 w-6 h-24 bg-cyan-200 rounded-full blur-sm -translate-y-1/2 hidden lg:block" />
-          <div className="absolute top-1/2 -right-3 w-6 h-24 bg-cyan-300 rounded-full blur-sm -translate-y-1/2 hidden lg:block" />
         </div>
-
-        {/* Bottom Decorative Text */}
-        <p className="text-center mt-8 text-xs text-gray-400 font-medium tracking-widest uppercase">
-          Join Our Community of Supporters
-        </p>
       </div>
     </section>
   );
