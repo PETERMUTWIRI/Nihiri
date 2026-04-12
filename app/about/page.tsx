@@ -143,38 +143,96 @@ export default function AboutPage() {
 
       {/* HOW WE FULFILL OUR MISSION */}
       <section className="py-20 px-6 md:px-12 max-w-7xl mx-auto border-t border-gray-200/60">
-        <div className="grid md:grid-cols-2 gap-12 items-center">
-          <div className="relative h-80 md:h-[28rem] rounded-2xl overflow-hidden shadow-2xl img-zoom">
-            <Image 
-              src="/images/about/fulfill-mission.jpg"
-              alt="Our programs in action"
-              fill
-              className="object-cover"
-            />
-          </div>
-          <div>
-            <span className="kicker mb-4 block">In Action</span>
-            <h2 className="heading-editorial text-4xl md:text-5xl text-black mb-8">
-              How We <span className="heading-accent">Fulfill</span> Our Mission
-            </h2>
-            <ul className="space-y-4">
-              {[
-                "Provide in-home ESL classes with customizable, culturally-competent curricula",
-                "Deliver health education to bridge care gaps and establish healthy behaviors",
-                "Teach families to navigate the American healthcare system effectively",
-                "Prepare clients for CT DMV driver's license examinations",
-                "Facilitate cultural exchange through cross-cultural friendship programs",
-                "Build safe youth spaces for cultural exchange and community building",
-                "Provide all services completely free of charge to families",
-              ].map((item, idx) => (
-                <li key={idx} className="flex items-start gap-4 group">
-                  <span className="w-6 h-6 rounded-full bg-brand-primary/20 text-brand-dark flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5 group-hover:bg-brand-primary group-hover:text-brand-text transition-colors">
-                    ✓
-                  </span>
-                  <span className="text-gray-700 leading-relaxed">{item}</span>
-                </li>
-              ))}
-            </ul>
+        <div className="text-center mb-16">
+          <span className="kicker mb-4 block">What We Do</span>
+          <h2 className="heading-editorial text-4xl md:text-5xl lg:text-6xl text-black mb-4">
+            Our <span className="heading-accent">Programs</span> & Services
+          </h2>
+          <div className="hr-elegant my-6"></div>
+          <p className="body-editorial text-gray-600 max-w-2xl mx-auto text-lg">
+            We offer comprehensive support across six key areas, empowering refugee and immigrant families to build independent, thriving lives.
+          </p>
+        </div>
+
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {[
+            { 
+              title: "ESL & Education", 
+              desc: "English language classes, digital literacy training, and translation services to empower communication and independence.",
+              href: "/programs/esl"
+            },
+            { 
+              title: "Health & Wellness", 
+              desc: "Medical referrals, mental health counseling, healthcare navigation, and wellness programs for holistic wellbeing.",
+              href: "/programs/health"
+            },
+            { 
+              title: "Advocacy & Legal", 
+              desc: "Legal support, immigration guidance, rights education, and assistance navigating complex systems.",
+              href: "/programs/advocacy"
+            },
+            { 
+              title: "Basic Needs", 
+              desc: "Food assistance, housing support, transportation services, and essential resources for stable living conditions.",
+              href: "/programs/basic-needs"
+            },
+            { 
+              title: "Employment", 
+              desc: "Job readiness training, career guidance, resume building, interview coaching, and employer connections.",
+              href: "/programs/employment"
+            },
+            { 
+              title: "Community", 
+              desc: "Cultural orientation, youth programs, community integration support, and cross-cultural friendship programs.",
+              href: "/programs/community"
+            },
+          ].map((program, idx) => (
+            <Link 
+              key={idx} 
+              href={program.href}
+              className="group bg-white rounded-2xl p-8 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-gray-100"
+            >
+              <span className="stat-number text-5xl text-brand-primary/30 mb-4 block group-hover:text-brand-primary/50 transition-colors">
+                {String(idx + 1).padStart(2, '0')}
+              </span>
+              <h3 className="card-title text-gray-900 mb-3 group-hover:text-brand-dark transition-colors">
+                {program.title}
+              </h3>
+              <p className="text-gray-600 leading-relaxed mb-4">
+                {program.desc}
+              </p>
+              <span className="inline-flex items-center gap-1 text-sm font-medium text-brand-dark group-hover:text-brand-text transition-colors btn-text">
+                Learn more
+                <svg className="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </span>
+            </Link>
+          ))}
+        </div>
+
+        {/* Additional Services List */}
+        <div className="mt-16 bg-brand-primary/5 rounded-3xl p-8 md:p-12">
+          <h3 className="heading-editorial text-2xl md:text-3xl text-center text-gray-900 mb-8">
+            Additional <span className="heading-accent">Services</span>
+          </h3>
+          <div className="grid md:grid-cols-2 gap-4 max-w-4xl mx-auto">
+            {[
+              "In-home ESL classes with customizable, culturally-competent curricula",
+              "Health education to bridge care gaps and establish healthy behaviors",
+              "Teaching families to navigate the American healthcare system",
+              "CT DMV driver's license examination preparation",
+              "Cultural exchange through cross-cultural friendship programs",
+              "Safe youth spaces for cultural exchange and community building",
+              "All services provided completely free of charge to families",
+            ].map((item, idx) => (
+              <li key={idx} className="flex items-start gap-4 group list-none">
+                <span className="w-6 h-6 rounded-full bg-brand-primary text-brand-text flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">
+                  ✓
+                </span>
+                <span className="text-gray-700 leading-relaxed">{item}</span>
+              </li>
+            ))}
           </div>
         </div>
       </section>
