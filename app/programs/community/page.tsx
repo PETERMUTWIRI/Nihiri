@@ -39,11 +39,11 @@ export default function CommunityPage() {
                 Community <span className="heading-accent-cyan">Integration</span> & Support
               </h1>
               <div className="hr-cyan my-6"></div>
-              <p className="body-editorial mb-6">
+              <p className="body-editorial text-gray-600 mb-6">
                 Building bridges between cultures and creating a welcoming community where refugees and immigrants 
                 feel valued, connected, and empowered to contribute their unique gifts.
               </p>
-              <p className="body-editorial mb-8">
+              <p className="body-editorial text-gray-600 mb-8">
                 Integration goes beyond learning a language—it is about feeling at home. Our Community Integration 
                 program fosters meaningful connections through cultural orientation, mentorship, youth programs, 
                 and community events that celebrate diversity while building shared understanding.
@@ -138,7 +138,7 @@ export default function CommunityPage() {
             <span className="kicker-cyan mb-4 block">Next Generation</span>
             <h2 className="heading-editorial text-4xl md:text-5xl text-gray-900">Youth & Family <span className="heading-accent-cyan">Support</span></h2>
             <div className="hr-cyan mx-auto my-6"></div>
-            <p className="body-editorial max-w-2xl mx-auto">
+            <p className="body-editorial text-gray-600 max-w-2xl mx-auto">
               Supporting children and families through the unique challenges of navigating two cultures 
               while building strong foundations for success.
             </p>
@@ -212,12 +212,12 @@ export default function CommunityPage() {
               <span className="kicker-cyan mb-4 block">Coming Together</span>
               <h2 className="heading-editorial text-4xl md:text-5xl text-gray-900 mb-6">Community Events & <span className="heading-accent-cyan">Networking</span></h2>
               <div className="hr-cyan my-6"></div>
-              <p className="body-editorial mb-6">
+              <p className="body-editorial text-gray-600 mb-6">
                 Creating spaces where refugees, immigrants, and receiving community members can meet, 
                 share stories, and build friendships. Our events celebrate the rich diversity of our 
                 community while fostering the connections that make integration meaningful.
               </p>
-              <p className="body-editorial mb-8">
+              <p className="body-editorial text-gray-600 mb-8">
                 From cultural festivals showcasing music, dance, and cuisine from around the world to 
                 networking events connecting newcomers with established community members, we create 
                 opportunities for genuine human connection.

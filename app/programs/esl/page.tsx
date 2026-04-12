@@ -40,12 +40,12 @@ export default function ESLPage() {
                 ESL & <span className="heading-accent-cyan">Education</span> Programs
               </h1>
               <div className="hr-cyan my-6"></div>
-              <p className="body-editorial mb-6">
+              <p className="body-editorial text-gray-600 mb-6">
                 Our comprehensive language and education programs are the heart of New International Hope. 
                 From English language instruction to digital literacy and translation services, we provide 
                 the tools for effective communication and lifelong learning.
               </p>
-              <p className="body-editorial mb-8">
+              <p className="body-editorial text-gray-600 mb-8">
                 We offer free childcare during sessions, allowing women to focus on their personal growth 
                 without barriers. Our customizable curriculum focuses on practical, working skills—preparing 
                 clients to embrace independence and navigate their new communities with confidence.
@@ -79,7 +79,7 @@ export default function ESLPage() {
           <span className="kicker-cyan mb-4 block">Transforming Lives</span>
           <h2 className="heading-editorial text-3xl md:text-4xl text-gray-900 mb-6">Transforming Lives Through <span className="heading-accent-cyan">Language</span></h2>
           <div className="hr-cyan mx-auto my-6"></div>
-          <p className="body-editorial">
+          <p className="body-editorial text-gray-600">
             Through our ESL programs, refugee women develop essential language skills, build confidence, 
             and foster meaningful social connections. Improved communication reduces isolation, enhances 
             access to healthcare, and opens pathways to employment—positively impacting mental and 
@@ -284,7 +284,7 @@ export default function ESLPage() {
             <span className="kicker-cyan mb-4 block">Digital Age Skills</span>
             <h2 className="heading-editorial text-4xl md:text-5xl text-gray-900">Education & Skill <span className="heading-accent-cyan">Development</span></h2>
             <div className="hr-cyan mx-auto my-6"></div>
-            <p className="body-editorial max-w-2xl mx-auto">
+            <p className="body-editorial text-gray-600 max-w-2xl mx-auto">
               Empowering individuals with essential digital and professional skills for independence 
               and employment in today's technology-driven world.
             </p>

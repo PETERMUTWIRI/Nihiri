@@ -39,12 +39,12 @@ export default function BasicNeedsPage() {
                 Basic Needs <span className="heading-accent-cyan">Assistance</span>
               </h1>
               <div className="hr-cyan my-6"></div>
-              <p className="body-editorial mb-6">
+              <p className="body-editorial text-gray-600 mb-6">
                 We believe that meeting fundamental needs is the foundation for building a stable and successful life. 
                 Our Basic Needs program connects refugees and immigrants with essential resources including nutritious food, 
                 safe housing, and reliable transportation.
               </p>
-              <p className="body-editorial mb-8">
+              <p className="body-editorial text-gray-600 mb-8">
                 By removing the stress of survival, we enable families to focus on long-term goals like education, 
                 employment, and community integration. Every service is provided with dignity, cultural sensitivity, 
                 and a commitment to empowering self-sufficiency.
@@ -79,7 +79,7 @@ export default function BasicNeedsPage() {
             <span className="kicker-cyan mb-4 block">Food Security</span>
             <h2 className="heading-editorial text-4xl md:text-5xl text-gray-900">Food & Basic Needs <span className="heading-accent-cyan">Assistance</span></h2>
             <div className="hr-cyan mx-auto my-6"></div>
-            <p className="body-editorial max-w-2xl mx-auto">
+            <p className="body-editorial text-gray-600 max-w-2xl mx-auto">
               No family should worry about where their next meal will come from. We help individuals and families 
               access nutritious food and essential supplies through comprehensive support services.
             </p>
@@ -223,7 +223,7 @@ export default function BasicNeedsPage() {
             <span className="kicker-cyan mb-4 block">Mobility</span>
             <h2 className="heading-editorial text-4xl md:text-5xl text-gray-900">Transportation <span className="heading-accent-cyan">Assistance</span></h2>
             <div className="hr-cyan mx-auto my-6"></div>
-            <p className="body-editorial max-w-2xl mx-auto">
+            <p className="body-editorial text-gray-600 max-w-2xl mx-auto">
               Access to reliable transportation opens doors to employment, healthcare, education, and community 
               connections. We ensure clients can reach the services they need.
             </p>

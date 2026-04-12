@@ -275,7 +275,7 @@ export default function AdvocacyPage() {
             <span className="kicker-cyan mb-4 block">Legal Guidance</span>
             <h2 className="heading-editorial text-4xl md:text-5xl text-gray-900">Legal & Immigration <span className="heading-accent-cyan">Support</span></h2>
             <div className="hr-cyan mx-auto my-6"></div>
-            <p className="body-editorial max-w-2xl mx-auto">
+            <p className="body-editorial text-gray-600 max-w-2xl mx-auto">
               Navigating immigration processes and legal systems can be overwhelming. We guide clients to trusted 
               legal help and provide support in understanding documentation, processes, and rights.
             </p>

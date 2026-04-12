@@ -44,12 +44,12 @@ export default function HealthPage() {
                 Health & <span className="heading-accent-cyan">Wellness</span>
               </h1>
               <div className="hr-cyan my-6"></div>
-              <p className="body-editorial mb-6">
+              <p className="body-editorial text-gray-600 mb-6">
                 Health is more than just medical care—it's mental wellbeing, preventive education, 
                 and access to essential resources. Our Health program provides comprehensive support 
                 to help refugees and immigrants thrive physically, mentally, and emotionally.
               </p>
-              <p className="body-editorial mb-8">
+              <p className="body-editorial text-gray-600 mb-8">
                 From health education to counseling referrals, medical navigation to hygiene assistance, 
                 we ensure that health disparities don't prevent our community members from achieving 
                 their full potential.
@@ -84,7 +84,7 @@ export default function HealthPage() {
             <span className="kicker-cyan mb-4 block">Knowledge is Health</span>
             <h2 className="heading-editorial text-4xl md:text-5xl text-gray-900">Health <span className="heading-accent-cyan">Education</span></h2>
             <div className="hr-cyan mx-auto my-6"></div>
-            <p className="body-editorial max-w-2xl mx-auto">
+            <p className="body-editorial text-gray-600 max-w-2xl mx-auto">
               Empowering refugees and immigrants with vital health knowledge to navigate the U.S. 
               healthcare system and maintain their wellbeing.
             </p>
@@ -216,7 +216,7 @@ export default function HealthPage() {
               <span className="kicker-cyan mb-4 block">Specialized Care</span>
               <h2 className="heading-editorial text-4xl md:text-5xl text-gray-900 mb-6">Women's <span className="heading-accent-cyan">Health</span></h2>
               <div className="hr-cyan my-6"></div>
-              <p className="body-editorial mb-6">
+              <p className="body-editorial text-gray-600 mb-6">
                 Addressing the unique health needs of refugee and immigrant women through education 
                 and access to specialized services. We create safe spaces for women to learn about 
                 their health and access culturally appropriate care.
@@ -344,7 +344,7 @@ export default function HealthPage() {
               <span className="kicker-cyan mb-4 block">Healing & Recovery</span>
               <h2 className="heading-editorial text-4xl md:text-5xl text-gray-900 mb-6">Mental Health & <span className="heading-accent-cyan">Trauma</span> Support</h2>
               <div className="hr-cyan my-6"></div>
-              <p className="body-editorial mb-6">
+              <p className="body-editorial text-gray-600 mb-6">
                 Many refugees have experienced profound trauma before and during their journey to safety. 
                 We provide compassionate support and connections to specialized mental health services 
                 that understand the unique challenges of displacement and cultural adjustment.

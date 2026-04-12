@@ -39,12 +39,12 @@ export default function EmploymentPage() {
                 Employment & <span className="heading-accent-cyan">Economic</span> Empowerment
               </h1>
               <div className="hr-cyan my-6"></div>
-              <p className="body-editorial mb-6">
+              <p className="body-editorial text-gray-600 mb-6">
                 Financial independence is a cornerstone of successful integration. Our Employment program equips 
                 refugees and immigrants with the skills, connections, and confidence to build meaningful careers 
                 and achieve economic stability.
               </p>
-              <p className="body-editorial mb-8">
+              <p className="body-editorial text-gray-600 mb-8">
                 From resume writing to entrepreneurship guidance, we provide comprehensive support at every stage 
                 of the employment journey. We partner with local employers who value the unique perspectives and 
                 work ethic that newcomers bring to the workforce.
@@ -79,7 +79,7 @@ export default function EmploymentPage() {
             <span className="kicker-cyan mb-4 block">Career Development</span>
             <h2 className="heading-editorial text-4xl md:text-5xl text-gray-900">Job Readiness <span className="heading-accent-cyan">Training</span></h2>
             <div className="hr-cyan mx-auto my-6"></div>
-            <p className="body-editorial max-w-2xl mx-auto">
+            <p className="body-editorial text-gray-600 max-w-2xl mx-auto">
               Building confidence and competence for the American workplace through practical skills training 
               and professional development workshops.
             </p>
@@ -207,12 +207,12 @@ export default function EmploymentPage() {
               <span className="kicker-cyan mb-4 block">Business Development</span>
               <h2 className="heading-editorial text-4xl md:text-5xl text-gray-900 mb-6">Small Business & <span className="heading-accent-cyan">Entrepreneurship</span></h2>
               <div className="hr-cyan my-6"></div>
-              <p className="body-editorial mb-6">
+              <p className="body-editorial text-gray-600 mb-6">
                 For those with entrepreneurial dreams, we offer guidance on starting and growing small businesses. 
                 Many refugees and immigrants have valuable skills, trades, and business experience that can be 
                 transformed into successful enterprises.
               </p>
-              <p className="body-editorial mb-8">
+              <p className="body-editorial text-gray-600 mb-8">
                 Our entrepreneurship support includes business plan development, understanding licensing requirements, 
                 accessing microfinance opportunities, marketing strategies, and connecting with local business 
                 development resources.
