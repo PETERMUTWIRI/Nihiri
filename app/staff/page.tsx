@@ -124,14 +124,14 @@ export default function StaffPage() {
         
         {/* Content */}
         <div className="relative z-10 max-w-4xl mx-auto text-center py-16">
-          <span className="kicker mb-6 block">The People Behind Our Mission</span>
+          <span className="kicker-cyan mb-6 block">The People Behind Our Mission</span>
           <motion.h1 
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             className="heading-editorial text-4xl md:text-6xl lg:text-7xl text-gray-900 mb-6"
           >
-            Our <span className="heading-accent text-brand-dark">Team</span>
+            Our <span className="heading-accent-cyan">Team</span>
           </motion.h1>
           <motion.p 
             initial={{ opacity: 0, y: 30 }}
@@ -148,7 +148,7 @@ export default function StaffPage() {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="mt-8"
           >
-            <span className="inline-block w-20 h-1 bg-brand-primary rounded-full"></span>
+            <span className="inline-block w-20 h-1 bg-cyan-500 rounded-full"></span>
           </motion.div>
         </div>
       </section>
@@ -167,8 +167,8 @@ export default function StaffPage() {
               onClick={() => setFilter(t)}
               className={`px-6 py-3 rounded-full text-sm font-semibold transition-all duration-200 btn-text ${
                 filter === t
-                  ? 'bg-brand-primary text-brand-text shadow-md scale-105'
-                  : 'bg-white text-gray-700 hover:bg-brand-primary/20 shadow-sm hover:shadow'
+                  ? 'bg-cyan-600 text-white shadow-md scale-105'
+                  : 'bg-white text-gray-700 hover:bg-cyan-50 shadow-sm hover:shadow border border-cyan-100'
               }`}
             >
               {t}
@@ -203,7 +203,7 @@ export default function StaffPage() {
                 exit={{ opacity: 0, scale: 0.9 }}
                 transition={{ duration: 0.3, delay: index * 0.05 }}
                 onClick={() => setActive(member)}
-                className="group bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 text-left"
+                className="group bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden border border-cyan-100 hover:border-cyan-300 text-left"
               >
                 {/* Image container */}
                 <div className="relative h-64 overflow-hidden bg-gray-50">
@@ -213,7 +213,7 @@ export default function StaffPage() {
                     fill
                     className="object-cover object-top transition-transform duration-500 group-hover:scale-105"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-cyan-900/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                   <div className="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
                     <span className="inline-flex items-center gap-1 text-white text-sm font-medium">
                       View Profile
@@ -226,13 +226,13 @@ export default function StaffPage() {
                 
                 {/* Content */}
                 <div className="p-5">
-                  <span className="inline-block px-3 py-1 text-xs font-semibold bg-brand-primary/10 text-brand-dark rounded-full mb-2 uppercase tracking-wider">
+                  <span className="inline-block px-3 py-1 text-xs font-semibold bg-cyan-100 text-cyan-700 rounded-full mb-2 uppercase tracking-wider">
                     {member.team}
                   </span>
-                  <h3 className="card-title text-gray-900 group-hover:text-brand-dark transition-colors">
+                  <h3 className="card-title-cyan text-gray-900">
                     {member.name}
                   </h3>
-                  <p className="text-sm text-brand-neutral font-medium uppercase tracking-wider">{member.role}</p>
+                  <p className="text-sm text-cyan-600 font-medium uppercase tracking-wider">{member.role}</p>
                   {member.quote && (
                     <p className="text-gray-500 text-sm mt-2 italic line-clamp-2">
                       &ldquo;{member.quote}&rdquo;
@@ -247,10 +247,10 @@ export default function StaffPage() {
 
       {/* JOIN US CTA */}
       <section className="py-20 px-6 md:px-12">
-        <div className="max-w-4xl mx-auto bg-gradient-to-br from-brand-primary/20 to-brand-primary/5 rounded-3xl p-10 md:p-14 text-center border border-brand-primary/10">
-          <span className="kicker mb-4 block">Join Us</span>
+        <div className="max-w-4xl mx-auto bg-cyan-50/50 rounded-3xl p-10 md:p-14 text-center border border-cyan-200">
+          <span className="kicker-cyan mb-4 block">Join Us</span>
           <h2 className="heading-editorial text-3xl md:text-4xl text-gray-900 mb-4">
-            Want to Join Our <span className="heading-accent">Team?</span>
+            Want to Join Our <span className="heading-accent-cyan">Team?</span>
           </h2>
           <p className="text-gray-600 mb-8 max-w-xl mx-auto body-editorial">
             We are always looking for passionate individuals who want to make a difference 
@@ -258,7 +258,7 @@ export default function StaffPage() {
           </p>
           <a 
             href="/contact" 
-            className="inline-flex items-center gap-2 px-8 py-4 bg-brand-primary text-brand-text font-bold rounded-full hover:bg-brand-dark transition shadow-md hover:shadow-lg btn-text"
+            className="inline-flex items-center gap-2 px-8 py-4 bg-cyan-600 text-white font-bold rounded-full hover:bg-cyan-700 transition shadow-md hover:shadow-lg btn-text"
           >
             Get in Touch
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -295,7 +295,7 @@ export default function StaffPage() {
                   fill
                   className="object-cover object-top"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+                <div className="absolute inset-0 bg-gradient-to-t from-cyan-900/70 via-cyan-900/20 to-transparent"></div>
                 <button
                   onClick={() => setActive(null)}
                   className="absolute top-4 right-4 w-10 h-10 flex items-center justify-center rounded-full bg-white/90 hover:bg-white text-gray-700 hover:text-gray-900 transition shadow-md"
@@ -304,11 +304,11 @@ export default function StaffPage() {
                   <FaTimes size={18} />
                 </button>
                 <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
-                  <span className="inline-block px-3 py-1 text-xs font-bold bg-brand-primary text-brand-text rounded-full mb-2 uppercase tracking-wider">
+                  <span className="inline-block px-3 py-1 text-xs font-bold bg-cyan-500 text-white rounded-full mb-2 uppercase tracking-wider">
                     {active.team}
                   </span>
                   <h2 className="card-title text-white text-2xl sm:text-3xl">{active.name}</h2>
-                  <p className="text-white/80 font-medium text-sm uppercase tracking-wider">{active.role}</p>
+                  <p className="text-cyan-200 font-medium text-sm uppercase tracking-wider">{active.role}</p>
                 </div>
               </div>
 
@@ -318,8 +318,8 @@ export default function StaffPage() {
                   <p className="body-editorial text-gray-600">{active.bio}</p>
                   
                   {active.quote && (
-                    <blockquote className="border-l-4 border-brand-primary pl-4 py-3 bg-brand-primary/5 rounded-r-lg">
-                      <p className="quote-editorial text-gray-700">&ldquo;{active.quote}&rdquo;</p>
+                    <blockquote className="quote-cyan">
+                      <p className="text-gray-700">&ldquo;{active.quote}&rdquo;</p>
                     </blockquote>
                   )}
                 </div>
@@ -329,7 +329,7 @@ export default function StaffPage() {
                   {active.email && (
                     <a
                       href={`mailto:${active.email}`}
-                      className="inline-flex items-center gap-2 px-5 py-2.5 bg-brand-primary text-brand-text font-semibold rounded-full hover:bg-brand-dark transition shadow-sm hover:shadow-md btn-text"
+                      className="inline-flex items-center gap-2 px-5 py-2.5 bg-cyan-600 text-white font-semibold rounded-full hover:bg-cyan-700 transition shadow-sm hover:shadow-md btn-text"
                     >
                       <FaEnvelope size={16} /> 
                       <span>Email</span>

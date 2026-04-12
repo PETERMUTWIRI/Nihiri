@@ -104,7 +104,7 @@ export default async function HomePage() {
               <div className="grid lg:grid-cols-2 gap-12 items-center">
                 {/* Left - Text & Mobile Video */}
                 <ScrollReveal direction="left" className="text-gray-900">
-                  <span className="kicker mb-4 block text-brand-neutral">Empowering Communities</span>
+                  <span className="kicker-cyan mb-4 block">Empowering Communities</span>
                   <h1 className="heading-editorial text-4xl md:text-5xl mb-6 leading-tight">
                     <span className="block">Supporting</span>
                     <span className="block text-cyan-600 heading-accent">Refugee</span>
@@ -127,7 +127,7 @@ export default async function HomePage() {
                   <div className="grid grid-cols-2 gap-3 sm:flex sm:flex-row sm:gap-4">
                     <Link 
                       href="/donate" 
-                      className="inline-flex items-center justify-center px-4 sm:px-8 py-4 bg-brand-primary hover:bg-brand-dark text-brand-text font-bold rounded-lg transition transform hover:scale-105 text-sm sm:text-base btn-text"
+                      className="inline-flex items-center justify-center px-4 sm:px-8 py-4 bg-cyan-600 hover:bg-cyan-700 text-white font-bold rounded-lg transition transform hover:scale-105 text-sm sm:text-base btn-text shadow-lg shadow-cyan-600/25"
                     >
                       Donate
                       <span className="ml-1 sm:ml-2">→</span>
@@ -147,7 +147,7 @@ export default async function HomePage() {
             <div className="hidden lg:grid lg:grid-cols-2 gap-12 items-center">
               {/* Left - Text Content */}
               <ScrollReveal direction="left" className="text-gray-900">
-                <span className="kicker mb-4 block text-brand-neutral">Empowering Communities</span>
+                <span className="kicker-cyan mb-4 block">Empowering Communities</span>
                 <h1 className="heading-editorial text-4xl xl:text-5xl mb-6 leading-tight">
                   Supporting{' '}
                   <span className="text-cyan-600 heading-accent">
@@ -163,7 +163,7 @@ export default async function HomePage() {
                 <div className="flex flex-row gap-4">
                   <Link 
                     href="/donate" 
-                    className="inline-flex items-center justify-center px-8 py-4 bg-brand-primary hover:bg-brand-dark text-brand-text font-bold rounded-lg transition transform hover:scale-105 text-base btn-text"
+                    className="inline-flex items-center justify-center px-8 py-4 bg-cyan-600 hover:bg-cyan-700 text-white font-bold rounded-lg transition transform hover:scale-105 text-base btn-text shadow-lg shadow-cyan-600/25"
                   >
                     Donate
                     <span className="ml-2">→</span>
@@ -199,12 +199,12 @@ export default async function HomePage() {
             <ScrollReveal>
               <div className="flex flex-col md:flex-row md:items-end md:justify-between mb-12">
                 <div>
-                  <span className="kicker mb-2 block">Stories</span>
+                  <span className="kicker-cyan mb-2 block">Stories</span>
                   <h2 className="heading-editorial text-4xl md:text-5xl text-gray-900 mt-2">
-                    From Our <span className="heading-accent">Blog</span>
+                    From Our <span className="heading-accent-cyan">Blog</span>
                   </h2>
                 </div>
-                <Link href="/blog" className="text-brand-dark hover:text-brand-text font-semibold mt-4 md:mt-0 btn-text inline-flex items-center gap-1">
+                <Link href="/blog" className="text-cyan-600 hover:text-cyan-700 font-semibold mt-4 md:mt-0 btn-text inline-flex items-center gap-1">
                   View All Stories <span>→</span>
                 </Link>
               </div>
@@ -222,13 +222,13 @@ export default async function HomePage() {
                         className="object-cover transition-transform duration-500 group-hover:scale-105"
                       />
                     ) : (
-                      <div className="w-full h-full bg-gradient-to-br from-brand-primary/20 to-cyan-200 flex items-center justify-center">
+                      <div className="w-full h-full bg-gradient-to-br from-cyan-100 to-blue-100 flex items-center justify-center">
                         <span className="text-6xl">📰</span>
                       </div>
                     )}
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                     <div className="absolute bottom-0 left-0 right-0 p-6">
-                      <span className="inline-block bg-brand-primary text-brand-text px-3 py-1 rounded-full text-sm font-semibold mb-2">
+                      <span className="inline-block bg-cyan-600 text-white px-3 py-1 rounded-full text-sm font-semibold mb-2">
                         {latestPost.category}
                       </span>
                     </div>
@@ -238,8 +238,8 @@ export default async function HomePage() {
               {/* Blog Content */}
               <ScrollReveal direction="right" delay={0.2}>
                 <div>
-                  <p className="text-gray-500 text-sm mb-2">{formatDate(latestPost.publishedAt || '')}</p>
-                  <h3 className="content-title text-gray-900 mb-4 hover:text-cyan-600 transition">
+                  <p className="text-cyan-600 text-sm mb-2 font-medium">{formatDate(latestPost.publishedAt || '')}</p>
+                  <h3 className="content-title-cyan text-gray-900 mb-4">
                     <Link href={`/blog#${latestPost.slug}`}>
                       {latestPost.title}
                     </Link>
@@ -249,7 +249,7 @@ export default async function HomePage() {
                   </p>
                   <Link 
                     href={`/blog#${latestPost.slug}`}
-                    className="inline-flex items-center gap-2 bg-brand-primary hover:bg-brand-dark text-brand-text px-6 py-3 rounded-lg font-semibold transition btn-text"
+                    className="inline-flex items-center gap-2 bg-cyan-600 hover:bg-cyan-700 text-white px-6 py-3 rounded-lg font-semibold transition btn-text shadow-lg shadow-cyan-600/25"
                   >
                     Read Full Story
                     <span>→</span>
@@ -266,9 +266,9 @@ export default async function HomePage() {
         <section className="py-20 bg-cyan-50/50">
           <div className="max-w-7xl mx-auto px-6 md:px-12">
             <ScrollReveal className="text-center mb-12">
-              <span className="kicker mb-2 block">Gatherings</span>
+              <span className="kicker-cyan mb-2 block">Gatherings</span>
               <h2 className="heading-editorial text-4xl md:text-5xl text-gray-900 mt-2">
-                Upcoming & <span className="heading-accent">Past</span> Events
+                Upcoming & <span className="heading-accent-cyan">Past</span> Events
               </h2>
               <p className="body-editorial text-gray-600 mt-4 max-w-2xl mx-auto">
                 Join us at our upcoming events or explore highlights from our recent gatherings.
@@ -278,7 +278,7 @@ export default async function HomePage() {
               {/* Upcoming Event - Left */}
               {upcomingEvent && (
                 <ScrollReveal direction="left">
-                  <div className="bg-white rounded-2xl overflow-hidden shadow-xl h-full">
+                  <div className="bg-white rounded-2xl overflow-hidden shadow-xl h-full border border-cyan-100">
                     <div className="relative h-64">
                       {upcomingEvent.cover ? (
                         <Image
@@ -288,19 +288,19 @@ export default async function HomePage() {
                           className="object-cover"
                         />
                       ) : (
-                        <div className="w-full h-full bg-gradient-to-br from-cyan-100 to-cyan-200 flex items-center justify-center">
+                        <div className="w-full h-full bg-gradient-to-br from-cyan-100 to-blue-100 flex items-center justify-center">
                           <span className="text-6xl">📅</span>
                         </div>
                       )}
                       <div className="absolute top-4 left-4">
-                        <span className="inline-block bg-brand-primary text-brand-text px-4 py-1 rounded-full text-sm font-bold">
+                        <span className="inline-block bg-cyan-600 text-white px-4 py-1 rounded-full text-sm font-bold">
                           Upcoming
                         </span>
                       </div>
                     </div>
                     <div className="p-6">
                       <p className="text-cyan-600 text-sm font-semibold mb-2 uppercase tracking-wider">{formatDate(upcomingEvent.startDate)}</p>
-                      <h3 className="card-title text-gray-900 mb-3">{upcomingEvent.title}</h3>
+                      <h3 className="card-title-cyan text-gray-900 mb-3">{upcomingEvent.title}</h3>
                       <p className="text-gray-600 mb-2">
                         <span className="font-semibold">Location:</span> {upcomingEvent.location}
                       </p>
@@ -311,7 +311,7 @@ export default async function HomePage() {
                             href={upcomingEvent.registrationLink}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="inline-flex items-center px-6 py-3 bg-brand-primary hover:bg-brand-dark text-brand-text font-bold rounded-lg transition btn-text"
+                            className="inline-flex items-center px-6 py-3 bg-cyan-600 hover:bg-cyan-700 text-white font-bold rounded-lg transition btn-text shadow-lg shadow-cyan-600/25"
                           >
                             Register 
                             <span className="ml-2">→</span>
@@ -332,7 +332,7 @@ export default async function HomePage() {
               {/* Latest Past Event - Right */}
               {latestPastEvent && (
                 <ScrollReveal direction="right">
-                  <div className="bg-white rounded-2xl overflow-hidden shadow-xl h-full">
+                  <div className="bg-white rounded-2xl overflow-hidden shadow-xl h-full border border-cyan-100">
                     <div className="relative h-64">
                       {latestPastEvent.cover ? (
                         <Image
@@ -353,8 +353,8 @@ export default async function HomePage() {
                       </div>
                     </div>
                     <div className="p-6">
-                      <p className="text-gray-500 text-sm font-semibold mb-2 uppercase tracking-wider">{formatDate(latestPastEvent.startDate)}</p>
-                      <h3 className="card-title text-gray-900 mb-3">{latestPastEvent.title}</h3>
+                      <p className="text-cyan-600 text-sm font-semibold mb-2 uppercase tracking-wider">{formatDate(latestPastEvent.startDate)}</p>
+                      <h3 className="card-title-cyan text-gray-900 mb-3">{latestPastEvent.title}</h3>
                       <p className="text-gray-600 mb-2">
                         <span className="font-semibold">Location:</span> {latestPastEvent.location}
                       </p>
@@ -376,12 +376,12 @@ export default async function HomePage() {
       )}
 
       {/* PARTNERS SECTION */}
-      <section className="py-16 bg-white border-t border-gray-200">
+      <section className="py-16 bg-white border-t border-cyan-100">
         <div className="max-w-7xl mx-auto px-6 md:px-12">
           <ScrollReveal className="text-center mb-10">
-            <span className="kicker mb-2 block">Collaboration</span>
+            <span className="kicker-cyan mb-2 block">Collaboration</span>
             <h2 className="heading-editorial text-3xl md:text-4xl text-gray-900 mt-2">
-              Our <span className="heading-accent">Partners</span>
+              Our <span className="heading-accent-cyan">Partners</span>
             </h2>
             <p className="body-editorial text-gray-600 mt-4 max-w-2xl mx-auto">
               We are grateful to collaborate with these amazing organizations who share our commitment 
@@ -399,9 +399,9 @@ export default async function HomePage() {
         
         <div className="relative z-10 max-w-4xl mx-auto px-6 md:px-12 text-center">
           <ScrollReveal>
-            <span className="kicker mb-4 block">Make an Impact</span>
+            <span className="kicker-cyan mb-4 block">Make an Impact</span>
             <h2 className="heading-editorial text-4xl md:text-5xl text-gray-900 mb-6">
-              Help Us Make a <span className="heading-accent">Difference</span>
+              Help Us Make a <span className="heading-accent-cyan">Difference</span>
             </h2>
             <p className="hero-subtitle text-gray-600 mb-10 max-w-2xl mx-auto">
               Your donation directly supports ESL classes, health navigation, and advocacy 
@@ -410,7 +410,7 @@ export default async function HomePage() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link 
                 href="/donate" 
-                className="inline-flex items-center justify-center px-10 py-5 bg-brand-primary hover:bg-brand-dark text-brand-text text-lg font-bold rounded-lg transition transform hover:scale-105 shadow-xl btn-text"
+                className="inline-flex items-center justify-center px-10 py-5 bg-cyan-600 hover:bg-cyan-700 text-white text-lg font-bold rounded-lg transition transform hover:scale-105 shadow-xl btn-text shadow-cyan-600/25"
               >
                 Donate
                 <span className="ml-2">→</span>

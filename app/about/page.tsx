@@ -11,26 +11,26 @@ export default function AboutPage() {
     <div className="min-h-screen bg-brand-background text-render-premium">
       
       {/* HERO SECTION - Premium Editorial Style */}
-      <section className="relative min-h-[70vh] bg-gradient-to-b from-brand-primary/20 to-brand-background flex items-center justify-center text-center overflow-hidden pt-16">
-        <div className="absolute inset-0 bg-black/5"></div>
+      <section className="relative min-h-[70vh] bg-gradient-to-b from-cyan-50/50 via-brand-primary/20 to-brand-background flex items-center justify-center text-center overflow-hidden pt-16">
+        <div className="absolute inset-0 bg-[url('/images/pattern.svg')] opacity-5"></div>
         <div className="relative z-10 px-6 flex flex-col items-center w-full">
           {/* Kicker */}
-          <span className="kicker mb-6 text-brand-neutral/80">
+          <span className="kicker-cyan mb-6">
             Established 2018 • New Haven, CT
           </span>
           
           {/* Main Title - Black with Serif Accent */}
-          <h1 className="text-5xl md:text-6xl lg:text-7xl font-black text-black mb-6 tracking-tight-premium">
-            Who We <span className="heading-accent text-brand-dark">Are</span>
+          <h1 className="heading-editorial text-5xl md:text-6xl lg:text-7xl text-gray-900 mb-6 tracking-tight-premium">
+            Who We <span className="heading-accent-cyan">Are</span>
           </h1>
           
           {/* Elegant Divider */}
-          <div className="hr-elegant my-6"></div>
+          <div className="hr-cyan my-6"></div>
           
           {/* Subtitle - Light Weight for Contrast */}
           <p className="hero-subtitle text-gray-600 mb-12 max-w-3xl">
             Building brighter futures for refugee women and children through 
-            <span className="font-medium text-gray-800"> compassion, education, and community.</span>
+            <span className="font-medium text-cyan-600"> compassion, education, and community.</span>
           </p>
           
           <div className="w-full max-w-4xl mx-auto">
@@ -44,20 +44,22 @@ export default function AboutPage() {
       <section className="py-20 px-6 md:px-12 max-w-7xl mx-auto">
         <div className="grid md:grid-cols-2 gap-16 mb-20">
           <div className="text-right pr-8 md:pr-12">
-            <span className="label-premium text-brand-primary mb-4 block">01</span>
+            <span className="label-cyan mb-4 block">01</span>
             <h2 className="heading-editorial text-4xl md:text-5xl text-gray-900 mb-6">
-              Our <span className="heading-accent">Mission</span>
+              Our <span className="heading-accent-cyan">Mission</span>
             </h2>
+            <div className="w-16 h-1 bg-cyan-500 rounded-full ml-auto mb-6"></div>
             <p className="body-editorial text-gray-600 text-lg">
               We equip refugee women and children with the tools, education, and support systems necessary 
               to build independent, thriving futures in their new communities.
             </p>
           </div>
-          <div className="text-left pl-8 md:pl-12 border-l-2 border-brand-primary/30">
-            <span className="label-premium text-brand-primary mb-4 block">02</span>
+          <div className="text-left pl-8 md:pl-12 border-l-2 border-cyan-200">
+            <span className="label-cyan mb-4 block">02</span>
             <h2 className="heading-editorial text-4xl md:text-5xl text-gray-900 mb-6">
-              Our <span className="heading-accent">Vision</span>
+              Our <span className="heading-accent-cyan">Vision</span>
             </h2>
+            <div className="w-16 h-1 bg-cyan-500 rounded-full mb-6"></div>
             <p className="body-editorial text-gray-600 text-lg">
               We envision communities where diversity is celebrated, opportunity is equitable, and every 
               refugee family has the resources to achieve self-sufficiency and dignity.
@@ -67,7 +69,7 @@ export default function AboutPage() {
       </section>
 
       {/* OUR HISTORY - Storytelling Layout */}
-      <section className="py-20 px-6 md:px-12 max-w-7xl mx-auto bg-white/50 rounded-3xl">
+      <section className="py-20 px-6 md:px-12 max-w-7xl mx-auto bg-cyan-gradient rounded-3xl">
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <div className="relative h-80 md:h-[28rem] rounded-2xl overflow-hidden shadow-2xl img-zoom">
             <Image 
@@ -77,29 +79,29 @@ export default function AboutPage() {
               className="object-cover"
               priority
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+            <div className="absolute inset-0 bg-gradient-to-t from-cyan-900/40 to-transparent"></div>
             <div className="absolute bottom-6 left-6 right-6">
               <p className="text-white font-serif italic text-lg">Jane Kinity</p>
-              <p className="text-white/80 text-sm">Founder & Executive Director</p>
+              <p className="text-cyan-200 text-sm">Founder & Executive Director</p>
             </div>
           </div>
           <div className="pl-0 md:pl-8">
-            <span className="kicker mb-4 block">Our Story</span>
+            <span className="kicker-cyan mb-4 block">Our Story</span>
             <h2 className="heading-editorial text-4xl md:text-5xl text-black mb-6">
-              A Journey of <span className="heading-accent">Purpose</span>
+              A Journey of <span className="heading-accent-cyan">Purpose</span>
             </h2>
-            <div className="w-16 h-1 bg-brand-primary rounded-full mb-6"></div>
+            <div className="w-16 h-1 bg-cyan-500 rounded-full mb-6"></div>
             <p className="body-editorial text-gray-600 mb-5">
-              <strong className="text-gray-900 font-semibold">Jane Kinity, founder & Executive Director of New International Hope for Refugee.</strong> 
+              <strong className="text-cyan-700 font-semibold">Jane Kinity, founder & Executive Director of New International Hope for Refugee.</strong> 
               She arrived in New Haven, CT as a refugee advocate in 2016, witnessing 
               firsthand the systemic barriers families face—language isolation, healthcare confusion, and social exclusion.
             </p>
-            <p className="body-editorial text-gray-600 mb-6">
+            <p className="body-editorial text-gray-600 mb-8">
               The gaps in support she observed inspired a clear mission: no family should rebuild alone. 
               In 2018, Jane founded Nihiri to deliver practical, culturally-sensitive solutions she knew 
               could transform lives.
             </p>
-            <Link href="/history" className="inline-flex items-center gap-2 text-brand-dark hover:text-brand-text font-semibold transition-colors group btn-text">
+            <Link href="/history" className="inline-flex items-center gap-2 text-cyan-600 hover:text-cyan-700 font-semibold transition-colors group btn-text">
               Explore Our Journey 
               <FaArrowRight className="transition-transform group-hover:translate-x-1" />
             </Link>
@@ -110,11 +112,11 @@ export default function AboutPage() {
       {/* CORE VALUES - Premium Card Design */}
       <section className="py-24 px-6 md:px-12 max-w-7xl mx-auto">
         <div className="text-center mb-16">
-          <span className="kicker mb-4 block">What Drives Us</span>
+          <span className="kicker-cyan mb-4 block">What Drives Us</span>
           <h2 className="heading-editorial text-4xl md:text-5xl lg:text-6xl text-black mb-4">
-            Our Core <span className="heading-accent">Values</span>
+            Our Core <span className="heading-accent-cyan">Values</span>
           </h2>
-          <div className="hr-elegant my-6"></div>
+          <div className="hr-cyan my-6"></div>
         </div>
         
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -126,11 +128,11 @@ export default function AboutPage() {
             { title: "Community", desc: "Belonging transforms lives. We foster genuine connections that turn strangers into neighbors and neighbors into family." },
             { title: "Iktsuarpok", desc: "An Inuit word meaning 'the anticipation of arrival.' It embodies our vision: a community where everyone feels that joyful sense of belonging." },
           ].map((value, idx) => (
-            <div key={idx} className="group bg-white rounded-2xl p-8 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-gray-100">
-              <span className="stat-number text-5xl text-brand-primary/30 mb-4 block">
+            <div key={idx} className="group bg-white rounded-2xl p-8 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-cyan-100 hover:border-cyan-300">
+              <span className="stat-cyan text-5xl mb-4 block">
                 {String(idx + 1).padStart(2, '0')}
               </span>
-              <h3 className="card-title text-gray-900 mb-4 group-hover:text-brand-dark transition-colors">
+              <h3 className="card-title-cyan text-gray-900 mb-4">
                 {value.title}
               </h3>
               <p className="text-gray-600 leading-relaxed">
@@ -142,13 +144,13 @@ export default function AboutPage() {
       </section>
 
       {/* HOW WE FULFILL OUR MISSION */}
-      <section className="py-20 px-6 md:px-12 max-w-7xl mx-auto border-t border-gray-200/60">
+      <section className="py-20 px-6 md:px-12 max-w-7xl mx-auto border-t border-cyan-200/60">
         <div className="text-center mb-16">
-          <span className="kicker mb-4 block">What We Do</span>
+          <span className="kicker-cyan mb-4 block">What We Do</span>
           <h2 className="heading-editorial text-4xl md:text-5xl lg:text-6xl text-black mb-4">
-            Our <span className="heading-accent">Programs</span> & Services
+            Our <span className="heading-accent-cyan">Programs</span> & Services
           </h2>
-          <div className="hr-elegant my-6"></div>
+          <div className="hr-cyan my-6"></div>
           <p className="body-editorial text-gray-600 max-w-2xl mx-auto text-lg">
             We offer comprehensive support across six key areas, empowering refugee and immigrant families to build independent, thriving lives.
           </p>
@@ -190,18 +192,18 @@ export default function AboutPage() {
             <Link 
               key={idx} 
               href={program.href}
-              className="group bg-white rounded-2xl p-8 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-gray-100"
+              className="group bg-white rounded-2xl p-8 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-cyan-100 hover:border-cyan-300"
             >
-              <span className="stat-number text-5xl text-brand-primary/30 mb-4 block group-hover:text-brand-primary/50 transition-colors">
+              <span className="stat-cyan text-5xl mb-4 block group-hover:text-cyan-700 transition-colors">
                 {String(idx + 1).padStart(2, '0')}
               </span>
-              <h3 className="card-title text-gray-900 mb-3 group-hover:text-brand-dark transition-colors">
+              <h3 className="card-title-cyan text-gray-900 mb-3">
                 {program.title}
               </h3>
               <p className="text-gray-600 leading-relaxed mb-4">
                 {program.desc}
               </p>
-              <span className="inline-flex items-center gap-1 text-sm font-medium text-brand-dark group-hover:text-brand-text transition-colors btn-text">
+              <span className="inline-flex items-center gap-1 text-sm font-medium text-cyan-600 group-hover:text-cyan-700 transition-colors btn-text">
                 Learn more
                 <svg className="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
@@ -212,9 +214,9 @@ export default function AboutPage() {
         </div>
 
         {/* Additional Services List */}
-        <div className="mt-16 bg-brand-primary/5 rounded-3xl p-8 md:p-12">
+        <div className="mt-16 bg-cyan-50/50 rounded-3xl p-8 md:p-12 border border-cyan-200">
           <h3 className="heading-editorial text-2xl md:text-3xl text-center text-gray-900 mb-8">
-            Additional <span className="heading-accent">Services</span>
+            Additional <span className="heading-accent-cyan">Services</span>
           </h3>
           <div className="grid md:grid-cols-2 gap-4 max-w-4xl mx-auto">
             {[
@@ -227,7 +229,7 @@ export default function AboutPage() {
               "All services provided completely free of charge to families",
             ].map((item, idx) => (
               <li key={idx} className="flex items-start gap-4 group list-none">
-                <span className="w-6 h-6 rounded-full bg-brand-primary text-brand-text flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">
+                <span className="w-6 h-6 rounded-full bg-cyan-500 text-white flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">
                   ✓
                 </span>
                 <span className="text-gray-700 leading-relaxed">{item}</span>
@@ -241,11 +243,11 @@ export default function AboutPage() {
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-6 md:px-12">
           <div className="text-center mb-12">
-            <span className="kicker mb-4 block">Collaboration</span>
-            <h2 className="heading-editorial text-4xl md:text-5xl text-gray-900 mb-4">
-              Our <span className="heading-accent">Partners</span>
+            <span className="kicker-cyan mb-4 block">Collaboration</span>
+            <h2 className="heading-editorial text-3xl md:text-4xl text-gray-900 mb-4">
+              Our <span className="heading-accent-cyan">Partners</span>
             </h2>
-            <p className="text-gray-600 max-w-2xl mx-auto text-lg body-editorial">
+            <p className="body-editorial text-gray-600 max-w-2xl mx-auto text-lg">
               We are grateful to collaborate with these amazing organizations who share our commitment to supporting refugee and immigrant communities.
             </p>
           </div>
@@ -253,11 +255,11 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* NEWSLETTER CTA */}
+      {/* NEWSLETTER CTA - With Your SVG Background */}
       <NewsletterCTA 
         title="Stay up to date with the latest at"
         placeholder="Enter your email address"
-        buttonText="Subscribe →"
+        buttonText="Send →"
       />
     </div>
   );

@@ -31,6 +31,11 @@
     --brand-text: #655c13;
     --brand-primary: #f3ec59;
     --brand-dark: #9f972a;
+    
+    /* Brand cyan/blue */
+    --brand-cyan: #06b6d4;
+    --brand-cyan-light: #67e8f9;
+    --brand-cyan-dark: #0891b2;
   }
 
   [data-theme='dark'] {
@@ -85,8 +90,21 @@
   .btn-secondary {
     @apply bg-white border-2 border-brand-primary text-brand-text px-6 py-3 rounded-lg font-semibold hover:bg-brand-light transition-all;
   }
+  .btn-cyan {
+    @apply bg-cyan-600 hover:bg-cyan-700 text-white px-6 py-3 rounded-lg font-semibold transition-all hover:scale-105 shadow-lg shadow-cyan-600/25;
+  }
   .link-primary {
-    @apply text-blue-600 hover:text-blue-800 font-semibold transition-colors;
+    @apply text-cyan-600 hover:text-cyan-700 font-semibold transition-colors;
+  }
+  .link-underline-cyan {
+    @apply relative text-cyan-600 hover:text-cyan-700 transition-colors;
+  }
+  .link-underline-cyan::after {
+    content: '';
+    @apply absolute bottom-0 left-0 w-0 h-0.5 bg-cyan-600 transition-all duration-300;
+  }
+  .link-underline-cyan:hover::after {
+    @apply w-full;
   }
 }
 
@@ -178,7 +196,7 @@
 
   /* BLOG CONTENT TYPOGRAPHY */
   .blog-content {
-    @apply prose prose-lg max-w-none prose-headings:text-gray-900 prose-p:text-gray-700 prose-a:text-blue-600 prose-strong:text-gray-900 prose-code:text-pink-600 prose-pre:bg-gray-900 prose-pre:text-gray-100;
+    @apply prose prose-lg max-w-none prose-headings:text-gray-900 prose-p:text-gray-700 prose-a:text-cyan-600 prose-strong:text-gray-900 prose-code:text-pink-600 prose-pre:bg-gray-900 prose-pre:text-gray-100;
   }
 
   .blog-content h1 {
@@ -198,7 +216,7 @@
   }
 
   .blog-content blockquote {
-    @apply border-l-4 border-blue-500 pl-6 my-6 italic text-gray-600 bg-blue-50 py-4 rounded-r-lg;
+    @apply border-l-4 border-cyan-500 pl-6 my-6 italic text-gray-600 bg-cyan-50 py-4 rounded-r-lg;
   }
 
   .blog-content img {
@@ -472,7 +490,7 @@
 
   /* Selection Color */
   ::selection {
-    @apply bg-brand-primary/30 text-gray-900;
+    @apply bg-cyan-200/50 text-gray-900;
   }
 
   /* Smooth Scroll Padding for Anchor Links */
@@ -519,6 +537,11 @@
     @apply font-serif italic font-normal;
   }
 
+  /* Cyan Accent for emphasis */
+  .heading-accent-cyan {
+    @apply font-serif italic font-normal text-cyan-600;
+  }
+
   /* Section Title with Decorative Line */
   .section-title {
     @apply relative inline-block;
@@ -529,6 +552,11 @@
     @apply absolute -bottom-3 left-0 w-16 h-1 bg-brand-primary rounded-full;
   }
 
+  .section-title-cyan::after {
+    content: '';
+    @apply absolute -bottom-3 left-0 w-16 h-1 bg-cyan-500 rounded-full;
+  }
+
   .section-title-center::after {
     @apply left-1/2 -translate-x-1/2;
   }
@@ -536,6 +564,10 @@
   /* Gradient Text - Premium feel */
   .text-gradient-gold {
     @apply bg-gradient-to-r from-yellow-600 via-yellow-500 to-amber-600 bg-clip-text text-transparent;
+  }
+
+  .text-gradient-cyan {
+    @apply bg-gradient-to-r from-cyan-600 via-cyan-500 to-blue-600 bg-clip-text text-transparent;
   }
 
   /* Subtle text shadow for depth */
@@ -563,9 +595,19 @@
     @apply font-sans font-semibold text-xs uppercase tracking-[0.2em];
   }
 
+  /* Label with Cyan accent */
+  .label-cyan {
+    @apply font-sans font-semibold text-xs uppercase tracking-[0.2em] text-cyan-600;
+  }
+
   /* Quote/Citation Styling */
   .quote-editorial {
     @apply font-serif italic text-2xl md:text-3xl leading-relaxed;
+  }
+
+  /* Quote with cyan border */
+  .quote-cyan {
+    @apply font-serif italic text-xl md:text-2xl leading-relaxed border-l-4 border-cyan-500 pl-6 py-2 bg-cyan-50/50 rounded-r-lg;
   }
 
   /* Number/Stat Display */
@@ -573,9 +615,19 @@
     @apply font-serif font-semibold tracking-tight;
   }
 
+  /* Stat with cyan color */
+  .stat-cyan {
+    @apply font-serif font-semibold tracking-tight text-cyan-600;
+  }
+
   /* Card Title Enhancement */
   .card-title {
     @apply font-serif font-medium text-xl leading-tight;
+  }
+
+  /* Card title with cyan hover */
+  .card-title-cyan {
+    @apply font-serif font-medium text-xl leading-tight text-gray-900 hover:text-cyan-600 transition-colors;
   }
 
   /* Hero Subtitle */
@@ -606,6 +658,11 @@
     @apply font-serif font-medium text-2xl md:text-3xl leading-tight tracking-tight;
   }
 
+  /* Content title with cyan accent */
+  .content-title-cyan {
+    @apply font-serif font-medium text-2xl md:text-3xl leading-tight tracking-tight text-gray-900 hover:text-cyan-600 transition-colors;
+  }
+
   /* Premium Drop Cap for editorial content */
   .drop-cap::first-letter {
     @apply font-serif text-5xl float-left mr-3 mt-1 leading-none;
@@ -616,9 +673,19 @@
     @apply font-sans font-semibold text-xs uppercase tracking-[0.25em] text-brand-neutral;
   }
 
+  /* Kicker with cyan color */
+  .kicker-cyan {
+    @apply font-sans font-semibold text-xs uppercase tracking-[0.25em] text-cyan-600;
+  }
+
   /* Elegant Horizontal Rule */
   .hr-elegant {
     @apply w-24 h-px bg-gradient-to-r from-transparent via-gray-400 to-transparent mx-auto my-8;
+  }
+
+  /* HR with cyan gradient */
+  .hr-cyan {
+    @apply w-24 h-px bg-gradient-to-r from-transparent via-cyan-400 to-transparent mx-auto my-8;
   }
 
   /* Premium Focus States */
@@ -626,10 +693,33 @@
     @apply outline-none ring-2 ring-brand-primary ring-offset-2;
   }
 
+  /* Focus with cyan */
+  .focus-cyan:focus-visible {
+    @apply outline-none ring-2 ring-cyan-500 ring-offset-2;
+  }
+
   /* Smooth Text Rendering */
   .text-render-premium {
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Cyan accent backgrounds */
+  .bg-cyan-soft {
+    @apply bg-cyan-50/50;
+  }
+
+  .bg-cyan-gradient {
+    @apply bg-gradient-to-br from-cyan-50 to-blue-50;
+  }
+
+  /* Border accents */
+  .border-cyan-soft {
+    @apply border-cyan-200;
+  }
+
+  .border-l-cyan-accent {
+    @apply border-l-4 border-cyan-500;
   }
 }

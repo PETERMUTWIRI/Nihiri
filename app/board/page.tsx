@@ -74,14 +74,14 @@ export default function BoardPage() {
         
         {/* Content */}
         <div className="relative z-10 max-w-4xl mx-auto text-center py-16">
-          <span className="kicker mb-6 block">Leadership</span>
+          <span className="kicker-cyan mb-6 block">Leadership</span>
           <motion.h1 
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             className="heading-editorial text-4xl md:text-6xl lg:text-7xl text-gray-900 mb-6"
           >
-            Board of <span className="heading-accent text-brand-dark">Directors</span>
+            Board of <span className="heading-accent-cyan">Directors</span>
           </motion.h1>
           <motion.p 
             initial={{ opacity: 0, y: 30 }}
@@ -97,7 +97,7 @@ export default function BoardPage() {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="mt-8"
           >
-            <span className="inline-block w-20 h-1 bg-brand-primary rounded-full"></span>
+            <span className="inline-block w-20 h-1 bg-cyan-500 rounded-full"></span>
           </motion.div>
         </div>
       </section>
@@ -112,12 +112,12 @@ export default function BoardPage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
               onClick={() => setActive(member)}
-              className="group bg-white rounded-3xl shadow-sm hover:shadow-xl transition-all duration-300 p-8 text-left overflow-hidden border border-gray-100"
+              className="group bg-white rounded-3xl shadow-sm hover:shadow-xl transition-all duration-300 p-8 text-left overflow-hidden border border-cyan-100 hover:border-cyan-300"
             >
               <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6">
                 <div className="relative w-28 h-28 sm:w-32 sm:h-32 flex-shrink-0">
-                  <div className="absolute inset-0 rounded-full bg-gradient-to-br from-brand-primary to-brand-primary/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 scale-105"></div>
-                  <div className="relative w-full h-full rounded-full overflow-hidden ring-4 ring-gray-50 group-hover:ring-brand-primary/30 transition-all duration-300 shadow-lg">
+                  <div className="absolute inset-0 rounded-full bg-gradient-to-br from-cyan-400 to-cyan-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300 scale-105"></div>
+                  <div className="relative w-full h-full rounded-full overflow-hidden ring-4 ring-cyan-50 group-hover:ring-cyan-200 transition-all duration-300 shadow-lg">
                     <Image
                       src={member.img}
                       alt={member.name}
@@ -127,14 +127,14 @@ export default function BoardPage() {
                   </div>
                 </div>
                 <div className="flex-1 text-center sm:text-left">
-                  <h3 className="card-title text-gray-900 group-hover:text-brand-dark transition-colors">
+                  <h3 className="card-title-cyan text-gray-900">
                     {member.name}
                   </h3>
-                  <p className="text-sm font-semibold text-brand-neutral mt-1 uppercase tracking-wider">{member.role}</p>
+                  <p className="text-sm font-semibold text-cyan-600 mt-1 uppercase tracking-wider">{member.role}</p>
                   <p className="text-gray-600 text-sm mt-3 line-clamp-3 leading-relaxed body-editorial">
                     {member.bio}
                   </p>
-                  <span className="inline-flex items-center gap-1 text-sm font-medium text-brand-dark mt-4 opacity-0 group-hover:opacity-100 transition-opacity btn-text">
+                  <span className="inline-flex items-center gap-1 text-sm font-medium text-cyan-600 mt-4 opacity-0 group-hover:opacity-100 transition-opacity btn-text">
                     Read more 
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
@@ -148,12 +148,12 @@ export default function BoardPage() {
       </section>
 
       {/* MISSION STATEMENT */}
-      <section className="py-20 px-6 md:px-12 bg-white">
+      <section className="py-20 px-6 md:px-12 bg-cyan-50/50">
         <div className="max-w-3xl mx-auto text-center">
-          <span className="kicker mb-4 block">Our Commitment</span>
-          <div className="hr-elegant my-6"></div>
+          <span className="kicker-cyan mb-4 block">Our Commitment</span>
+          <div className="hr-cyan my-6 mx-auto"></div>
           <h2 className="heading-editorial text-3xl md:text-4xl text-gray-900 mb-6">
-            Guided by <span className="heading-accent">Purpose</span>
+            Guided by <span className="heading-accent-cyan">Purpose</span>
           </h2>
           <p className="body-editorial text-gray-600 text-lg">
             Our board members bring diverse expertise and a shared passion for empowering refugees and immigrants. 
@@ -190,13 +190,13 @@ For Refugees And Immigrants"
               exit={{ scale: 0.9, opacity: 0, y: '-45%' }}
             >
               {/* Header with gradient */}
-              <div className="h-24 bg-gradient-to-br from-brand-primary/30 to-brand-primary/10 relative"></div>
+              <div className="h-24 bg-gradient-to-br from-cyan-400/30 to-cyan-600/20 relative"></div>
               
               <div className="px-8 pb-8">
                 {/* Profile section */}
                 <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6 -mt-12">
                   <div className="relative w-24 h-24 sm:w-28 sm:h-28 flex-shrink-0">
-                    <div className="absolute inset-0 rounded-full bg-gradient-to-br from-brand-primary to-brand-primary/60 scale-105"></div>
+                    <div className="absolute inset-0 rounded-full bg-gradient-to-br from-cyan-400 to-cyan-600 scale-105"></div>
                     <div className="relative w-full h-full rounded-full overflow-hidden ring-4 ring-white shadow-lg">
                       <Image
                         src={active.img}
@@ -208,7 +208,7 @@ For Refugees And Immigrants"
                   </div>
                   <div className="flex-1 text-center sm:text-left mt-2 sm:mt-14">
                     <h2 className="card-title text-2xl text-gray-900">{active.name}</h2>
-                    <p className="text-brand-neutral font-medium text-sm uppercase tracking-wider">{active.role}</p>
+                    <p className="text-cyan-600 font-medium text-sm uppercase tracking-wider">{active.role}</p>
                   </div>
                   <button
                     onClick={() => setActive(null)}
@@ -224,8 +224,8 @@ For Refugees And Immigrants"
                   <p className="body-editorial text-gray-600">{active.bio}</p>
                   
                   {active.quote && (
-                    <blockquote className="border-l-4 border-brand-primary pl-4 py-3 bg-brand-primary/5 rounded-r-lg">
-                      <p className="quote-editorial text-gray-700">&ldquo;{active.quote}&rdquo;</p>
+                    <blockquote className="quote-cyan">
+                      <p className="text-gray-700">&ldquo;{active.quote}&rdquo;</p>
                     </blockquote>
                   )}
                 </div>
@@ -235,7 +235,7 @@ For Refugees And Immigrants"
                   {active.email && (
                     <a
                       href={`mailto:${active.email}`}
-                      className="inline-flex items-center gap-2 px-5 py-2.5 bg-brand-primary text-brand-text font-semibold rounded-full hover:bg-brand-dark transition shadow-sm hover:shadow-md btn-text"
+                      className="inline-flex items-center gap-2 px-5 py-2.5 bg-cyan-600 text-white font-semibold rounded-full hover:bg-cyan-700 transition shadow-sm hover:shadow-md btn-text"
                     >
                       <FaEnvelope size={16} /> 
                       <span>Contact</span>
