@@ -541,6 +541,7 @@ export default function Navbar() {
     about: [
       { label: 'About Us', href: '/about', description: 'Learn about who we are and what we do.' },
       { label: 'Our History', href: '/history', description: 'Learn how we got here.' },
+      { label: 'Success Stories', href: '/success-stories', description: 'Real stories of transformation from our community.' },
       { label: 'Board of Directors', href: '/board', description: 'Discover our board.' },
       { label: 'Staff', href: '/staff', description: 'Meet all the people that make us happen.' },
       { label: 'Awards & Recognition', href: '/recognition', description: 'View our certificates, awards, and recognition.' },

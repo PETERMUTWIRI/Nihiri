@@ -3,7 +3,6 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import NewsletterCTA from './NewsletterCTA';
 import { 
   FaXTwitter, 
   FaFacebookF, 
@@ -12,14 +11,28 @@ import {
   FaYoutube,
   FaPhone,
   FaEnvelope,
-  FaLocationDot
+  FaLocationDot,
+  FaPaperPlane,
+  FaCircleCheck
 } from 'react-icons/fa6';
 
 export default function Footer() {
   const [openSection, setOpenSection] = useState<string | null>(null);
+  const [email, setEmail] = useState('');
+  const [subscribed, setSubscribed] = useState(false);
 
   const toggleSection = (section: string) => {
     setOpenSection(openSection === section ? null : section);
+  };
+
+  const handleSubscribe = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (email && email.includes('@')) {
+      setSubscribed(true);
+      setEmail('');
+      // Reset after 5 seconds
+      setTimeout(() => setSubscribed(false), 5000);
+    }
   };
 
   const currentYear = new Date().getFullYear();
@@ -51,7 +64,6 @@ export default function Footer() {
   };
 
   return (
-    // After
     <footer className="text-white relative overflow-hidden">
       {/* Background Image */}
       <div className="absolute inset-0">
@@ -168,52 +180,45 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Column 4: Contact */}
+          {/* Column 4: Newsletter */}
           <div>
             <h4 className="text-lg font-black text-brand-primary mb-6 uppercase tracking-wider">
-              Contact Us
+              Stay Connected
             </h4>
             
-            <div className="space-y-4">
-              <a href="mailto:info@nihri.com" className="flex items-center gap-3 text-white/80 hover:text-white transition-colors">
-                <FaEnvelope className="text-brand-primary" />
-                <span className="text-sm font-medium">info@nihri.com</span>
-              </a>
-              
-              <a href="mailto:janetk26@yahoo.com" className="flex items-center gap-3 text-white/80 hover:text-white transition-colors">
-                <FaEnvelope className="text-brand-primary" />
-                <span className="text-sm font-medium">janetk26@yahoo.com</span>
-              </a>
-              
-              <a href="mailto:newinternationalhope@gmail.com" className="flex items-center gap-3 text-white/80 hover:text-white transition-colors">
-                <FaEnvelope className="text-brand-primary" />
-                <span className="text-sm font-medium">newinternationalhope@gmail.com</span>
-              </a>
-
-              <a href="tel:+2036759395" className="flex items-center gap-3 text-white/80 hover:text-white transition-colors">
-                <FaPhone className="text-brand-primary" />
-                <span className="text-sm font-medium">+(203) 675 93 95</span>
-              </a>
-
-              <div className="flex items-start gap-3 text-white/80">
-                <FaLocationDot className="text-brand-primary mt-1" />
-                <span className="text-sm font-medium leading-relaxed">
-                  475 Elm St.<br />
-                  New Haven, CT 06511<br />
-                  United States
-                </span>
+            {subscribed ? (
+              <div className="bg-green-500/20 border border-green-400 rounded-xl p-4 text-center">
+                <FaCircleCheck className="text-3xl text-green-400 mx-auto mb-2" />
+                <p className="text-white font-semibold">Welcome to our weekly newsletter!</p>
+                <p className="text-white/80 text-sm mt-1">Thank you for subscribing.</p>
               </div>
-            </div>
-
-            
+            ) : (
+              <form onSubmit={handleSubscribe} className="space-y-3">
+                <p className="text-white/80 text-sm">
+                  Get updates on our programs, events, and impact stories.
+                </p>
+                <div className="flex gap-2">
+                  <input
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="Enter your email"
+                    className="flex-1 px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/50 text-sm focus:outline-none focus:ring-2 focus:ring-brand-primary focus:border-transparent"
+                    required
+                  />
+                  <button
+                    type="submit"
+                    className="px-4 py-3 bg-brand-primary hover:bg-brand-dark text-brand-text font-semibold rounded-lg transition flex items-center gap-2"
+                  >
+                    <FaPaperPlane className="text-sm" />
+                  </button>
+                </div>
+                <p className="text-xs text-white/60">
+                  We respect your privacy. Unsubscribe anytime.
+                </p>
+              </form>
+            )}
           </div>
-        </div>
-      </div>
-
-      {/* Newsletter Section */}
-      <div className="bg-cyan-800 border-t border-cyan-500">
-        <div className="max-w-7xl mx-auto px-4 md:px-8 py-6">
-          <NewsletterCTA compact />
         </div>
       </div>
 

@@ -88,12 +88,34 @@ const getLatestGalleryImages = unstable_cache(
   { revalidate: 60 }
 );
 
+const getFeaturedSuccessStories = unstable_cache(
+  async () => {
+    const prisma = new PrismaClient();
+    const stories = await prisma.successStory.findMany({
+      where: { approved: true, deletedAt: null },
+      orderBy: { createdAt: 'desc' },
+      take: 3,
+    });
+    await prisma.$disconnect();
+    return stories.map((story) => ({
+      id: story.id,
+      name: story.name,
+      organization: story.organization,
+      imageUrl: story.imageUrl,
+      story: story.story.slice(0, 150) + (story.story.length > 150 ? '...' : ''),
+    }));
+  },
+  ['featured-success-stories'],
+  { revalidate: 60 }
+);
+
 export default async function HomePage() {
-  const [latestPost, upcomingEvent, latestPastEvent, galleryImages] = await Promise.all([
+  const [latestPost, upcomingEvent, latestPastEvent, galleryImages, successStories] = await Promise.all([
     getLatestPost(),
     getUpcomingEvent(),
     getLatestPastEvent(),
     getLatestGalleryImages(),
+    getFeaturedSuccessStories(),
   ]);
 
   const formatDate = (d: string | null | undefined) => {
@@ -207,6 +229,194 @@ export default async function HomePage() {
 
       {/* OUR STORY SECTION */}
       <OurStory />
+
+      {/* PROGRAMS OVERVIEW SECTION */}
+      <section className="py-20 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-6 md:px-12">
+          <ScrollReveal className="text-center mb-12">
+            <span className="kicker-cyan mb-2 block">What We Do</span>
+            <h2 className="heading-editorial text-4xl md:text-5xl text-gray-900 mt-2">
+              Our <span className="heading-accent-cyan">Programs</span>
+            </h2>
+            <p className="body-editorial text-gray-600 mt-4 max-w-2xl mx-auto">
+              Comprehensive support services designed to empower refugee and immigrant families 
+              on their journey to independence.
+            </p>
+          </ScrollReveal>
+          
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {/* ESL Program */}
+            <ScrollReveal delay={0}>
+              <Link href="/programs/esl" className="group block h-full">
+                <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition hover:-translate-y-1 border border-cyan-100 h-full">
+                  <div className="w-14 h-14 bg-cyan-100 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-cyan-600 transition-colors">
+                    <span className="text-2xl group-hover:text-white transition-colors">📚</span>
+                  </div>
+                  <h3 className="card-title-cyan text-xl mb-3">ESL & Education</h3>
+                  <p className="text-gray-600 text-sm leading-relaxed">
+                    English language classes, digital literacy training, and translation services 
+                    to empower effective communication.
+                  </p>
+                </div>
+              </Link>
+            </ScrollReveal>
+
+            {/* Health Program */}
+            <ScrollReveal delay={0.1}>
+              <Link href="/programs/health" className="group block h-full">
+                <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition hover:-translate-y-1 border border-cyan-100 h-full">
+                  <div className="w-14 h-14 bg-cyan-100 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-cyan-600 transition-colors">
+                    <span className="text-2xl group-hover:text-white transition-colors">🏥</span>
+                  </div>
+                  <h3 className="card-title-cyan text-xl mb-3">Health & Wellness</h3>
+                  <p className="text-gray-600 text-sm leading-relaxed">
+                    Medical referrals, mental health support, and healthcare navigation 
+                    for holistic wellbeing.
+                  </p>
+                </div>
+              </Link>
+            </ScrollReveal>
+
+            {/* Advocacy Program */}
+            <ScrollReveal delay={0.2}>
+              <Link href="/programs/advocacy" className="group block h-full">
+                <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition hover:-translate-y-1 border border-cyan-100 h-full">
+                  <div className="w-14 h-14 bg-cyan-100 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-cyan-600 transition-colors">
+                    <span className="text-2xl group-hover:text-white transition-colors">⚖️</span>
+                  </div>
+                  <h3 className="card-title-cyan text-xl mb-3">Advocacy & Legal</h3>
+                  <p className="text-gray-600 text-sm leading-relaxed">
+                    Legal support, immigration guidance, and rights education to protect 
+                    and empower our community.
+                  </p>
+                </div>
+              </Link>
+            </ScrollReveal>
+
+            {/* Basic Needs Program */}
+            <ScrollReveal delay={0}>
+              <Link href="/programs/basic-needs" className="group block h-full">
+                <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition hover:-translate-y-1 border border-cyan-100 h-full">
+                  <div className="w-14 h-14 bg-cyan-100 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-cyan-600 transition-colors">
+                    <span className="text-2xl group-hover:text-white transition-colors">🏠</span>
+                  </div>
+                  <h3 className="card-title-cyan text-xl mb-3">Basic Needs</h3>
+                  <p className="text-gray-600 text-sm leading-relaxed">
+                    Food assistance, housing support, and transportation services 
+                    for stable living conditions.
+                  </p>
+                </div>
+              </Link>
+            </ScrollReveal>
+
+            {/* Employment Program */}
+            <ScrollReveal delay={0.1}>
+              <Link href="/programs/employment" className="group block h-full">
+                <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition hover:-translate-y-1 border border-cyan-100 h-full">
+                  <div className="w-14 h-14 bg-cyan-100 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-cyan-600 transition-colors">
+                    <span className="text-2xl group-hover:text-white transition-colors">💼</span>
+                  </div>
+                  <h3 className="card-title-cyan text-xl mb-3">Employment</h3>
+                  <p className="text-gray-600 text-sm leading-relaxed">
+                    Job training, career guidance, resume building, and employer 
+                    connections for economic independence.
+                  </p>
+                </div>
+              </Link>
+            </ScrollReveal>
+
+            {/* Community Program */}
+            <ScrollReveal delay={0.2}>
+              <Link href="/programs/community" className="group block h-full">
+                <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition hover:-translate-y-1 border border-cyan-100 h-full">
+                  <div className="w-14 h-14 bg-cyan-100 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-cyan-600 transition-colors">
+                    <span className="text-2xl group-hover:text-white transition-colors">🤝</span>
+                  </div>
+                  <h3 className="card-title-cyan text-xl mb-3">Community</h3>
+                  <p className="text-gray-600 text-sm leading-relaxed">
+                    Cultural orientation, youth programs, and family support 
+                    for building meaningful connections.
+                  </p>
+                </div>
+              </Link>
+            </ScrollReveal>
+          </div>
+          
+          <div className="text-center mt-10">
+            <Link 
+              href="/programs" 
+              className="inline-flex items-center gap-2 text-cyan-600 hover:text-cyan-700 font-semibold transition"
+            >
+              View All Programs <span>→</span>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* SUCCESS STORIES SECTION */}
+      {successStories.length > 0 && (
+        <section className="py-20 bg-white">
+          <div className="max-w-7xl mx-auto px-6 md:px-12">
+            <ScrollReveal className="text-center mb-12">
+              <span className="kicker-cyan mb-2 block">Community Voices</span>
+              <h2 className="heading-editorial text-4xl md:text-5xl text-gray-900 mt-2">
+                Stories of <span className="heading-accent-cyan">Hope</span>
+              </h2>
+              <p className="body-editorial text-gray-600 mt-4 max-w-2xl mx-auto">
+                Real stories of resilience, growth, and transformation from our community members.
+              </p>
+            </ScrollReveal>
+            
+            <div className="grid md:grid-cols-3 gap-8">
+              {successStories.map((story, index) => (
+                <ScrollReveal key={story.id} delay={index * 0.1}>
+                  <div className="bg-gray-50 rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition hover:-translate-y-1 border border-cyan-100 h-full">
+                    <div className="relative h-56 bg-cyan-100">
+                      {story.imageUrl ? (
+                        <img
+                          src={story.imageUrl}
+                          alt={story.name}
+                          className="w-full h-full object-cover"
+                        />
+                      ) : (
+                        <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-cyan-100 to-blue-100">
+                          <span className="text-6xl">👤</span>
+                        </div>
+                      )}
+                    </div>
+                    <div className="p-6">
+                      <h3 className="card-title-cyan text-xl mb-1">{story.name}</h3>
+                      {story.organization && (
+                        <p className="text-cyan-600 text-sm font-medium mb-3">{story.organization}</p>
+                      )}
+                      <p className="text-gray-600 text-sm line-clamp-3 leading-relaxed">
+                        {story.story}
+                      </p>
+                    </div>
+                  </div>
+                </ScrollReveal>
+              ))}
+            </div>
+            
+            <div className="text-center mt-10 space-y-4">
+              <Link 
+                href="/success-stories" 
+                className="inline-flex items-center gap-2 text-cyan-600 hover:text-cyan-700 font-semibold transition"
+              >
+                View All Stories <span>→</span>
+              </Link>
+              <div>
+                <Link 
+                  href="/success-stories#submit" 
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-cyan-600 hover:bg-cyan-700 text-white font-semibold rounded-lg transition shadow-lg shadow-cyan-600/25"
+                >
+                  Share Your Story <span>→</span>
+                </Link>
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* LATEST BLOG SECTION */}
       {latestPost && (

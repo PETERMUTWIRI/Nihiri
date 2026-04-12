@@ -126,3 +126,21 @@ model NewsletterSubscriber {
   @@index([email])
   @@index([subscribed])
 }
+
+model SuccessStory {
+  id           Int       @id @default(autoincrement())
+  name         String    @db.VarChar(255)
+  organization String?   @db.VarChar(255)
+  imageUrl     String?   @db.VarChar(500)
+  story        String    @db.Text
+  approved     Boolean   @default(false)
+  featured     Boolean   @default(false)
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+  deletedAt    DateTime? @db.Timestamp(6)
+
+  @@index([approved])
+  @@index([featured])
+  @@index([createdAt])
+  @@index([deletedAt])
+}
