@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { FaArrowRight } from 'react-icons/fa6';
+import { FaArrowRight, FaPaperPlane, FaEnvelope } from 'react-icons/fa6';
 import { useNewsletter } from '@/lib/hooks/useNewsletter';
 
 interface NewsletterCTAProps {
@@ -46,167 +46,141 @@ export default function NewsletterCTA({
   const [line1, line2] = subtitle.split('\n');
 
   return (
-    <section className="relative pt-0 pb-12 px-6 md:px-12 overflow-hidden bg-white">
-      {/* Decorative SVG Pattern - Top */}
-      <div className="absolute top-0 left-0 right-0 h-24 opacity-100 pointer-events-none">
-        <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 200" preserveAspectRatio="none">
-          {/* Repeating ornamental bows - scaled */}
-          <g fill="#06b6d4">
-            {/* First - Larger */}
-            <g transform="translate(100, 50) scale(1.5) translate(-100, -50)">
-              <path d="M100,40 Q80,20 60,40 Q40,60 60,80 Q80,60 100,40 M100,40 Q120,20 140,40 Q160,60 140,80 Q120,60 100,40"/>
-              <circle cx="100" cy="50" r="5" fill="#00a3a3"/>
-            </g>
-            
-            {/* Standard size */}
-            <g>
-              <path d="M300,40 Q280,20 260,40 Q240,60 260,80 Q280,60 300,40 M300,40 Q320,20 340,40 Q360,60 340,80 Q320,60 300,40"/>
-              <circle cx="300" cy="50" r="5" fill="#0891b2"/>
-            </g>
-            
-            {/* Middle (3rd position) - Larger */}
-            <g transform="translate(500, 50) scale(1.5) translate(-500, -50)">
-              <path d="M500,40 Q480,20 460,40 Q440,60 460,80 Q480,60 500,40 M500,40 Q520,20 540,40 Q560,60 540,80 Q520,60 500,40"/>
-              <circle cx="500" cy="50" r="5" fill="#0891b2"/>
-            </g>
-            
-            {/* Standard size */}
-            <g>
-              <path d="M700,40 Q680,20 660,40 Q640,60 660,80 Q680,60 700,40 M700,40 Q720,20 740,40 Q760,60 740,80 Q720,60 700,40"/>
-              <circle cx="700" cy="50" r="5" fill="#0891b2"/>
-            </g>
-            
-            {/* Standard size */}
-            <g>
-              <path d="M900,40 Q880,20 860,40 Q840,60 860,80 Q880,60 900,40 M900,40 Q920,20 940,40 Q960,60 940,80 Q920,60 900,40"/>
-              <circle cx="900" cy="50" r="5" fill="#0891b2"/>
-            </g>
-            
-            {/* Last - Larger */}
-            <g transform="translate(1100, 50) scale(1.5) translate(-1100, -50)">
-              <path d="M1100,40 Q1080,20 1060,40 Q1040,60 1060,80 Q1080,60 1100,40 M1100,40 Q1120,20 1140,40 Q1160,60 1140,80 Q1120,60 1100,40"/>
-              <circle cx="1100" cy="50" r="5" fill="#0891b2"/>
-            </g>
-          </g>
-          
-          {/* Decorative dots */}
-          <g fill="#00a3a3">
-            <circle cx="150" cy="100" r="4"/>
-            <circle cx="1050" cy="100" r="4"/>
-            <circle cx="200" cy="150" r="3.5"/>
-            <circle cx="1000" cy="150" r="3.5"/>
-          </g>
-        </svg>
+    <section className="relative py-20 px-6 md:px-12 overflow-hidden bg-white">
+      {/* Decorative Background Elements */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        {/* Top-left decorative circle */}
+        <div className="absolute -top-20 -left-20 w-64 h-64 bg-cyan-50 rounded-full opacity-60 blur-3xl" />
+        {/* Bottom-right decorative circle */}
+        <div className="absolute -bottom-20 -right-20 w-80 h-80 bg-cyan-100 rounded-full opacity-40 blur-3xl" />
+        {/* Small floating dots */}
+        <div className="absolute top-20 right-1/4 w-3 h-3 bg-cyan-400 rounded-full opacity-60 animate-pulse" />
+        <div className="absolute bottom-32 left-1/4 w-2 h-2 bg-cyan-300 rounded-full opacity-80 animate-pulse delay-75" />
+        <div className="absolute top-1/2 right-20 w-4 h-4 bg-cyan-200 rounded-full opacity-50 animate-pulse delay-150" />
       </div>
 
-      {/* Decorative SVG Pattern - Bottom */}
-      <div className="absolute bottom-0 left-0 right-0 h-24 opacity-100 pointer-events-none">
-        <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 200" preserveAspectRatio="none">
-          {/* Repeating ornamental bows */}
-          <g fill="#06b6d4">
-            {/* First - Larger */}
-            <g transform="translate(100, 150) scale(1.5) translate(-100, -150)">
-              <path d="M100,160 Q80,180 60,160 Q40,140 60,120 Q80,140 100,160 M100,160 Q120,180 140,160 Q160,140 140,120 Q120,140 100,160"/>
-              <circle cx="100" cy="150" r="5" fill="#0891b2"/>
-            </g>
-            
-            {/* Standard size */}
-            <g>
-              <path d="M300,160 Q280,180 260,160 Q240,140 260,120 Q280,140 300,160 M300,160 Q320,180 340,160 Q360,140 340,120 Q320,140 300,160"/>
-              <circle cx="300" cy="150" r="5" fill="#0891b2"/>
-            </g>
-            
-            {/* Middle (3rd position) - Larger */}
-            <g transform="translate(500, 150) scale(1.5) translate(-500, -150)">
-              <path d="M500,160 Q480,180 460,160 Q440,140 460,120 Q480,140 500,160 M500,160 Q520,180 540,160 Q560,140 540,120 Q520,140 500,160"/>
-              <circle cx="500" cy="150" r="5" fill="#0891b2"/>
-            </g>
-            
-            {/* Standard size */}
-            <g>
-              <path d="M700,160 Q680,180 660,160 Q640,140 660,120 Q680,140 700,160 M700,160 Q720,180 740,160 Q760,140 740,120 Q720,140 700,160"/>
-              <circle cx="700" cy="150" r="5" fill="#0891b2"/>
-            </g>
-            
-            {/* Standard size */}
-            <g>
-              <path d="M900,160 Q880,180 860,160 Q840,140 860,120 Q880,140 900,160 M900,160 Q920,180 940,160 Q960,140 940,120 Q920,140 900,160"/>
-              <circle cx="900" cy="150" r="5" fill="#0891b2"/>
-            </g>
-            
-            {/* Last - Larger */}
-            <g transform="translate(1100, 150) scale(1.5) translate(-1100, -150)">
-              <path d="M1100,160 Q1080,180 1060,160 Q1040,140 1060,120 Q1080,140 1100,160 M1100,160 Q1120,180 1140,160 Q1160,140 1140,120 Q1120,140 1100,160"/>
-              <circle cx="1100" cy="150" r="5" fill="#0891b2"/>
-            </g>
-          </g>
+      {/* Content Container */}
+      <div className="relative max-w-5xl mx-auto">
+        {/* Main Card */}
+        <div className="relative bg-white rounded-3xl shadow-2xl border border-cyan-100 overflow-hidden">
+          {/* Cyan Accent Bar at Top */}
+          <div className="h-2 bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600" />
           
-          {/* Decorative dots */}
-          <g fill="#0891b2">
-            <circle cx="150" cy="100" r="4"/>
-            <circle cx="1050" cy="100" r="4"/>
-            <circle cx="200" cy="50" r="3.5"/>
-            <circle cx="1000" cy="50" r="3.5"/>
-          </g>
-        </svg>
-      </div>
+          <div className="px-8 md:px-16 py-12 md:py-16">
+            {/* Header Section */}
+            <div className="text-center mb-10">
+              {/* Kicker */}
+              <span className="kicker-cyan mb-4 block">
+                Newsletter
+              </span>
+              
+              {/* Main Title */}
+              <h2 className="heading-editorial text-3xl md:text-4xl lg:text-5xl text-gray-900 mb-4">
+                {title.includes('Stay') ? (
+                  <>
+                    Stay <span className="heading-accent-cyan">Connected</span>
+                  </>
+                ) : (
+                  title
+                )}
+              </h2>
+              
+              {/* Divider */}
+              <div className="hr-cyan mx-auto my-6" />
+              
+              {/* Subtitle */}
+              <div className="space-y-1">
+                <p className="text-xl md:text-2xl font-serif font-medium text-gray-900">
+                  {line1}
+                </p>
+                {line2 && (
+                  <p className="text-lg md:text-xl font-serif italic text-cyan-600">
+                    {line2}
+                  </p>
+                )}
+              </div>
+            </div>
 
-      {/* Content */}
-      <div className="relative max-w-6xl mx-auto z-10">
-        <div className="bg-white rounded-2xl shadow-lg px-8 md:px-16 py-6 md:py-8 border border-brand-primary/20 hover:border-brand-primary/40 transition-colors">
-          <div className="mb-6 text-center">
-            <h2 className="text-2xl md:text-3xl font-extrabold text-black leading-tight mb-2">
-              {title}
-            </h2>
-            <div className="mb-4">
-              <p className="text-2xl md:text-3xl font-extrabold text-black">
-                {line1}
+            {/* Email Icon */}
+            <div className="flex justify-center mb-8">
+              <div className="w-16 h-16 bg-cyan-100 rounded-2xl flex items-center justify-center shadow-lg">
+                <FaEnvelope className="text-3xl text-cyan-600" />
+              </div>
+            </div>
+
+            {/* Form Section */}
+            <form onSubmit={handleSubmit} className="max-w-2xl mx-auto">
+              <div className="flex flex-col sm:flex-row gap-4">
+                {/* Email Input */}
+                <div className="flex-1 relative">
+                  <input
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder={placeholder}
+                    className="w-full px-6 py-4 pl-12 bg-gray-50 border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 transition-all text-gray-900 placeholder-gray-400 font-medium"
+                    disabled={loading}
+                  />
+                  <FaEnvelope className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" />
+                </div>
+                
+                {/* Submit Button */}
+                <button 
+                  type="submit"
+                  disabled={loading}
+                  className="btn-cyan whitespace-nowrap disabled:opacity-50 disabled:cursor-not-allowed group"
+                >
+                  {loading ? (
+                    <>
+                      <span className="animate-spin mr-2">⏳</span>
+                      Subscribing...
+                    </>
+                  ) : (
+                    <>
+                      {buttonText} 
+                      <FaPaperPlane className="ml-2 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
+                    </>
+                  )}
+                </button>
+              </div>
+
+              {/* Status Message */}
+              {message && (
+                <div className={`mt-4 p-4 rounded-xl text-center font-medium ${
+                  status === 'success' 
+                    ? 'bg-green-50 text-green-700 border border-green-200' 
+                    : 'bg-red-50 text-red-700 border border-red-200'
+                }`}>
+                  {status === 'success' ? '✓ ' : '✗ '}
+                  {message}
+                </div>
+              )}
+            </form>
+
+            {/* Footer Links */}
+            <div className="mt-8 pt-6 border-t border-gray-100 text-center space-y-2">
+              <p className="text-sm text-gray-500 font-medium">
+                We respect your privacy. Unsubscribe at any time.
               </p>
-              <p className="text-lg md:text-xl font-extrabold text-gray-900">
-                {line2}
-              </p>
+              <a 
+                href="/unsubscribe" 
+                className="text-sm text-cyan-600 hover:text-cyan-800 font-semibold hover:underline transition-colors inline-flex items-center gap-1"
+              >
+                Unsubscribe
+                <FaArrowRight className="text-xs" />
+              </a>
             </div>
           </div>
 
-          <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 items-center justify-center">
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder={placeholder}
-              className="flex-1 w-full sm:w-auto px-6 py-3 border-2 border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-brand-primary focus:border-brand-primary transition-all text-brand-text placeholder-gray-500 font-medium"
-              disabled={loading}
-            />
-            <button 
-              type="submit"
-              disabled={loading}
-              className="w-full sm:w-auto bg-brand-primary hover:bg-brand-dark text-brand-text font-bold px-8 py-3 rounded-lg transition-all transform hover:scale-105 active:scale-95 shadow-lg hover:shadow-xl flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              {loading ? 'Subscribing...' : buttonText} <FaArrowRight className="transition-transform group-hover:translate-x-1" />
-            </button>
-          </form>
-
-          {/* Status Message */}
-          {message && (
-            <p className={`text-center text-sm mt-3 font-medium ${
-              status === 'success' ? 'text-green-600' : 'text-red-600'
-            }`}>
-              {message}
-            </p>
-          )}
-
-          <div className="text-center mt-4 space-y-1">
-            <p className="text-xs text-gray-600 font-medium tracking-wide">
-              We respect your privacy.
-            </p>
-            <a 
-              href="/unsubscribe" 
-              className="text-xs text-blue-600 hover:text-blue-800 underline font-medium inline-block"
-            >
-              Unsubscribe
-            </a>
-          </div>
+          {/* Decorative Side Elements */}
+          <div className="absolute top-1/2 -left-3 w-6 h-24 bg-cyan-200 rounded-full blur-sm -translate-y-1/2 hidden lg:block" />
+          <div className="absolute top-1/2 -right-3 w-6 h-24 bg-cyan-300 rounded-full blur-sm -translate-y-1/2 hidden lg:block" />
         </div>
+
+        {/* Bottom Decorative Text */}
+        <p className="text-center mt-8 text-xs text-gray-400 font-medium tracking-widest uppercase">
+          Join Our Community of Supporters
+        </p>
       </div>
     </section>
   );

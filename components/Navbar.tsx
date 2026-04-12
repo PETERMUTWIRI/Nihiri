@@ -100,23 +100,23 @@ const FeaturedCard = ({ post, isLoading }: { post: BlogPost | null; isLoading: b
         animate={{ scale: 1, opacity: 1 }}
         transition={{ duration: 0.4 }}
       >
-        <h4 className="text-xs font-extrabold text-brand-primary uppercase tracking-wider mb-3">
+        <h4 className="text-[10px] font-semibold text-cyan-600 uppercase tracking-[0.2em] mb-3">
           Featured
         </h4>
         <div className="aspect-video bg-gray-200 dark:bg-gray-700 rounded-lg mb-3 overflow-hidden flex items-center justify-center">
           <span className="text-4xl">📰</span>
         </div>
-        <h5 className="font-extrabold text-brand-text dark:text-brand-dark-text mb-2 text-sm">
-          Latest Stories
+        <h5 className="font-serif font-medium text-gray-900 dark:text-white mb-2 text-base">
+          Latest <span className="italic text-cyan-600">Stories</span>
         </h5>
         <p className="text-gray-600 dark:text-gray-400 text-xs mb-3">
           Check out our latest blog posts and updates
         </p>
         <Link
           href="/blog"
-          className="text-blue-600 hover:text-blue-800 font-semibold text-xs inline-flex items-center gap-1 transition-colors"
+          className="text-cyan-600 hover:text-cyan-800 font-semibold text-xs inline-flex items-center gap-1 transition-colors group"
         >
-          View All Posts →
+          View All Posts <span className="transition-transform group-hover:translate-x-1">→</span>
         </Link>
       </motion.div>
     );
@@ -134,10 +134,10 @@ const FeaturedCard = ({ post, isLoading }: { post: BlogPost | null; isLoading: b
       transition={{ duration: 0.4 }}
     >
       <div className="flex items-center justify-between mb-3">
-        <h4 className="text-xs font-extrabold text-brand-primary uppercase tracking-wider">
+        <h4 className="text-[10px] font-semibold text-cyan-600 uppercase tracking-[0.2em]">
           Latest Story
         </h4>
-        <span className="text-[10px] text-gray-500 dark:text-gray-400">
+        <span className="text-[10px] text-gray-500 dark:text-gray-400 font-medium">
           {formatDate(post.publishedAt)}
         </span>
       </div>
@@ -164,11 +164,11 @@ const FeaturedCard = ({ post, isLoading }: { post: BlogPost | null; isLoading: b
           )}
         </div>
         
-        <span className="inline-block bg-brand-primary/20 text-brand-text px-2 py-0.5 rounded text-[10px] font-semibold mb-2">
+        <span className="inline-block bg-cyan-100 text-cyan-700 px-2 py-0.5 rounded text-[10px] font-semibold mb-2">
           {post.category}
         </span>
         
-        <h5 className="font-extrabold text-gray-900 mb-2 text-sm line-clamp-2 group-hover:text-blue-600 transition-colors">
+        <h5 className="font-serif font-medium text-gray-900 dark:text-white mb-2 text-sm line-clamp-2 group-hover:text-cyan-600 transition-colors">
           {post.title}
         </h5>
         
@@ -179,9 +179,9 @@ const FeaturedCard = ({ post, isLoading }: { post: BlogPost | null; isLoading: b
       
       <Link
         href="/blog"
-        className="text-blue-600 hover:text-blue-800 font-semibold text-xs inline-flex items-center gap-1 transition-colors"
+        className="text-cyan-600 hover:text-cyan-800 font-semibold text-xs inline-flex items-center gap-1 transition-colors group"
       >
-        Read More →
+        Read More <span className="transition-transform group-hover:translate-x-1">→</span>
       </Link>
     </motion.div>
   );
@@ -252,7 +252,7 @@ const NavItem = ({
                       <div className="flex items-start gap-2">
                         <span className="text-brand-primary/40 group-hover/item:text-brand-primary transition-colors mt-0.5 flex-shrink-0" />
                         <div className="flex-1 min-w-0">
-                          <h3 className="font-extrabold text-black dark:text-white text-sm mb-0.5 leading-snug truncate">
+                          <h3 className="font-sans font-bold text-gray-900 dark:text-white text-sm mb-0.5 leading-snug truncate group-hover/item:text-cyan-600 transition-colors">
                             {item.label}
                           </h3>
                           <p className="text-gray-600 dark:text-gray-400 text-xs leading-snug line-clamp-2">
@@ -304,7 +304,14 @@ const MobileDrawer = ({ open, setOpen, navItems, featuredPost }: {
           >
             <div className="py-8">
               <div className="px-6 pb-6 border-b border-white/20 mb-4 flex items-center justify-between">
-                <h3 className="text-xl font-black text-white">Menu</h3>
+                <div className="flex flex-col">
+                  <span className="text-[10px] uppercase tracking-[0.2em] text-cyan-300 font-semibold leading-none mb-0.5">
+                    New International Hope
+                  </span>
+                  <h3 className="font-serif text-xl font-semibold text-white tracking-tight">
+                    Nihri's <span className="italic font-normal text-cyan-300">hope</span>
+                  </h3>
+                </div>
                 <button
                   onClick={() => setOpen(false)}
                   className="text-white hover:text-brand-primary transition-colors p-2 -mr-2"
@@ -317,7 +324,7 @@ const MobileDrawer = ({ open, setOpen, navItems, featuredPost }: {
               {/* Mobile Featured Section */}
               {featuredPost && (
                 <div className="px-6 pb-4 border-b border-white/20">
-                  <h4 className="text-xs font-bold text-white/80 uppercase tracking-wider mb-2">
+                  <h4 className="text-[10px] font-semibold text-cyan-300 uppercase tracking-[0.2em] mb-2">
                     Latest Story
                   </h4>
                   <Link 
@@ -333,8 +340,8 @@ const MobileDrawer = ({ open, setOpen, navItems, featuredPost }: {
                         loading="lazy"
                       />
                     )}
-                    <h5 className="font-bold text-sm line-clamp-2">{featuredPost.title}</h5>
-                    <span className="text-xs text-white/70">{featuredPost.category}</span>
+                    <h5 className="font-serif font-medium text-white text-sm line-clamp-2 mb-1">{featuredPost.title}</h5>
+                    <span className="text-xs text-cyan-300 font-medium">{featuredPost.category}</span>
                   </Link>
                 </div>
               )}
@@ -363,12 +370,16 @@ const MobileAccordion = ({ title, items, onLinkClick }: { title: string; items: 
   return (
     <div className="border-b border-white/10">
       <button
-        className="w-full flex items-center justify-between py-4 px-6 text-white font-bold hover:bg-white/10 transition-colors"
+        className="w-full flex items-center justify-between py-4 px-6 text-white hover:bg-white/10 transition-colors group"
         onClick={() => setOpen(!open)}
         aria-expanded={open}
       >
-        <span>{title}</span>
-        <motion.span animate={{ rotate: open ? 180 : 0 }} transition={{ duration: shouldReduceMotion ? 0 : 0.2 }}>
+        <span className="font-sans font-bold text-base group-hover:text-cyan-300 transition-colors">{title}</span>
+        <motion.span 
+          animate={{ rotate: open ? 180 : 0 }} 
+          transition={{ duration: shouldReduceMotion ? 0 : 0.2 }}
+          className="text-cyan-300"
+        >
           <FaChevronDown />
         </motion.span>
       </button>
@@ -386,7 +397,7 @@ const MobileAccordion = ({ title, items, onLinkClick }: { title: string; items: 
                 <Link
                   key={item.href}
                   href={item.href}
-                  className="block py-3 px-4 text-white/90 hover:text-white hover:bg-white/10 rounded-lg transition-colors text-sm font-medium"
+                  className="block py-3 px-4 text-white/90 hover:text-cyan-300 hover:bg-white/10 rounded-lg transition-colors text-sm font-medium"
                   onClick={() => {
                     setOpen(false);
                     onLinkClick?.();
@@ -631,10 +642,12 @@ export default function Navbar() {
                 transition={{ delay: 0.1, duration: 0.4 }}
                 className="flex flex-col"
               >
-                <h2 className="text-xl font-extrabold text-black dark:text-white tracking-tight leading-tight">
-                  Nihri's hope
+                <span className="text-[10px] uppercase tracking-[0.2em] text-cyan-600 font-semibold leading-none mb-0.5">
+                  New International Hope
+                </span>
+                <h2 className="font-serif text-2xl font-semibold text-gray-900 dark:text-white tracking-tight leading-tight">
+                  Nihri's <span className="italic font-normal text-cyan-600">hope</span>
                 </h2>
-                <p className="text-sm text-gray-600 dark:text-gray-400 font-medium">For Refugees And Immigrants</p>
               </motion.div>
             </Link>
 
