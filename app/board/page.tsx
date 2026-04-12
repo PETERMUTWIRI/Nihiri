@@ -68,8 +68,8 @@ export default function BoardPage() {
             className="object-cover"
             priority
           />
-          {/* Dark Overlay for readability */}
-          <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-black/80"></div>
+          {/* White Overlay for readability - 85% opacity like homepage */}
+          <div className="absolute inset-0 bg-white/85"></div>
         </div>
         
         {/* Content */}
@@ -78,7 +78,7 @@ export default function BoardPage() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="text-4xl md:text-6xl lg:text-7xl font-black text-white mb-6 drop-shadow-lg"
+            className="text-4xl md:text-6xl lg:text-7xl font-black text-gray-900 mb-6"
           >
             Board of <span className="text-brand-primary">Directors</span>
           </motion.h1>
@@ -86,7 +86,7 @@ export default function BoardPage() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-lg md:text-xl lg:text-2xl text-white/90 max-w-2xl mx-auto leading-relaxed drop-shadow-md"
+            className="text-lg md:text-xl lg:text-2xl text-gray-700 max-w-2xl mx-auto leading-relaxed"
           >
             Meet the dedicated leaders who guide our mission with compassion and ensure every refugee family has the support they need to thrive.
           </motion.p>
