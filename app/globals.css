@@ -503,4 +503,133 @@
   .stagger-3 { animation-delay: 0.3s; }
   .stagger-4 { animation-delay: 0.4s; }
   .stagger-5 { animation-delay: 0.5s; }
+
+  /* ============================================
+     ENHANCED PREMIUM TYPOGRAPHY SYSTEM
+     ============================================ */
+
+  /* Editorial Heading Style - For major page titles */
+  .heading-editorial {
+    @apply font-serif font-medium tracking-tight leading-[1.1];
+    letter-spacing: -0.02em;
+  }
+
+  /* Accent Word Styling */
+  .heading-accent {
+    @apply font-serif italic font-normal;
+  }
+
+  /* Section Title with Decorative Line */
+  .section-title {
+    @apply relative inline-block;
+  }
+
+  .section-title::after {
+    content: '';
+    @apply absolute -bottom-3 left-0 w-16 h-1 bg-brand-primary rounded-full;
+  }
+
+  .section-title-center::after {
+    @apply left-1/2 -translate-x-1/2;
+  }
+
+  /* Gradient Text - Premium feel */
+  .text-gradient-gold {
+    @apply bg-gradient-to-r from-yellow-600 via-yellow-500 to-amber-600 bg-clip-text text-transparent;
+  }
+
+  /* Subtle text shadow for depth */
+  .text-shadow-soft {
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Premium Letter Spacing */
+  .tracking-premium {
+    letter-spacing: 0.02em;
+  }
+
+  .tracking-tight-premium {
+    letter-spacing: -0.03em;
+  }
+
+  /* Editorial Body Text */
+  .body-editorial {
+    @apply font-sans font-light leading-relaxed tracking-premium;
+    line-height: 1.8;
+  }
+
+  /* Caption/Label Styling */
+  .label-premium {
+    @apply font-sans font-semibold text-xs uppercase tracking-[0.2em];
+  }
+
+  /* Quote/Citation Styling */
+  .quote-editorial {
+    @apply font-serif italic text-2xl md:text-3xl leading-relaxed;
+  }
+
+  /* Number/Stat Display */
+  .stat-number {
+    @apply font-serif font-semibold tracking-tight;
+  }
+
+  /* Card Title Enhancement */
+  .card-title {
+    @apply font-serif font-medium text-xl leading-tight;
+  }
+
+  /* Hero Subtitle */
+  .hero-subtitle {
+    @apply font-sans font-light text-lg md:text-xl tracking-wide;
+    letter-spacing: 0.05em;
+  }
+
+  /* Navigation Link Enhancement */
+  .nav-link-premium {
+    @apply font-sans font-medium text-sm tracking-wide;
+    letter-spacing: 0.02em;
+  }
+
+  /* Button Text Enhancement */
+  .btn-text {
+    @apply font-sans font-semibold text-sm tracking-wide;
+    letter-spacing: 0.03em;
+  }
+
+  /* Footer Heading */
+  .footer-heading {
+    @apply font-serif font-medium text-lg;
+  }
+
+  /* Blog/Content Title */
+  .content-title {
+    @apply font-serif font-medium text-2xl md:text-3xl leading-tight tracking-tight;
+  }
+
+  /* Premium Drop Cap for editorial content */
+  .drop-cap::first-letter {
+    @apply font-serif text-5xl float-left mr-3 mt-1 leading-none;
+  }
+
+  /* Kicker/Overline text */
+  .kicker {
+    @apply font-sans font-semibold text-xs uppercase tracking-[0.25em] text-brand-neutral;
+  }
+
+  /* Elegant Horizontal Rule */
+  .hr-elegant {
+    @apply w-24 h-px bg-gradient-to-r from-transparent via-gray-400 to-transparent mx-auto my-8;
+  }
+
+  /* Premium Focus States */
+  .focus-premium:focus-visible {
+    @apply outline-none ring-2 ring-brand-primary ring-offset-2;
+  }
+
+  /* Smooth Text Rendering */
+  .text-render-premium {
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
 }

@@ -56,7 +56,7 @@ export default function BoardPage() {
   const [active, setActive] = useState<Member | null>(null);
 
   return (
-    <div className="min-h-screen bg-brand-background">
+    <div className="min-h-screen bg-brand-background text-render-premium">
       {/* HERO */}
       <section className="relative min-h-[60vh] md:min-h-[70vh] flex items-center justify-center px-6 md:px-12 overflow-hidden">
         {/* Background Image */}
@@ -74,19 +74,20 @@ export default function BoardPage() {
         
         {/* Content */}
         <div className="relative z-10 max-w-4xl mx-auto text-center py-16">
+          <span className="kicker mb-6 block">Leadership</span>
           <motion.h1 
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="text-4xl md:text-6xl lg:text-7xl font-black text-gray-900 mb-6"
+            className="heading-editorial text-4xl md:text-6xl lg:text-7xl text-gray-900 mb-6"
           >
-            Board of <span className="text-brand-primary">Directors</span>
+            Board of <span className="heading-accent text-brand-dark">Directors</span>
           </motion.h1>
           <motion.p 
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-lg md:text-xl lg:text-2xl text-gray-700 max-w-2xl mx-auto leading-relaxed"
+            className="hero-subtitle text-gray-600 max-w-2xl mx-auto"
           >
             Meet the dedicated leaders who guide our mission with compassion and ensure every refugee family has the support they need to thrive.
           </motion.p>
@@ -102,7 +103,7 @@ export default function BoardPage() {
       </section>
 
       {/* BOARD GRID */}
-      <section className="py-16 md:py-20 px-6 md:px-12 max-w-6xl mx-auto">
+      <section className="py-20 md:py-24 px-6 md:px-12 max-w-6xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {board.map((member, index) => (
             <motion.button
@@ -111,12 +112,12 @@ export default function BoardPage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
               onClick={() => setActive(member)}
-              className="group bg-white rounded-3xl shadow-md hover:shadow-xl transition-all duration-300 p-6 text-left overflow-hidden border border-gray-100"
+              className="group bg-white rounded-3xl shadow-sm hover:shadow-xl transition-all duration-300 p-8 text-left overflow-hidden border border-gray-100"
             >
               <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6">
                 <div className="relative w-28 h-28 sm:w-32 sm:h-32 flex-shrink-0">
                   <div className="absolute inset-0 rounded-full bg-gradient-to-br from-brand-primary to-brand-primary/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 scale-105"></div>
-                  <div className="relative w-full h-full rounded-full overflow-hidden ring-4 ring-white shadow-lg">
+                  <div className="relative w-full h-full rounded-full overflow-hidden ring-4 ring-gray-50 group-hover:ring-brand-primary/30 transition-all duration-300 shadow-lg">
                     <Image
                       src={member.img}
                       alt={member.name}
@@ -126,14 +127,14 @@ export default function BoardPage() {
                   </div>
                 </div>
                 <div className="flex-1 text-center sm:text-left">
-                  <h3 className="text-xl font-bold text-gray-900 group-hover:text-brand-primary transition-colors">
+                  <h3 className="card-title text-gray-900 group-hover:text-brand-dark transition-colors">
                     {member.name}
                   </h3>
-                  <p className="text-sm font-semibold text-blue-600 mt-1">{member.role}</p>
-                  <p className="text-gray-600 text-sm mt-3 line-clamp-3 leading-relaxed">
+                  <p className="text-sm font-semibold text-brand-neutral mt-1 uppercase tracking-wider">{member.role}</p>
+                  <p className="text-gray-600 text-sm mt-3 line-clamp-3 leading-relaxed body-editorial">
                     {member.bio}
                   </p>
-                  <span className="inline-flex items-center gap-1 text-sm font-medium text-brand-primary mt-4 opacity-0 group-hover:opacity-100 transition-opacity">
+                  <span className="inline-flex items-center gap-1 text-sm font-medium text-brand-dark mt-4 opacity-0 group-hover:opacity-100 transition-opacity btn-text">
                     Read more 
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
@@ -147,11 +148,14 @@ export default function BoardPage() {
       </section>
 
       {/* MISSION STATEMENT */}
-      <section className="py-16 px-6 md:px-12 bg-white">
-        <div className="max-w-4xl mx-auto text-center">
-          <div className="w-16 h-1 bg-brand-primary mx-auto mb-8 rounded-full"></div>
-          <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6">Our Commitment</h2>
-          <p className="text-lg text-gray-600 leading-relaxed">
+      <section className="py-20 px-6 md:px-12 bg-white">
+        <div className="max-w-3xl mx-auto text-center">
+          <span className="kicker mb-4 block">Our Commitment</span>
+          <div className="hr-elegant my-6"></div>
+          <h2 className="heading-editorial text-3xl md:text-4xl text-gray-900 mb-6">
+            Guided by <span className="heading-accent">Purpose</span>
+          </h2>
+          <p className="body-editorial text-gray-600 text-lg">
             Our board members bring diverse expertise and a shared passion for empowering refugees and immigrants. 
             Together, they provide strategic direction and ensure we remain true to our mission of creating 
             a welcoming community where everyone can succeed.
@@ -186,9 +190,9 @@ For Refugees And Immigrants"
               exit={{ scale: 0.9, opacity: 0, y: '-45%' }}
             >
               {/* Header with gradient */}
-              <div className="h-24 bg-gradient-to-br from-brand-primary/20 to-brand-primary/5 relative"></div>
+              <div className="h-24 bg-gradient-to-br from-brand-primary/30 to-brand-primary/10 relative"></div>
               
-              <div className="px-6 md:px-8 pb-8">
+              <div className="px-8 pb-8">
                 {/* Profile section */}
                 <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6 -mt-12">
                   <div className="relative w-24 h-24 sm:w-28 sm:h-28 flex-shrink-0">
@@ -203,8 +207,8 @@ For Refugees And Immigrants"
                     </div>
                   </div>
                   <div className="flex-1 text-center sm:text-left mt-2 sm:mt-14">
-                    <h2 className="text-2xl font-bold text-gray-900">{active.name}</h2>
-                    <p className="text-blue-600 font-semibold">{active.role}</p>
+                    <h2 className="card-title text-2xl text-gray-900">{active.name}</h2>
+                    <p className="text-brand-neutral font-medium text-sm uppercase tracking-wider">{active.role}</p>
                   </div>
                   <button
                     onClick={() => setActive(null)}
@@ -217,11 +221,11 @@ For Refugees And Immigrants"
 
                 {/* Content */}
                 <div className="mt-6 space-y-4">
-                  <p className="text-gray-700 leading-relaxed">{active.bio}</p>
+                  <p className="body-editorial text-gray-600">{active.bio}</p>
                   
                   {active.quote && (
-                    <blockquote className="border-l-4 border-brand-primary pl-4 py-2 bg-brand-primary/5 rounded-r-lg">
-                      <p className="text-gray-700 italic">&ldquo;{active.quote}&rdquo;</p>
+                    <blockquote className="border-l-4 border-brand-primary pl-4 py-3 bg-brand-primary/5 rounded-r-lg">
+                      <p className="quote-editorial text-gray-700">&ldquo;{active.quote}&rdquo;</p>
                     </blockquote>
                   )}
                 </div>
@@ -231,7 +235,7 @@ For Refugees And Immigrants"
                   {active.email && (
                     <a
                       href={`mailto:${active.email}`}
-                      className="inline-flex items-center gap-2 px-5 py-2.5 bg-brand-primary text-black font-semibold rounded-full hover:bg-brand-primary/90 transition shadow-sm hover:shadow-md"
+                      className="inline-flex items-center gap-2 px-5 py-2.5 bg-brand-primary text-brand-text font-semibold rounded-full hover:bg-brand-dark transition shadow-sm hover:shadow-md btn-text"
                     >
                       <FaEnvelope size={16} /> 
                       <span>Contact</span>
@@ -242,7 +246,7 @@ For Refugees And Immigrants"
                       href={active.linkedin}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-5 py-2.5 bg-gray-900 text-white font-semibold rounded-full hover:bg-gray-800 transition shadow-sm hover:shadow-md"
+                      className="inline-flex items-center gap-2 px-5 py-2.5 bg-gray-900 text-white font-semibold rounded-full hover:bg-gray-800 transition shadow-sm hover:shadow-md btn-text"
                     >
                       <FaLinkedinIn size={16} /> 
                       <span>LinkedIn</span>

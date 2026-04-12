@@ -106,7 +106,7 @@ export default function StaffPage() {
   const filtered = filter === 'All' ? staff : staff.filter((s) => s.team === filter);
 
   return (
-    <div className="min-h-screen bg-brand-background">
+    <div className="min-h-screen bg-brand-background text-render-premium">
       {/* HERO */}
       <section className="relative min-h-[60vh] md:min-h-[70vh] flex items-center justify-center px-6 md:px-12 overflow-hidden">
         {/* Background Image */}
@@ -124,19 +124,20 @@ export default function StaffPage() {
         
         {/* Content */}
         <div className="relative z-10 max-w-4xl mx-auto text-center py-16">
+          <span className="kicker mb-6 block">The People Behind Our Mission</span>
           <motion.h1 
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="text-4xl md:text-6xl lg:text-7xl font-black text-gray-900 mb-6"
+            className="heading-editorial text-4xl md:text-6xl lg:text-7xl text-gray-900 mb-6"
           >
-            Our <span className="text-brand-primary">Team</span>
+            Our <span className="heading-accent text-brand-dark">Team</span>
           </motion.h1>
           <motion.p 
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-lg md:text-xl lg:text-2xl text-gray-700 max-w-2xl mx-auto leading-relaxed"
+            className="hero-subtitle text-gray-600 max-w-2xl mx-auto"
           >
             Meet the passionate people who power our programs every day, 
             dedicated to empowering refugees and immigrants in our community.
@@ -153,20 +154,20 @@ export default function StaffPage() {
       </section>
 
       {/* FILTER PILLS */}
-      <section className="py-8 px-6 md:px-12 max-w-5xl mx-auto">
+      <section className="py-10 px-6 md:px-12 max-w-5xl mx-auto">
         <motion.div 
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4, delay: 0.2 }}
-          className="flex flex-wrap justify-center gap-2"
+          className="flex flex-wrap justify-center gap-3"
         >
           {teams.map((t) => (
             <button
               key={t}
               onClick={() => setFilter(t)}
-              className={`px-5 py-2.5 rounded-full text-sm font-bold transition-all duration-200 ${
+              className={`px-6 py-3 rounded-full text-sm font-semibold transition-all duration-200 btn-text ${
                 filter === t
-                  ? 'bg-brand-primary text-black shadow-md scale-105'
+                  ? 'bg-brand-primary text-brand-text shadow-md scale-105'
                   : 'bg-white text-gray-700 hover:bg-brand-primary/20 shadow-sm hover:shadow'
               }`}
             >
@@ -180,7 +181,7 @@ export default function StaffPage() {
           key={filter}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          className="text-center text-gray-600 mt-6 max-w-xl mx-auto"
+          className="text-center text-gray-600 mt-6 max-w-xl mx-auto body-editorial"
         >
           {teamDescriptions[filter]}
         </motion.p>
@@ -202,10 +203,10 @@ export default function StaffPage() {
                 exit={{ opacity: 0, scale: 0.9 }}
                 transition={{ duration: 0.3, delay: index * 0.05 }}
                 onClick={() => setActive(member)}
-                className="group bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 text-left"
+                className="group bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 text-left"
               >
                 {/* Image container */}
-                <div className="relative h-64 overflow-hidden bg-gray-100">
+                <div className="relative h-64 overflow-hidden bg-gray-50">
                   <Image
                     src={member.img}
                     alt={member.name}
@@ -225,13 +226,13 @@ export default function StaffPage() {
                 
                 {/* Content */}
                 <div className="p-5">
-                  <span className="inline-block px-3 py-1 text-xs font-semibold bg-brand-primary/10 text-brand-primary rounded-full mb-2">
+                  <span className="inline-block px-3 py-1 text-xs font-semibold bg-brand-primary/10 text-brand-dark rounded-full mb-2 uppercase tracking-wider">
                     {member.team}
                   </span>
-                  <h3 className="text-lg font-bold text-gray-900 group-hover:text-brand-primary transition-colors">
+                  <h3 className="card-title text-gray-900 group-hover:text-brand-dark transition-colors">
                     {member.name}
                   </h3>
-                  <p className="text-sm text-blue-600 font-medium">{member.role}</p>
+                  <p className="text-sm text-brand-neutral font-medium uppercase tracking-wider">{member.role}</p>
                   {member.quote && (
                     <p className="text-gray-500 text-sm mt-2 italic line-clamp-2">
                       &ldquo;{member.quote}&rdquo;
@@ -245,16 +246,19 @@ export default function StaffPage() {
       </section>
 
       {/* JOIN US CTA */}
-      <section className="py-16 px-6 md:px-12">
-        <div className="max-w-4xl mx-auto bg-gradient-to-br from-brand-primary/20 to-brand-primary/5 rounded-3xl p-8 md:p-12 text-center border border-brand-primary/10">
-          <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">Want to Join Our Team?</h2>
-          <p className="text-gray-600 mb-6 max-w-xl mx-auto">
+      <section className="py-20 px-6 md:px-12">
+        <div className="max-w-4xl mx-auto bg-gradient-to-br from-brand-primary/20 to-brand-primary/5 rounded-3xl p-10 md:p-14 text-center border border-brand-primary/10">
+          <span className="kicker mb-4 block">Join Us</span>
+          <h2 className="heading-editorial text-3xl md:text-4xl text-gray-900 mb-4">
+            Want to Join Our <span className="heading-accent">Team?</span>
+          </h2>
+          <p className="text-gray-600 mb-8 max-w-xl mx-auto body-editorial">
             We are always looking for passionate individuals who want to make a difference 
             in the lives of refugees and immigrants in our community.
           </p>
           <a 
             href="/contact" 
-            className="inline-flex items-center gap-2 px-6 py-3 bg-brand-primary text-black font-bold rounded-full hover:bg-brand-primary/90 transition shadow-md hover:shadow-lg"
+            className="inline-flex items-center gap-2 px-8 py-4 bg-brand-primary text-brand-text font-bold rounded-full hover:bg-brand-dark transition shadow-md hover:shadow-lg btn-text"
           >
             Get in Touch
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -300,22 +304,22 @@ export default function StaffPage() {
                   <FaTimes size={18} />
                 </button>
                 <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
-                  <span className="inline-block px-3 py-1 text-xs font-bold bg-brand-primary text-black rounded-full mb-2">
+                  <span className="inline-block px-3 py-1 text-xs font-bold bg-brand-primary text-brand-text rounded-full mb-2 uppercase tracking-wider">
                     {active.team}
                   </span>
-                  <h2 className="text-2xl sm:text-3xl font-bold">{active.name}</h2>
-                  <p className="text-blue-300 font-medium">{active.role}</p>
+                  <h2 className="card-title text-white text-2xl sm:text-3xl">{active.name}</h2>
+                  <p className="text-white/80 font-medium text-sm uppercase tracking-wider">{active.role}</p>
                 </div>
               </div>
 
               {/* Content */}
               <div className="p-6 sm:p-8">
                 <div className="space-y-4">
-                  <p className="text-gray-700 leading-relaxed">{active.bio}</p>
+                  <p className="body-editorial text-gray-600">{active.bio}</p>
                   
                   {active.quote && (
                     <blockquote className="border-l-4 border-brand-primary pl-4 py-3 bg-brand-primary/5 rounded-r-lg">
-                      <p className="text-gray-700 italic">&ldquo;{active.quote}&rdquo;</p>
+                      <p className="quote-editorial text-gray-700">&ldquo;{active.quote}&rdquo;</p>
                     </blockquote>
                   )}
                 </div>
@@ -325,7 +329,7 @@ export default function StaffPage() {
                   {active.email && (
                     <a
                       href={`mailto:${active.email}`}
-                      className="inline-flex items-center gap-2 px-5 py-2.5 bg-brand-primary text-black font-semibold rounded-full hover:bg-brand-primary/90 transition shadow-sm hover:shadow-md"
+                      className="inline-flex items-center gap-2 px-5 py-2.5 bg-brand-primary text-brand-text font-semibold rounded-full hover:bg-brand-dark transition shadow-sm hover:shadow-md btn-text"
                     >
                       <FaEnvelope size={16} /> 
                       <span>Email</span>
@@ -345,7 +349,7 @@ export default function StaffPage() {
                       href={active.linkedin}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-5 py-2.5 bg-gray-900 text-white font-semibold rounded-full hover:bg-gray-800 transition shadow-sm hover:shadow-md"
+                      className="inline-flex items-center gap-2 px-5 py-2.5 bg-gray-900 text-white font-semibold rounded-full hover:bg-gray-800 transition shadow-sm hover:shadow-md btn-text"
                     >
                       <FaLinkedinIn size={16} /> 
                       <span>LinkedIn</span>
