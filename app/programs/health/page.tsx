@@ -1,71 +1,71 @@
-
-// app/programs/health/page.tsx - HEALTH & WELLNESS PROGRAM PAGE
+// app/programs/health/page.tsx - HEALTH PROGRAM PAGE
 import Image from 'next/image';
 import Link from 'next/link';
 import { 
   FaArrowRight, 
-  FaHome, 
-  FaBrain, 
-  FaBaby, 
-  FaFemale, 
-  FaSyringe, 
-  FaBookOpen, 
-  FaUsers, 
-  FaMicrophone, 
-  FaSearch,
-  FaHeart,
-  FaPhoneAlt,
-  FaCalendarCheck,
-  FaBus,
-  FaHandHoldingMedical,
-  FaHospital,
+  FaHandHoldingHeart,
+  FaHeartbeat,
+  FaBrain,
   FaUserMd,
-  FaClinicMedical
+  FaHospital,
+  FaBookMedical,
+  FaFemale,
+  FaHeart,
+  FaLeaf,
+  FaMobileAlt,
+  FaRunning,
+  FaUtensils,
+  FaChevronRight,
+  FaUsers
 } from 'react-icons/fa';
 import NewsletterCTA from '@/components/NewsletterCTA';
 
 export default function HealthPage() {
   return (
-    <div className="min-h-screen bg-white">
-      {/* HERO SECTION - Image Left, Content Right */}
+    <div className="min-h-screen bg-white text-render-premium">
+      {/* HERO SECTION */}
       <section
         className="relative py-20 pt-8 bg-cover bg-center"
         style={{ backgroundImage: "url('/images/history/history-05-health-nav.jpg')" }}
       >
-        <div className="absolute inset-0 bg-white/90" />
+        <div className="absolute inset-0 bg-white/85" />
         <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Left: Hero Image */}
             <div className="relative h-96 lg:h-[500px] rounded-3xl overflow-hidden shadow-2xl">
-              <Image src="/images/programs/health5.png" alt="Health Education Session" fill className="object-cover" priority />
-              <div className="absolute inset-0 bg-gradient-to-br from-brand-primary/20 to-yellow-400/20" />
+              <Image src="/images/programs/health3.png" alt="Health Support" fill className="object-cover" priority />
+              <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/20 to-green-400/20" />
             </div>
 
             {/* Right: Content */}
             <div>
-              <span className="inline-block bg-brand-primary text-brand-text px-4 py-2 rounded-full text-sm font-bold mb-6">
-                Comprehensive Care
-              </span>
-              <h1 className="text-5xl md:text-6xl font-black text-gray-900 mb-6 leading-tight">
-                Health & Wellness Programs
+              <span className="kicker-cyan mb-4 block">Holistic Wellbeing</span>
+              <h1 className="heading-editorial text-5xl md:text-6xl text-gray-900 mb-6 leading-tight">
+                Health & <span className="heading-accent-cyan">Wellness</span>
               </h1>
-              <p className="text-xl text-gray-600 mb-6 leading-relaxed">
-                Our comprehensive health and wellness programs address the physical, mental, and emotional 
-                wellbeing of refugees and immigrants. From in-home health education to counseling support 
-                and medical care navigation, we ensure families have access to the care they need.
+              <div className="hr-cyan my-6"></div>
+              <p className="body-editorial mb-6">
+                Health is more than just medical care—it's mental wellbeing, preventive education, 
+                and access to essential resources. Our Health program provides comprehensive support 
+                to help refugees and immigrants thrive physically, mentally, and emotionally.
               </p>
-              <p className="text-gray-600 mb-8">
-                We understand that navigating a new healthcare system can be overwhelming, especially when 
-                language barriers and cultural differences create additional obstacles. Our mission is to 
-                increase health literacy, encourage patient autonomy, and help families develop sustainable, 
-                healthy behaviors while providing emotional support throughout their healing journey.
+              <p className="body-editorial mb-8">
+                From health education to counseling referrals, medical navigation to hygiene assistance, 
+                we ensure that health disparities don't prevent our community members from achieving 
+                their full potential.
               </p>
               <div className="flex flex-wrap gap-4">
                 <Link 
                   href="/contact"
-                  className="inline-flex items-center bg-brand-primary text-brand-text px-8 py-4 rounded-lg font-semibold hover:bg-brand-dark transition shadow-lg"
+                  className="btn-cyan inline-flex items-center px-8 py-4 rounded-lg"
                 >
-                  Get More Info <FaArrowRight className="ml-2"/>
+                  Get Health Support <FaArrowRight className="ml-2"/>
+                </Link>
+                <Link 
+                  href="/referral"
+                  className="inline-flex items-center bg-white text-gray-900 border-2 border-cyan-500 px-8 py-4 rounded-lg font-semibold hover:bg-cyan-50 transition"
+                >
+                  Submit Referral
                 </Link>
               </div>
             </div>
@@ -73,503 +73,420 @@ export default function HealthPage() {
         </div>
       </section>
 
-      {/* CORE HEALTH SERVICES */}
-      <section
-        className="relative py-20 bg-cover bg-center"
-        style={{ backgroundImage: "url('/images/history/history-09-award-ceremony.jpg')" }}
-      >
-        <div className="absolute inset-0 bg-white/90" />
-        <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12">
-          <h2 className="text-4xl font-black text-center text-gray-900 mb-16">Core Health Services</h2>
-          
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {/* Mental Health & Parenting */}
-            <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition hover:-translate-y-1">
-              <div className="w-16 h-16 bg-brand-primary/20 rounded-2xl flex items-center justify-center mb-6">
-                <FaBrain className="text-3xl text-brand-primary"/>
-              </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-3">Mental Health & Parenting</h3>
-              <p className="text-gray-600">
-                Addressing the psychological impact of displacement and trauma, our mental health education focuses on coping strategies, stress management, and positive parenting techniques adapted for families rebuilding their lives in a new country.
-              </p>
-            </div>
-
-            {/* General Health Education */}
-            <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition hover:-translate-y-1">
-              <div className="w-16 h-16 bg-brand-primary/20 rounded-2xl flex items-center justify-center mb-6">
-                <FaBookOpen className="text-3xl text-brand-primary"/>
-              </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-3">Health Education</h3>
-              <p className="text-gray-600">
-                Comprehensive topics ranging from chronic disease management to preventive care, tailored to the specific health concerns and questions raised by our client families. Each curriculum is adapted to address the most pressing needs of the community we serve.
-              </p>
-            </div>
-
-            {/* Children's Health */}
-            <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition hover:-translate-y-1">
-              <div className="w-16 h-16 bg-brand-primary/20 rounded-2xl flex items-center justify-center mb-6">
-                <FaBaby className="text-3xl text-brand-primary"/>
-              </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-3">Children's Health Education</h3>
-              <p className="text-gray-600">
-                Specialized programming for pediatric health, including developmental milestones, nutrition for growing bodies, recognizing signs of illness, and understanding the American pediatric care system to ensure every child receives the attention they deserve.
-              </p>
-            </div>
-
-            {/* Women's Prenatal Health */}
-            <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition hover:-translate-y-1">
-              <div className="w-16 h-16 bg-pink-100 rounded-2xl flex items-center justify-center mb-6">
-                <FaFemale className="text-3xl text-pink-600"/>
-              </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-3">Women's Prenatal Health</h3>
-              <p className="text-gray-600">
-                Dedicated support for expecting mothers, covering prenatal nutrition, understanding prenatal appointments, preparing for childbirth in the U.S. healthcare system, and postpartum care to ensure healthy outcomes for both mother and baby.
-              </p>
-            </div>
-
-            {/* Vaccines */}
-            <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition hover:-translate-y-1">
-              <div className="w-16 h-16 bg-brand-primary/20 rounded-2xl flex items-center justify-center mb-6">
-                <FaSyringe className="text-3xl text-brand-primary"/>
-              </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-3">Vaccine Education</h3>
-              <p className="text-gray-600">
-                Critical information about COVID-19 and routine immunizations, including understanding vaccine safety, accessing vaccination sites, and addressing concerns with culturally sensitive, evidence-based education to protect entire communities.
-              </p>
-            </div>
-
-            {/* In-Home Delivery */}
-            <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition hover:-translate-y-1">
-              <div className="w-16 h-16 bg-brand-primary/20 rounded-2xl flex items-center justify-center mb-6">
-                <FaHome className="text-3xl text-brand-primary"/>
-              </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-3">In-Home Delivery</h3>
-              <p className="text-gray-600">
-                Recognizing that transportation and childcare barriers often prevent families from attending health classes, we bring education directly to their living rooms. This approach ensures maximum participation and comfort while learning sensitive health topics.
-              </p>
-            </div>
-          </div>
-
-          {/* Partners */}
-          <div className="mt-12 text-center">
-            <p className="text-gray-500 mb-4">This program is made possible thanks to the generosity of our partners:</p>
-            <div className="flex flex-wrap justify-center gap-6 text-sm font-semibold text-gray-700">
-              <span className="bg-white px-4 py-2 rounded-lg shadow">Blossom Hill Foundation</span>
-              <span className="bg-white px-4 py-2 rounded-lg shadow">Y-HEALAR</span>
-              <span className="bg-white px-4 py-2 rounded-lg shadow">EMPOWER</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* EDUCATION & LITERACY SECTION */}
+      {/* HEALTH EDUCATION SECTION */}
       <section
         className="relative py-20 bg-cover bg-center"
         style={{ backgroundImage: "url('/images/history/history-06-world-refugee-day.jpg')" }}
       >
-        <div className="absolute inset-0 bg-white/90" />
-        <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12">
-          <h2 className="text-4xl font-black text-center text-gray-900 mb-16">Education & Literacy Initiatives</h2>
-
-          <div className="grid lg:grid-cols-3 gap-8">
-            {/* EMPOWER Program */}
-            <div className="bg-gradient-to-br from-brand-background to-white rounded-2xl p-8 border border-brand-primary/30">
-              <div className="w-16 h-16 bg-brand-primary/20 rounded-2xl flex items-center justify-center mb-6">
-                <FaUsers className="text-3xl text-brand-primary"/>
-              </div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">EMPOWER Program</h3>
-              <p className="text-gray-600 mb-4">
-                In collaboration with Emotion Program Outside the Clinic with Wellness Education for Refugees (EMPOWER), we host an enriching summer program designed specifically for refugee children. This four-week summer camp provides a safe, nurturing environment where children can process their experiences while building essential life skills.
-              </p>
-              <p className="text-gray-600">
-                Families and children engage together in social-emotional learning activities, develop healthy coping mechanisms for stress and trauma, participate in physical activities that promote wellbeing, and strengthen family bonds through emotional literacy exercises. This holistic approach ensures that healing happens not just for individuals, but for entire family units.
-              </p>
-            </div>
-
-            {/* Ambassador Classes */}
-            <div className="bg-gradient-to-br from-brand-background to-white rounded-2xl p-8 border border-brand-primary/30">
-              <div className="w-16 h-16 bg-brand-primary/20 rounded-2xl flex items-center justify-center mb-6">
-                <FaMicrophone className="text-3xl text-brand-primary"/>
-              </div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">Ambassador Classes</h3>
-              <p className="text-gray-600 mb-4">
-                In partnership with Yale Health Education and Literacy for Asylees and Refugees (Y-HEALAR), we operate a comprehensive multi-class ambassador program that trains community members to become health educators themselves. This year, we are proud to have two dedicated health ambassadors participating in the program.
-              </p>
-              <p className="text-gray-600">
-                Throughout the program, participants develop the skills and confidence needed to lead health classes independently within their own communities. By training peers from within the refugee and immigrant communities, we create sustainable health education networks that continue to expand our reach and impact long after formal programming ends.
-              </p>
-            </div>
-
-            {/* Women's Health Workshops */}
-            <div className="bg-gradient-to-br from-brand-background to-white rounded-2xl p-8 border border-brand-primary/30">
-              <div className="w-16 h-16 bg-pink-100 rounded-2xl flex items-center justify-center mb-6">
-                <FaFemale className="text-3xl text-pink-600"/>
-              </div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">Women's Health Workshops</h3>
-              <p className="text-gray-600 mb-4">
-                These specialized workshops address the unique health concerns of women in our community, covering critical topics including stress management techniques, culturally-informed parenting strategies, mindfulness practices for mental wellness, and nutrition education adapted to available resources and cultural dietary preferences.
-              </p>
-              <p className="text-gray-600">
-                With approximately 120 participants annually, these workshops have become a cornerstone of our community health strategy. The intimate setting allows women to ask questions they might otherwise feel uncomfortable discussing, creating a supportive sisterhood of shared knowledge and mutual empowerment.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* IMAGE CAROUSEL */}
-      <section
-        className="relative py-16 bg-cover bg-center overflow-hidden"
-        style={{ backgroundImage: "url('/images/history/history-08-board-2020.jpg')" }}
-      >
-        <div className="absolute inset-0 bg-white/90" />
-        <div className="relative z-10">
-        <div className="relative">
-          <div className="flex gap-6 animate-scroll-right">
-            {/* Image 1 */}
-            <div className="flex-shrink-0 w-72 h-48 rounded-2xl overflow-hidden shadow-lg relative">
-              <Image src="/images/programs/health1.png" alt="Health Session 1" fill className="object-cover" />
-            </div>
-            {/* Image 2 */}
-            <div className="flex-shrink-0 w-72 h-48 rounded-2xl overflow-hidden shadow-lg relative">
-              <Image src="/images/programs/health2.png" alt="Health Session 2" fill className="object-cover" />
-            </div>
-            {/* Image 3 */}
-            <div className="flex-shrink-0 w-72 h-48 rounded-2xl overflow-hidden shadow-lg relative">
-              <Image src="/images/programs/health3.png" alt="Health Session 3" fill className="object-cover" />
-            </div>
-            {/* Image 4 */}
-            <div className="flex-shrink-0 w-72 h-48 rounded-2xl overflow-hidden shadow-lg relative">
-              <Image src="/images/programs/health4.png" alt="Health Session 4" fill className="object-cover" />
-            </div>
-            {/* Image 5 */}
-            <div className="flex-shrink-0 w-72 h-48 rounded-2xl overflow-hidden shadow-lg relative">
-              <Image src="/images/programs/health5.png" alt="Health Session 5" fill className="object-cover" />
-            </div>
-            
-            {/* Duplicate set for seamless loop */}
-            <div className="flex-shrink-0 w-72 h-48 rounded-2xl overflow-hidden shadow-lg relative">
-              <Image src="/images/programs/health1.png" alt="Health Session 1" fill className="object-cover" />
-            </div>
-            <div className="flex-shrink-0 w-72 h-48 rounded-2xl overflow-hidden shadow-lg relative">
-              <Image src="/images/programs/health2.png" alt="Health Session 2" fill className="object-cover" />
-            </div>
-            <div className="flex-shrink-0 w-72 h-48 rounded-2xl overflow-hidden shadow-lg relative">
-              <Image src="/images/programs/health3.png" alt="Health Session 3" fill className="object-cover" />
-            </div>
-            <div className="flex-shrink-0 w-72 h-48 rounded-2xl overflow-hidden shadow-lg relative">
-              <Image src="/images/programs/health4.png" alt="Health Session 4" fill className="object-cover" />
-            </div>
-            <div className="flex-shrink-0 w-72 h-48 rounded-2xl overflow-hidden shadow-lg relative">
-              <Image src="/images/programs/health5.png" alt="Health Session 5" fill className="object-cover" />
-            </div>
-          </div>
-        </div>
-      </div>
-      </section>
-
-      {/* ADVOCACY SECTION */}
-      <section
-        className="relative py-20 bg-cover bg-center text-gray-900"
-        style={{ backgroundImage: "url('/images/history/history-10-future-mural.jpg')" }}
-      >
-        <div className="absolute inset-0 bg-white/90" />
-        <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12">
-          <h2 className="text-4xl font-black text-center mb-16">Advocacy & Outreach</h2>
-
-          <div className="grid md:grid-cols-2 gap-12">
-            <div className="space-y-8">
-              <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition hover:-translate-y-1">
-                <h3 className="text-2xl font-bold mb-4 text-gray-900">Vaccine Clinic Program</h3>
-                <p className="text-gray-600 leading-relaxed">
-                  Offered both online and in-person, our vaccine awareness initiative is specifically designed to address the unique concerns of refugee communities. We provide comprehensive education about the immune system, explain the critical importance of immunization for community health, and respectfully address common myths and misconceptions about vaccines that may circulate within communities.
-                </p>
-                <p className="text-gray-600 mt-4 leading-relaxed">
-                  We create welcoming, judgment-free spaces where clients feel safe asking specific questions about their personal health situations. All educational materials are professionally translated and presented in Dari, Pashto, and Arabic, ensuring that language is never a barrier to understanding life-saving health information.
-                </p>
-              </div>
-
-              <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition hover:-translate-y-1">
-                <h3 className="text-2xl font-bold mb-4 text-gray-900">National Association of Regional Councils (NARC)</h3>
-                <p className="text-gray-600 leading-relaxed">
-                  The annual NARC Conference and Exhibition stands as the largest national gathering focused on promoting effective regional cooperation and solutions. Our participation allows us to share best practices with leadership from Councils of Government and Metropolitan Planning Organizations across the country.
-                </p>
-                <p className="text-gray-600 mt-4 leading-relaxed">
-                  This platform enables us to advocate for refugee health needs at the policy level, learning from congressional and state lawmakers, university researchers, and nonprofit leaders about emerging strategies for serving displaced populations. Our presence ensures that refugee voices are represented in regional health planning discussions.
-                </p>
-              </div>
-            </div>
-
-            <div className="space-y-8">
-              <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition hover:-translate-y-1">
-                <h3 className="text-2xl font-bold mb-4 text-gray-900">Mental Health America Conference</h3>
-                <p className="text-gray-600 leading-relaxed">
-                  In June 2022, our representatives took the national stage to share research and expertise on addressing America's refugee mental health crisis. This presentation offered practical, culturally-informed approaches to mental healthcare that respect the diverse backgrounds and experiences of refugee communities.
-                </p>
-                <p className="text-gray-600 mt-4 leading-relaxed">
-                  By participating in these national conversations, we help shape the broader discourse on refugee mental health, ensuring that service providers across the country understand the unique psychological impacts of forced migration and the specific support structures that promote healing and resilience.
-                </p>
-              </div>
-
-              <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition hover:-translate-y-1">
-                <h3 className="text-2xl font-bold mb-4 text-gray-900">Photovoice Worldwide</h3>
-                <p className="text-gray-600 leading-relaxed">
-                  In October 2022, our team member Rachel shared insights from a powerful Photovoice activity conducted with refugee youth in collaboration with Wesleyan University. This innovative methodology allows young people to document their lived experiences through photography, creating visual narratives that communicate their challenges, hopes, and perspectives in ways that traditional interviews cannot capture.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* COUNSELING & EMOTIONAL SUPPORT */}
-      <section
-        className="relative py-20 bg-cover bg-center"
-        style={{ backgroundImage: "url('/images/history/history-07-youth-circle.jpg')" }}
-      >
-        <div className="absolute inset-0 bg-brand-primary/90" />
+        <div className="absolute inset-0 bg-white/85" />
         <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12">
           <div className="text-center mb-16">
-            <span className="text-white/80 font-bold text-sm uppercase tracking-wide">Mental Wellness</span>
-            <h2 className="text-4xl font-black text-white mt-2">Counseling & Emotional Support</h2>
-            <p className="text-white/80 mt-4 max-w-2xl mx-auto">
-              Adjusting to a new country can be challenging. We offer compassionate support and connections 
-              to professional mental health services for refugees and immigrants processing trauma and building resilience.
+            <span className="kicker-cyan mb-4 block">Knowledge is Health</span>
+            <h2 className="heading-editorial text-4xl md:text-5xl text-gray-900">Health <span className="heading-accent-cyan">Education</span></h2>
+            <div className="hr-cyan mx-auto my-6"></div>
+            <p className="body-editorial max-w-2xl mx-auto">
+              Empowering refugees and immigrants with vital health knowledge to navigate the U.S. 
+              healthcare system and maintain their wellbeing.
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {/* Emotional Support */}
-            <div className="bg-white/95 backdrop-blur rounded-2xl p-8 shadow-xl">
-              <div className="w-16 h-16 bg-brand-primary/20 rounded-2xl flex items-center justify-center mb-6">
-                <FaHeart className="text-3xl text-brand-primary"/>
+            {/* Medical Navigation */}
+            <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition hover:-translate-y-1 border border-cyan-100">
+              <div className="w-16 h-16 bg-cyan-100 rounded-2xl flex items-center justify-center mb-6">
+                <FaHospital className="text-3xl text-cyan-600"/>
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-3">Emotional Support</h3>
+              <h3 className="card-title-cyan text-xl mb-3">Medical System Navigation</h3>
               <p className="text-gray-600">
-                Caring guidance and a listening ear for those navigating the stress of displacement, 
-                cultural adjustment, and rebuilding lives in an unfamiliar environment.
+                Comprehensive workshops teaching how to access healthcare services, understand insurance 
+                coverage, schedule appointments, and communicate effectively with healthcare providers 
+                in the U.S. system.
               </p>
             </div>
 
-            {/* Mental Health Referrals */}
-            <div className="bg-white/95 backdrop-blur rounded-2xl p-8 shadow-xl">
-              <div className="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center mb-6">
-                <FaUserMd className="text-3xl text-blue-600"/>
+            {/* Preventive Care */}
+            <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition hover:-translate-y-1 border border-cyan-100">
+              <div className="w-16 h-16 bg-cyan-100 rounded-2xl flex items-center justify-center mb-6">
+                <FaHeartbeat className="text-3xl text-cyan-600"/>
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-3">Professional Counseling Referrals</h3>
+              <h3 className="card-title-cyan text-xl mb-3">Preventive Care</h3>
               <p className="text-gray-600">
-                Connections to licensed mental health professionals and counseling services with 
-                cultural competency and interpretation support available.
+                Education on the importance of regular check-ups, vaccinations, screenings, and healthy 
+                lifestyle choices that can prevent serious health issues before they develop.
               </p>
             </div>
 
-            {/* Trauma-Informed Care */}
-            <div className="bg-white/95 backdrop-blur rounded-2xl p-8 shadow-xl">
-              <div className="w-16 h-16 bg-purple-100 rounded-2xl flex items-center justify-center mb-6">
-                <FaBrain className="text-3xl text-purple-600"/>
+            {/* Mental Health Awareness */}
+            <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition hover:-translate-y-1 border border-cyan-100">
+              <div className="w-16 h-16 bg-cyan-100 rounded-2xl flex items-center justify-center mb-6">
+                <FaBrain className="text-3xl text-cyan-600"/>
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-3">Trauma-Informed Resources</h3>
+              <h3 className="card-title-cyan text-xl mb-3">Mental Health Awareness</h3>
               <p className="text-gray-600">
-                Access to trauma-informed care resources and support groups for individuals and families 
-                processing experiences of violence, loss, and displacement.
+                Destigmatizing mental health and teaching coping strategies for stress, trauma, and 
+                cultural adjustment. Promoting understanding that mental health is just as important 
+                as physical health.
               </p>
             </div>
 
-            {/* Family & Youth Support */}
-            <div className="bg-white/95 backdrop-blur rounded-2xl p-8 shadow-xl">
-              <div className="w-16 h-16 bg-green-100 rounded-2xl flex items-center justify-center mb-6">
-                <FaUsers className="text-3xl text-green-600"/>
+            {/* Nutrition & Wellness */}
+            <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition hover:-translate-y-1 border border-cyan-100">
+              <div className="w-16 h-16 bg-cyan-100 rounded-2xl flex items-center justify-center mb-6">
+                <FaUtensils className="text-3xl text-cyan-600"/>
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-3">Family & Youth Support</h3>
+              <h3 className="card-title-cyan text-xl mb-3">Nutrition & Wellness</h3>
               <p className="text-gray-600">
-                Specialized support services for children, adolescents, and families addressing 
-                intergenerational trauma, parenting challenges, and family dynamics.
+                Workshops on healthy eating on a budget, understanding food labels, adapting traditional 
+                diets to local ingredients, and maintaining physical health through proper nutrition.
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* HEALTHCARE & MEDICAL SUPPORT */}
+      {/* MEDICAL REFERRALS SECTION */}
       <section
         className="relative py-20 bg-cover bg-center"
-        style={{ backgroundImage: "url('/images/history/history-06-world-refugee-day.jpg')" }}
+        style={{ backgroundImage: "url('/images/history/history-04-welcome-dinner.jpg')" }}
       >
-        <div className="absolute inset-0 bg-white/90" />
+        <div className="absolute inset-0 bg-cyan-600/85" />
         <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12">
           <div className="text-center mb-16">
-            <span className="text-brand-primary font-bold text-sm uppercase tracking-wide">Medical Care Access</span>
-            <h2 className="text-4xl font-black text-gray-900 mt-2">Healthcare & Medical Support</h2>
-            <p className="text-gray-600 mt-4 max-w-2xl mx-auto">
-              Helping clients access essential healthcare services by navigating the complex medical system, 
-              scheduling appointments, and ensuring transportation to receive proper care.
+            <span className="kicker text-white/90 mb-4 block">Connecting to Care</span>
+            <h2 className="heading-editorial text-4xl md:text-5xl text-white">Medical & Counseling <span className="italic font-serif">Referrals</span></h2>
+            <div className="hr-white mx-auto my-6"></div>
+            <p className="body-editorial text-white/90 max-w-2xl mx-auto">
+              Facilitating access to essential medical and mental health services through trusted 
+              partnerships with local healthcare providers.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {/* Clinic Connections */}
-            <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition hover:-translate-y-1">
-              <div className="w-16 h-16 bg-green-100 rounded-2xl flex items-center justify-center mb-6">
-                <FaClinicMedical className="text-3xl text-green-600"/>
+          <div className="grid md:grid-cols-3 gap-8">
+            {/* Primary Care */}
+            <div className="bg-white/95 backdrop-blur rounded-2xl p-8 shadow-xl border border-cyan-100">
+              <div className="w-16 h-16 bg-cyan-100 rounded-2xl flex items-center justify-center mb-6">
+                <FaUserMd className="text-3xl text-cyan-600"/>
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-3">Free & Low-Cost Clinics</h3>
+              <h3 className="card-title-cyan text-xl mb-3">Primary Care Access</h3>
               <p className="text-gray-600">
-                Connecting clients to community health centers, free clinics, and sliding-scale 
-                medical providers that offer quality care regardless of insurance status or ability to pay.
+                Referrals to clinics and physicians who provide comprehensive primary care services, 
+                including routine check-ups, chronic disease management, and preventive screenings 
+                regardless of insurance status.
               </p>
             </div>
 
-            {/* Appointment Scheduling */}
-            <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition hover:-translate-y-1">
-              <div className="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center mb-6">
-                <FaCalendarCheck className="text-3xl text-blue-600"/>
+            {/* Mental Health Services */}
+            <div className="bg-white/95 backdrop-blur rounded-2xl p-8 shadow-xl border border-cyan-100">
+              <div className="w-16 h-16 bg-cyan-100 rounded-2xl flex items-center justify-center mb-6">
+                <FaBrain className="text-3xl text-cyan-600"/>
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-3">Appointment Assistance</h3>
+              <h3 className="card-title-cyan text-xl mb-3">Mental Health Services</h3>
               <p className="text-gray-600">
-                Helping clients schedule medical appointments, prepare for visits, and understand 
-                follow-up care instructions with cultural and linguistic support throughout the process.
+                Connections to culturally sensitive counselors and therapists who understand the unique 
+                challenges refugees face. Support for trauma, anxiety, depression, and family counseling 
+                with multilingual providers when possible.
               </p>
             </div>
 
-            {/* Medical Transport */}
-            <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition hover:-translate-y-1">
-              <div className="w-16 h-16 bg-brand-primary/20 rounded-2xl flex items-center justify-center mb-6">
-                <FaBus className="text-3xl text-brand-primary"/>
+            {/* Medical Navigation */}
+            <div className="bg-white/95 backdrop-blur rounded-2xl p-8 shadow-xl border border-cyan-100">
+              <div className="w-16 h-16 bg-cyan-100 rounded-2xl flex items-center justify-center mb-6">
+                <FaHospital className="text-3xl text-cyan-600"/>
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-3">Medical Transportation</h3>
+              <h3 className="card-title-cyan text-xl mb-3">Medical Navigation</h3>
               <p className="text-gray-600">
-                Coordinating transportation to and from medical visits for clients who lack reliable 
-                transport, ensuring they never miss critical appointments due to mobility barriers.
-              </p>
-            </div>
-
-            {/* Insurance Guidance */}
-            <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition hover:-translate-y-1">
-              <div className="w-16 h-16 bg-purple-100 rounded-2xl flex items-center justify-center mb-6">
-                <FaHandHoldingMedical className="text-3xl text-purple-600"/>
-              </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-3">Health Insurance Enrollment</h3>
-              <p className="text-gray-600">
-                Guidance on understanding and enrolling in health insurance options including Medicaid, 
-                CHIP, marketplace plans, and refugee medical assistance programs.
-              </p>
-            </div>
-
-            {/* Maternal Health */}
-            <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition hover:-translate-y-1">
-              <div className="w-16 h-16 bg-pink-100 rounded-2xl flex items-center justify-center mb-6">
-                <FaFemale className="text-3xl text-pink-600"/>
-              </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-3">Maternal & Child Health</h3>
-              <p className="text-gray-600">
-                Specialized referrals for prenatal care, pediatric services, family planning, and 
-                maternal health programs ensuring healthy outcomes for mothers and children.
-              </p>
-            </div>
-
-            {/* Hospital Navigation */}
-            <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition hover:-translate-y-1">
-              <div className="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center mb-6">
-                <FaHospital className="text-3xl text-red-600"/>
-              </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-3">Hospital Navigation</h3>
-              <p className="text-gray-600">
-                Support during hospital visits and emergency care, including interpretation services 
-                and advocacy to ensure patients understand their treatment and rights.
+                Accompanying clients to appointments, helping complete medical forms, explaining 
+                treatment plans, and ensuring clients understand their healthcare options and rights. 
+                Acting as a bridge between clients and providers.
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* RESEARCH SECTION */}
-      <section className="py-20 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-6 md:px-12">
-          <h2 className="text-4xl font-black text-center text-gray-900 mb-16">Research & Academic Partnerships</h2>
+      {/* WOMEN'S HEALTH SECTION */}
+      <section
+        className="relative py-20 bg-cover bg-center"
+        style={{ backgroundImage: "url('/images/history/history-07-youth-circle.jpg')" }}
+      >
+        <div className="absolute inset-0 bg-white/85" />
+        <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <span className="kicker-cyan mb-4 block">Specialized Care</span>
+              <h2 className="heading-editorial text-4xl md:text-5xl text-gray-900 mb-6">Women's <span className="heading-accent-cyan">Health</span></h2>
+              <div className="hr-cyan my-6"></div>
+              <p className="body-editorial mb-6">
+                Addressing the unique health needs of refugee and immigrant women through education 
+                and access to specialized services. We create safe spaces for women to learn about 
+                their health and access culturally appropriate care.
+              </p>
 
-          <div className="space-y-8">
-            {/* PCORI Project */}
-            <div className="bg-white rounded-2xl p-8 shadow-lg">
-              <div className="flex items-start gap-6">
-                <div className="w-16 h-16 bg-brand-primary/20 rounded-2xl flex items-center justify-center flex-shrink-0">
-                  <FaSearch className="text-3xl text-brand-primary"/>
+              <div className="space-y-4">
+                <div className="flex items-start gap-4">
+                  <div className="w-10 h-10 bg-cyan-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <FaFemale className="text-cyan-600"/>
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-gray-900">Reproductive Health Education</h4>
+                    <p className="text-gray-600 text-sm">
+                      Comprehensive education on reproductive health, family planning, prenatal care, 
+                      and maternal health in a culturally sensitive manner.
+                    </p>
+                  </div>
                 </div>
-                <div>
-                  <h3 className="text-2xl font-bold text-gray-900 mb-4">PCORI Engagement Award Project</h3>
-                  <p className="text-gray-600 leading-relaxed">
-                    In collaboration with faculty at the Yale School of Medicine, we are honored to lead a groundbreaking project funded through the Patient-Centered Outcomes Research Institute (PCORI) Eugene Washington PCORI Engagement Award (EASO 30519). This significant research initiative represents a major step forward in refugee health research methodology.
-                  </p>
-                  <p className="text-gray-600 mt-4 leading-relaxed">
-                    Our team has established a diverse committee comprising clinicians, academic researchers, community stakeholders, and refugee community members themselves. Together, we are receiving comprehensive training in Patient-Centered Outcomes Research (PCOR) methodologies. Our goal is to develop a shared, community-driven set of research priorities that truly reflect the needs and concerns of refugee populations, ensuring that future health research serves those it aims to help.
-                  </p>
+                <div className="flex items-start gap-4">
+                  <div className="w-10 h-10 bg-cyan-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <FaHeartbeat className="text-cyan-600"/>
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-gray-900">Cancer Screenings & Prevention</h4>
+                    <p className="text-gray-600 text-sm">
+                      Education and referral services for breast cancer screenings, cervical cancer 
+                      prevention, and other women's health screenings.
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-4">
+                  <div className="w-10 h-10 bg-cyan-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <FaHeart className="text-cyan-600"/>
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-gray-900">Safe Space Support Groups</h4>
+                    <p className="text-gray-600 text-sm">
+                      Women's health circles where participants can discuss health concerns, share 
+                      experiences, and support each other in a confidential environment.
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
 
-            <div className="grid md:grid-cols-2 gap-8">
-              {/* Muslim Mental Health Conference */}
-              <div className="bg-white rounded-2xl p-8 shadow-lg">
-                <h3 className="text-xl font-bold text-gray-900 mb-4">Muslim Mental Health Conference</h3>
-                <p className="text-gray-600 leading-relaxed">
-                  This annual gathering provides a vital platform for discussing the intersection of faith, culture, and mental health. Our representatives participate each year, sharing insights about the specific health and cultural considerations affecting refugee children and women from Muslim-majority countries.
-                </p>
-                <p className="text-gray-600 mt-4 leading-relaxed">
-                  In 2022, we presented important findings about the impact of COVID-19 on refugee mental health, detailing how our organization rapidly adapted our healthcare delivery model in response to the pandemic's unique challenges. This knowledge-sharing helps other organizations serving similar populations develop more effective, culturally-responsive interventions.
-                </p>
-              </div>
+            <div className="relative h-96 lg:h-[500px] rounded-3xl overflow-hidden shadow-2xl">
+              <Image src="/images/programs/esl_founder.png" alt="Women's Health Support" fill className="object-cover" />
+              <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/20 to-pink-400/20" />
+            </div>
+          </div>
+        </div>
+      </section>
 
-              {/* North American Refugee Health Conference */}
-              <div className="bg-white rounded-2xl p-8 shadow-lg">
-                <h3 className="text-xl font-bold text-gray-900 mb-4">North American Refugee Health Conference</h3>
-                <p className="text-gray-600 leading-relaxed">
-                  At the 2022 conference in Cleveland, our representatives joined researcher Joseph Williams from Yale's School of Public Health to present important findings on COVID-19's disproportionate impact on refugee families. We shared data on infection rates, vaccine hesitancy factors, and economic consequences within the communities we serve.
-                </p>
-                <p className="text-gray-600 mt-4 leading-relaxed">
-                  More importantly, we outlined how our organization is striving to help families recover and rebuild as we emerge from the pandemic. This includes expanded mental health services, economic support programs, and continued health education to address long-term COVID effects. Our presentation emphasized the need for sustained support for refugee communities even as broader society returns to normal.
-                </p>
+      {/* HYGIENE ASSISTANCE SECTION */}
+      <section
+        className="relative py-20 bg-cover bg-center"
+        style={{ backgroundImage: "url('/images/history/history-08-board-2020.jpg')" }}
+      >
+        <div className="absolute inset-0 bg-slate-950/80" />
+        <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12">
+          <div className="text-center mb-16">
+            <span className="kicker text-cyan-300 mb-4 block">Essential Support</span>
+            <h2 className="heading-editorial text-4xl md:text-5xl text-white">Hygiene & Basic Needs <span className="italic font-serif text-cyan-300">Assistance</span></h2>
+            <div className="hr-cyan mx-auto my-6"></div>
+            <p className="body-editorial text-white/80 max-w-2xl mx-auto">
+              Providing essential hygiene products and resources to ensure dignity and health for 
+              individuals and families facing financial hardship.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {/* Hygiene Kits */}
+            <div className="bg-white/10 backdrop-blur rounded-2xl p-8 border border-white/20">
+              <div className="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center mb-6">
+                <FaHandHoldingHeart className="text-3xl text-white"/>
               </div>
+              <h3 className="text-xl font-serif font-medium text-white mb-3">Hygiene Kits Distribution</h3>
+              <p className="text-white/80">
+                Providing essential hygiene items including soap, shampoo, toothpaste, feminine hygiene 
+                products, and other personal care necessities to families in need.
+              </p>
+            </div>
+
+            {/* Hygiene Education */}
+            <div className="bg-white/10 backdrop-blur rounded-2xl p-8 border border-white/20">
+              <div className="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center mb-6">
+                <FaBookMedical className="text-3xl text-white"/>
+              </div>
+              <h3 className="text-xl font-serif font-medium text-white mb-3">Hygiene Education</h3>
+              <p className="text-white/80">
+                Workshops on personal hygiene practices, home sanitation, food safety, and preventing 
+                common illnesses through proper hygiene habits.
+              </p>
+            </div>
+
+            {/* Emergency Assistance */}
+            <div className="bg-white/10 backdrop-blur rounded-2xl p-8 border border-white/20">
+              <div className="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center mb-6">
+                <FaMobileAlt className="text-3xl text-white"/>
+              </div>
+              <h3 className="text-xl font-serif font-medium text-white mb-3">Emergency Support</h3>
+              <p className="text-white/80">
+                Rapid response assistance for families facing urgent health-related needs, including 
+                prescription medication support and emergency hygiene supplies.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* MENTAL HEALTH & TRAUMA SECTION */}
+      <section
+        className="relative py-20 bg-cover bg-center"
+        style={{ backgroundImage: "url('/images/history/history-09-award-ceremony.jpg')" }}
+      >
+        <div className="absolute inset-0 bg-white/85" />
+        <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div className="order-2 lg:order-1 relative h-96 lg:h-[500px] rounded-3xl overflow-hidden shadow-2xl">
+              <Image src="/images/programs/community1.png" alt="Mental Health Support" fill className="object-cover" />
+              <div className="absolute inset-0 bg-gradient-to-br from-purple-500/20 to-cyan-400/20" />
+            </div>
+
+            <div className="order-1 lg:order-2">
+              <span className="kicker-cyan mb-4 block">Healing & Recovery</span>
+              <h2 className="heading-editorial text-4xl md:text-5xl text-gray-900 mb-6">Mental Health & <span className="heading-accent-cyan">Trauma</span> Support</h2>
+              <div className="hr-cyan my-6"></div>
+              <p className="body-editorial mb-6">
+                Many refugees have experienced profound trauma before and during their journey to safety. 
+                We provide compassionate support and connections to specialized mental health services 
+                that understand the unique challenges of displacement and cultural adjustment.
+              </p>
+
+              <div className="space-y-4">
+                <div className="flex items-start gap-4">
+                  <div className="w-10 h-10 bg-cyan-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <FaBrain className="text-cyan-600"/>
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-gray-900">Trauma-Informed Care</h4>
+                    <p className="text-gray-600 text-sm">
+                      Connecting clients with therapists trained in trauma-informed care who understand 
+                      the psychological impact of war, displacement, and resettlement.
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-4">
+                  <div className="w-10 h-10 bg-cyan-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <FaUsers className="text-cyan-600"/>
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-gray-900">Support Groups</h4>
+                    <p className="text-gray-600 text-sm">
+                      Peer support groups where individuals can share experiences, reduce isolation, 
+                      and build community with others who understand their journey.
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-4">
+                  <div className="w-10 h-10 bg-cyan-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <FaLeaf className="text-cyan-600"/>
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-gray-900">Wellness Activities</h4>
+                    <p className="text-gray-600 text-sm">
+                      Yoga, meditation, and mindfulness sessions designed to reduce stress, improve 
+                      mental wellbeing, and provide tools for managing anxiety.
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-4">
+                  <div className="w-10 h-10 bg-cyan-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <FaRunning className="text-cyan-600"/>
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-gray-900">Cultural Adjustment Support</h4>
+                    <p className="text-gray-600 text-sm">
+                      Specialized support for navigating the emotional challenges of adapting to a new 
+                      culture while maintaining identity and traditions.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* IMPACT STATS SECTION */}
+      <section
+        className="relative py-20 bg-cover bg-center"
+        style={{ backgroundImage: "url('/images/history/history-10-future-mural.jpg')" }}
+      >
+        <div className="absolute inset-0 bg-cyan-600/85" />
+        <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12">
+          <div className="text-center mb-16">
+            <span className="kicker text-white/90 mb-4 block">Our Impact</span>
+            <h2 className="heading-editorial text-4xl text-white">Health Program <span className="italic font-serif">Outcomes</span></h2>
+            <div className="hr-white mx-auto my-6"></div>
+            <p className="body-editorial text-white/90 max-w-2xl mx-auto">
+              Making a measurable difference in the health and wellbeing of our community
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-4 gap-8 text-center">
+            <div className="p-6 bg-white/10 backdrop-blur rounded-2xl border border-white/20">
+              <span className="stat-cyan text-5xl block mb-2 text-white">500+</span>
+              <span className="text-white/80 body-editorial">Health Education Sessions</span>
+            </div>
+            <div className="p-6 bg-white/10 backdrop-blur rounded-2xl border border-white/20">
+              <span className="stat-cyan text-5xl block mb-2 text-white">200+</span>
+              <span className="text-white/80 body-editorial">Medical Referrals</span>
+            </div>
+            <div className="p-6 bg-white/10 backdrop-blur rounded-2xl border border-white/20">
+              <span className="stat-cyan text-5xl block mb-2 text-white">300+</span>
+              <span className="text-white/80 body-editorial">Hygiene Kits Distributed</span>
+            </div>
+            <div className="p-6 bg-white/10 backdrop-blur rounded-2xl border border-white/20">
+              <span className="stat-cyan text-5xl block mb-2 text-white">150+</span>
+              <span className="text-white/80 body-editorial">Mental Health Connections</span>
             </div>
           </div>
         </div>
       </section>
 
       {/* OTHER PROGRAMS */}
-      <section className="py-20 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-6 md:px-12">
-          <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">Other Programs</h2>
+      <section
+        className="relative py-20 bg-cover bg-center"
+        style={{ backgroundImage: "url('/images/history/history-01-hero.jpeg')" }}
+      >
+        <div className="absolute inset-0 bg-white/85" />
+        <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12">
+          <div className="text-center mb-12">
+            <span className="kicker-cyan mb-4 block">Explore</span>
+            <h2 className="heading-editorial text-3xl md:text-4xl text-gray-900">Other <span className="heading-accent-cyan">Programs</span></h2>
+            <div className="hr-cyan mx-auto my-6"></div>
+          </div>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-5xl mx-auto">
-            <Link href="/programs/esl" className="group">
-              <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition hover:-translate-y-1">
-                <h3 className="text-2xl font-bold text-gray-900 mb-3 group-hover:text-brand-primary transition">ESL Education</h3>
-                <p className="text-gray-600 mb-4">
-                  English language classes, digital literacy, and translation services for effective communication.
-                </p>
-                <span className="text-blue-600 hover:text-blue-800 font-semibold flex items-center gap-2 transition-colors">
-                  Learn More <FaArrowRight />
-                </span>
-              </div>
-            </Link>
-
-            <Link href="/programs/advocacy" className="group">
-              <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition hover:-translate-y-1">
-                <h3 className="text-2xl font-bold text-gray-900 mb-3 group-hover:text-brand-primary transition">Advocacy</h3>
-                <p className="text-gray-600 mb-4">
-                  Legal advocacy and immigration support for navigating complex systems and understanding rights.
-                </p>
-                <span className="text-blue-600 hover:text-blue-800 font-semibold flex items-center gap-2 transition-colors">
-                  Learn More <FaArrowRight />
-                </span>
-              </div>
-            </Link>
-
             <Link href="/programs/basic-needs" className="group">
-              <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition hover:-translate-y-1">
-                <h3 className="text-2xl font-bold text-gray-900 mb-3 group-hover:text-brand-primary transition">Basic Needs</h3>
+              <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition hover:-translate-y-1 border border-cyan-100">
+                <h3 className="card-title-cyan text-2xl mb-3">Basic Needs</h3>
                 <p className="text-gray-600 mb-4">
                   Food assistance, housing support, and transportation services for stable living conditions.
                 </p>
-                <span className="text-blue-600 hover:text-blue-800 font-semibold flex items-center gap-2 transition-colors">
+                <span className="text-cyan-600 hover:text-cyan-800 font-semibold flex items-center gap-2 transition-colors">
+                  Learn More <FaArrowRight />
+                </span>
+              </div>
+            </Link>
+
+            <Link href="/programs/esl" className="group">
+              <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition hover:-translate-y-1 border border-cyan-100">
+                <h3 className="card-title-cyan text-2xl mb-3">ESL Education</h3>
+                <p className="text-gray-600 mb-4">
+                  English language classes and skill development programs to empower communication and independence.
+                </p>
+                <span className="text-cyan-600 hover:text-cyan-800 font-semibold flex items-center gap-2 transition-colors">
+                  Learn More <FaArrowRight />
+                </span>
+              </div>
+            </Link>
+
+            <Link href="/programs/community" className="group">
+              <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition hover:-translate-y-1 border border-cyan-100">
+                <h3 className="card-title-cyan text-2xl mb-3">Community</h3>
+                <p className="text-gray-600 mb-4">
+                  Youth programs, cultural orientation, and family support for building connections.
+                </p>
+                <span className="text-cyan-600 hover:text-cyan-800 font-semibold flex items-center gap-2 transition-colors">
                   Learn More <FaArrowRight />
                 </span>
               </div>

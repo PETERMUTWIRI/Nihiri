@@ -17,35 +17,34 @@ import NewsletterCTA from '@/components/NewsletterCTA';
 
 export default function EmploymentPage() {
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white text-render-premium">
       {/* HERO SECTION */}
       <section
         className="relative py-20 pt-8 bg-cover bg-center"
         style={{ backgroundImage: "url('/images/history/history-09-award-ceremony.jpg')" }}
       >
-        <div className="absolute inset-0 bg-white/90" />
+        <div className="absolute inset-0 bg-white/85" />
         <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Left: Hero Image */}
             <div className="relative h-96 lg:h-[500px] rounded-3xl overflow-hidden shadow-2xl">
               <Image src="/images/hero/kinity1.webp" alt="Employment Support" fill className="object-cover" priority />
-              <div className="absolute inset-0 bg-gradient-to-br from-brand-primary/20 to-yellow-400/20" />
+              <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/20 to-blue-400/20" />
             </div>
 
             {/* Right: Content */}
             <div>
-              <span className="inline-block bg-brand-primary text-brand-text px-4 py-2 rounded-full text-sm font-bold mb-6">
-                Economic Empowerment
-              </span>
-              <h1 className="text-5xl md:text-6xl font-black text-gray-900 mb-6 leading-tight">
-                Employment & Economic Empowerment
+              <span className="kicker-cyan mb-4 block">Economic Empowerment</span>
+              <h1 className="heading-editorial text-5xl md:text-6xl text-gray-900 mb-6 leading-tight">
+                Employment & <span className="heading-accent-cyan">Economic</span> Empowerment
               </h1>
-              <p className="text-xl text-gray-600 mb-6 leading-relaxed">
+              <div className="hr-cyan my-6"></div>
+              <p className="body-editorial mb-6">
                 Financial independence is a cornerstone of successful integration. Our Employment program equips 
                 refugees and immigrants with the skills, connections, and confidence to build meaningful careers 
                 and achieve economic stability.
               </p>
-              <p className="text-gray-600 mb-8">
+              <p className="body-editorial mb-8">
                 From resume writing to entrepreneurship guidance, we provide comprehensive support at every stage 
                 of the employment journey. We partner with local employers who value the unique perspectives and 
                 work ethic that newcomers bring to the workforce.
@@ -53,13 +52,13 @@ export default function EmploymentPage() {
               <div className="flex flex-wrap gap-4">
                 <Link 
                   href="/contact"
-                  className="inline-flex items-center bg-brand-primary text-brand-text px-8 py-4 rounded-lg font-semibold hover:bg-brand-dark transition shadow-lg"
+                  className="btn-cyan inline-flex items-center px-8 py-4 rounded-lg"
                 >
                   Get Career Support <FaArrowRight className="ml-2"/>
                 </Link>
                 <Link 
                   href="/volunteer"
-                  className="inline-flex items-center bg-white text-brand-text border-2 border-brand-primary px-8 py-4 rounded-lg font-semibold hover:bg-brand-light transition"
+                  className="inline-flex items-center bg-white text-gray-900 border-2 border-cyan-500 px-8 py-4 rounded-lg font-semibold hover:bg-cyan-50 transition"
                 >
                   Become a Mentor
                 </Link>
@@ -74,12 +73,13 @@ export default function EmploymentPage() {
         className="relative py-20 bg-cover bg-center"
         style={{ backgroundImage: "url('/images/history/history-03-first-esl.jpg')" }}
       >
-        <div className="absolute inset-0 bg-white/90" />
+        <div className="absolute inset-0 bg-white/85" />
         <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12">
           <div className="text-center mb-16">
-            <span className="text-brand-primary font-bold text-sm uppercase tracking-wide">Career Development</span>
-            <h2 className="text-4xl font-black text-gray-900 mt-2">Job Readiness Training</h2>
-            <p className="text-gray-600 mt-4 max-w-2xl mx-auto">
+            <span className="kicker-cyan mb-4 block">Career Development</span>
+            <h2 className="heading-editorial text-4xl md:text-5xl text-gray-900">Job Readiness <span className="heading-accent-cyan">Training</span></h2>
+            <div className="hr-cyan mx-auto my-6"></div>
+            <p className="body-editorial max-w-2xl mx-auto">
               Building confidence and competence for the American workplace through practical skills training 
               and professional development workshops.
             </p>
@@ -87,11 +87,11 @@ export default function EmploymentPage() {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {/* Resume Writing */}
-            <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition hover:-translate-y-1">
-              <div className="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center mb-6">
-                <FaFileAlt className="text-3xl text-blue-600"/>
+            <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition hover:-translate-y-1 border border-cyan-100">
+              <div className="w-16 h-16 bg-cyan-100 rounded-2xl flex items-center justify-center mb-6">
+                <FaFileAlt className="text-3xl text-cyan-600"/>
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-3">Resume Building</h3>
+              <h3 className="card-title-cyan text-xl mb-3">Resume Building</h3>
               <p className="text-gray-600">
                 One-on-one assistance crafting professional resumes that highlight transferable skills and 
                 experiences. We help clients present their backgrounds effectively to American employers.
@@ -99,11 +99,11 @@ export default function EmploymentPage() {
             </div>
 
             {/* Interview Preparation */}
-            <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition hover:-translate-y-1">
-              <div className="w-16 h-16 bg-green-100 rounded-2xl flex items-center justify-center mb-6">
-                <FaUsers className="text-3xl text-green-600"/>
+            <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition hover:-translate-y-1 border border-cyan-100">
+              <div className="w-16 h-16 bg-cyan-100 rounded-2xl flex items-center justify-center mb-6">
+                <FaUsers className="text-3xl text-cyan-600"/>
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-3">Interview Coaching</h3>
+              <h3 className="card-title-cyan text-xl mb-3">Interview Coaching</h3>
               <p className="text-gray-600">
                 Mock interviews and coaching sessions to build confidence, practice common questions, and 
                 understand American workplace culture and professional etiquette.
@@ -111,11 +111,11 @@ export default function EmploymentPage() {
             </div>
 
             {/* Digital Skills */}
-            <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition hover:-translate-y-1">
-              <div className="w-16 h-16 bg-brand-primary/20 rounded-2xl flex items-center justify-center mb-6">
-                <FaLaptop className="text-3xl text-brand-primary"/>
+            <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition hover:-translate-y-1 border border-cyan-100">
+              <div className="w-16 h-16 bg-cyan-100 rounded-2xl flex items-center justify-center mb-6">
+                <FaLaptop className="text-3xl text-cyan-600"/>
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-3">Digital Job Search</h3>
+              <h3 className="card-title-cyan text-xl mb-3">Digital Job Search</h3>
               <p className="text-gray-600">
                 Training on online job boards, professional networking platforms like LinkedIn, email 
                 communication, and digital application processes essential for modern job hunting.
@@ -123,11 +123,11 @@ export default function EmploymentPage() {
             </div>
 
             {/* Career Guidance */}
-            <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition hover:-translate-y-1">
-              <div className="w-16 h-16 bg-purple-100 rounded-2xl flex items-center justify-center mb-6">
-                <FaChartLine className="text-3xl text-purple-600"/>
+            <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition hover:-translate-y-1 border border-cyan-100">
+              <div className="w-16 h-16 bg-cyan-100 rounded-2xl flex items-center justify-center mb-6">
+                <FaChartLine className="text-3xl text-cyan-600"/>
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-3">Career Guidance</h3>
+              <h3 className="card-title-cyan text-xl mb-3">Career Guidance</h3>
               <p className="text-gray-600">
                 Personalized career counseling to identify strengths, explore career paths, understand 
                 credential requirements, and develop long-term professional goals.
@@ -142,12 +142,13 @@ export default function EmploymentPage() {
         className="relative py-20 bg-cover bg-center"
         style={{ backgroundImage: "url('/images/history/history-07-youth-circle.jpg')" }}
       >
-        <div className="absolute inset-0 bg-brand-primary/90" />
+        <div className="absolute inset-0 bg-cyan-600/85" />
         <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12">
           <div className="text-center mb-16">
-            <span className="text-white/80 font-bold text-sm uppercase tracking-wide">Partnerships</span>
-            <h2 className="text-4xl font-black text-white mt-2">Employer Connections</h2>
-            <p className="text-white/80 mt-4 max-w-2xl mx-auto">
+            <span className="kicker text-white/90 mb-4 block">Partnerships</span>
+            <h2 className="heading-editorial text-4xl md:text-5xl text-white">Employer <span className="italic font-serif">Connections</span></h2>
+            <div className="hr-white mx-auto my-6"></div>
+            <p className="body-editorial text-white/90 max-w-2xl mx-auto">
               We partner with local employers who are committed to diversifying their workforce and recognizing 
               the value that refugees and immigrants bring to their organizations.
             </p>
@@ -155,11 +156,11 @@ export default function EmploymentPage() {
 
           <div className="grid md:grid-cols-3 gap-8">
             {/* Job Matching */}
-            <div className="bg-white/95 backdrop-blur rounded-2xl p-8 shadow-xl">
-              <div className="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center mb-6">
-                <FaHandshake className="text-3xl text-blue-600"/>
+            <div className="bg-white/95 backdrop-blur rounded-2xl p-8 shadow-xl border border-cyan-100">
+              <div className="w-16 h-16 bg-cyan-100 rounded-2xl flex items-center justify-center mb-6">
+                <FaHandshake className="text-3xl text-cyan-600"/>
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-3">Job Matching</h3>
+              <h3 className="card-title-cyan text-xl mb-3">Job Matching</h3>
               <p className="text-gray-600">
                 Connecting clients with job opportunities that match their skills, experience, and career goals. 
                 We maintain relationships with employers across various industries including healthcare, 
@@ -168,11 +169,11 @@ export default function EmploymentPage() {
             </div>
 
             {/* Application Support */}
-            <div className="bg-white/95 backdrop-blur rounded-2xl p-8 shadow-xl">
-              <div className="w-16 h-16 bg-green-100 rounded-2xl flex items-center justify-center mb-6">
-                <FaBuilding className="text-3xl text-green-600"/>
+            <div className="bg-white/95 backdrop-blur rounded-2xl p-8 shadow-xl border border-cyan-100">
+              <div className="w-16 h-16 bg-cyan-100 rounded-2xl flex items-center justify-center mb-6">
+                <FaBuilding className="text-3xl text-cyan-600"/>
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-3">Application Assistance</h3>
+              <h3 className="card-title-cyan text-xl mb-3">Application Assistance</h3>
               <p className="text-gray-600">
                 Hands-on help completing job applications, writing cover letters, and preparing supporting 
                 documents. We ensure applications are professional, complete, and submitted on time.
@@ -180,11 +181,11 @@ export default function EmploymentPage() {
             </div>
 
             {/* Mentorship */}
-            <div className="bg-white/95 backdrop-blur rounded-2xl p-8 shadow-xl">
-              <div className="w-16 h-16 bg-purple-100 rounded-2xl flex items-center justify-center mb-6">
-                <FaGraduationCap className="text-3xl text-purple-600"/>
+            <div className="bg-white/95 backdrop-blur rounded-2xl p-8 shadow-xl border border-cyan-100">
+              <div className="w-16 h-16 bg-cyan-100 rounded-2xl flex items-center justify-center mb-6">
+                <FaGraduationCap className="text-3xl text-cyan-600"/>
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-3">Professional Mentorship</h3>
+              <h3 className="card-title-cyan text-xl mb-3">Professional Mentorship</h3>
               <p className="text-gray-600">
                 Pairing clients with professional mentors who provide guidance, industry insights, networking 
                 opportunities, and ongoing support as they navigate their careers in a new country.
@@ -199,18 +200,19 @@ export default function EmploymentPage() {
         className="relative py-20 bg-cover bg-center"
         style={{ backgroundImage: "url('/images/history/history-10-future-mural.jpg')" }}
       >
-        <div className="absolute inset-0 bg-white/90" />
+        <div className="absolute inset-0 bg-white/85" />
         <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
-              <span className="text-brand-primary font-bold text-sm uppercase tracking-wide">Business Development</span>
-              <h2 className="text-4xl font-black text-gray-900 mt-2 mb-6">Small Business & Entrepreneurship</h2>
-              <p className="text-gray-600 mb-6 leading-relaxed">
+              <span className="kicker-cyan mb-4 block">Business Development</span>
+              <h2 className="heading-editorial text-4xl md:text-5xl text-gray-900 mb-6">Small Business & <span className="heading-accent-cyan">Entrepreneurship</span></h2>
+              <div className="hr-cyan my-6"></div>
+              <p className="body-editorial mb-6">
                 For those with entrepreneurial dreams, we offer guidance on starting and growing small businesses. 
                 Many refugees and immigrants have valuable skills, trades, and business experience that can be 
                 transformed into successful enterprises.
               </p>
-              <p className="text-gray-600 mb-8">
+              <p className="body-editorial mb-8">
                 Our entrepreneurship support includes business plan development, understanding licensing requirements, 
                 accessing microfinance opportunities, marketing strategies, and connecting with local business 
                 development resources.
@@ -218,8 +220,8 @@ export default function EmploymentPage() {
 
               <div className="space-y-4">
                 <div className="flex items-start gap-4">
-                  <div className="w-10 h-10 bg-brand-primary/20 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <FaLightbulb className="text-brand-primary"/>
+                  <div className="w-10 h-10 bg-cyan-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <FaLightbulb className="text-cyan-600"/>
                   </div>
                   <div>
                     <h4 className="font-bold text-gray-900">Business Planning</h4>
@@ -227,8 +229,8 @@ export default function EmploymentPage() {
                   </div>
                 </div>
                 <div className="flex items-start gap-4">
-                  <div className="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <FaHandshake className="text-green-600"/>
+                  <div className="w-10 h-10 bg-cyan-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <FaHandshake className="text-cyan-600"/>
                   </div>
                   <div>
                     <h4 className="font-bold text-gray-900">Resource Connections</h4>
@@ -236,8 +238,8 @@ export default function EmploymentPage() {
                   </div>
                 </div>
                 <div className="flex items-start gap-4">
-                  <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <FaChartLine className="text-blue-600"/>
+                  <div className="w-10 h-10 bg-cyan-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <FaChartLine className="text-cyan-600"/>
                   </div>
                   <div>
                     <h4 className="font-bold text-gray-900">Growth Support</h4>
@@ -249,7 +251,7 @@ export default function EmploymentPage() {
 
             <div className="relative h-96 lg:h-[500px] rounded-3xl overflow-hidden shadow-2xl">
               <Image src="/images/programs/esl_founder.png" alt="Entrepreneurship Support" fill className="object-cover" />
-              <div className="absolute inset-0 bg-gradient-to-br from-brand-primary/20 to-yellow-400/20" />
+              <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/20 to-blue-400/20" />
             </div>
           </div>
         </div>
@@ -263,28 +265,30 @@ export default function EmploymentPage() {
         <div className="absolute inset-0 bg-slate-950/80" />
         <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-black text-white mb-4">Our Impact</h2>
-            <p className="text-white/80 max-w-2xl mx-auto">
+            <span className="kicker text-cyan-300 mb-4 block">Impact</span>
+            <h2 className="heading-editorial text-4xl text-white">Our <span className="italic font-serif text-cyan-300">Impact</span></h2>
+            <div className="hr-cyan mx-auto my-6"></div>
+            <p className="body-editorial text-white/80 max-w-2xl mx-auto">
               Supporting economic independence and career success for refugee and immigrant families
             </p>
           </div>
 
           <div className="grid md:grid-cols-4 gap-8 text-center">
             <div className="p-6">
-              <span className="text-5xl font-black text-brand-primary block mb-2">350+</span>
-              <span className="text-white/80">Job Placements</span>
+              <span className="stat-cyan text-5xl block mb-2">350+</span>
+              <span className="text-white/80 body-editorial">Job Placements</span>
             </div>
             <div className="p-6">
-              <span className="text-5xl font-black text-brand-primary block mb-2">50+</span>
-              <span className="text-white/80">Employer Partners</span>
+              <span className="stat-cyan text-5xl block mb-2">50+</span>
+              <span className="text-white/80 body-editorial">Employer Partners</span>
             </div>
             <div className="p-6">
-              <span className="text-5xl font-black text-brand-primary block mb-2">25+</span>
-              <span className="text-white/80">Businesses Launched</span>
+              <span className="stat-cyan text-5xl block mb-2">25+</span>
+              <span className="text-white/80 body-editorial">Businesses Launched</span>
             </div>
             <div className="p-6">
-              <span className="text-5xl font-black text-brand-primary block mb-2">85%</span>
-              <span className="text-white/80">Job Retention Rate</span>
+              <span className="stat-cyan text-5xl block mb-2">85%</span>
+              <span className="text-white/80 body-editorial">Job Retention Rate</span>
             </div>
           </div>
         </div>
@@ -295,10 +299,10 @@ export default function EmploymentPage() {
         className="relative py-16 bg-cover bg-center overflow-hidden"
         style={{ backgroundImage: "url('/images/history/history-06-world-refugee-day.jpg')" }}
       >
-        <div className="absolute inset-0 bg-white/90" />
+        <div className="absolute inset-0 bg-white/85" />
         <div className="relative z-10">
           <div className="text-center mb-8">
-            <h2 className="text-2xl font-bold text-gray-900">Employment Success in Action</h2>
+            <h2 className="heading-editorial text-2xl text-gray-900">Employment Success in <span className="heading-accent-cyan">Action</span></h2>
           </div>
           <div className="relative">
             <div className="flex gap-6 animate-scroll-right">
@@ -344,42 +348,46 @@ export default function EmploymentPage() {
         className="relative py-20 bg-cover bg-center"
         style={{ backgroundImage: "url('/images/history/history-01-hero.jpeg')" }}
       >
-        <div className="absolute inset-0 bg-white/90" />
+        <div className="absolute inset-0 bg-white/85" />
         <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12">
-          <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">Other Programs</h2>
+          <div className="text-center mb-12">
+            <span className="kicker-cyan mb-4 block">Explore</span>
+            <h2 className="heading-editorial text-3xl md:text-4xl text-gray-900">Other <span className="heading-accent-cyan">Programs</span></h2>
+            <div className="hr-cyan mx-auto my-6"></div>
+          </div>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-5xl mx-auto">
             <Link href="/programs/esl" className="group">
-              <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition hover:-translate-y-1">
-                <h3 className="text-2xl font-bold text-gray-900 mb-3 group-hover:text-brand-primary transition">ESL Education</h3>
+              <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition hover:-translate-y-1 border border-cyan-100">
+                <h3 className="card-title-cyan text-2xl mb-3">ESL Education</h3>
                 <p className="text-gray-600 mb-4">
                   English language classes and skill development programs to empower communication and independence.
                 </p>
-                <span className="text-blue-600 hover:text-blue-800 font-semibold flex items-center gap-2 transition-colors">
+                <span className="text-cyan-600 hover:text-cyan-800 font-semibold flex items-center gap-2 transition-colors">
                   Learn More <FaArrowRight />
                 </span>
               </div>
             </Link>
 
             <Link href="/programs/basic-needs" className="group">
-              <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition hover:-translate-y-1">
-                <h3 className="text-2xl font-bold text-gray-900 mb-3 group-hover:text-brand-primary transition">Basic Needs</h3>
+              <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition hover:-translate-y-1 border border-cyan-100">
+                <h3 className="card-title-cyan text-2xl mb-3">Basic Needs</h3>
                 <p className="text-gray-600 mb-4">
                   Food assistance, housing support, and transportation services for stable living conditions.
                 </p>
-                <span className="text-blue-600 hover:text-blue-800 font-semibold flex items-center gap-2 transition-colors">
+                <span className="text-cyan-600 hover:text-cyan-800 font-semibold flex items-center gap-2 transition-colors">
                   Learn More <FaArrowRight />
                 </span>
               </div>
             </Link>
 
             <Link href="/programs/health" className="group">
-              <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition hover:-translate-y-1">
-                <h3 className="text-2xl font-bold text-gray-900 mb-3 group-hover:text-brand-primary transition">Health Services</h3>
+              <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition hover:-translate-y-1 border border-cyan-100">
+                <h3 className="card-title-cyan text-2xl mb-3">Health Services</h3>
                 <p className="text-gray-600 mb-4">
                   Medical referrals, wellness programs, and counseling support for holistic wellbeing.
                 </p>
-                <span className="text-blue-600 hover:text-blue-800 font-semibold flex items-center gap-2 transition-colors">
+                <span className="text-cyan-600 hover:text-cyan-800 font-semibold flex items-center gap-2 transition-colors">
                   Learn More <FaArrowRight />
                 </span>
               </div>
