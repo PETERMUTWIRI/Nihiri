@@ -178,7 +178,7 @@ ${formData.additionalNotes || 'None provided'}`;
   };
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white text-render-premium">
       {/* Toast */}
       <AnimatePresence>
         {showToast && (
@@ -194,16 +194,16 @@ ${formData.additionalNotes || 'None provided'}`;
         )}
       </AnimatePresence>
 
-      {/* HERO - Clean, Professional */}
-      <section className="bg-brand-background pt-32 pb-16">
-        <div className="max-w-4xl mx-auto px-6 md:px-12 text-center">
-          <span className="inline-block bg-brand-primary/20 text-brand-text px-4 py-2 rounded-full text-sm font-semibold mb-6">
-            Health Services
-          </span>
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-gray-900 mb-6">
-            Health Referral Form
+      {/* HERO - with Background Image */}
+      <section className="relative bg-cover bg-center pt-32 pb-20" style={{backgroundImage: `url('/images/programs/health2.webp')`}}>
+        <div className="absolute inset-0 bg-white/85"></div>
+        <div className="relative z-10 max-w-4xl mx-auto px-6 md:px-12 text-center">
+          <span className="kicker-cyan mb-6 block">Health Services</span>
+          <h1 className="heading-editorial text-5xl md:text-6xl text-gray-900 mb-6 leading-tight">
+            Health <span className="heading-accent-cyan">Referral Form</span>
           </h1>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+          <div className="hr-cyan mx-auto my-6"></div>
+          <p className="hero-subtitle text-gray-600 max-w-2xl mx-auto">
             Please use this form to refer clients within your organization to our health classes 
             and child wellness programs. Our team responds based on urgency level.
           </p>
@@ -215,22 +215,22 @@ ${formData.additionalNotes || 'None provided'}`;
         <div className="max-w-6xl mx-auto px-6 md:px-12">
           <div className="grid md:grid-cols-2 gap-6">
             {/* Eligibility */}
-            <div className="bg-gray-50 rounded-xl p-6 border border-gray-200">
+            <div className="bg-cyan-50 rounded-xl p-6 border border-cyan-200">
               <h2 className="font-bold text-gray-900 mb-4">Eligibility Requirements</h2>
               <p className="text-gray-600 text-sm mb-4">
                 Before submitting, please ensure your client meets our requirements:
               </p>
               <ul className="space-y-2 text-sm text-gray-700">
                 <li className="flex items-start gap-2">
-                  <span className="text-brand-primary mt-1">•</span>
+                  <span className="text-cyan-600 font-bold mt-1">•</span>
                   <span>Female of refugee/immigrant status</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-brand-primary mt-1">•</span>
+                  <span className="text-cyan-600 font-bold mt-1">•</span>
                   <span>Reside in New Haven County or Connecticut</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-brand-primary mt-1">•</span>
+                  <span className="text-cyan-600 font-bold mt-1">•</span>
                   <span>Predominantly speak Arabic, Pashto, Dari, or Farsi</span>
                 </li>
               </ul>
@@ -251,15 +251,16 @@ ${formData.additionalNotes || 'None provided'}`;
       </section>
 
       {/* FORM SECTION */}
-      <section className="py-16 bg-brand-background">
-        <div className="max-w-4xl mx-auto px-6 md:px-12">
+      <section className="relative py-20 bg-cover bg-center" style={{backgroundImage: `url('/images/programs/health3.webp')`}}>
+        <div className="absolute inset-0 bg-white/85"></div>
+        <div className="relative z-10 max-w-4xl mx-auto px-6 md:px-12">
           {/* Progress */}
           <div className="mb-10">
             <div className="flex justify-between mb-4">
               {['Referee', 'Patient', 'Health Info', 'Review'].map((label, idx) => (
                 <div key={label} className="flex flex-col items-center flex-1">
                   <div className={`w-10 h-10 rounded-full flex items-center justify-center mb-2 font-bold text-sm ${
-                    idx + 1 <= currentStep ? 'bg-brand-primary text-brand-text' : 'bg-gray-200 text-gray-500'
+                    idx + 1 <= currentStep ? 'bg-cyan-600 text-white' : 'bg-gray-200 text-gray-500'
                   }`}>
                     {idx + 1 < currentStep ? '✓' : idx + 1}
                   </div>
@@ -268,50 +269,50 @@ ${formData.additionalNotes || 'None provided'}`;
               ))}
             </div>
             <div className="h-2 bg-gray-200 rounded-full">
-              <div className="h-full bg-brand-primary rounded-full transition-all duration-300" style={{ width: `${(currentStep / 4) * 100}%` }} />
+              <div className="h-full bg-cyan-600 rounded-full transition-all duration-300" style={{ width: `${(currentStep / 4) * 100}%` }} />
             </div>
           </div>
 
-          <form onSubmit={handleSubmit} className="bg-white rounded-2xl p-8 md:p-10 shadow-xl">
+          <form onSubmit={handleSubmit} className="bg-white rounded-2xl p-8 md:p-10 shadow-xl border border-cyan-100">
             {/* STEP 1 - REFEREE INFO */}
             {currentStep === 1 && (
               <div className="space-y-8">
                 <div>
-                  <h2 className="text-xl font-bold text-gray-900 mb-6 pb-2 border-b border-gray-200">Organization of Origin</h2>
+                  <h2 className="text-xl font-bold text-gray-900 mb-6 pb-2 border-b border-cyan-200">Organization of Origin</h2>
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">Organization Name <span className="text-red-500">*</span></label>
-                    <input type="text" name="organization" value={formData.organization} onChange={handleChange} className={`w-full px-4 py-3 rounded-lg border ${errors.organization ? 'border-red-500' : 'border-gray-200'} focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/20 bg-white`} />
+                    <input type="text" name="organization" value={formData.organization} onChange={handleChange} className={`w-full px-4 py-3 rounded-lg border ${errors.organization ? 'border-red-500' : 'border-gray-200'} focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 bg-white`} />
                     {errors.organization && <p className="mt-1 text-sm text-red-500">{errors.organization}</p>}
                   </div>
                 </div>
 
                 <div>
-                  <h2 className="text-xl font-bold text-gray-900 mb-6 pb-2 border-b border-gray-200">Referee Information</h2>
+                  <h2 className="text-xl font-bold text-gray-900 mb-6 pb-2 border-b border-cyan-200">Referee Information</h2>
                   <div className="grid md:grid-cols-2 gap-6">
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-2">First Name <span className="text-red-500">*</span></label>
-                      <input type="text" name="refereeFirstName" value={formData.refereeFirstName} onChange={handleChange} className={`w-full px-4 py-3 rounded-lg border ${errors.refereeFirstName ? 'border-red-500' : 'border-gray-200'} focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/20 bg-white`} />
+                      <input type="text" name="refereeFirstName" value={formData.refereeFirstName} onChange={handleChange} className={`w-full px-4 py-3 rounded-lg border ${errors.refereeFirstName ? 'border-red-500' : 'border-gray-200'} focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 bg-white`} />
                       {errors.refereeFirstName && <p className="mt-1 text-sm text-red-500">{errors.refereeFirstName}</p>}
                     </div>
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-2">Last Name <span className="text-red-500">*</span></label>
-                      <input type="text" name="refereeLastName" value={formData.refereeLastName} onChange={handleChange} className={`w-full px-4 py-3 rounded-lg border ${errors.refereeLastName ? 'border-red-500' : 'border-gray-200'} focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/20 bg-white`} />
+                      <input type="text" name="refereeLastName" value={formData.refereeLastName} onChange={handleChange} className={`w-full px-4 py-3 rounded-lg border ${errors.refereeLastName ? 'border-red-500' : 'border-gray-200'} focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 bg-white`} />
                       {errors.refereeLastName && <p className="mt-1 text-sm text-red-500">{errors.refereeLastName}</p>}
                     </div>
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-2">Email</label>
-                      <input type="email" name="refereeEmail" value={formData.refereeEmail} onChange={handleChange} className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/20 bg-white" />
+                      <input type="email" name="refereeEmail" value={formData.refereeEmail} onChange={handleChange} className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 bg-white" />
                     </div>
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-2">Phone <span className="text-red-500">*</span></label>
-                      <input type="tel" name="refereePhone" value={formData.refereePhone} onChange={handleChange} className={`w-full px-4 py-3 rounded-lg border ${errors.refereePhone ? 'border-red-500' : 'border-gray-200'} focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/20 bg-white`} />
+                      <input type="tel" name="refereePhone" value={formData.refereePhone} onChange={handleChange} className={`w-full px-4 py-3 rounded-lg border ${errors.refereePhone ? 'border-red-500' : 'border-gray-200'} focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 bg-white`} />
                       {errors.refereePhone && <p className="mt-1 text-sm text-red-500">{errors.refereePhone}</p>}
                     </div>
                   </div>
                 </div>
 
                 <div className="flex justify-end">
-                  <button type="button" onClick={handleNext} className="px-8 py-4 bg-brand-primary hover:bg-brand-dark text-brand-text font-semibold rounded-lg transition shadow-lg">Continue</button>
+                  <button type="button" onClick={handleNext} className="px-8 py-4 bg-cyan-600 hover:bg-cyan-700 text-white font-semibold rounded-lg transition shadow-lg shadow-cyan-600/25 btn-text">Continue</button>
                 </div>
               </div>
             )}
@@ -320,43 +321,43 @@ ${formData.additionalNotes || 'None provided'}`;
             {currentStep === 2 && (
               <div className="space-y-8">
                 <div>
-                  <h2 className="text-xl font-bold text-gray-900 mb-6 pb-2 border-b border-gray-200">Patient Contact Information</h2>
+                  <h2 className="text-xl font-bold text-gray-900 mb-6 pb-2 border-b border-cyan-200">Patient Contact Information</h2>
                   <div className="space-y-6">
                     <div className="grid md:grid-cols-2 gap-6">
                       <div>
                         <label className="block text-sm font-medium text-gray-700 mb-2">First Name <span className="text-red-500">*</span></label>
-                        <input type="text" name="patientFirstName" value={formData.patientFirstName} onChange={handleChange} className={`w-full px-4 py-3 rounded-lg border ${errors.patientFirstName ? 'border-red-500' : 'border-gray-200'} focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/20 bg-white`} />
+                        <input type="text" name="patientFirstName" value={formData.patientFirstName} onChange={handleChange} className={`w-full px-4 py-3 rounded-lg border ${errors.patientFirstName ? 'border-red-500' : 'border-gray-200'} focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 bg-white`} />
                         {errors.patientFirstName && <p className="mt-1 text-sm text-red-500">{errors.patientFirstName}</p>}
                       </div>
                       <div>
                         <label className="block text-sm font-medium text-gray-700 mb-2">Last Name <span className="text-red-500">*</span></label>
-                        <input type="text" name="patientLastName" value={formData.patientLastName} onChange={handleChange} className={`w-full px-4 py-3 rounded-lg border ${errors.patientLastName ? 'border-red-500' : 'border-gray-200'} focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/20 bg-white`} />
+                        <input type="text" name="patientLastName" value={formData.patientLastName} onChange={handleChange} className={`w-full px-4 py-3 rounded-lg border ${errors.patientLastName ? 'border-red-500' : 'border-gray-200'} focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 bg-white`} />
                         {errors.patientLastName && <p className="mt-1 text-sm text-red-500">{errors.patientLastName}</p>}
                       </div>
                     </div>
 
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-2">Address <span className="text-red-500">*</span></label>
-                      <input type="text" name="addressLine1" value={formData.addressLine1} onChange={handleChange} className={`w-full px-4 py-3 rounded-lg border ${errors.addressLine1 ? 'border-red-500' : 'border-gray-200'} focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/20 bg-white mb-3`} placeholder="Street address" />
-                      <input type="text" name="addressLine2" value={formData.addressLine2} onChange={handleChange} className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/20 bg-white" placeholder="Apartment, suite, etc. (optional)" />
+                      <input type="text" name="addressLine1" value={formData.addressLine1} onChange={handleChange} className={`w-full px-4 py-3 rounded-lg border ${errors.addressLine1 ? 'border-red-500' : 'border-gray-200'} focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 bg-white mb-3`} placeholder="Street address" />
+                      <input type="text" name="addressLine2" value={formData.addressLine2} onChange={handleChange} className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 bg-white" placeholder="Apartment, suite, etc. (optional)" />
                       {errors.addressLine1 && <p className="mt-1 text-sm text-red-500">{errors.addressLine1}</p>}
                     </div>
 
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                       <div className="col-span-2">
                         <label className="block text-sm font-medium text-gray-700 mb-2">City <span className="text-red-500">*</span></label>
-                        <input type="text" name="city" value={formData.city} onChange={handleChange} className={`w-full px-4 py-3 rounded-lg border ${errors.city ? 'border-red-500' : 'border-gray-200'} focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/20 bg-white`} />
+                        <input type="text" name="city" value={formData.city} onChange={handleChange} className={`w-full px-4 py-3 rounded-lg border ${errors.city ? 'border-red-500' : 'border-gray-200'} focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 bg-white`} />
                         {errors.city && <p className="mt-1 text-sm text-red-500">{errors.city}</p>}
                       </div>
                       <div>
                         <label className="block text-sm font-medium text-gray-700 mb-2">State</label>
-                        <select name="state" value={formData.state} onChange={handleChange} className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/20 bg-white">
+                        <select name="state" value={formData.state} onChange={handleChange} className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 bg-white">
                           {states.map(s => <option key={s} value={s}>{s}</option>)}
                         </select>
                       </div>
                       <div>
                         <label className="block text-sm font-medium text-gray-700 mb-2">ZIP <span className="text-red-500">*</span></label>
-                        <input type="text" name="zip" value={formData.zip} onChange={handleChange} className={`w-full px-4 py-3 rounded-lg border ${errors.zip ? 'border-red-500' : 'border-gray-200'} focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/20 bg-white`} />
+                        <input type="text" name="zip" value={formData.zip} onChange={handleChange} className={`w-full px-4 py-3 rounded-lg border ${errors.zip ? 'border-red-500' : 'border-gray-200'} focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 bg-white`} />
                         {errors.zip && <p className="mt-1 text-sm text-red-500">{errors.zip}</p>}
                       </div>
                     </div>
@@ -364,11 +365,11 @@ ${formData.additionalNotes || 'None provided'}`;
                     <div className="grid md:grid-cols-2 gap-6">
                       <div>
                         <label className="block text-sm font-medium text-gray-700 mb-2">Email</label>
-                        <input type="email" name="patientEmail" value={formData.patientEmail} onChange={handleChange} className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/20 bg-white" />
+                        <input type="email" name="patientEmail" value={formData.patientEmail} onChange={handleChange} className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 bg-white" />
                       </div>
                       <div>
                         <label className="block text-sm font-medium text-gray-700 mb-2">Phone <span className="text-red-500">*</span></label>
-                        <input type="tel" name="patientPhone" value={formData.patientPhone} onChange={handleChange} className={`w-full px-4 py-3 rounded-lg border ${errors.patientPhone ? 'border-red-500' : 'border-gray-200'} focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/20 bg-white`} />
+                        <input type="tel" name="patientPhone" value={formData.patientPhone} onChange={handleChange} className={`w-full px-4 py-3 rounded-lg border ${errors.patientPhone ? 'border-red-500' : 'border-gray-200'} focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 bg-white`} />
                         {errors.patientPhone && <p className="mt-1 text-sm text-red-500">{errors.patientPhone}</p>}
                       </div>
                     </div>
@@ -376,11 +377,11 @@ ${formData.additionalNotes || 'None provided'}`;
                     <div className="grid md:grid-cols-2 gap-6">
                       <div>
                         <label className="block text-sm font-medium text-gray-700 mb-2">Age</label>
-                        <input type="number" name="patientAge" value={formData.patientAge} onChange={handleChange} className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/20 bg-white" />
+                        <input type="number" name="patientAge" value={formData.patientAge} onChange={handleChange} className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 bg-white" />
                       </div>
                       <div>
                         <label className="block text-sm font-medium text-gray-700 mb-2">Preferred Language</label>
-                        <select name="preferredLanguage" value={formData.preferredLanguage} onChange={handleChange} className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/20 bg-white">
+                        <select name="preferredLanguage" value={formData.preferredLanguage} onChange={handleChange} className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 bg-white">
                           <option value="">Select language</option>
                           {languages.map(lang => <option key={lang} value={lang}>{lang}</option>)}
                         </select>
@@ -392,7 +393,7 @@ ${formData.additionalNotes || 'None provided'}`;
                       <div className="flex gap-6">
                         {['Male', 'Female', 'Other'].map((option) => (
                           <label key={option} className="flex items-center gap-2 cursor-pointer">
-                            <input type="radio" name="patientGender" value={option} checked={formData.patientGender === option} onChange={handleChange} className="w-4 h-4 text-brand-primary" />
+                            <input type="radio" name="patientGender" value={option} checked={formData.patientGender === option} onChange={handleChange} className="w-4 h-4 text-cyan-600" />
                             <span className="text-gray-700">{option}</span>
                           </label>
                         ))}
@@ -404,7 +405,7 @@ ${formData.additionalNotes || 'None provided'}`;
 
                 <div className="flex justify-between">
                   <button type="button" onClick={handleBack} className="px-8 py-4 border-2 border-gray-200 text-gray-700 font-semibold rounded-lg hover:bg-gray-50 transition">Back</button>
-                  <button type="button" onClick={handleNext} className="px-8 py-4 bg-brand-primary hover:bg-brand-dark text-brand-text font-semibold rounded-lg transition shadow-lg">Continue</button>
+                  <button type="button" onClick={handleNext} className="px-8 py-4 bg-cyan-600 hover:bg-cyan-700 text-white font-semibold rounded-lg transition shadow-lg shadow-cyan-600/25 btn-text">Continue</button>
                 </div>
               </div>
             )}
@@ -414,7 +415,7 @@ ${formData.additionalNotes || 'None provided'}`;
               <div className="space-y-8">
                 <div className={`p-6 rounded-xl border-2 ${getUrgencyColor(formData.urgencyLevel)}`}>
                   <h2 className="font-bold text-gray-900 mb-4">Urgency Level <span className="text-red-500">*</span></h2>
-                  <select name="urgencyLevel" value={formData.urgencyLevel} onChange={handleChange} className={`w-full px-4 py-3 rounded-lg border ${errors.urgencyLevel ? 'border-red-500' : 'border-gray-300'} focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/20 bg-white`}>
+                  <select name="urgencyLevel" value={formData.urgencyLevel} onChange={handleChange} className={`w-full px-4 py-3 rounded-lg border ${errors.urgencyLevel ? 'border-red-500' : 'border-gray-300'} focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 bg-white`}>
                     {urgencyLevels.map((level) => (
                       <option key={level.value} value={level.value}>{level.label}</option>
                     ))}
@@ -430,21 +431,21 @@ ${formData.additionalNotes || 'None provided'}`;
                 </div>
 
                 <div>
-                  <h2 className="text-xl font-bold text-gray-900 mb-6 pb-2 border-b border-gray-200">Health Information</h2>
+                  <h2 className="text-xl font-bold text-gray-900 mb-6 pb-2 border-b border-cyan-200">Health Information</h2>
                   <div className="space-y-6">
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-2">Health Issue / Concern <span className="text-red-500">*</span></label>
-                      <textarea name="healthIssue" value={formData.healthIssue} onChange={handleChange} rows={5} className={`w-full px-4 py-3 rounded-lg border ${errors.healthIssue ? 'border-red-500' : 'border-gray-200'} focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/20 bg-white resize-none`} placeholder="Describe the health concern, symptoms, and any relevant medical history..." />
+                      <textarea name="healthIssue" value={formData.healthIssue} onChange={handleChange} rows={5} className={`w-full px-4 py-3 rounded-lg border ${errors.healthIssue ? 'border-red-500' : 'border-gray-200'} focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 bg-white resize-none`} placeholder="Describe the health concern, symptoms, and any relevant medical history..." />
                       {errors.healthIssue && <p className="mt-1 text-sm text-red-500">{errors.healthIssue}</p>}
                     </div>
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-2">Additional Notes</label>
-                      <textarea name="additionalNotes" value={formData.additionalNotes} onChange={handleChange} rows={3} className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/20 bg-white resize-none" placeholder="Insurance status, transportation needs, etc." />
+                      <textarea name="additionalNotes" value={formData.additionalNotes} onChange={handleChange} rows={3} className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 bg-white resize-none" placeholder="Insurance status, transportation needs, etc." />
                     </div>
                   </div>
                 </div>
 
-                <div className="bg-brand-primary/10 rounded-xl p-6 border border-brand-primary/20">
+                <div className="bg-cyan-50 rounded-xl p-6 border border-cyan-200">
                   <h3 className="font-bold text-gray-900 mb-3">What happens next?</h3>
                   <ul className="space-y-2 text-gray-700">
                     <li>• We will review the referral within hours based on urgency</li>
@@ -456,7 +457,7 @@ ${formData.additionalNotes || 'None provided'}`;
 
                 <div className="flex justify-between">
                   <button type="button" onClick={handleBack} className="px-8 py-4 border-2 border-gray-200 text-gray-700 font-semibold rounded-lg hover:bg-gray-50 transition">Back</button>
-                  <button type="button" onClick={handleNext} className="px-8 py-4 bg-brand-primary hover:bg-brand-dark text-brand-text font-semibold rounded-lg transition shadow-lg">Review Application</button>
+                  <button type="button" onClick={handleNext} className="px-8 py-4 bg-cyan-600 hover:bg-cyan-700 text-white font-semibold rounded-lg transition shadow-lg shadow-cyan-600/25 btn-text">Review Application</button>
                 </div>
               </div>
             )}
@@ -464,9 +465,9 @@ ${formData.additionalNotes || 'None provided'}`;
             {/* STEP 4 - REVIEW */}
             {currentStep === 4 && (
               <div className="space-y-8">
-                <h2 className="text-xl font-bold text-gray-900 mb-6 pb-2 border-b border-gray-200">Review Your Referral</h2>
+                <h2 className="text-xl font-bold text-gray-900 mb-6 pb-2 border-b border-cyan-200">Review Your Referral</h2>
                 
-                <div className="space-y-6 bg-gray-50 rounded-xl p-6">
+                <div className="space-y-6 bg-cyan-50 rounded-xl p-6 border border-cyan-100">
                   <div>
                     <p className="text-sm text-gray-500 mb-1">Organization</p>
                     <p className="font-medium text-gray-900">{formData.organization}</p>
@@ -504,7 +505,7 @@ ${formData.additionalNotes || 'None provided'}`;
 
                 <div className="flex justify-between">
                   <button type="button" onClick={handleBack} className="px-8 py-4 border-2 border-gray-200 text-gray-700 font-semibold rounded-lg hover:bg-gray-50 transition">Back</button>
-                  <button type="submit" disabled={isSubmitting} className="px-8 py-4 bg-brand-primary hover:bg-brand-dark text-brand-text font-semibold rounded-lg transition shadow-lg disabled:opacity-50">
+                  <button type="submit" disabled={isSubmitting} className="px-8 py-4 bg-cyan-600 hover:bg-cyan-700 text-white font-semibold rounded-lg transition shadow-lg shadow-cyan-600/25 disabled:opacity-50 btn-text">
                     {isSubmitting ? 'Sending...' : 'Submit Referral'}
                   </button>
                 </div>
@@ -515,10 +516,15 @@ ${formData.additionalNotes || 'None provided'}`;
       </section>
 
       {/* FAQ SECTION */}
-      <section className="py-16 bg-white">
-        <div className="max-w-4xl mx-auto px-6 md:px-12">
+      <section className="relative py-20 bg-cover bg-center" style={{backgroundImage: `url('/images/programs/health4.webp')`}}>
+        <div className="absolute inset-0 bg-white/85"></div>
+        <div className="relative z-10 max-w-4xl mx-auto px-6 md:px-12">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-black text-gray-900 mb-4">Frequently Asked Questions</h2>
+            <span className="kicker-cyan mb-4 block">Help Center</span>
+            <h2 className="heading-editorial text-3xl md:text-4xl text-gray-900 mb-4">
+              Frequently Asked <span className="heading-accent-cyan">Questions</span>
+            </h2>
+            <div className="hr-cyan mx-auto my-6"></div>
           </div>
           <div className="space-y-4">
             {[
@@ -527,8 +533,8 @@ ${formData.additionalNotes || 'None provided'}`;
               { q: 'Are services free?', a: 'Yes, all our health navigation and education services are completely free.' },
               { q: 'Do you provide interpretation?', a: 'Yes, professional interpretation is provided for all health education sessions.' },
             ].map((faq, idx) => (
-              <div key={idx} className="bg-gray-50 rounded-xl p-6">
-                <h3 className="font-semibold text-gray-900 mb-2">{faq.q}</h3>
+              <div key={idx} className="bg-white rounded-xl p-6 shadow-lg border border-cyan-100">
+                <h3 className="card-title-cyan text-gray-900 mb-2">{faq.q}</h3>
                 <p className="text-gray-600">{faq.a}</p>
               </div>
             ))}

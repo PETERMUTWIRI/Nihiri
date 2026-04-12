@@ -4,23 +4,27 @@ import Link from 'next/link';
 
 export default function AccessibilityPage() {
   return (
-    <div className="min-h-screen bg-white">
-      {/* HERO */}
-      <section className="bg-brand-background pt-32 pb-16">
-        <div className="max-w-4xl mx-auto px-6 md:px-12 text-center">
-          <h1 className="text-4xl md:text-5xl font-black text-gray-900 mb-4">
+    <div className="min-h-screen bg-white text-render-premium">
+      {/* HERO - with Background Image */}
+      <section className="relative bg-cover bg-center pt-32 pb-16" style={{backgroundImage: `url('/images/history/history-01-hero.jpeg')`}}>
+        <div className="absolute inset-0 bg-white/85"></div>
+        <div className="relative z-10 max-w-4xl mx-auto px-6 md:px-12 text-center">
+          <span className="kicker-cyan mb-4 block">Inclusion</span>
+          <h1 className="heading-editorial text-gray-900 mb-4">
             Accessibility Statement
           </h1>
-          <p className="text-gray-600">
+          <div className="hr-cyan mx-auto my-6"></div>
+          <p className="body-editorial text-gray-600">
             Our commitment to digital accessibility for all
           </p>
         </div>
       </section>
 
       {/* CONTENT */}
-      <section className="py-16 bg-white">
-        <div className="max-w-4xl mx-auto px-6 md:px-12">
-          <div className="prose prose-lg max-w-none text-gray-700">
+      <section className="relative py-20 bg-cover bg-center" style={{backgroundImage: `url('/images/history/history-05-health-nav.jpg')`}}>
+        <div className="absolute inset-0 bg-white/85"></div>
+        <div className="relative z-10 max-w-4xl mx-auto px-6 md:px-12">
+          <div className="prose prose-lg max-w-none text-gray-700 bg-white/95 backdrop-blur rounded-3xl p-8 md:p-12 shadow-xl border border-cyan-100">
             
             <p className="text-xl text-gray-600 mb-8">
               New International Hope for Refugees and Immigrants is committed to ensuring digital accessibility 
@@ -107,7 +111,7 @@ export default function AccessibilityPage() {
               Below is a description of known limitations and potential solutions:
             </p>
             
-            <div className="bg-gray-50 rounded-xl p-6 mb-6">
+            <div className="bg-cyan-50 rounded-xl p-6 mb-6 border border-cyan-100">
               <h3 className="font-semibold text-gray-900 mb-2">Third-Party Content</h3>
               <p className="text-sm text-gray-700">
                 Some third-party content or embedded features may not fully meet our accessibility standards. 
@@ -115,7 +119,7 @@ export default function AccessibilityPage() {
               </p>
             </div>
 
-            <div className="bg-gray-50 rounded-xl p-6 mb-6">
+            <div className="bg-cyan-50 rounded-xl p-6 mb-6 border border-cyan-100">
               <h3 className="font-semibold text-gray-900 mb-2">Alternative Formats</h3>
               <p className="text-sm text-gray-700">
                 If you need information in an alternative format (large print, Braille, audio recording), 
@@ -129,8 +133,8 @@ export default function AccessibilityPage() {
               barriers or have suggestions for improvement, please contact us:
             </p>
             
-            <div className="bg-gray-50 rounded-xl p-6 mb-6">
-              <p className="mb-1"><strong>Email:</strong> <a href="mailto:info@nihri.com" className="text-brand-primary hover:underline">info@nihri.com</a></p>
+            <div className="bg-cyan-50 rounded-xl p-6 mb-6 border border-cyan-100">
+              <p className="mb-1"><strong>Email:</strong> <a href="mailto:info@nihri.com" className="text-cyan-600 hover:underline">info@nihri.com</a></p>
               <p className="mb-1"><strong>Phone:</strong> +(203) 675-9395</p>
               <p><strong>Address:</strong> 475 Elm St., New Haven, CT 06511</p>
             </div>
@@ -145,12 +149,12 @@ export default function AccessibilityPage() {
               If you are not satisfied with our response to your accessibility concern, you have the right 
               to file a formal complaint. Please submit your complaint in writing to:
             </p>
-            <div className="bg-gray-50 rounded-xl p-6 mb-6">
+            <div className="bg-cyan-50 rounded-xl p-6 mb-6 border border-cyan-100">
               <p className="mb-1"><strong>Accessibility Coordinator</strong></p>
               <p className="mb-1">New International Hope for Refugees and Immigrants</p>
               <p className="mb-1">475 Elm St.</p>
               <p className="mb-1">New Haven, CT 06511</p>
-              <p>Email: <a href="mailto:info@nihri.com" className="text-brand-primary hover:underline">info@nihri.com</a></p>
+              <p>Email: <a href="mailto:info@nihri.com" className="text-cyan-600 hover:underline">info@nihri.com</a></p>
             </div>
 
             <h2 className="text-2xl font-bold text-gray-900 mt-12 mb-4">Enforcement Procedure</h2>
@@ -170,10 +174,10 @@ export default function AccessibilityPage() {
               For additional information and resources on web accessibility, we recommend:
             </p>
             <ul className="list-disc pl-6 mb-6 space-y-2">
-              <li><a href="https://www.w3.org/WAI/" target="_blank" rel="noopener noreferrer" className="text-brand-primary hover:underline">W3C Web Accessibility Initiative (WAI)</a></li>
-              <li><a href="https://www.ada.gov/" target="_blank" rel="noopener noreferrer" className="text-brand-primary hover:underline">ADA.gov</a></li>
-              <li><a href="https://webaim.org/" target="_blank" rel="noopener noreferrer" className="text-brand-primary hover:underline">WebAIM</a></li>
-              <li><a href="https://www.section508.gov/" target="_blank" rel="noopener noreferrer" className="text-brand-primary hover:underline">Section508.gov</a></li>
+              <li><a href="https://www.w3.org/WAI/" target="_blank" rel="noopener noreferrer" className="text-cyan-600 hover:underline">W3C Web Accessibility Initiative (WAI)</a></li>
+              <li><a href="https://www.ada.gov/" target="_blank" rel="noopener noreferrer" className="text-cyan-600 hover:underline">ADA.gov</a></li>
+              <li><a href="https://webaim.org/" target="_blank" rel="noopener noreferrer" className="text-cyan-600 hover:underline">WebAIM</a></li>
+              <li><a href="https://www.section508.gov/" target="_blank" rel="noopener noreferrer" className="text-cyan-600 hover:underline">Section508.gov</a></li>
             </ul>
 
             <h2 className="text-2xl font-bold text-gray-900 mt-12 mb-4">Statement Updates</h2>
@@ -182,7 +186,7 @@ export default function AccessibilityPage() {
               this statement as we continue to improve the accessibility of our website.
             </p>
 
-            <div className="bg-brand-primary/10 rounded-xl p-6 mt-12 border border-brand-primary/20">
+            <div className="bg-cyan-50 rounded-xl p-6 mt-12 border border-cyan-200">
               <p className="text-gray-800 font-medium">
                 Our commitment to accessibility is ongoing. We believe that by working together, 
                 we can create a more inclusive digital environment for everyone in our community.
@@ -191,8 +195,8 @@ export default function AccessibilityPage() {
 
           </div>
 
-          <div className="mt-16 pt-8 border-t border-gray-200 text-center">
-            <Link href="/" className="inline-flex items-center gap-2 text-brand-primary font-semibold hover:underline">
+          <div className="mt-16 pt-8 border-t border-cyan-200 text-center">
+            <Link href="/" className="inline-flex items-center gap-2 text-cyan-600 font-semibold hover:underline">
               ← Back to Home
             </Link>
           </div>

@@ -2,6 +2,7 @@
 
 import { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import Image from 'next/image';
 import NewsletterCTA from '@/components/NewsletterCTA';
 
 interface FormData {
@@ -140,7 +141,7 @@ ${formData.aboutYourself}`;
   };
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white text-render-premium">
       {/* Toast */}
       <AnimatePresence>
         {showToast && (
@@ -156,19 +157,19 @@ ${formData.aboutYourself}`;
         )}
       </AnimatePresence>
 
-      {/* HERO - with Gradient Text */}
-      <section className="bg-brand-background pt-32 pb-16">
-        <div className="max-w-4xl mx-auto px-6 md:px-12 text-center">
-          <span className="inline-block bg-brand-primary/20 text-brand-text px-4 py-2 rounded-full text-sm font-semibold mb-6">
-            Join Our Team
-          </span>
-          <h1 className="text-5xl md:text-6xl font-black text-gray-900 mb-6 leading-tight">
+      {/* HERO - with Background Image */}
+      <section className="relative bg-cover bg-center pt-32 pb-20" style={{backgroundImage: `url('/images/history/history-07-youth-circle.jpg')`}}>
+        <div className="absolute inset-0 bg-white/85"></div>
+        <div className="relative z-10 max-w-4xl mx-auto px-6 md:px-12 text-center">
+          <span className="kicker-cyan mb-6 block">Join Our Team</span>
+          <h1 className="heading-editorial text-5xl md:text-6xl text-gray-900 mb-6 leading-tight">
             Be a{' '}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-600 to-brand-primary">
+            <span className="heading-accent-cyan">
               Beacon of Hope
             </span>
           </h1>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+          <div className="hr-cyan mx-auto my-6"></div>
+          <p className="hero-subtitle text-gray-600 max-w-2xl mx-auto">
             Volunteering with New International Hope is a great way to enrich the life 
             of a refugee or immigrant while also enriching your own.
           </p>
@@ -180,12 +181,13 @@ ${formData.aboutYourself}`;
         <div className="max-w-6xl mx-auto px-6 md:px-12">
           <div className="grid md:grid-cols-4 gap-6">
             {[
-              { label: 'Make an Impact', desc: 'Change lives directly' },
-              { label: 'Flexible Hours', desc: 'Volunteer on your schedule' },
-              { label: 'Gain Experience', desc: 'Build your skills' },
-              { label: 'Join a Community', desc: 'Connect with others' },
+              { label: 'Make an Impact', desc: 'Change lives directly', icon: '💙' },
+              { label: 'Flexible Hours', desc: 'Volunteer on your schedule', icon: '⏰' },
+              { label: 'Gain Experience', desc: 'Build your skills', icon: '📈' },
+              { label: 'Join a Community', desc: 'Connect with others', icon: '🤝' },
             ].map((item) => (
-              <div key={item.label} className="bg-white rounded-xl p-6 shadow-lg border border-gray-100 text-center hover:shadow-xl transition">
+              <div key={item.label} className="bg-white rounded-xl p-6 shadow-lg border border-cyan-100 text-center hover:shadow-xl transition hover:-translate-y-1">
+                <span className="text-3xl mb-3 block">{item.icon}</span>
                 <p className="font-bold text-gray-900 text-lg mb-1">{item.label}</p>
                 <p className="text-gray-600 text-sm">{item.desc}</p>
               </div>
@@ -195,11 +197,16 @@ ${formData.aboutYourself}`;
       </section>
 
       {/* VOLUNTEER OPPORTUNITIES */}
-      <section className="py-16 bg-brand-background">
-        <div className="max-w-6xl mx-auto px-6 md:px-12">
+      <section className="relative py-20 bg-cover bg-center" style={{backgroundImage: `url('/images/history/history-03-first-esl.jpg')`}}>
+        <div className="absolute inset-0 bg-white/85"></div>
+        <div className="relative z-10 max-w-6xl mx-auto px-6 md:px-12">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-black text-gray-900 mb-4">Volunteer Opportunities</h2>
-            <p className="text-gray-600 max-w-2xl mx-auto">
+            <span className="kicker-cyan mb-4 block">Opportunities</span>
+            <h2 className="heading-editorial text-3xl md:text-4xl text-gray-900 mb-4">
+              Volunteer <span className="heading-accent-cyan">Opportunities</span>
+            </h2>
+            <div className="hr-cyan mx-auto my-6"></div>
+            <p className="body-editorial text-gray-600 max-w-2xl mx-auto">
               Discover how you can contribute your skills and time to support refugee and immigrant families.
             </p>
           </div>
@@ -211,8 +218,8 @@ ${formData.aboutYourself}`;
               { title: 'Childcare Provider', desc: 'Provide childcare during ESL classes. Great for those who love working with children.' },
               { title: 'Administrative Support', desc: 'Help with office tasks and program coordination. Perfect for organized, detail-oriented individuals.' },
             ].map((item) => (
-              <div key={item.title} className="bg-white rounded-xl p-6 shadow-lg border border-gray-100 hover:shadow-xl transition hover:-translate-y-1">
-                <h3 className="font-bold text-gray-900 mb-2">{item.title}</h3>
+              <div key={item.title} className="bg-white rounded-xl p-6 shadow-lg border border-cyan-100 hover:shadow-xl transition hover:-translate-y-1">
+                <h3 className="card-title-cyan text-gray-900 mb-2">{item.title}</h3>
                 <p className="text-gray-600 text-sm">{item.desc}</p>
               </div>
             ))}
@@ -221,11 +228,15 @@ ${formData.aboutYourself}`;
       </section>
 
       {/* APPLICATION FORM */}
-      <section className="py-16 bg-white">
+      <section className="py-20 bg-cyan-50/50">
         <div className="max-w-4xl mx-auto px-6 md:px-12">
           <div className="text-center mb-10">
-            <h2 className="text-3xl font-black text-gray-900 mb-4">Apply Today</h2>
-            <p className="text-gray-600">
+            <span className="kicker-cyan mb-4 block">Get Started</span>
+            <h2 className="heading-editorial text-3xl md:text-4xl text-gray-900 mb-4">
+              Apply <span className="heading-accent-cyan">Today</span>
+            </h2>
+            <div className="hr-cyan mx-auto my-6"></div>
+            <p className="body-editorial text-gray-600">
               Please fill out this form and someone from our team will get back to you with next steps.
             </p>
           </div>
@@ -236,7 +247,7 @@ ${formData.aboutYourself}`;
               {['Personal Info', 'Position', 'About You', 'Review'].map((label, idx) => (
                 <div key={label} className="flex flex-col items-center flex-1">
                   <div className={`w-10 h-10 rounded-full flex items-center justify-center mb-2 font-bold text-sm ${
-                    idx + 1 <= currentStep ? 'bg-brand-primary text-brand-text' : 'bg-gray-200 text-gray-500'
+                    idx + 1 <= currentStep ? 'bg-cyan-600 text-white' : 'bg-gray-200 text-gray-500'
                   }`}>
                     {idx + 1 < currentStep ? '✓' : idx + 1}
                   </div>
@@ -245,25 +256,25 @@ ${formData.aboutYourself}`;
               ))}
             </div>
             <div className="h-2 bg-gray-200 rounded-full">
-              <div className="h-full bg-brand-primary rounded-full transition-all duration-300" style={{ width: `${(currentStep / 4) * 100}%` }} />
+              <div className="h-full bg-cyan-600 rounded-full transition-all duration-300" style={{ width: `${(currentStep / 4) * 100}%` }} />
             </div>
           </div>
 
-          <form onSubmit={handleSubmit} className="bg-gray-50 rounded-2xl p-8 md:p-10 shadow-xl">
+          <form onSubmit={handleSubmit} className="bg-white rounded-2xl p-8 md:p-10 shadow-xl border border-cyan-100">
             {/* STEP 1 - PERSONAL INFO */}
             {currentStep === 1 && (
               <div className="space-y-8">
-                <h2 className="text-xl font-bold text-gray-900 mb-6 pb-2 border-b border-gray-200">Personal Information</h2>
+                <h2 className="text-xl font-bold text-gray-900 mb-6 pb-2 border-b border-cyan-200">Personal Information</h2>
                 
                 <div className="grid md:grid-cols-2 gap-6">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">First Name <span className="text-red-500">*</span></label>
-                    <input type="text" name="firstName" value={formData.firstName} onChange={handleChange} className={`w-full px-4 py-3 rounded-lg border ${errors.firstName ? 'border-red-500' : 'border-gray-200'} focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/20 bg-white`} />
+                    <input type="text" name="firstName" value={formData.firstName} onChange={handleChange} className={`w-full px-4 py-3 rounded-lg border ${errors.firstName ? 'border-red-500' : 'border-gray-200'} focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 bg-white`} />
                     {errors.firstName && <p className="mt-1 text-sm text-red-500">{errors.firstName}</p>}
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">Last Name <span className="text-red-500">*</span></label>
-                    <input type="text" name="lastName" value={formData.lastName} onChange={handleChange} className={`w-full px-4 py-3 rounded-lg border ${errors.lastName ? 'border-red-500' : 'border-gray-200'} focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/20 bg-white`} />
+                    <input type="text" name="lastName" value={formData.lastName} onChange={handleChange} className={`w-full px-4 py-3 rounded-lg border ${errors.lastName ? 'border-red-500' : 'border-gray-200'} focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 bg-white`} />
                     {errors.lastName && <p className="mt-1 text-sm text-red-500">{errors.lastName}</p>}
                   </div>
                 </div>
@@ -271,18 +282,18 @@ ${formData.aboutYourself}`;
                 <div className="grid md:grid-cols-2 gap-6">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">Email <span className="text-red-500">*</span></label>
-                    <input type="email" name="email" value={formData.email} onChange={handleChange} className={`w-full px-4 py-3 rounded-lg border ${errors.email ? 'border-red-500' : 'border-gray-200'} focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/20 bg-white`} placeholder="your@email.com" />
+                    <input type="email" name="email" value={formData.email} onChange={handleChange} className={`w-full px-4 py-3 rounded-lg border ${errors.email ? 'border-red-500' : 'border-gray-200'} focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 bg-white`} placeholder="your@email.com" />
                     {errors.email && <p className="mt-1 text-sm text-red-500">{errors.email}</p>}
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">Phone <span className="text-red-500">*</span></label>
-                    <input type="tel" name="phone" value={formData.phone} onChange={handleChange} className={`w-full px-4 py-3 rounded-lg border ${errors.phone ? 'border-red-500' : 'border-gray-200'} focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/20 bg-white`} placeholder="+1 (555) 000-0000" />
+                    <input type="tel" name="phone" value={formData.phone} onChange={handleChange} className={`w-full px-4 py-3 rounded-lg border ${errors.phone ? 'border-red-500' : 'border-gray-200'} focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 bg-white`} placeholder="+1 (555) 000-0000" />
                     {errors.phone && <p className="mt-1 text-sm text-red-500">{errors.phone}</p>}
                   </div>
                 </div>
 
                 <div className="flex justify-end">
-                  <button type="button" onClick={handleNext} className="px-8 py-4 bg-brand-primary hover:bg-brand-dark text-brand-text font-semibold rounded-lg transition shadow-lg">Continue</button>
+                  <button type="button" onClick={handleNext} className="px-8 py-4 bg-cyan-600 hover:bg-cyan-700 text-white font-semibold rounded-lg transition shadow-lg shadow-cyan-600/25 btn-text">Continue</button>
                 </div>
               </div>
             )}
@@ -290,17 +301,17 @@ ${formData.aboutYourself}`;
             {/* STEP 2 - POSITION */}
             {currentStep === 2 && (
               <div className="space-y-8">
-                <h2 className="text-xl font-bold text-gray-900 mb-6 pb-2 border-b border-gray-200">Position Details</h2>
+                <h2 className="text-xl font-bold text-gray-900 mb-6 pb-2 border-b border-cyan-200">Position Details</h2>
                 
                 <div className="grid md:grid-cols-2 gap-6">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">Available Start Date <span className="text-red-500">*</span></label>
-                    <input type="date" name="startDate" value={formData.startDate} onChange={handleChange} className={`w-full px-4 py-3 rounded-lg border ${errors.startDate ? 'border-red-500' : 'border-gray-200'} focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/20 bg-white`} />
+                    <input type="date" name="startDate" value={formData.startDate} onChange={handleChange} className={`w-full px-4 py-3 rounded-lg border ${errors.startDate ? 'border-red-500' : 'border-gray-200'} focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 bg-white`} />
                     {errors.startDate && <p className="mt-1 text-sm text-red-500">{errors.startDate}</p>}
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">Position Interested In <span className="text-red-500">*</span></label>
-                    <select name="position" value={formData.position} onChange={handleChange} className={`w-full px-4 py-3 rounded-lg border ${errors.position ? 'border-red-500' : 'border-gray-200'} focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/20 bg-white`}>
+                    <select name="position" value={formData.position} onChange={handleChange} className={`w-full px-4 py-3 rounded-lg border ${errors.position ? 'border-red-500' : 'border-gray-200'} focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 bg-white`}>
                       <option value="">Select a position</option>
                       {volunteerPositions.map(pos => <option key={pos} value={pos}>{pos}</option>)}
                     </select>
@@ -308,7 +319,7 @@ ${formData.aboutYourself}`;
                   </div>
                 </div>
 
-                <div className="bg-brand-primary/10 rounded-xl p-6 border border-brand-primary/20">
+                <div className="bg-cyan-50 rounded-xl p-6 border border-cyan-200">
                   <h3 className="font-bold text-gray-900 mb-3">Not sure which position?</h3>
                   <p className="text-gray-700 text-sm">
                     Select Other and tell us about your skills in the next step. We will help you find the perfect fit.
@@ -317,7 +328,7 @@ ${formData.aboutYourself}`;
 
                 <div className="flex justify-between">
                   <button type="button" onClick={handleBack} className="px-8 py-4 border-2 border-gray-200 text-gray-700 font-semibold rounded-lg hover:bg-gray-50 transition">Back</button>
-                  <button type="button" onClick={handleNext} className="px-8 py-4 bg-brand-primary hover:bg-brand-dark text-brand-text font-semibold rounded-lg transition shadow-lg">Continue</button>
+                  <button type="button" onClick={handleNext} className="px-8 py-4 bg-cyan-600 hover:bg-cyan-700 text-white font-semibold rounded-lg transition shadow-lg shadow-cyan-600/25 btn-text">Continue</button>
                 </div>
               </div>
             )}
@@ -325,11 +336,11 @@ ${formData.aboutYourself}`;
             {/* STEP 3 - ABOUT YOU */}
             {currentStep === 3 && (
               <div className="space-y-8">
-                <h2 className="text-xl font-bold text-gray-900 mb-6 pb-2 border-b border-gray-200">About Yourself</h2>
+                <h2 className="text-xl font-bold text-gray-900 mb-6 pb-2 border-b border-cyan-200">About Yourself</h2>
                 
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">Tell us about yourself, your skills, volunteer experience, and why you are interested in volunteering with us <span className="text-red-500">*</span></label>
-                  <textarea name="aboutYourself" value={formData.aboutYourself} onChange={handleChange} rows={6} className={`w-full px-4 py-3 rounded-lg border ${errors.aboutYourself ? 'border-red-500' : 'border-gray-200'} focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/20 bg-white resize-none`} placeholder="Share your story, experience, and what motivates you to volunteer..." />
+                  <textarea name="aboutYourself" value={formData.aboutYourself} onChange={handleChange} rows={6} className={`w-full px-4 py-3 rounded-lg border ${errors.aboutYourself ? 'border-red-500' : 'border-gray-200'} focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 bg-white resize-none`} placeholder="Share your story, experience, and what motivates you to volunteer..." />
                   {errors.aboutYourself && <p className="mt-1 text-sm text-red-500">{errors.aboutYourself}</p>}
                 </div>
 
@@ -338,14 +349,14 @@ ${formData.aboutYourself}`;
                   <div className="grid md:grid-cols-2 gap-6">
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-2">Resume</label>
-                      <div onClick={() => resumeRef.current?.click()} className="w-full px-4 py-8 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer hover:border-brand-primary hover:bg-brand-primary/5 transition text-center">
+                      <div onClick={() => resumeRef.current?.click()} className="w-full px-4 py-8 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer hover:border-cyan-500 hover:bg-cyan-50 transition text-center">
                         <input ref={resumeRef} type="file" accept=".pdf,.doc,.docx" onChange={(e) => handleFileChange(e, 'resume')} className="hidden" />
                         {resumeName ? <p className="text-sm text-gray-700 font-medium">{resumeName}</p> : <><p className="text-sm text-gray-500 mb-1">Click to upload</p><p className="text-xs text-gray-400">PDF, DOC, or DOCX</p></>}
                       </div>
                     </div>
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-2">Cover Letter</label>
-                      <div onClick={() => coverLetterRef.current?.click()} className="w-full px-4 py-8 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer hover:border-brand-primary hover:bg-brand-primary/5 transition text-center">
+                      <div onClick={() => coverLetterRef.current?.click()} className="w-full px-4 py-8 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer hover:border-cyan-500 hover:bg-cyan-50 transition text-center">
                         <input ref={coverLetterRef} type="file" accept=".pdf,.doc,.docx" onChange={(e) => handleFileChange(e, 'coverLetter')} className="hidden" />
                         {coverLetterName ? <p className="text-sm text-gray-700 font-medium">{coverLetterName}</p> : <><p className="text-sm text-gray-500 mb-1">Click to upload</p><p className="text-xs text-gray-400">PDF, DOC, or DOCX</p></>}
                       </div>
@@ -355,7 +366,7 @@ ${formData.aboutYourself}`;
 
                 <div className="flex justify-between">
                   <button type="button" onClick={handleBack} className="px-8 py-4 border-2 border-gray-200 text-gray-700 font-semibold rounded-lg hover:bg-gray-50 transition">Back</button>
-                  <button type="button" onClick={handleNext} className="px-8 py-4 bg-brand-primary hover:bg-brand-dark text-brand-text font-semibold rounded-lg transition shadow-lg">Review Application</button>
+                  <button type="button" onClick={handleNext} className="px-8 py-4 bg-cyan-600 hover:bg-cyan-700 text-white font-semibold rounded-lg transition shadow-lg shadow-cyan-600/25 btn-text">Review Application</button>
                 </div>
               </div>
             )}
@@ -363,9 +374,9 @@ ${formData.aboutYourself}`;
             {/* STEP 4 - REVIEW */}
             {currentStep === 4 && (
               <div className="space-y-8">
-                <h2 className="text-xl font-bold text-gray-900 mb-6 pb-2 border-b border-gray-200">Review Your Application</h2>
+                <h2 className="text-xl font-bold text-gray-900 mb-6 pb-2 border-b border-cyan-200">Review Your Application</h2>
                 
-                <div className="space-y-6 bg-gray-50 rounded-xl p-6">
+                <div className="space-y-6 bg-cyan-50 rounded-xl p-6 border border-cyan-100">
                   <div className="grid md:grid-cols-2 gap-4">
                     <div>
                       <p className="text-sm text-gray-500 mb-1">Name</p>
@@ -410,7 +421,7 @@ ${formData.aboutYourself}`;
 
                 <div className="flex justify-between">
                   <button type="button" onClick={handleBack} className="px-8 py-4 border-2 border-gray-200 text-gray-700 font-semibold rounded-lg hover:bg-gray-50 transition">Back</button>
-                  <button type="submit" disabled={isSubmitting} className="px-8 py-4 bg-brand-primary hover:bg-brand-dark text-brand-text font-semibold rounded-lg transition shadow-lg disabled:opacity-50">
+                  <button type="submit" disabled={isSubmitting} className="px-8 py-4 bg-cyan-600 hover:bg-cyan-700 text-white font-semibold rounded-lg transition shadow-lg shadow-cyan-600/25 disabled:opacity-50 btn-text">
                     {isSubmitting ? 'Sending...' : 'Submit Application'}
                   </button>
                 </div>
@@ -421,10 +432,15 @@ ${formData.aboutYourself}`;
       </section>
 
       {/* IMPACT STATS */}
-      <section className="py-16 bg-brand-background">
-        <div className="max-w-6xl mx-auto px-6 md:px-12">
+      <section className="relative py-20 bg-cover bg-center" style={{backgroundImage: `url('/images/history/history-08-board-2020.jpg')`}}>
+        <div className="absolute inset-0 bg-white/85"></div>
+        <div className="relative z-10 max-w-6xl mx-auto px-6 md:px-12">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-black text-gray-900 mb-4">Our Impact Together</h2>
+            <span className="kicker-cyan mb-4 block">Impact</span>
+            <h2 className="heading-editorial text-3xl md:text-4xl text-gray-900 mb-4">
+              Our Impact <span className="heading-accent-cyan">Together</span>
+            </h2>
+            <div className="hr-cyan mx-auto my-6"></div>
           </div>
           <div className="grid md:grid-cols-4 gap-8 text-center">
             {[
@@ -434,8 +450,8 @@ ${formData.aboutYourself}`;
               { number: '10+', label: 'Years of Service' },
             ].map((stat) => (
               <div key={stat.label}>
-                <p className="text-4xl md:text-5xl font-black text-gray-900 mb-2">{stat.number}</p>
-                <p className="text-gray-600">{stat.label}</p>
+                <p className="stat-cyan text-4xl md:text-5xl mb-2">{stat.number}</p>
+                <p className="text-gray-600 body-editorial">{stat.label}</p>
               </div>
             ))}
           </div>

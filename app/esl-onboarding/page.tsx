@@ -196,7 +196,7 @@ ${formData.learningGoals || 'Not provided'}`;
   };
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white text-render-premium">
       {/* Toast */}
       <AnimatePresence>
         {showToast && (
@@ -212,16 +212,16 @@ ${formData.learningGoals || 'Not provided'}`;
         )}
       </AnimatePresence>
 
-      {/* HERO - Clean, Professional */}
-      <section className="bg-brand-background pt-32 pb-16">
-        <div className="max-w-4xl mx-auto px-6 md:px-12 text-center">
-          <span className="inline-block bg-brand-primary/20 text-brand-text px-4 py-2 rounded-full text-sm font-semibold mb-6">
-            Student Enrollment
-          </span>
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-gray-900 mb-6">
-            ESL Referral Form
+      {/* HERO - with Background Image */}
+      <section className="relative bg-cover bg-center pt-32 pb-20" style={{backgroundImage: `url('/images/history/history-03-first-esl.jpg')`}}>
+        <div className="absolute inset-0 bg-white/85"></div>
+        <div className="relative z-10 max-w-4xl mx-auto px-6 md:px-12 text-center">
+          <span className="kicker-cyan mb-6 block">Student Enrollment</span>
+          <h1 className="heading-editorial text-5xl md:text-6xl text-gray-900 mb-6 leading-tight">
+            ESL <span className="heading-accent-cyan">Referral Form</span>
           </h1>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+          <div className="hr-cyan mx-auto my-6"></div>
+          <p className="hero-subtitle text-gray-600 max-w-2xl mx-auto">
             Please use this form to refer students within your organization to our ESL Program. 
             All services are provided free of charge.
           </p>
@@ -233,12 +233,13 @@ ${formData.learningGoals || 'Not provided'}`;
         <div className="max-w-6xl mx-auto px-6 md:px-12">
           <div className="grid md:grid-cols-4 gap-6">
             {[
-              { label: '100% Free', desc: 'No cost to students' },
-              { label: 'Free Childcare', desc: 'Bring your children' },
-              { label: 'One-on-One', desc: 'Personalized tutoring' },
-              { label: 'Flexible Schedule', desc: 'Learn at your pace' },
+              { label: '100% Free', desc: 'No cost to students', icon: '✓' },
+              { label: 'Free Childcare', desc: 'Bring your children', icon: '👶' },
+              { label: 'One-on-One', desc: 'Personalized tutoring', icon: '📚' },
+              { label: 'Flexible Schedule', desc: 'Learn at your pace', icon: '📅' },
             ].map((item) => (
-              <div key={item.label} className="bg-white rounded-xl p-6 shadow-lg border border-gray-100 text-center hover:shadow-xl transition">
+              <div key={item.label} className="bg-white rounded-xl p-6 shadow-lg border border-cyan-100 text-center hover:shadow-xl transition hover:-translate-y-1">
+                <span className="stat-cyan text-2xl block mb-2">{item.icon}</span>
                 <p className="font-bold text-gray-900 text-lg mb-1">{item.label}</p>
                 <p className="text-gray-600 text-sm">{item.desc}</p>
               </div>
@@ -248,15 +249,16 @@ ${formData.learningGoals || 'Not provided'}`;
       </section>
 
       {/* FORM SECTION */}
-      <section className="py-16 bg-brand-background">
-        <div className="max-w-4xl mx-auto px-6 md:px-12">
+      <section className="relative py-20 bg-cover bg-center" style={{backgroundImage: `url('/images/programs/esl2.webp')`}}>
+        <div className="absolute inset-0 bg-white/85"></div>
+        <div className="relative z-10 max-w-4xl mx-auto px-6 md:px-12">
           {/* Progress */}
           <div className="mb-10">
             <div className="flex justify-between mb-4">
               {['Organization', 'Student Info', 'Learning Details', 'Review'].map((label, idx) => (
                 <div key={label} className="flex flex-col items-center flex-1">
                   <div className={`w-10 h-10 rounded-full flex items-center justify-center mb-2 font-bold text-sm ${
-                    idx + 1 <= currentStep ? 'bg-brand-primary text-brand-text' : 'bg-gray-200 text-gray-500'
+                    idx + 1 <= currentStep ? 'bg-cyan-600 text-white' : 'bg-gray-200 text-gray-500'
                   }`}>
                     {idx + 1 < currentStep ? '✓' : idx + 1}
                   </div>
@@ -265,95 +267,95 @@ ${formData.learningGoals || 'Not provided'}`;
               ))}
             </div>
             <div className="h-2 bg-gray-200 rounded-full">
-              <div className="h-full bg-brand-primary rounded-full transition-all duration-300" style={{ width: `${(currentStep / 4) * 100}%` }} />
+              <div className="h-full bg-cyan-600 rounded-full transition-all duration-300" style={{ width: `${(currentStep / 4) * 100}%` }} />
             </div>
           </div>
 
-          <form onSubmit={handleSubmit} className="bg-white rounded-2xl p-8 md:p-10 shadow-xl">
+          <form onSubmit={handleSubmit} className="bg-white rounded-2xl p-8 md:p-10 shadow-xl border border-cyan-100">
             {/* STEP 1 */}
             {currentStep === 1 && (
               <div className="space-y-8">
                 <div>
-                  <h2 className="text-xl font-bold text-gray-900 mb-6 pb-2 border-b border-gray-200">Organization of Origin</h2>
+                  <h2 className="text-xl font-bold text-gray-900 mb-6 pb-2 border-b border-cyan-200">Organization of Origin</h2>
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">Organization Name <span className="text-red-500">*</span></label>
-                    <input type="text" name="organization" value={formData.organization} onChange={handleChange} className={`w-full px-4 py-3 rounded-lg border ${errors.organization ? 'border-red-500' : 'border-gray-200'} focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/20 bg-white`} />
+                    <input type="text" name="organization" value={formData.organization} onChange={handleChange} className={`w-full px-4 py-3 rounded-lg border ${errors.organization ? 'border-red-500' : 'border-gray-200'} focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 bg-white`} />
                     {errors.organization && <p className="mt-1 text-sm text-red-500">{errors.organization}</p>}
                   </div>
                 </div>
 
                 <div>
-                  <h2 className="text-xl font-bold text-gray-900 mb-6 pb-2 border-b border-gray-200">Referee Information</h2>
+                  <h2 className="text-xl font-bold text-gray-900 mb-6 pb-2 border-b border-cyan-200">Referee Information</h2>
                   <div className="grid md:grid-cols-2 gap-6">
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-2">First Name <span className="text-red-500">*</span></label>
-                      <input type="text" name="refereeFirstName" value={formData.refereeFirstName} onChange={handleChange} className={`w-full px-4 py-3 rounded-lg border ${errors.refereeFirstName ? 'border-red-500' : 'border-gray-200'} focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/20 bg-white`} />
+                      <input type="text" name="refereeFirstName" value={formData.refereeFirstName} onChange={handleChange} className={`w-full px-4 py-3 rounded-lg border ${errors.refereeFirstName ? 'border-red-500' : 'border-gray-200'} focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 bg-white`} />
                       {errors.refereeFirstName && <p className="mt-1 text-sm text-red-500">{errors.refereeFirstName}</p>}
                     </div>
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-2">Last Name <span className="text-red-500">*</span></label>
-                      <input type="text" name="refereeLastName" value={formData.refereeLastName} onChange={handleChange} className={`w-full px-4 py-3 rounded-lg border ${errors.refereeLastName ? 'border-red-500' : 'border-gray-200'} focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/20 bg-white`} />
+                      <input type="text" name="refereeLastName" value={formData.refereeLastName} onChange={handleChange} className={`w-full px-4 py-3 rounded-lg border ${errors.refereeLastName ? 'border-red-500' : 'border-gray-200'} focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 bg-white`} />
                       {errors.refereeLastName && <p className="mt-1 text-sm text-red-500">{errors.refereeLastName}</p>}
                     </div>
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-2">Email</label>
-                      <input type="email" name="refereeEmail" value={formData.refereeEmail} onChange={handleChange} className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/20 bg-white" />
+                      <input type="email" name="refereeEmail" value={formData.refereeEmail} onChange={handleChange} className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 bg-white" />
                     </div>
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-2">Phone <span className="text-red-500">*</span></label>
-                      <input type="tel" name="refereePhone" value={formData.refereePhone} onChange={handleChange} className={`w-full px-4 py-3 rounded-lg border ${errors.refereePhone ? 'border-red-500' : 'border-gray-200'} focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/20 bg-white`} />
+                      <input type="tel" name="refereePhone" value={formData.refereePhone} onChange={handleChange} className={`w-full px-4 py-3 rounded-lg border ${errors.refereePhone ? 'border-red-500' : 'border-gray-200'} focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 bg-white`} />
                       {errors.refereePhone && <p className="mt-1 text-sm text-red-500">{errors.refereePhone}</p>}
                     </div>
                   </div>
                 </div>
 
                 <div>
-                  <h2 className="text-xl font-bold text-gray-900 mb-6 pb-2 border-b border-gray-200">Student Contact Information</h2>
+                  <h2 className="text-xl font-bold text-gray-900 mb-6 pb-2 border-b border-cyan-200">Student Contact Information</h2>
                   <div className="space-y-6">
                     <div className="grid md:grid-cols-2 gap-6">
                       <div>
                         <label className="block text-sm font-medium text-gray-700 mb-2">First Name <span className="text-red-500">*</span></label>
-                        <input type="text" name="studentFirstName" value={formData.studentFirstName} onChange={handleChange} className={`w-full px-4 py-3 rounded-lg border ${errors.studentFirstName ? 'border-red-500' : 'border-gray-200'} focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/20 bg-white`} />
+                        <input type="text" name="studentFirstName" value={formData.studentFirstName} onChange={handleChange} className={`w-full px-4 py-3 rounded-lg border ${errors.studentFirstName ? 'border-red-500' : 'border-gray-200'} focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 bg-white`} />
                         {errors.studentFirstName && <p className="mt-1 text-sm text-red-500">{errors.studentFirstName}</p>}
                       </div>
                       <div>
                         <label className="block text-sm font-medium text-gray-700 mb-2">Last Name <span className="text-red-500">*</span></label>
-                        <input type="text" name="studentLastName" value={formData.studentLastName} onChange={handleChange} className={`w-full px-4 py-3 rounded-lg border ${errors.studentLastName ? 'border-red-500' : 'border-gray-200'} focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/20 bg-white`} />
+                        <input type="text" name="studentLastName" value={formData.studentLastName} onChange={handleChange} className={`w-full px-4 py-3 rounded-lg border ${errors.studentLastName ? 'border-red-500' : 'border-gray-200'} focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 bg-white`} />
                         {errors.studentLastName && <p className="mt-1 text-sm text-red-500">{errors.studentLastName}</p>}
                       </div>
                     </div>
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-2">Address <span className="text-red-500">*</span></label>
-                      <input type="text" name="addressLine1" value={formData.addressLine1} onChange={handleChange} className={`w-full px-4 py-3 rounded-lg border ${errors.addressLine1 ? 'border-red-500' : 'border-gray-200'} focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/20 bg-white mb-3`} placeholder="Street address" />
-                      <input type="text" name="addressLine2" value={formData.addressLine2} onChange={handleChange} className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/20 bg-white" placeholder="Apartment, suite, etc. (optional)" />
+                      <input type="text" name="addressLine1" value={formData.addressLine1} onChange={handleChange} className={`w-full px-4 py-3 rounded-lg border ${errors.addressLine1 ? 'border-red-500' : 'border-gray-200'} focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 bg-white mb-3`} placeholder="Street address" />
+                      <input type="text" name="addressLine2" value={formData.addressLine2} onChange={handleChange} className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 bg-white" placeholder="Apartment, suite, etc. (optional)" />
                       {errors.addressLine1 && <p className="mt-1 text-sm text-red-500">{errors.addressLine1}</p>}
                     </div>
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                       <div className="col-span-2">
                         <label className="block text-sm font-medium text-gray-700 mb-2">City <span className="text-red-500">*</span></label>
-                        <input type="text" name="city" value={formData.city} onChange={handleChange} className={`w-full px-4 py-3 rounded-lg border ${errors.city ? 'border-red-500' : 'border-gray-200'} focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/20 bg-white`} />
+                        <input type="text" name="city" value={formData.city} onChange={handleChange} className={`w-full px-4 py-3 rounded-lg border ${errors.city ? 'border-red-500' : 'border-gray-200'} focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 bg-white`} />
                         {errors.city && <p className="mt-1 text-sm text-red-500">{errors.city}</p>}
                       </div>
                       <div>
                         <label className="block text-sm font-medium text-gray-700 mb-2">State</label>
-                        <select name="state" value={formData.state} onChange={handleChange} className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/20 bg-white">
+                        <select name="state" value={formData.state} onChange={handleChange} className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 bg-white">
                           {states.map(s => <option key={s} value={s}>{s}</option>)}
                         </select>
                       </div>
                       <div>
                         <label className="block text-sm font-medium text-gray-700 mb-2">ZIP <span className="text-red-500">*</span></label>
-                        <input type="text" name="zip" value={formData.zip} onChange={handleChange} className={`w-full px-4 py-3 rounded-lg border ${errors.zip ? 'border-red-500' : 'border-gray-200'} focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/20 bg-white`} />
+                        <input type="text" name="zip" value={formData.zip} onChange={handleChange} className={`w-full px-4 py-3 rounded-lg border ${errors.zip ? 'border-red-500' : 'border-gray-200'} focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 bg-white`} />
                         {errors.zip && <p className="mt-1 text-sm text-red-500">{errors.zip}</p>}
                       </div>
                     </div>
                     <div className="grid md:grid-cols-2 gap-6">
                       <div>
                         <label className="block text-sm font-medium text-gray-700 mb-2">Email</label>
-                        <input type="email" name="studentEmail" value={formData.studentEmail} onChange={handleChange} className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/20 bg-white" />
+                        <input type="email" name="studentEmail" value={formData.studentEmail} onChange={handleChange} className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 bg-white" />
                       </div>
                       <div>
                         <label className="block text-sm font-medium text-gray-700 mb-2">Phone <span className="text-red-500">*</span></label>
-                        <input type="tel" name="studentPhone" value={formData.studentPhone} onChange={handleChange} className={`w-full px-4 py-3 rounded-lg border ${errors.studentPhone ? 'border-red-500' : 'border-gray-200'} focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/20 bg-white`} />
+                        <input type="tel" name="studentPhone" value={formData.studentPhone} onChange={handleChange} className={`w-full px-4 py-3 rounded-lg border ${errors.studentPhone ? 'border-red-500' : 'border-gray-200'} focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 bg-white`} />
                         {errors.studentPhone && <p className="mt-1 text-sm text-red-500">{errors.studentPhone}</p>}
                       </div>
                     </div>
@@ -361,7 +363,7 @@ ${formData.learningGoals || 'Not provided'}`;
                 </div>
 
                 <div className="flex justify-end">
-                  <button type="button" onClick={handleNext} className="px-8 py-4 bg-brand-primary hover:bg-brand-dark text-brand-text font-semibold rounded-lg transition shadow-lg">
+                  <button type="button" onClick={handleNext} className="px-8 py-4 bg-cyan-600 hover:bg-cyan-700 text-white font-semibold rounded-lg transition shadow-lg shadow-cyan-600/25 btn-text">
                     Continue
                   </button>
                 </div>
@@ -372,13 +374,13 @@ ${formData.learningGoals || 'Not provided'}`;
             {currentStep === 2 && (
               <div className="space-y-8">
                 <div>
-                  <h2 className="text-xl font-bold text-gray-900 mb-6 pb-2 border-b border-gray-200">WhatsApp Access</h2>
+                  <h2 className="text-xl font-bold text-gray-900 mb-6 pb-2 border-b border-cyan-200">WhatsApp Access</h2>
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-3">Does the Student Have a WhatsApp Account? Are they able to sign up for one if the answer is no? <span className="text-red-500">*</span></label>
                     <div className="space-y-3">
                       {['Yes, has WhatsApp', 'No, but can sign up', 'No, cannot sign up'].map((option) => (
-                        <label key={option} className="flex items-center gap-3 cursor-pointer p-3 rounded-lg border border-gray-200 hover:border-brand-primary transition">
-                          <input type="radio" name="hasWhatsapp" value={option} checked={formData.hasWhatsapp === option} onChange={handleChange} className="w-4 h-4 text-brand-primary" />
+                        <label key={option} className="flex items-center gap-3 cursor-pointer p-3 rounded-lg border border-gray-200 hover:border-cyan-500 hover:bg-cyan-50 transition">
+                          <input type="radio" name="hasWhatsapp" value={option} checked={formData.hasWhatsapp === option} onChange={handleChange} className="w-4 h-4 text-cyan-600" />
                           <span className="text-gray-700">{option}</span>
                         </label>
                       ))}
@@ -388,11 +390,11 @@ ${formData.learningGoals || 'Not provided'}`;
                 </div>
 
                 <div>
-                  <h2 className="text-xl font-bold text-gray-900 mb-6 pb-2 border-b border-gray-200">Immigration Information</h2>
+                  <h2 className="text-xl font-bold text-gray-900 mb-6 pb-2 border-b border-cyan-200">Immigration Information</h2>
                   <div className="space-y-6">
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-2">Types of immigrants by the time of arrival to the US <span className="text-red-500">*</span></label>
-                      <select name="immigrationTime" value={formData.immigrationTime} onChange={handleChange} className={`w-full px-4 py-3 rounded-lg border ${errors.immigrationTime ? 'border-red-500' : 'border-gray-200'} focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/20 bg-white`}>
+                      <select name="immigrationTime" value={formData.immigrationTime} onChange={handleChange} className={`w-full px-4 py-3 rounded-lg border ${errors.immigrationTime ? 'border-red-500' : 'border-gray-200'} focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 bg-white`}>
                         {immigrationCategories.map(cat => <option key={cat.value} value={cat.value}>{cat.label}</option>)}
                       </select>
                       {errors.immigrationTime && <p className="mt-1 text-sm text-red-500">{errors.immigrationTime}</p>}
@@ -400,17 +402,17 @@ ${formData.learningGoals || 'Not provided'}`;
                     <div className="grid md:grid-cols-2 gap-6">
                       <div>
                         <label className="block text-sm font-medium text-gray-700 mb-2">Year You Came</label>
-                        <input type="number" name="yearArrived" value={formData.yearArrived} onChange={handleChange} min="1900" max={new Date().getFullYear()} className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/20 bg-white" placeholder="e.g., 2019" />
+                        <input type="number" name="yearArrived" value={formData.yearArrived} onChange={handleChange} min="1900" max={new Date().getFullYear()} className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 bg-white" placeholder="e.g., 2019" />
                       </div>
                       <div>
                         <label className="block text-sm font-medium text-gray-700 mb-2">Current Age <span className="text-red-500">*</span></label>
-                        <input type="number" name="currentAge" value={formData.currentAge} onChange={handleChange} min="1" max="120" className={`w-full px-4 py-3 rounded-lg border ${errors.currentAge ? 'border-red-500' : 'border-gray-200'} focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/20 bg-white`} />
+                        <input type="number" name="currentAge" value={formData.currentAge} onChange={handleChange} min="1" max="120" className={`w-full px-4 py-3 rounded-lg border ${errors.currentAge ? 'border-red-500' : 'border-gray-200'} focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 bg-white`} />
                         {errors.currentAge && <p className="mt-1 text-sm text-red-500">{errors.currentAge}</p>}
                       </div>
                     </div>
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-2">Status/Visa Type</label>
-                      <select name="visaStatus" value={formData.visaStatus} onChange={handleChange} className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/20 bg-white">
+                      <select name="visaStatus" value={formData.visaStatus} onChange={handleChange} className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 bg-white">
                         {visaTypes.map(type => <option key={type.value} value={type.value}>{type.label}</option>)}
                       </select>
                     </div>
@@ -418,11 +420,11 @@ ${formData.learningGoals || 'Not provided'}`;
                 </div>
 
                 <div>
-                  <h2 className="text-xl font-bold text-gray-900 mb-6 pb-2 border-b border-gray-200">Learning Information</h2>
+                  <h2 className="text-xl font-bold text-gray-900 mb-6 pb-2 border-b border-cyan-200">Learning Information</h2>
                   <div className="grid md:grid-cols-2 gap-6">
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-2">Native Language <span className="text-red-500">*</span></label>
-                      <select name="nativeLanguage" value={formData.nativeLanguage} onChange={handleChange} className={`w-full px-4 py-3 rounded-lg border ${errors.nativeLanguage ? 'border-red-500' : 'border-gray-200'} focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/20 bg-white`}>
+                      <select name="nativeLanguage" value={formData.nativeLanguage} onChange={handleChange} className={`w-full px-4 py-3 rounded-lg border ${errors.nativeLanguage ? 'border-red-500' : 'border-gray-200'} focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 bg-white`}>
                         <option value="">Select language</option>
                         {languages.map(lang => <option key={lang} value={lang}>{lang}</option>)}
                       </select>
@@ -430,7 +432,7 @@ ${formData.learningGoals || 'Not provided'}`;
                     </div>
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-2">Current English Level <span className="text-red-500">*</span></label>
-                      <select name="englishLevel" value={formData.englishLevel} onChange={handleChange} className={`w-full px-4 py-3 rounded-lg border ${errors.englishLevel ? 'border-red-500' : 'border-gray-200'} focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/20 bg-white`}>
+                      <select name="englishLevel" value={formData.englishLevel} onChange={handleChange} className={`w-full px-4 py-3 rounded-lg border ${errors.englishLevel ? 'border-red-500' : 'border-gray-200'} focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 bg-white`}>
                         {englishLevels.map(level => <option key={level.value} value={level.value}>{level.label}</option>)}
                       </select>
                       {errors.englishLevel && <p className="mt-1 text-sm text-red-500">{errors.englishLevel}</p>}
@@ -440,7 +442,7 @@ ${formData.learningGoals || 'Not provided'}`;
 
                 <div className="flex justify-between">
                   <button type="button" onClick={handleBack} className="px-8 py-4 border-2 border-gray-200 text-gray-700 font-semibold rounded-lg hover:bg-gray-50 transition">Back</button>
-                  <button type="button" onClick={handleNext} className="px-8 py-4 bg-brand-primary hover:bg-brand-dark text-brand-text font-semibold rounded-lg transition shadow-lg">Continue</button>
+                  <button type="button" onClick={handleNext} className="px-8 py-4 bg-cyan-600 hover:bg-cyan-700 text-white font-semibold rounded-lg transition shadow-lg shadow-cyan-600/25 btn-text">Continue</button>
                 </div>
               </div>
             )}
@@ -449,14 +451,14 @@ ${formData.learningGoals || 'Not provided'}`;
             {currentStep === 3 && (
               <div className="space-y-8">
                 <div>
-                  <h2 className="text-xl font-bold text-gray-900 mb-6 pb-2 border-b border-gray-200">Learning Goals</h2>
+                  <h2 className="text-xl font-bold text-gray-900 mb-6 pb-2 border-b border-cyan-200">Learning Goals</h2>
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">Tell us about the student&apos;s goals, background, and any special needs</label>
-                    <textarea name="learningGoals" value={formData.learningGoals} onChange={handleChange} rows={6} className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/20 bg-white resize-none" placeholder="What does the student want to achieve? (e.g., speak with children's teachers, get a job, pass citizenship test...)" />
+                    <textarea name="learningGoals" value={formData.learningGoals} onChange={handleChange} rows={6} className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 bg-white resize-none" placeholder="What does the student want to achieve? (e.g., speak with children's teachers, get a job, pass citizenship test...)" />
                   </div>
                 </div>
 
-                <div className="bg-brand-primary/10 rounded-xl p-6 border border-brand-primary/20">
+                <div className="bg-cyan-50 rounded-xl p-6 border border-cyan-200">
                   <h3 className="font-bold text-gray-900 mb-3">What happens next?</h3>
                   <ul className="space-y-2 text-gray-700">
                     <li>• We will send a WhatsApp message within 24 hours</li>
@@ -468,7 +470,7 @@ ${formData.learningGoals || 'Not provided'}`;
 
                 <div className="flex justify-between">
                   <button type="button" onClick={handleBack} className="px-8 py-4 border-2 border-gray-200 text-gray-700 font-semibold rounded-lg hover:bg-gray-50 transition">Back</button>
-                  <button type="button" onClick={handleNext} className="px-8 py-4 bg-brand-primary hover:bg-brand-dark text-brand-text font-semibold rounded-lg transition shadow-lg">Review Application</button>
+                  <button type="button" onClick={handleNext} className="px-8 py-4 bg-cyan-600 hover:bg-cyan-700 text-white font-semibold rounded-lg transition shadow-lg shadow-cyan-600/25 btn-text">Review Application</button>
                 </div>
               </div>
             )}
@@ -476,9 +478,9 @@ ${formData.learningGoals || 'Not provided'}`;
             {/* STEP 4 - REVIEW */}
             {currentStep === 4 && (
               <div className="space-y-8">
-                <h2 className="text-xl font-bold text-gray-900 mb-6 pb-2 border-b border-gray-200">Review Your Application</h2>
+                <h2 className="text-xl font-bold text-gray-900 mb-6 pb-2 border-b border-cyan-200">Review Your Application</h2>
                 
-                <div className="space-y-6 bg-gray-50 rounded-xl p-6">
+                <div className="space-y-6 bg-cyan-50 rounded-xl p-6 border border-cyan-100">
                   <div>
                     <p className="text-sm text-gray-500 mb-1">Organization</p>
                     <p className="font-medium text-gray-900">{formData.organization}</p>
@@ -522,7 +524,7 @@ ${formData.learningGoals || 'Not provided'}`;
 
                 <div className="flex justify-between">
                   <button type="button" onClick={handleBack} className="px-8 py-4 border-2 border-gray-200 text-gray-700 font-semibold rounded-lg hover:bg-gray-50 transition">Back</button>
-                  <button type="submit" disabled={isSubmitting} className="px-8 py-4 bg-brand-primary hover:bg-brand-dark text-brand-text font-semibold rounded-lg transition shadow-lg disabled:opacity-50">
+                  <button type="submit" disabled={isSubmitting} className="px-8 py-4 bg-cyan-600 hover:bg-cyan-700 text-white font-semibold rounded-lg transition shadow-lg shadow-cyan-600/25 disabled:opacity-50 btn-text">
                     {isSubmitting ? 'Sending...' : 'Submit Referral'}
                   </button>
                 </div>
@@ -533,10 +535,15 @@ ${formData.learningGoals || 'Not provided'}`;
       </section>
 
       {/* FAQ SECTION */}
-      <section className="py-16 bg-white">
-        <div className="max-w-4xl mx-auto px-6 md:px-12">
+      <section className="relative py-20 bg-cover bg-center" style={{backgroundImage: `url('/images/programs/esl6.webp')`}}>
+        <div className="absolute inset-0 bg-white/85"></div>
+        <div className="relative z-10 max-w-4xl mx-auto px-6 md:px-12">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-black text-gray-900 mb-4">Frequently Asked Questions</h2>
+            <span className="kicker-cyan mb-4 block">Help Center</span>
+            <h2 className="heading-editorial text-3xl md:text-4xl text-gray-900 mb-4">
+              Frequently Asked <span className="heading-accent-cyan">Questions</span>
+            </h2>
+            <div className="hr-cyan mx-auto my-6"></div>
           </div>
           <div className="space-y-4">
             {[
@@ -545,8 +552,8 @@ ${formData.learningGoals || 'Not provided'}`;
               { q: 'Can I bring my children?', a: 'Yes, we provide free childcare during all ESL sessions so mothers can focus on learning.' },
               { q: 'How long are the classes?', a: 'Classes are typically 1-2 hours, once or twice per week, scheduled at times that work for you.' },
             ].map((faq, idx) => (
-              <div key={idx} className="bg-gray-50 rounded-xl p-6">
-                <h3 className="font-semibold text-gray-900 mb-2">{faq.q}</h3>
+              <div key={idx} className="bg-white rounded-xl p-6 shadow-lg border border-cyan-100">
+                <h3 className="card-title-cyan text-gray-900 mb-2">{faq.q}</h3>
                 <p className="text-gray-600">{faq.a}</p>
               </div>
             ))}

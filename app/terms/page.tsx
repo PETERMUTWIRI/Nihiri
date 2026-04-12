@@ -4,23 +4,27 @@ import Link from 'next/link';
 
 export default function TermsOfServicePage() {
   return (
-    <div className="min-h-screen bg-white">
-      {/* HERO */}
-      <section className="bg-brand-background pt-32 pb-16">
-        <div className="max-w-4xl mx-auto px-6 md:px-12 text-center">
-          <h1 className="text-4xl md:text-5xl font-black text-gray-900 mb-4">
+    <div className="min-h-screen bg-white text-render-premium">
+      {/* HERO - with Background Image */}
+      <section className="relative bg-cover bg-center pt-32 pb-16" style={{backgroundImage: `url('/images/history/history-01-hero.jpeg')`}}>
+        <div className="absolute inset-0 bg-white/85"></div>
+        <div className="relative z-10 max-w-4xl mx-auto px-6 md:px-12 text-center">
+          <span className="kicker-cyan mb-4 block">Legal</span>
+          <h1 className="heading-editorial text-gray-900 mb-4">
             Terms of Service
           </h1>
-          <p className="text-gray-600">
+          <div className="hr-cyan mx-auto my-6"></div>
+          <p className="body-editorial text-gray-600">
             Last updated: January 2025
           </p>
         </div>
       </section>
 
       {/* CONTENT */}
-      <section className="py-16 bg-white">
-        <div className="max-w-4xl mx-auto px-6 md:px-12">
-          <div className="prose prose-lg max-w-none text-gray-700">
+      <section className="relative py-20 bg-cover bg-center" style={{backgroundImage: `url('/images/history/history-03-first-esl.jpg')`}}>
+        <div className="absolute inset-0 bg-white/85"></div>
+        <div className="relative z-10 max-w-4xl mx-auto px-6 md:px-12">
+          <div className="prose prose-lg max-w-none text-gray-700 bg-white/95 backdrop-blur rounded-3xl p-8 md:p-12 shadow-xl border border-cyan-100">
             
             <p className="text-xl text-gray-600 mb-8">
               Welcome to the New International Hope for Refugees and Immigrants (NIHRI) website. 
@@ -159,11 +163,11 @@ export default function TermsOfServicePage() {
             <p className="mb-4">
               If you have any questions about these Terms of Service, please contact us:
             </p>
-            <div className="bg-gray-50 rounded-xl p-6 mt-4">
+            <div className="bg-cyan-50 rounded-xl p-6 mt-4 border border-cyan-100">
               <p className="mb-1"><strong>New International Hope for Refugees and Immigrants</strong></p>
               <p className="mb-1">475 Elm St.</p>
               <p className="mb-1">New Haven, CT 06511</p>
-              <p className="mb-1">Email: <a href="mailto:info@nihri.com" className="text-brand-primary hover:underline">info@nihri.com</a></p>
+              <p className="mb-1">Email: <a href="mailto:info@nihri.com" className="text-cyan-600 hover:underline">info@nihri.com</a></p>
               <p>Phone: +(203) 675-9395</p>
             </div>
 
@@ -173,8 +177,8 @@ export default function TermsOfServicePage() {
 
           </div>
 
-          <div className="mt-16 pt-8 border-t border-gray-200 text-center">
-            <Link href="/" className="inline-flex items-center gap-2 text-brand-primary font-semibold hover:underline">
+          <div className="mt-16 pt-8 border-t border-cyan-200 text-center">
+            <Link href="/" className="inline-flex items-center gap-2 text-cyan-600 font-semibold hover:underline">
               ← Back to Home
             </Link>
           </div>
