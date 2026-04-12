@@ -90,20 +90,25 @@ const getLatestGalleryImages = unstable_cache(
 
 const getFeaturedSuccessStories = unstable_cache(
   async () => {
-    const prisma = new PrismaClient();
-    const stories = await prisma.successStory.findMany({
-      where: { approved: true, deletedAt: null },
-      orderBy: { createdAt: 'desc' },
-      take: 3,
-    });
-    await prisma.$disconnect();
-    return stories.map((story) => ({
-      id: story.id,
-      name: story.name,
-      organization: story.organization,
-      imageUrl: story.imageUrl,
-      story: story.story.slice(0, 150) + (story.story.length > 150 ? '...' : ''),
-    }));
+    try {
+      const prisma = new PrismaClient();
+      const stories = await prisma.successStory.findMany({
+        where: { approved: true, deletedAt: null },
+        orderBy: { createdAt: 'desc' },
+        take: 3,
+      });
+      await prisma.$disconnect();
+      return stories.map((story) => ({
+        id: story.id,
+        name: story.name,
+        organization: story.organization,
+        imageUrl: story.imageUrl,
+        story: story.story.slice(0, 150) + (story.story.length > 150 ? '...' : ''),
+      }));
+    } catch (error) {
+      // Return empty array if table doesn't exist yet
+      return [];
+    }
   },
   ['featured-success-stories'],
   { revalidate: 60 }

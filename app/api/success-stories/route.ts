@@ -21,7 +21,11 @@ export async function GET(request: NextRequest) {
     });
 
     return NextResponse.json({ success: true, stories });
-  } catch (error) {
+  } catch (error: any) {
+    // If table doesn't exist yet, return empty array
+    if (error?.code === 'P2021') {
+      return NextResponse.json({ success: true, stories: [] });
+    }
     console.error('Error fetching success stories:', error);
     return NextResponse.json(
       { success: false, error: 'Failed to fetch success stories' },
@@ -73,7 +77,14 @@ export async function POST(request: NextRequest) {
       message: 'Thank you for sharing your story! It will be reviewed and published soon.',
       story: newStory,
     });
-  } catch (error) {
+  } catch (error: any) {
+    // If table doesn't exist yet
+    if (error?.code === 'P2021') {
+      return NextResponse.json(
+        { success: false, error: 'Story submission is temporarily unavailable. Please try again later.' },
+        { status: 503 }
+      );
+    }
     console.error('Error creating success story:', error);
     return NextResponse.json(
       { success: false, error: 'Failed to submit story' },
