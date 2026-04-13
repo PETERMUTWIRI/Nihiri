@@ -205,27 +205,21 @@ export default function StaffPage() {
                 onClick={() => setActive(member)}
                 className="group bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden border border-cyan-100 hover:border-cyan-300 text-left"
               >
-                {/* Image container */}
-                <div className="relative h-64 overflow-hidden bg-gray-50">
-                  <Image
-                    src={member.img}
-                    alt={member.name}
-                    fill
-                    className="object-cover object-center transition-transform duration-500 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-cyan-900/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                  <div className="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                    <span className="inline-flex items-center gap-1 text-white text-sm font-medium">
-                      View Profile
-                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                      </svg>
-                    </span>
+                <div className="p-6 flex flex-col items-center text-center">
+                  {/* Circular Avatar */}
+                  <div className="relative w-32 h-32 flex-shrink-0 mb-4">
+                    <div className="absolute inset-0 rounded-full bg-gradient-to-br from-cyan-400 to-cyan-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300 scale-105"></div>
+                    <div className="relative w-full h-full rounded-full overflow-hidden ring-4 ring-cyan-50 group-hover:ring-cyan-200 transition-all duration-300 shadow-lg">
+                      <Image
+                        src={member.img}
+                        alt={member.name}
+                        fill
+                        className="object-cover transition-transform duration-300 group-hover:scale-105"
+                      />
+                    </div>
                   </div>
-                </div>
-                
-                {/* Content */}
-                <div className="p-5">
+
+                  {/* Content */}
                   <span className="inline-block px-3 py-1 text-xs font-semibold bg-cyan-100 text-cyan-700 rounded-full mb-2 uppercase tracking-wider">
                     {member.team}
                   </span>
@@ -238,6 +232,12 @@ export default function StaffPage() {
                       &ldquo;{member.quote}&rdquo;
                     </p>
                   )}
+                  <span className="inline-flex items-center gap-1 text-sm font-medium text-cyan-600 mt-4 opacity-0 group-hover:opacity-100 transition-opacity btn-text">
+                    View Profile
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </span>
                 </div>
               </motion.button>
             ))}
