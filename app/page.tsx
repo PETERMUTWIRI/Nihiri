@@ -519,7 +519,7 @@ export default async function HomePage() {
                           src={upcomingEvent.cover}
                           alt={upcomingEvent.title}
                           fill
-                          className="object-cover"
+                          className="object-contain"
                         />
                       ) : (
                         <div className="w-full h-full bg-gradient-to-br from-cyan-100 to-blue-100 flex items-center justify-center">
@@ -573,7 +573,7 @@ export default async function HomePage() {
                           src={latestPastEvent.cover}
                           alt={latestPastEvent.title}
                           fill
-                          className="object-cover"
+                          className="object-contain"
                         />
                       ) : (
                         <div className="w-full h-full bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center">
