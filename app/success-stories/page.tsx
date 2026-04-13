@@ -29,6 +29,8 @@ export default function SuccessStoriesPage() {
     story: '',
     imageUrl: '',
   });
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
 
   // Fetch stories
   useEffect(() => {
@@ -49,6 +51,16 @@ export default function SuccessStoriesPage() {
     }
   };
 
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0] || null;
+    setSelectedFile(file);
+    if (file) {
+      setPreviewUrl(URL.createObjectURL(file));
+    } else {
+      setPreviewUrl(null);
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitting(true);
@@ -56,10 +68,27 @@ export default function SuccessStoriesPage() {
     setSubmitStatus('idle');
 
     try {
+      let imageUrl = formData.imageUrl;
+
+      // Upload image if a file is selected
+      if (selectedFile) {
+        const uploadForm = new FormData();
+        uploadForm.append('file', selectedFile);
+        const uploadRes = await fetch('/api/upload', {
+          method: 'POST',
+          body: uploadForm,
+        });
+        const uploadData = await uploadRes.json();
+        if (!uploadRes.ok || !uploadData.url) {
+          throw new Error(uploadData.error || 'Image upload failed');
+        }
+        imageUrl = uploadData.url;
+      }
+
       const response = await fetch('/api/success-stories', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({ ...formData, imageUrl }),
       });
 
       const data = await response.json();
@@ -68,13 +97,15 @@ export default function SuccessStoriesPage() {
         setSubmitStatus('success');
         setSubmitMessage(data.message);
         setFormData({ name: '', organization: '', story: '', imageUrl: '' });
+        setSelectedFile(null);
+        setPreviewUrl(null);
       } else {
         setSubmitStatus('error');
         setSubmitMessage(data.error || 'Failed to submit story');
       }
-    } catch (error) {
+    } catch (error: any) {
       setSubmitStatus('error');
-      setSubmitMessage('Something went wrong. Please try again.');
+      setSubmitMessage(error.message || 'Something went wrong. Please try again.');
     } finally {
       setSubmitting(false);
     }
@@ -215,22 +246,32 @@ export default function SuccessStoriesPage() {
                       </div>
                     </div>
 
-                    {/* Image URL Field */}
+                    {/* Photo Upload Field */}
                     <div>
                       <label className="block text-sm font-semibold text-gray-900 mb-2">
                         <FaUpload className="inline mr-2 text-cyan-600" />
-                        Photo URL (Optional)
+                        Photo (Optional)
                       </label>
                       <input
-                        type="url"
-                        value={formData.imageUrl}
-                        onChange={(e) => setFormData({ ...formData, imageUrl: e.target.value })}
-                        className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 transition"
-                        placeholder="https://example.com/your-photo.jpg"
+                        type="file"
+                        accept="image/*"
+                        onChange={handleFileChange}
+                        disabled={submitting}
+                        className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 transition text-sm text-gray-700"
                       />
                       <p className="text-xs text-gray-500 mt-1">
-                        Provide a link to your photo (Imgur, Google Drive, etc.)
+                        Upload a photo of yourself. Supported formats: JPG, PNG, WEBP.
                       </p>
+                      {previewUrl && (
+                        <div className="mt-4">
+                          <p className="text-xs text-gray-500 mb-1">Preview:</p>
+                          <img
+                            src={previewUrl}
+                            alt="Preview"
+                            className="w-32 h-32 object-cover rounded-xl border border-cyan-200"
+                          />
+                        </div>
+                      )}
                     </div>
 
                     {/* Story Field */}

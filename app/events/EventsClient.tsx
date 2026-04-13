@@ -65,11 +65,11 @@ export default function EventsClient({ initialEvents }: { initialEvents: Event[]
             <span className="inline-block bg-brand-primary/20 text-brand-dark px-3 py-1 rounded-full text-xs font-semibold mb-4 uppercase tracking-wider">{active.category}</span>
 
             {/* IMAGE (like blog) */}
-            <div className="relative aspect-video rounded-xl overflow-hidden mb-6 bg-gray-100">
+            <div className="relative rounded-xl overflow-hidden mb-6 bg-gray-100 flex justify-center">
               {active.cover && !imgErr.has(active.id) ? (
-                <img src={active.cover} alt={active.title} className="w-full h-full object-cover" loading="lazy" onError={() => setImgErr((s) => new Set(s).add(active.id))} />
+                <img src={active.cover} alt={active.title} className="w-full max-h-[60vh] object-contain" loading="lazy" onError={() => setImgErr((s) => new Set(s).add(active.id))} />
               ) : (
-                <div className="w-full h-full bg-gradient-to-br from-blue-100 to-purple-100 flex items-center justify-center"><span className="text-6xl">📅</span></div>
+                <div className="w-full aspect-video bg-gradient-to-br from-blue-100 to-purple-100 flex items-center justify-center"><span className="text-6xl">📅</span></div>
               )}
             </div>
 
