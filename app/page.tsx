@@ -151,7 +151,7 @@ export default async function HomePage() {
                 {/* Left - Text & Mobile Video */}
                 <ScrollReveal direction="left" className="text-gray-900">
                   <span className="kicker-cyan mb-4 block">Empowering Communities</span>
-                  <h1 className="heading-editorial text-4xl md:text-5xl mb-6 leading-tight">
+                  <h1 className="heading-editorial text-4xl md:text-5xl mb-6 leading-tight text-center">
                     <span className="block">Supporting</span>
                     <span className="block text-cyan-600 heading-accent">Refugee</span>
                     <span className="block">Women</span>
@@ -194,7 +194,7 @@ export default async function HomePage() {
               {/* Left - Text Content */}
               <ScrollReveal direction="left" className="text-gray-900">
                 <span className="kicker-cyan mb-4 block">Empowering Communities</span>
-                <h1 className="heading-editorial text-4xl xl:text-5xl mb-6 leading-tight">
+                <h1 className="heading-editorial text-4xl xl:text-5xl mb-6 leading-tight text-center">
                   Supporting{' '}
                   <span className="text-cyan-600 heading-accent">
                     Refugee

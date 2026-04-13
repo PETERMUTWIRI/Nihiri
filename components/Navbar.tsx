@@ -347,6 +347,13 @@ const MobileDrawer = ({ open, setOpen, navItems, featuredPost }: {
               )}
               
               <div className="space-y-1">
+                <Link
+                  href="/"
+                  onClick={() => setOpen(false)}
+                  className="flex items-center justify-between py-4 px-6 text-white hover:bg-white/10 transition-colors group border-b border-white/10"
+                >
+                  <span className="font-sans font-bold text-base group-hover:text-cyan-300 transition-colors">Home</span>
+                </Link>
                 <MobileAccordion title="About" items={navItems.about} onLinkClick={() => setOpen(false)} />
                 <MobileAccordion title="Events" items={navItems.events} onLinkClick={() => setOpen(false)} />
                 <MobileAccordion title="Programs" items={navItems.programs} onLinkClick={() => setOpen(false)} />

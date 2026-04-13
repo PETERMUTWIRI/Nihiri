@@ -37,7 +37,7 @@ export default function StickyDonateBar() {
         >
           {/* Mobile: Floating pill style */}
           <div className="md:hidden px-3">
-            <div className="bg-white shadow-lg rounded-full border border-gray-200 pointer-events-auto mx-auto max-w-sm">
+            <div className="bg-white shadow-lg rounded-full border border-gray-200 pointer-events-auto mx-auto max-w-sm w-full overflow-hidden">
               <div className="flex items-center justify-between gap-2 py-2 px-3">
                 <div className="flex items-center gap-2 flex-1 min-w-0">
                   <div className="w-8 h-8 bg-brand-primary rounded-full flex items-center justify-center flex-shrink-0">
