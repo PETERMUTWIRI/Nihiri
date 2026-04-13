@@ -10,8 +10,10 @@ const prisma = new PrismaClient();
 const schema = z.object({
   year: z.number().int().min(2000).max(2100),
   title: z.string().min(1),
-  cover: z.string().optional(),
-  canvaUrl: z.string().url(),
+  cover: z.string().optional().nullable(),
+  canvaUrl: z.string().url().optional().nullable(),
+  content: z.string().optional().nullable(),
+  excerpt: z.string().max(500).optional().nullable(),
   published: z.boolean().optional().default(true),
 });
 
@@ -37,7 +39,9 @@ export async function POST(req: NextRequest) {
     year: body.year,
     title: body.title,
     cover: body.cover,
-    canvaurl: body.canvaUrl, // snake-case
+    canvaurl: body.canvaUrl,
+    content: body.content,
+    excerpt: body.excerpt,
     published: body.published,
   };
 
@@ -54,17 +58,17 @@ export async function PUT(req: NextRequest) {
   if (!id) return NextResponse.json({ error: 'ID required' }, { status: 400 });
 
   const raw = await req.json();
-  console.log('PUT /api/reports body:', raw); // ← log what arrived
+  console.log('PUT /api/reports body:', raw);
 
-  // validate ONLY known fields
   const body = schema.parse(raw);
 
-  // whitelist ONLY columns that exist in DB
   const data: any = {};
   if (body.year !== undefined) data.year = body.year;
   if (body.title !== undefined) data.title = body.title;
   if (body.cover !== undefined) data.cover = body.cover;
-  if (body.canvaUrl !== undefined) data.canvaurl = body.canvaUrl; // snake-case
+  if (body.canvaUrl !== undefined) data.canvaurl = body.canvaUrl;
+  if (body.content !== undefined) data.content = body.content;
+  if (body.excerpt !== undefined) data.excerpt = body.excerpt;
   if (body.published !== undefined) data.published = body.published;
 
   const updated = await prisma.annualReport.update({ where: { id }, data });

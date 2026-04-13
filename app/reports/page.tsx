@@ -13,7 +13,9 @@ const getCachedReports = unstable_cache(
       year: r.year,
       title: r.title,
       cover: r.cover,
-      canvaUrl: r.canvaurl, // ← cast snake-case → camelCase
+      canvaUrl: r.canvaurl,
+      content: r.content,
+      excerpt: r.excerpt,
       published: r.published,
     }));
   },

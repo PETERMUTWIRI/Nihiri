@@ -1,4 +1,4 @@
-// app/reports/ReportsClient.tsx - SPLIT-VIEW LIKE BLOG
+// app/reports/ReportsClient.tsx - NATIVE ANNUAL REPORT RENDERER
 'use client';
 import { useState, useEffect } from 'react';
 import { FaExternalLinkAlt, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
@@ -8,7 +8,9 @@ interface Report {
   year: number;
   title: string;
   cover: string | null;
-  canvaUrl: string;
+  canvaUrl: string | null;
+  content: string | null;
+  excerpt: string | null;
 }
 
 export default function ReportsClient({ initialReports }: { initialReports: Report[] }) {
@@ -16,11 +18,19 @@ export default function ReportsClient({ initialReports }: { initialReports: Repo
   const [idx, setIdx] = useState(0);
   const mounted = typeof window !== 'undefined';
 
-  useEffect(() => { window.addEventListener('keydown', (e) => { if (e.key === 'ArrowLeft') setIdx((i) => (i - 1 + reports.length) % reports.length); if (e.key === 'ArrowRight') setIdx((i) => (i + 1 + reports.length) % reports.length); }); }, []);
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'ArrowLeft') setIdx((i) => (i - 1 + reports.length) % reports.length);
+      if (e.key === 'ArrowRight') setIdx((i) => (i + 1 + reports.length) % reports.length);
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [reports.length]);
 
   if (!mounted || !reports.length) return <div className="min-h-screen flex items-center justify-center">Loading…</div>;
 
   const active = reports[idx];
+  const hasContent = !!(active.content && active.content.trim().length > 0);
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col text-render-premium">
@@ -37,11 +47,11 @@ export default function ReportsClient({ initialReports }: { initialReports: Repo
         <div className="w-full lg:w-1/2 bg-white border-r border-gray-200 p-8 flex flex-col justify-center lg:sticky lg:top-[73px] lg:h-screen lg:overflow-y-auto">
           <div className="max-w-md mx-auto w-full">
             <span className="kicker mb-4 block">{active.year}</span>
-            <div className="relative aspect-[4/5] rounded-xl overflow-hidden mb-6 bg-gray-100">
+            <div className="relative rounded-xl overflow-hidden mb-6 bg-gray-100 flex justify-center">
               {active.cover ? (
-                <img src={active.cover} alt={active.title} className="w-full h-full object-cover" loading="lazy" />
+                <img src={active.cover} alt={active.title} className="w-full max-h-[60vh] object-contain" loading="lazy" />
               ) : (
-                <div className="w-full h-full bg-gradient-to-br from-brand-primary/20 to-brand-light flex items-center justify-center"><span className="text-6xl">📊</span></div>
+                <div className="w-full aspect-[4/5] bg-gradient-to-br from-brand-primary/20 to-brand-light flex items-center justify-center"><span className="text-6xl">📊</span></div>
               )}
             </div>
             <h2 className="content-title text-gray-900 mb-4">{active.title}</h2>
@@ -58,15 +68,49 @@ export default function ReportsClient({ initialReports }: { initialReports: Repo
           <div className="max-w-2xl mx-auto">
             <span className="kicker mb-4 block">Report Details</span>
             <h3 className="content-title text-gray-900 mb-4">{active.title}</h3>
-            <p className="body-editorial text-gray-600 mb-6">Annual report for year {active.year}. View our impact, financials, and program outcomes.</p>
-            <a
-              href={active.canvaUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 bg-brand-primary hover:bg-brand-dark text-brand-text px-6 py-3 rounded-lg font-semibold transition btn-text"
-            >
-              <FaExternalLinkAlt /> Open Interactive Report
-            </a>
+
+            {active.excerpt && (
+              <p className="body-editorial text-gray-600 italic mb-6 border-l-4 border-cyan-500 pl-4">
+                {active.excerpt}
+              </p>
+            )}
+
+            {!active.excerpt && (
+              <p className="body-editorial text-gray-600 mb-6">
+                Annual report for year {active.year}. View our impact, financials, and program outcomes.
+              </p>
+            )}
+
+            {hasContent ? (
+              <article
+                className="prose prose-lg max-w-none"
+                dangerouslySetInnerHTML={{ __html: active.content! }}
+              />
+            ) : active.canvaUrl ? (
+              <a
+                href={active.canvaUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 bg-brand-primary hover:bg-brand-dark text-brand-text px-6 py-3 rounded-lg font-semibold transition btn-text"
+              >
+                <FaExternalLinkAlt /> Open Interactive Report
+              </a>
+            ) : (
+              <p className="text-gray-500">Full report content coming soon.</p>
+            )}
+
+            {hasContent && active.canvaUrl && (
+              <div className="mt-8 pt-6 border-t border-gray-200">
+                <a
+                  href={active.canvaUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 bg-brand-primary hover:bg-brand-dark text-brand-text px-6 py-3 rounded-lg font-semibold transition btn-text"
+                >
+                  <FaExternalLinkAlt /> Open Interactive Report
+                </a>
+              </div>
+            )}
 
             <div className="mt-12 pt-8 border-t border-gray-200">
               <h4 className="font-serif font-medium text-lg text-gray-900 mb-4">Share this report</h4>

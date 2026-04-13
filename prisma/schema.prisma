@@ -107,7 +107,9 @@ model AnnualReport {
   year      Int      @unique
   title     String
   cover     String?
-  canvaurl  String
+  canvaurl  String?
+  content   String?
+  excerpt   String?  @db.VarChar(500)
   published Boolean  @default(true)
   createdat DateTime @default(now()) @db.Timestamp(6)
   updatedat DateTime @default(now()) @db.Timestamp(6)
