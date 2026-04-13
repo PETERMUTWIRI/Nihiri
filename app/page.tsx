@@ -150,7 +150,7 @@ export default async function HomePage() {
               <div className="grid lg:grid-cols-2 gap-12 items-center">
                 {/* Left - Text & Mobile Video */}
                 <ScrollReveal direction="left" className="text-gray-900">
-                  <span className="kicker-cyan mb-4 block">Empowering Communities</span>
+                  <span className="kicker-cyan mb-4 block text-center">Empowering Communities</span>
                   <h1 className="heading-editorial text-4xl md:text-5xl mb-6 leading-tight text-center">
                     <span className="block">Supporting <span className="text-cyan-600 heading-accent">Refugees</span></span>
                     <span className="block">Women and Children</span>
@@ -191,7 +191,7 @@ export default async function HomePage() {
             <div className="hidden lg:grid lg:grid-cols-2 gap-12 items-center">
               {/* Left - Text Content */}
               <ScrollReveal direction="left" className="text-gray-900">
-                <span className="kicker-cyan mb-4 block">Empowering Communities</span>
+                <span className="kicker-cyan mb-4 block text-center">Empowering Communities</span>
                 <h1 className="heading-editorial text-4xl xl:text-5xl mb-6 leading-tight text-center">
                   <span className="block">Supporting <span className="text-cyan-600 heading-accent">Refugees</span></span>
                   <span className="block">Women and Children</span>
