@@ -17,7 +17,7 @@ interface FormErrors {
   [key: string]: string;
 }
 
-const WHATSAPP_NUMBER = '+254713064026';
+const WHATSAPP_NUMBER = '+12036759395';
 
 const subjectOptions = [
   { value: '', label: 'Select a subject' },

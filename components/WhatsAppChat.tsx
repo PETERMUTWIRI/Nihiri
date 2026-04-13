@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaWhatsapp, FaXmark, FaPaperPlane } from 'react-icons/fa6';
 
-const WHATSAPP_NUMBER = '+254713064026';
+const WHATSAPP_NUMBER = '+12036759395';
 
 const quickMessages = [
   'I want to volunteer',

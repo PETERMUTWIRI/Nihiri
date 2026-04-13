@@ -143,7 +143,7 @@ export default async function HomePage() {
         <div className="absolute inset-0" style={{backgroundColor: 'rgba(255, 255, 255, 0.90)'}}></div>
 
         {/* Content */}
-        <div className="relative z-10 flex flex-col px-6 md:px-12 py-12 w-full">
+        <div className="relative z-10 flex flex-col px-6 md:px-12 py-4 md:py-12 w-full">
           <div className="max-w-7xl mx-auto w-full">
             {/* MOBILE LAYOUT - Keep original */}
             <div className="lg:hidden">
