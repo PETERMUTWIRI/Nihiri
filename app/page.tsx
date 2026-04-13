@@ -200,7 +200,7 @@ export default async function HomePage() {
                 </p>
                 
                 {/* Buttons */}
-                <div className="flex flex-row gap-4">
+                <div className="flex flex-row gap-4 justify-center">
                   <Link 
                     href="/donate" 
                     className="inline-flex items-center justify-center px-8 py-4 bg-cyan-600 hover:bg-cyan-700 text-white font-bold rounded-lg transition transform hover:scale-105 text-base btn-text shadow-lg shadow-cyan-600/25"
