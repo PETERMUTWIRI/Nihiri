@@ -138,12 +138,12 @@ export default async function HomePage() {
     <div className="min-h-screen bg-white text-render-premium">
       
       {/* HERO SECTION - Desktop: Carousel + Video | Mobile: Original Layout */}
-      <section className="relative overflow-hidden bg-cover bg-center" style={{backgroundImage: `url('/images/hero/graduation.jpeg')`}}>
+      <section className="relative min-h-screen flex items-center overflow-hidden bg-cover bg-center" style={{backgroundImage: `url('/images/hero/graduation.jpeg')`}}>
         {/* White overlay with 97% opacity - solid overlay */}
         <div className="absolute inset-0" style={{backgroundColor: 'rgba(255, 255, 255, 0.90)'}}></div>
 
         {/* Content */}
-        <div className="relative z-10 flex flex-col px-6 md:px-12 pt-16 md:pt-20 pb-12 md:pb-16">
+        <div className="relative z-10 flex flex-col px-6 md:px-12 py-12 w-full">
           <div className="max-w-7xl mx-auto w-full">
             {/* MOBILE LAYOUT - Keep original */}
             <div className="lg:hidden">
@@ -152,10 +152,8 @@ export default async function HomePage() {
                 <ScrollReveal direction="left" className="text-gray-900">
                   <span className="kicker-cyan mb-4 block">Empowering Communities</span>
                   <h1 className="heading-editorial text-4xl md:text-5xl mb-6 leading-tight text-center">
-                    <span className="block">Supporting</span>
-                    <span className="block text-cyan-600 heading-accent">Refugee</span>
-                    <span className="block">Women</span>
-                    <span className="block">and Children</span>
+                    <span className="block">Supporting <span className="text-cyan-600 heading-accent">Refugees</span></span>
+                    <span className="block">Women and Children</span>
                   </h1>
                   <p className="hero-subtitle text-gray-600 mb-8 max-w-xl">
                     At nihri&apos;s hope, we work hard to provide refugee and immigrant families with all the tools they need to cultivate and exercise their individual independence.
@@ -195,11 +193,8 @@ export default async function HomePage() {
               <ScrollReveal direction="left" className="text-gray-900">
                 <span className="kicker-cyan mb-4 block">Empowering Communities</span>
                 <h1 className="heading-editorial text-4xl xl:text-5xl mb-6 leading-tight text-center">
-                  Supporting{' '}
-                  <span className="text-cyan-600 heading-accent">
-                    Refugee
-                  </span>{' '}
-                  Women and Children
+                  <span className="block">Supporting <span className="text-cyan-600 heading-accent">Refugees</span></span>
+                  <span className="block">Women and Children</span>
                 </h1>
                 <p className="hero-subtitle text-gray-600 mb-8 max-w-xl">
                   At Nihri's hope, we work hard to provide refugee and immigrant families with all the tools they need to cultivate and exercise their individual independence.
