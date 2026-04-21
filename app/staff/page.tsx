@@ -214,7 +214,7 @@ export default function StaffPage() {
                         src={member.img}
                         alt={member.name}
                         fill
-                        className="object-cover transition-transform duration-300 group-hover:scale-105"
+                        className={`transition-transform duration-300 group-hover:scale-105 ${member.name === 'Jane Kinity' ? 'object-cover object-top' : 'object-cover'}`}
                       />
                     </div>
                   </div>
@@ -293,7 +293,7 @@ export default function StaffPage() {
                   src={active.img}
                   alt={active.name}
                   fill
-                  className="object-cover object-center"
+                  className={active.name === 'Jane Kinity' ? 'object-cover object-top' : 'object-cover object-center'}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-cyan-900/70 via-cyan-900/20 to-transparent"></div>
                 <button
