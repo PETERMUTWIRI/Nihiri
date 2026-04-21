@@ -122,7 +122,7 @@ export default function BoardPage() {
                       src={member.img}
                       alt={member.name}
                       fill
-                      className="object-cover transition-transform duration-300 group-hover:scale-105"
+                      className={`transition-transform duration-300 group-hover:scale-105 ${member.name === 'Jane Kinity' ? 'object-cover object-top' : 'object-cover'}`}
                     />
                   </div>
                 </div>

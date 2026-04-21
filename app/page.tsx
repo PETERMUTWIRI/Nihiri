@@ -7,6 +7,7 @@ import HeroCarousel from '@/components/HeroCarousel';
 import PartnerLogos from '@/components/PartnerLogos';
 
 import OurStory from '@/components/OurStory';
+import BoardStaffPreview from '@/components/BoardStaffPreview';
 import ScrollReveal, { StaggerContainer, StaggerItem } from '@/components/ScrollReveal';
 
 // Cache the database queries
@@ -228,6 +229,9 @@ export default async function HomePage() {
 
       {/* OUR STORY SECTION */}
       <OurStory />
+
+      {/* BOARD & STAFF PREVIEW */}
+      <BoardStaffPreview />
 
       {/* PROGRAMS OVERVIEW SECTION */}
       <section className="py-20 bg-gray-50">
