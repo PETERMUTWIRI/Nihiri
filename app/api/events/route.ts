@@ -26,6 +26,7 @@ const eventSchema = z.object({
   isFree: z.boolean().default(true),
   ticketPrice: z.string().optional(),
   gallery: z.array(z.string()).max(10).optional(),
+  eventSource: z.string().max(50).optional(),
 });
 
 /* ---------- GET ---------- */
@@ -86,6 +87,7 @@ export async function POST(req: NextRequest) {
       isFree: body.isFree,
       ticketPrice: body.isFree ? null : body.ticketPrice || null,
       gallery: body.gallery || [],
+      eventSource: body.eventSource || 'manual',
     },
   });
 
@@ -135,6 +137,7 @@ export async function PUT(req: NextRequest) {
   if (body.isFree !== undefined) data.isFree = body.isFree;
   if (body.ticketPrice !== undefined) data.ticketPrice = body.isFree ? null : body.ticketPrice;
   if (body.gallery !== undefined) data.gallery = body.gallery;
+  if (body.eventSource !== undefined) data.eventSource = body.eventSource;
 
   const updated = await prisma.event.update({ where: { id }, data });
   console.log('Event updated:', updated.id);

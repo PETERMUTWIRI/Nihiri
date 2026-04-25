@@ -31,6 +31,7 @@ const getCachedUpcoming = unstable_cache(
       ticketPrice: e.ticketPrice,
       maxAttendees: e.maxAttendees,
       gallery: (e.gallery as string[]) ?? [],
+      eventSource: e.eventSource ?? 'manual',
       createdAt: e.createdAt.toISOString(),
     }));
   },

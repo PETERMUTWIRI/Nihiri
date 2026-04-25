@@ -55,6 +55,7 @@ model Event {
   registrationLink String?   @db.VarChar(500)
   maxAttendees     Int?
   isFree           Boolean?  @default(true)
+  eventSource      String?   @default("manual") @db.VarChar(50)
   ticketPrice      String?   @db.VarChar(50)
   gallery          Json?
   content          String?

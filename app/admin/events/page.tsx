@@ -1,9 +1,9 @@
-// app/admin/events/page.tsx - ENTERPRISE EVENT EDITOR (mirrors blog)
+// app/admin/events/page.tsx - ENTERPRISE EVENT EDITOR (mirrors blog) + Givebutter
 'use client';
 
 import { useEffect, useState, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { FaSave, FaArrowLeft, FaCalendar, FaClock, FaMapMarkerAlt, FaImage, FaGlobe, FaPlus, FaTrash } from 'react-icons/fa';
+import { FaSave, FaArrowLeft, FaCalendar, FaClock, FaMapMarkerAlt, FaImage, FaGlobe, FaPlus, FaTrash, FaTicket } from 'react-icons/fa';
 import Link from 'next/link';
 
 export default function AdminEventsPage() {
@@ -38,7 +38,8 @@ function EventEditor() {
     maxAttendees: '',
     isFree: true,
     ticketPrice: '',
-    gallery: [] as string[], // NEW
+    gallery: [] as string[],
+    eventSource: 'manual' as 'manual' | 'givebutter',
   });
 
   const [isLoading, setIsLoading] = useState(false);
@@ -55,8 +56,12 @@ function EventEditor() {
       setIsLoading(true);
       const res = await fetch(`/api/events?id=${id}`);
       const ev = await res.json();
-      // cast maxAttendees to string for input field
-      setForm({ ...ev, gallery: ev.gallery || [], maxAttendees: ev.maxAttendees?.toString() ?? '' });
+      setForm({
+        ...ev,
+        gallery: ev.gallery || [],
+        maxAttendees: ev.maxAttendees?.toString() ?? '',
+        eventSource: ev.eventSource || 'manual',
+      });
     } catch (e) {
       console.error(e);
       alert('Failed to load event');
@@ -90,6 +95,14 @@ function EventEditor() {
     }
   }, [form.title]);
 
+  /* ---------- auto-detect givebutter URL ---------- */
+  useEffect(() => {
+    const link = form.registrationLink;
+    if (link && link.includes('givebutter.com') && form.eventSource !== 'givebutter') {
+      setForm(p => ({ ...p, eventSource: 'givebutter' }));
+    }
+  }, [form.registrationLink]);
+
   /* ---------- multi-image upload (same as blog) ---------- */
   const uploadImages = async (files: FileList) => {
     if (files.length + form.gallery.length > 10) return alert('Max 10 images');
@@ -122,7 +135,7 @@ function EventEditor() {
       const payload = {
         ...form,
         maxAttendees: form.maxAttendees ? Number(form.maxAttendees) : null,
-        ticketPrice: form.isFree ? undefined : form.ticketPrice, 
+        ticketPrice: form.isFree ? undefined : form.ticketPrice,
       };
 
       const res = await fetch(url, { method, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
@@ -193,6 +206,29 @@ function EventEditor() {
               </select>
             </div>
 
+            {/* event source: manual vs givebutter */}
+            <div className="bg-brand-background border border-brand-primary/30 rounded-xl p-5">
+              <h4 className="font-semibold text-gray-900 mb-3 flex items-center gap-2"><FaTicket className="text-brand-dark" /> Event Source</h4>
+              <div className="flex gap-4 mb-4">
+                <label className={`flex-1 cursor-pointer border rounded-lg p-4 text-center transition ${form.eventSource === 'manual' ? 'border-blue-600 bg-blue-50' : 'border-gray-200 hover:border-gray-300'}`}>
+                  <input type="radio" name="eventSource" value="manual" checked={form.eventSource === 'manual'} onChange={handleChange} className="sr-only" />
+                  <span className="font-medium text-gray-900">Manual</span>
+                  <p className="text-xs text-gray-500 mt-1">Create event details manually</p>
+                </label>
+                <label className={`flex-1 cursor-pointer border rounded-lg p-4 text-center transition ${form.eventSource === 'givebutter' ? 'border-blue-600 bg-blue-50' : 'border-gray-200 hover:border-gray-300'}`}>
+                  <input type="radio" name="eventSource" value="givebutter" checked={form.eventSource === 'givebutter'} onChange={handleChange} className="sr-only" />
+                  <span className="font-medium text-gray-900">Givebutter</span>
+                  <p className="text-xs text-gray-500 mt-1">Link to a Givebutter campaign</p>
+                </label>
+              </div>
+
+              {form.eventSource === 'givebutter' && (
+                <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-3 text-sm text-yellow-800">
+                  <strong>Tip:</strong> Paste your Givebutter campaign URL below in the Registration field. The &quot;Book Event&quot; button will redirect attendees to Givebutter.
+                </div>
+              )}
+            </div>
+
             {/* dates (simple text) */}
             <div className="grid md:grid-cols-2 gap-4">
               <div>
@@ -227,21 +263,31 @@ function EventEditor() {
 
             {/* registration */}
             <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">Registration</label>
-              <input name="registrationLink" value={form.registrationLink} onChange={handleChange} placeholder="https://... or newinternationalhope@gmail.com" className="w-full px-4 py-3 border rounded-lg" disabled={isLoading} />
+              <label className="block text-sm font-semibold text-gray-700 mb-2">
+                {form.eventSource === 'givebutter' ? 'Givebutter Campaign URL' : 'Registration Link'}
+              </label>
+              <input
+                name="registrationLink"
+                value={form.registrationLink}
+                onChange={handleChange}
+                placeholder={form.eventSource === 'givebutter' ? 'https://givebutter.com/c/...' : 'https://... or newinternationalhope@gmail.com'}
+                className="w-full px-4 py-3 border rounded-lg"
+                disabled={isLoading}
+              />
             </div>
 
             {/* COVER IMAGE */}
             <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2"><FaImage className="inline mr-1" /> Cover Image</label>
+              <label className="block text-sm font-semibold text-gray-700 mb-2"><FaImage className="inline mr-1" /> Cover Image (Poster)</label>
               <input type="file" accept="image/*" onChange={(e) => handleImageUpload(e, 'cover')} disabled={isLoading || uploadLoading} />
               {uploadLoading && <span className="text-blue-600 text-sm ml-2">Uploading...</span>}
               {form.cover && (
                 <div className="mt-2 relative inline-block">
-                  <img src={form.cover} alt="Cover" className="h-24 rounded shadow" />
+                  <img src={form.cover} alt="Cover" className="h-40 rounded shadow object-contain" />
                   <button onClick={() => setForm(p => ({ ...p, cover: '' }))} className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-6 h-6 text-xs hover:bg-red-600">×</button>
                 </div>
               )}
+              <p className="text-xs text-gray-500 mt-1">Upload a poster with all event details. It will be displayed prominently.</p>
             </div>
             {/* GALLERY (NEW) */}
             <div>
@@ -276,70 +322,57 @@ function EventEditor() {
         )}
 
         {/* ---------- SEO TAB ---------- */}
-        <div className="space-y-6">
-          <div className="bg-blue-50 p-4 rounded-lg mb-6">
-            <h3 className="font-semibold text-blue-900 mb-1">SEO Settings</h3>
-            <p className="text-sm text-blue-700">Optimise how this event appears in search engines and social media.</p>
-          </div>
+        {activeTab === 'seo' && (
+          <div className="space-y-6">
+            <div className="bg-blue-50 p-4 rounded-lg mb-6">
+              <h3 className="font-semibold text-blue-900 mb-1">SEO Settings</h3>
+              <p className="text-sm text-blue-700">Optimise how this event appears in search engines and social media.</p>
+            </div>
 
-          <div>
-            <label className="block text-sm font-semibold text-gray-700 mb-2">Meta Title (60 chars max)</label>
-            <input name="metaTitle" value={form.metaTitle} onChange={handleChange} placeholder="SEO title for search results..." className="w-full px-4 py-3 border rounded-lg" maxLength={60} />
-            <div className="flex justify-between mt-1"><span className="text-xs text-gray-500">{form.metaTitle.length}/60</span><span className="text-xs text-gray-500">Recommended: 50-60 characters</span></div>
-          </div>
+            <div>
+              <label className="block text-sm font-semibold text-gray-700 mb-2">Meta Title (60 chars max)</label>
+              <input name="metaTitle" value={form.metaTitle} onChange={handleChange} placeholder="SEO title for search results..." className="w-full px-4 py-3 border rounded-lg" maxLength={60} />
+              <div className="flex justify-between mt-1"><span className="text-xs text-gray-500">{form.metaTitle.length}/60</span><span className="text-xs text-gray-500">Recommended: 50-60 characters</span></div>
+            </div>
 
-          <div>
-            <label className="block text-sm font-semibold text-gray-700 mb-2">Meta Description (160 chars max)</label>
-            <textarea name="metaDesc" value={form.metaDesc} onChange={handleChange} placeholder="Brief description for search results..." className="w-full px-4 py-3 border rounded-lg h-24" maxLength={160} />
-            <div className="flex justify-between mt-1"><span className="text-xs text-gray-500">{form.metaDesc.length}/160</span><span className="text-xs text-gray-500">Recommended: 150-160 characters</span></div>
-          </div>
+            <div>
+              <label className="block text-sm font-semibold text-gray-700 mb-2">Meta Description (160 chars max)</label>
+              <textarea name="metaDesc" value={form.metaDesc} onChange={handleChange} placeholder="Brief description for search results..." className="w-full px-4 py-3 border rounded-lg h-24" maxLength={160} />
+              <div className="flex justify-between mt-1"><span className="text-xs text-gray-500">{form.metaDesc.length}/160</span><span className="text-xs text-gray-500">Recommended: 150-160 characters</span></div>
+            </div>
 
-          <div>
-            <label className="block text-sm font-semibold text-gray-700 mb-2">Social Media Image (Open Graph)</label>
-            <input type="file" accept="image/*" onChange={(e) => handleImageUpload(e, 'ogImage')} disabled={isLoading || uploadLoading} />
-            {uploadLoading && <span className="text-blue-600 text-sm ml-2">Uploading...</span>}
-            {form.ogImage && (
-              <div className="mt-2 relative inline-block">
-                <img src={form.ogImage} alt="OG" className="h-24 rounded shadow" />
-                <button onClick={() => setForm(p => ({ ...p, ogImage: '' }))} className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-6 h-6 text-xs hover:bg-red-600">×</button>
+            <div>
+              <label className="block text-sm font-semibold text-gray-700 mb-2">Social Media Image (Open Graph)</label>
+              <input type="file" accept="image/*" onChange={(e) => handleImageUpload(e, 'ogImage')} disabled={isLoading || uploadLoading} />
+              {uploadLoading && <span className="text-blue-600 text-sm ml-2">Uploading...</span>}
+              {form.ogImage && (
+                <div className="mt-2 relative inline-block">
+                  <img src={form.ogImage} alt="OG" className="h-24 rounded shadow" />
+                  <button onClick={() => setForm(p => ({ ...p, ogImage: '' }))} className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-6 h-6 text-xs hover:bg-red-600">×</button>
+                </div>
+              )}
+              <p className="text-xs text-gray-500 mt-1">Recommended: 1200×630 pixels</p>
+            </div>
+
+            {/* Google preview */}
+            <div className="border rounded-lg p-4 bg-gray-50">
+              <h4 className="text-sm font-semibold text-gray-700 mb-2">Google Search Preview</h4>
+              <div className="bg-white p-4 rounded border">
+                <div className="text-blue-800 text-lg truncate" style={{ color: '#1a0dab' }}>{form.metaTitle || form.title || 'Event Title'}</div>
+                <div className="text-green-700 text-sm truncate">nihiri.com › events › {(form.title || 'event').toLowerCase().replace(/\s+/g, '-')}</div>
+                <div className="text-gray-600 text-sm line-clamp-2 mt-1">{form.metaDesc || form.description?.replace(/<[^>]*>/g, '').slice(0, 160) || 'No description provided...'}</div>
               </div>
-            )}
-            <p className="text-xs text-gray-500 mt-1">Recommended: 1200×630 pixels</p>
-          </div>
+            </div>
 
-          {/* Google preview */}
-          <div className="border rounded-lg p-4 bg-gray-50">
-            <h4 className="text-sm font-semibold text-gray-700 mb-2">Google Search Preview</h4>
-            <div className="bg-white p-4 rounded border">
-              <div className="text-blue-800 text-lg truncate" style={{ color: '#1a0dab' }}>{form.metaTitle || form.title || 'Event Title'}</div>
-              <div className="text-green-700 text-sm truncate">nihiri.com › events › {(form.title || 'event').toLowerCase().replace(/\s+/g, '-')}</div>
-              <div className="text-gray-600 text-sm line-clamp-2 mt-1">{form.metaDesc || form.description?.replace(/<[^>]*>/g, '').slice(0, 160) || 'No description provided...'}</div>
+            {/* ---------- SAVE BUTTON ---------- */}
+            <div className="flex gap-4 mt-8 pt-6 border-t">
+              <button onClick={saveEvent} disabled={isLoading} className="flex-1 bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition flex items-center justify-center gap-2 disabled:opacity-50">
+                <FaSave /> {isLoading ? 'Saving...' : (editId ? 'Update Event' : 'Save Event')}
+              </button>
             </div>
           </div>
-        </div>
-
-        {/* ---------- SAVE BUTTON ---------- */}
-        <div className="flex gap-4 mt-8 pt-6 border-t">
-          <button onClick={saveEvent} disabled={isLoading} className="flex-1 bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition flex items-center justify-center gap-2 disabled:opacity-50">
-            <FaSave /> {isLoading ? 'Saving...' : (editId ? 'Update Event' : 'Save Event')}
-          </button>
-        </div>
+        )}
       </div>
     </div>
   );
-}
-
-/* ---------- helper: single image upload (same as blog) ---------- */
-async function handleImageUpload(e: React.ChangeEvent<HTMLInputElement>, field: 'cover' | 'ogImage') {
-  const file = e.target.files?.[0];
-  if (!file) return;
-  const body = new FormData();
-  body.append('file', file);
-  try {
-    const res = await fetch('/api/upload', { method: 'POST', body });
-    const data = await res.json();
-    if (data.url) window.dispatchEvent(new CustomEvent('uploadDone', { detail: { field, url: data.url } }));
-  } catch (error) {
-    alert('Failed to upload image');
-  }
 }
