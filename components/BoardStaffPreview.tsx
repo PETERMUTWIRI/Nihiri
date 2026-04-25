@@ -22,13 +22,13 @@ const boardMembers: BoardMember[] = [
   { name: 'Eshe Abood', role: 'Vice Chair', img: '/images/employees/Eshe-Abood.avif' },
   { name: 'Ann Mbugwa', role: 'Secretary', img: '/images/employees/Ann-Mbugwa.avif' },
   { name: 'Joseph Kazadi', role: 'Vice-President', img: '/images/employees/Joseph-Kazadi.avif' },
-  { name: 'Rahab', role: 'Treasurer', img: '/images/employees/Rahab.jpg' },
+  { name: 'Rahab Kinity', role: 'Treasurer', img: '/images/employees/Rahab.jpg' },
 ];
 
 const staffMembers: StaffMember[] = [
   { name: 'Jane Kinity', role: 'Founder & Executive Director', team: 'Leadership', img: '/images/employees/Jane-Kinity.avif' },
   { name: 'Joseph Kazadi', role: 'Vice-President', team: 'Leadership', img: '/images/employees/Joseph-Kazadi.avif' },
-  { name: 'Rahab', role: 'Treasurer', team: 'Leadership', img: '/images/employees/Rahab.jpg' },
+  { name: 'Rahab Kinity', role: 'Treasurer', team: 'Leadership', img: '/images/employees/Rahab.jpg' },
   { name: 'Annie Phiri', role: 'Case Manager', team: 'Case Management', img: '/images/employees/AnniePhiri.avif' },
   { name: 'Martine Kabanga', role: 'Youth Coordinator', team: 'Youth Programs', img: '/images/employees/Martine-Kabanga.avif' },
   { name: 'Mary Njoki', role: 'Assistant Youth Coordinator', team: 'Youth Programs', img: '/images/employees/Mary-Njoki.avif' },

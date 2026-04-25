@@ -59,7 +59,7 @@ const staff: Member[] = [
   },
   {
     id: 5,
-    name: 'Rahab',
+    name: 'Rahab Kinity',
     role: 'Treasurer',
     team: 'Leadership',
     img: '/images/employees/Rahab.jpg',

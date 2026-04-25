@@ -52,7 +52,7 @@ const board: Member[] = [
   },
   {
     id: 5,
-    name: 'Rahab',
+    name: 'Rahab Kinity',
     role: 'Treasurer',
     img: '/images/employees/Rahab.jpg',
     bio: 'Rahab serves as Treasurer, overseeing the financial health and integrity of the organization with diligence and transparency.',
