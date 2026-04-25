@@ -6,6 +6,13 @@ import { verifyAdminAuth, unauthorizedResponse } from '@/lib/auth/middleware';
 
 const prisma = new PrismaClient();
 
+/* ---------- helpers ---------- */
+function safeDate(val: unknown): Date | null {
+  if (val === null || val === undefined || val === '') return null;
+  const d = new Date(String(val));
+  return isNaN(d.getTime()) ? null : d;
+}
+
 /* ---------- validation ---------- */
 const eventSchema = z.object({
   title: z.string().min(1, 'Title is required'),
@@ -13,8 +20,18 @@ const eventSchema = z.object({
   category: z.enum(['Upcoming', 'Past']),
   cover: z.string().optional(),
   location: z.string().min(1, 'Location is required'),
-  startDate: z.string().min(1),
-  endDate: z.string().optional().nullable(),
+  startDate: z.string().min(1, 'startDate is required'),
+  endDate: z.preprocess(
+    (val) => {
+      if (val === '' || val === null || val === undefined) return null;
+      if (typeof val === 'string') {
+        const d = new Date(val);
+        if (isNaN(d.getTime())) return null;
+      }
+      return val;
+    },
+    z.string().optional().nullable()
+  ),
   author: z.string().optional(),
   metaTitle: z.string().max(100).optional(),
   metaDesc: z.string().max(160).optional(),
@@ -74,6 +91,11 @@ export async function POST(req: NextRequest) {
 
   const slug = slugify(body.title) + '-' + Date.now();
 
+  const start = safeDate(body.startDate);
+  if (!start) {
+    return NextResponse.json({ error: 'Invalid or missing startDate' }, { status: 400 });
+  }
+
   const event = await prisma.event.create({
     data: {
       title: body.title,
@@ -82,8 +104,8 @@ export async function POST(req: NextRequest) {
       category: body.category,
       cover: body.cover || null,
       location: body.location,
-      startDate: new Date(body.startDate),
-      endDate: body.endDate ? new Date(body.endDate) : null,
+      startDate: start,
+      endDate: safeDate(body.endDate),
       author: body.author || null,
       metaTitle: body.metaTitle || null,
       metaDesc: body.metaDesc || null,
@@ -132,8 +154,14 @@ export async function PUT(req: NextRequest) {
   if (body.category !== undefined) data.category = body.category;
   if (body.cover !== undefined) data.cover = body.cover;
   if (body.location !== undefined) data.location = body.location;
-  if (body.startDate !== undefined) data.startDate = new Date(body.startDate);
-  if (body.endDate !== undefined) data.endDate = body.endDate ? new Date(body.endDate) : null;
+  if (body.startDate !== undefined) {
+    const start = safeDate(body.startDate);
+    if (!start) {
+      return NextResponse.json({ error: 'Invalid startDate' }, { status: 400 });
+    }
+    data.startDate = start;
+  }
+  if (body.endDate !== undefined) data.endDate = safeDate(body.endDate);
   if (body.author !== undefined) data.author = body.author;
   if (body.metaTitle !== undefined) data.metaTitle = body.metaTitle;
   if (body.metaDesc !== undefined) data.metaDesc = body.metaDesc;
