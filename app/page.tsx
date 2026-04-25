@@ -35,7 +35,7 @@ const getUpcomingEvent = unstable_cache(
   async () => {
     const prisma = new PrismaClient();
     const event = await prisma.event.findFirst({
-      where: { category: 'Upcoming', deletedAt: null },
+      where: { deletedAt: null, startDate: { gte: new Date() } },
       orderBy: { startDate: 'asc' },
     });
     await prisma.$disconnect();
@@ -55,8 +55,8 @@ const getLatestPastEvent = unstable_cache(
   async () => {
     const prisma = new PrismaClient();
     const event = await prisma.event.findFirst({
-      where: { category: 'Past', deletedAt: null },
-      orderBy: { createdAt: 'desc' },
+      where: { deletedAt: null, startDate: { lt: new Date() } },
+      orderBy: { startDate: 'desc' },
     });
     await prisma.$disconnect();
     return event ? {

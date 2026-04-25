@@ -8,8 +8,8 @@ const prisma = new PrismaClient();
 const getCachedPast = unstable_cache(
   async () => {
     const rows = await prisma.event.findMany({
-      where: { category: 'Past', deletedAt: null },
-      orderBy: { createdAt: 'desc' },
+      where: { deletedAt: null, startDate: { lt: new Date() } },
+      orderBy: { startDate: 'desc' }, // most recent past first
     });
     return rows.map((e) => ({
       id: e.id,
@@ -50,5 +50,5 @@ export default async function PastEventsPage() {
         </div>
       </div>
     );
-  return <EventsClient initialEvents={events} />;
+  return <EventsClient initialEvents={events} pageType="past" />;
 }

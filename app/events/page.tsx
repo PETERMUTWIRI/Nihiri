@@ -8,8 +8,8 @@ const prisma = new PrismaClient();
 const getCachedUpcoming = unstable_cache(
   async () => {
     const rows = await prisma.event.findMany({
-      where: { category: 'Upcoming', deletedAt: null },
-      orderBy: { createdAt: 'desc' }, // newest first
+      where: { deletedAt: null, startDate: { gte: new Date() } },
+      orderBy: { startDate: 'asc' }, // nearest first
     });
     return rows.map((e) => ({
       id: e.id,
@@ -50,5 +50,5 @@ export default async function UpcomingEventsPage() {
         </div>
       </div>
     );
-  return <EventsClient initialEvents={events} />;
+  return <EventsClient initialEvents={events} pageType="upcoming" />;
 }

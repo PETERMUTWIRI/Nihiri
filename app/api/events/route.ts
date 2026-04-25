@@ -40,8 +40,16 @@ export async function GET(req: NextRequest) {
     return event ? NextResponse.json(event) : NextResponse.json({ error: 'Not found' }, { status: 404 });
   }
 
+  const now = new Date();
   const where: any = { deletedAt: null };
-  if (category && category !== 'All') where.category = category;
+
+  if (category === 'Upcoming') {
+    where.startDate = { gte: now };
+  } else if (category === 'Past') {
+    where.startDate = { lt: now };
+  } else if (category && category !== 'All') {
+    where.category = category;
+  }
 
   const events = await prisma.event.findMany({ where, orderBy: { startDate: category === 'Past' ? 'desc' : 'asc' } });
   return NextResponse.json(events);

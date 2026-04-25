@@ -26,7 +26,7 @@ interface Event {
   eventSource: string;
 }
 
-export default function EventsClient({ initialEvents }: { initialEvents: Event[] }) {
+export default function EventsClient({ initialEvents, pageType }: { initialEvents: Event[]; pageType: 'upcoming' | 'past' }) {
   const [events] = useState(initialEvents);
   const [idx, setIdx] = useState(0);
   const [imgErr, setImgErr] = useState<Set<number>>(new Set());
@@ -72,8 +72,8 @@ export default function EventsClient({ initialEvents }: { initialEvents: Event[]
             <span className="heading-accent">Events</span>
           </h1>
           <div className="flex gap-2">
-            <Link href="/events" className={`px-4 py-2 rounded-lg text-sm font-semibold btn-text ${active.category === 'Upcoming' ? 'bg-brand-primary text-brand-text' : 'bg-gray-200 text-gray-800 hover:bg-gray-300'}`}>Upcoming</Link>
-            <Link href="/events/past" className={`px-4 py-2 rounded-lg text-sm font-semibold btn-text ${active.category === 'Past' ? 'bg-brand-primary text-brand-text' : 'bg-gray-200 text-gray-800 hover:bg-gray-300'}`}>Past</Link>
+            <Link href="/events" className={`px-4 py-2 rounded-lg text-sm font-semibold btn-text ${pageType === 'upcoming' ? 'bg-brand-primary text-brand-text' : 'bg-gray-200 text-gray-800 hover:bg-gray-300'}`}>Upcoming</Link>
+            <Link href="/events/past" className={`px-4 py-2 rounded-lg text-sm font-semibold btn-text ${pageType === 'past' ? 'bg-brand-primary text-brand-text' : 'bg-gray-200 text-gray-800 hover:bg-gray-300'}`}>Past</Link>
           </div>
         </div>
       </header>
@@ -84,7 +84,7 @@ export default function EventsClient({ initialEvents }: { initialEvents: Event[]
         <div className="w-full lg:w-1/2 bg-white border-r border-gray-200 p-4 lg:p-8 flex flex-col lg:sticky lg:top-[73px] lg:h-[calc(100vh-73px)] lg:overflow-y-auto">
           <div className="max-w-lg mx-auto w-full flex flex-col h-full">
             <span className="inline-block bg-brand-primary/20 text-brand-dark px-3 py-1 rounded-full text-xs font-semibold mb-4 uppercase tracking-wider self-start">
-              {active.category}
+              {pageType === 'upcoming' ? 'Upcoming' : 'Past'}
             </span>
 
             {/* POSTER IMAGE - CLICK TO EXPAND */}
