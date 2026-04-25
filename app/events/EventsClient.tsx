@@ -1,7 +1,7 @@
 // app/events/EventsClient.tsx - POSTER-FOCUSED + LIGHTBOX + GIVEBUTTER CTA
 'use client';
 import { useState, useEffect } from 'react';
-import { FaCalendar, FaLocationDot, FaChevronLeft, FaChevronRight, FaXmark, FaExternalLinkAlt, FaTicket } from 'react-icons/fa6';
+import { FaCalendar, FaLocationDot, FaChevronLeft, FaChevronRight, FaXmark, FaArrowUpRightFromSquare, FaTicket } from 'react-icons/fa6';
 import Link from 'next/link';
 
 interface Event {
@@ -135,7 +135,7 @@ export default function EventsClient({ initialEvents, pageType }: { initialEvent
                   rel={active.registrationLink.includes('@') ? undefined : 'noopener noreferrer'}
                   className="inline-flex items-center gap-2 bg-brand-primary text-brand-text px-6 py-3 rounded-lg font-semibold hover:bg-brand-dark transition btn-text shadow-md"
                 >
-                  {isGivebutter ? <FaTicket /> : <FaExternalLinkAlt />}
+                  {isGivebutter ? <FaTicket /> : <FaArrowUpRightFromSquare />}
                   {ctaLabel()}
                 </a>
               </div>

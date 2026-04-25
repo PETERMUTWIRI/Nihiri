@@ -3,7 +3,7 @@
 
 import { useEffect, useState, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { FaSave, FaArrowLeft, FaCalendar, FaClock, FaMapMarkerAlt, FaImage, FaGlobe, FaPlus, FaTrash, FaTicket } from 'react-icons/fa';
+import { FaSave, FaArrowLeft, FaCalendar, FaClock, FaMapMarkerAlt, FaImage, FaGlobe, FaPlus, FaTrash, FaTicketAlt } from 'react-icons/fa';
 import Link from 'next/link';
 
 export default function AdminEventsPage() {
@@ -208,7 +208,7 @@ function EventEditor() {
 
             {/* event source: manual vs givebutter */}
             <div className="bg-brand-background border border-brand-primary/30 rounded-xl p-5">
-              <h4 className="font-semibold text-gray-900 mb-3 flex items-center gap-2"><FaTicket className="text-brand-dark" /> Event Source</h4>
+              <h4 className="font-semibold text-gray-900 mb-3 flex items-center gap-2"><FaTicketAlt className="text-brand-dark" /> Event Source</h4>
               <div className="flex gap-4 mb-4">
                 <label className={`flex-1 cursor-pointer border rounded-lg p-4 text-center transition ${form.eventSource === 'manual' ? 'border-blue-600 bg-blue-50' : 'border-gray-200 hover:border-gray-300'}`}>
                   <input type="radio" name="eventSource" value="manual" checked={form.eventSource === 'manual'} onChange={handleChange} className="sr-only" />
