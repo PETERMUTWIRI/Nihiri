@@ -50,6 +50,13 @@ const board: Member[] = [
     bio: 'Joseph Kazadi is a machine operator for Towels laboratories LTD from the Democratic Republic of Congo. He is an active member in his community, volunteering for Old Lyme fire department. He also serves as Associate Refugee Congress Delegate of Connecticut.',
     quote: 'As Vice-President, I aim to help my community come together and lead us to a happy life.',
   },
+  {
+    id: 5,
+    name: 'Rahab',
+    role: 'Treasurer',
+    img: '/images/employees/Rahab.jpg',
+    bio: 'Rahab serves as Treasurer, overseeing the financial health and integrity of the organization with diligence and transparency.',
+  },
 ];
 
 export default function BoardPage() {

@@ -57,6 +57,14 @@ const staff: Member[] = [
     img: '/images/employees/Ann-Mbugwa.avif',
     bio: 'Anne Mbugwa graduated with BSBA in Human Resource Management on May 7, 2022. She believes that determined people working together can accomplish anything. Member of SHRM RI Society for Human Resource Management.',
   },
+  {
+    id: 5,
+    name: 'Rahab',
+    role: 'Treasurer',
+    team: 'Leadership',
+    img: '/images/employees/Rahab.jpg',
+    bio: 'Rahab serves as Treasurer, overseeing the financial health and integrity of the organization with diligence and transparency.',
+  },
 
   /* ----- Case Management ----- */
   {
