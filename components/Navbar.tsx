@@ -305,9 +305,6 @@ const MobileDrawer = ({ open, setOpen, navItems, featuredPost }: {
             <div className="py-8">
               <div className="px-6 pb-6 border-b border-white/20 mb-4 flex items-center justify-between">
                 <div className="flex flex-col">
-                  <span className="text-[14px] uppercase tracking-[0.2em] text-cyan-300 font-semibold leading-none mb-0.5">
-                    New International Hope
-                  </span>
                   <h3 className="font-serif text-xl font-semibold text-blue-100 tracking-tight">
                     New International Hope For Refugees and Immigrants
                   </h3>
@@ -650,9 +647,6 @@ export default function Navbar() {
                 transition={{ delay: 0.1, duration: 0.4 }}
                 className="flex flex-col"
               >
-                <span className="text-[14px] uppercase tracking-[0.2em] text-cyan-600 font-semibold leading-none mb-0.5">
-                  New International Hope
-                </span>
                 <h2 className="font-serif text-2xl font-semibold text-blue-900 dark:text-blue-100 tracking-tight leading-tight">
                   New International Hope For Refugees and Immigrants
                 </h2>
