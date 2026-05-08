@@ -139,7 +139,7 @@ export default async function HomePage() {
     <div className="min-h-screen bg-white text-render-premium">
       
       {/* HERO SECTION - Desktop: Carousel + Video | Mobile: Original Layout */}
-      <section className="relative min-h-screen flex items-center overflow-hidden bg-cover bg-center" style={{backgroundImage: `url('/images/hero/graduation.jpeg')`}}>
+      <section className="relative flex items-center overflow-hidden bg-cover bg-center" style={{backgroundImage: `url('/images/hero/graduation.jpeg')`}}>
         {/* White overlay with 97% opacity - solid overlay */}
         <div className="absolute inset-0" style={{backgroundColor: 'rgba(255, 255, 255, 0.90)'}}></div>
 
@@ -152,8 +152,7 @@ export default async function HomePage() {
                 {/* Left - Text & Mobile Video */}
                 <ScrollReveal direction="left" className="text-gray-900">
                   <h1 className="heading-editorial text-5xl md:text-6xl mb-6 leading-tight text-center">
-                    <span className="block">Supporting <span className="text-cyan-600 heading-accent">Refugees</span></span>
-                    <span className="block">Women and Children</span>
+                    Our Mission
                   </h1>
                   <p className="hero-subtitle text-gray-600 mb-8 max-w-xl">
                     We are committed to supporting refugees and immigrants by connecting them with essential resources, empowering them with skills, and helping them build a stable and successful life in their new community.
@@ -189,8 +188,7 @@ export default async function HomePage() {
               {/* Left - Text Content */}
               <ScrollReveal direction="left" className="text-gray-900">
                 <h1 className="heading-editorial text-5xl xl:text-7xl mb-6 leading-tight text-center">
-                  <span className="block">Supporting <span className="text-cyan-600 heading-accent">Refugees</span></span>
-                  <span className="block">Women and Children</span>
+                  Our Mission
                 </h1>
                 <p className="hero-subtitle text-gray-600 mb-8 max-w-xl">
                   We are committed to supporting refugees and immigrants by connecting them with essential resources, empowering them with skills, and helping them build a stable and successful life in their new community.
