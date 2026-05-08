@@ -49,11 +49,11 @@ export default function BoardStaffPreview() {
           </p>
         </ScrollReveal>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-16">
           {boardMembers.map((member, index) => (
             <ScrollReveal key={member.name} delay={index * 0.1}>
               <div className="group text-center">
-                <div className="relative w-28 h-28 md:w-32 md:h-32 mx-auto mb-4">
+                <div className="relative w-full max-w-[280px] aspect-square md:w-32 md:h-32 mx-auto mb-4">
                   <div className="absolute inset-0 rounded-full bg-gradient-to-br from-cyan-400 to-cyan-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300 scale-105"></div>
                   <div className="relative w-full h-full rounded-full overflow-hidden ring-4 ring-cyan-50 group-hover:ring-cyan-200 transition-all duration-300 shadow-lg">
                     <Image
@@ -91,11 +91,11 @@ export default function BoardStaffPreview() {
           </p>
         </ScrollReveal>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-6 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-6 mb-12">
           {staffMembers.map((member, index) => (
             <ScrollReveal key={`${member.name}-${member.team}`} delay={index * 0.08}>
               <div className="group text-center">
-                <div className="relative w-24 h-24 md:w-28 md:h-28 mx-auto mb-4">
+                <div className="relative w-full max-w-[280px] aspect-square md:w-28 md:h-28 mx-auto mb-4">
                   <div className="absolute inset-0 rounded-full bg-gradient-to-br from-cyan-400 to-cyan-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300 scale-105"></div>
                   <div className="relative w-full h-full rounded-full overflow-hidden ring-4 ring-cyan-50 group-hover:ring-cyan-200 transition-all duration-300 shadow-lg">
                     <Image

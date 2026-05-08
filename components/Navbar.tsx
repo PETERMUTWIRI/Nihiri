@@ -100,7 +100,7 @@ const FeaturedCard = ({ post, isLoading }: { post: BlogPost | null; isLoading: b
         animate={{ scale: 1, opacity: 1 }}
         transition={{ duration: 0.4 }}
       >
-        <h4 className="text-[10px] font-semibold text-cyan-600 uppercase tracking-[0.2em] mb-3">
+        <h4 className="text-[14px] font-semibold text-cyan-600 uppercase tracking-[0.2em] mb-3">
           Featured
         </h4>
         <div className="aspect-video bg-gray-200 dark:bg-gray-700 rounded-lg mb-3 overflow-hidden flex items-center justify-center">
@@ -134,10 +134,10 @@ const FeaturedCard = ({ post, isLoading }: { post: BlogPost | null; isLoading: b
       transition={{ duration: 0.4 }}
     >
       <div className="flex items-center justify-between mb-3">
-        <h4 className="text-[10px] font-semibold text-cyan-600 uppercase tracking-[0.2em]">
+        <h4 className="text-[14px] font-semibold text-cyan-600 uppercase tracking-[0.2em]">
           Latest Story
         </h4>
-        <span className="text-[10px] text-gray-500 dark:text-gray-400 font-medium">
+        <span className="text-[14px] text-gray-500 dark:text-gray-400 font-medium">
           {formatDate(post.publishedAt)}
         </span>
       </div>
@@ -164,7 +164,7 @@ const FeaturedCard = ({ post, isLoading }: { post: BlogPost | null; isLoading: b
           )}
         </div>
         
-        <span className="inline-block bg-cyan-100 text-cyan-700 px-2 py-0.5 rounded text-[10px] font-semibold mb-2">
+        <span className="inline-block bg-cyan-100 text-cyan-700 px-2 py-0.5 rounded text-[14px] font-semibold mb-2">
           {post.category}
         </span>
         
@@ -305,11 +305,11 @@ const MobileDrawer = ({ open, setOpen, navItems, featuredPost }: {
             <div className="py-8">
               <div className="px-6 pb-6 border-b border-white/20 mb-4 flex items-center justify-between">
                 <div className="flex flex-col">
-                  <span className="text-[10px] uppercase tracking-[0.2em] text-cyan-300 font-semibold leading-none mb-0.5">
+                  <span className="text-[14px] uppercase tracking-[0.2em] text-cyan-300 font-semibold leading-none mb-0.5">
                     New International Hope
                   </span>
                   <h3 className="font-serif text-xl font-semibold text-white tracking-tight">
-                    Nihri's <span className="italic font-normal text-cyan-300">hope</span>
+                    New International Hope For Refugees and Immigrants
                   </h3>
                 </div>
                 <button
@@ -324,7 +324,7 @@ const MobileDrawer = ({ open, setOpen, navItems, featuredPost }: {
               {/* Mobile Featured Section */}
               {featuredPost && (
                 <div className="px-6 pb-4 border-b border-white/20">
-                  <h4 className="text-[10px] font-semibold text-cyan-300 uppercase tracking-[0.2em] mb-2">
+                  <h4 className="text-[14px] font-semibold text-cyan-300 uppercase tracking-[0.2em] mb-2">
                     Latest Story
                   </h4>
                   <Link 
@@ -650,11 +650,11 @@ export default function Navbar() {
                 transition={{ delay: 0.1, duration: 0.4 }}
                 className="flex flex-col"
               >
-                <span className="text-[10px] uppercase tracking-[0.2em] text-cyan-600 font-semibold leading-none mb-0.5">
+                <span className="text-[14px] uppercase tracking-[0.2em] text-cyan-600 font-semibold leading-none mb-0.5">
                   New International Hope
                 </span>
                 <h2 className="font-serif text-2xl font-semibold text-gray-900 dark:text-white tracking-tight leading-tight">
-                  Nihri's <span className="italic font-normal text-cyan-600">hope</span>
+                  New International Hope For Refugees and Immigrants
                 </h2>
               </motion.div>
             </Link>
