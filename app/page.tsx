@@ -151,21 +151,17 @@ export default async function HomePage() {
               <div className="grid lg:grid-cols-2 gap-12 items-center">
                 {/* Left - Text & Mobile Video */}
                 <ScrollReveal direction="left" className="text-gray-900">
-                  <span className="block text-center heading-editorial text-5xl md:text-6xl text-cyan-600 -translate-y-[3cm] mb-0">Empowering Communities</span>
-                  <h1 className="heading-editorial text-5xl md:text-6xl mb-6 leading-tight text-center -mt-[2cm]">
+                  <h1 className="heading-editorial text-5xl md:text-6xl mb-6 leading-tight text-center">
                     <span className="block">Supporting <span className="text-cyan-600 heading-accent">Refugees</span></span>
                     <span className="block">Women and Children</span>
                   </h1>
                   <p className="hero-subtitle text-gray-600 mb-8 max-w-xl">
-                    At nihri&apos;s hope, we work hard to provide refugee and immigrant families with all the tools they need to cultivate and exercise their individual independence.
+                    We are committed to supporting refugees and immigrants by connecting them with essential resources, empowering them with skills, and helping them build a stable and successful life in their new community.
                   </p>
                   
-                  {/* Mobile Video - Small Preview */}
+                  {/* Mobile Carousel */}
                   <div className="mb-6">
-                    <YouTubeEmbed 
-                      videoId="6bfSEk_oX60" 
-                      mini={true}
-                    />
+                    <HeroCarousel />
                   </div>
 
                   {/* Buttons */}
@@ -197,7 +193,7 @@ export default async function HomePage() {
                   <span className="block">Women and Children</span>
                 </h1>
                 <p className="hero-subtitle text-gray-600 mb-8 max-w-xl">
-                  At Nihri's hope, we work hard to provide refugee and immigrant families with all the tools they need to cultivate and exercise their individual independence.
+                  We are committed to supporting refugees and immigrants by connecting them with essential resources, empowering them with skills, and helping them build a stable and successful life in their new community.
                 </p>
                 
                 {/* Buttons */}

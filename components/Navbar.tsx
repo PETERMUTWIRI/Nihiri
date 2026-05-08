@@ -308,7 +308,7 @@ const MobileDrawer = ({ open, setOpen, navItems, featuredPost }: {
                   <span className="text-[14px] uppercase tracking-[0.2em] text-cyan-300 font-semibold leading-none mb-0.5">
                     New International Hope
                   </span>
-                  <h3 className="font-serif text-xl font-semibold text-white tracking-tight">
+                  <h3 className="font-serif text-xl font-semibold text-blue-100 tracking-tight">
                     New International Hope For Refugees and Immigrants
                   </h3>
                 </div>
@@ -653,7 +653,7 @@ export default function Navbar() {
                 <span className="text-[14px] uppercase tracking-[0.2em] text-cyan-600 font-semibold leading-none mb-0.5">
                   New International Hope
                 </span>
-                <h2 className="font-serif text-2xl font-semibold text-gray-900 dark:text-white tracking-tight leading-tight">
+                <h2 className="font-serif text-2xl font-semibold text-blue-900 dark:text-blue-100 tracking-tight leading-tight">
                   New International Hope For Refugees and Immigrants
                 </h2>
               </motion.div>
