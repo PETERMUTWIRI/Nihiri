@@ -52,7 +52,7 @@ export default function DonatePage() {
                 Your donation is securely processed through Givebutter. All contributions are tax-deductible.
               </p>
               <iframe
-                src="https://givebutter.com/embed/c/10011"
+                src="https://givebutter.com/embed/c/new-international-pndnxj"
                 width="100%"
                 height="600"
                 style={{ border: 'none' }}
